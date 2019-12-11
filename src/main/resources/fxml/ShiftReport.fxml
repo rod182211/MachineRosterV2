@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.optaplanner.examples.view.ShiftReport">
+   <children>
+      <HBox prefHeight="32.0" prefWidth="1600.0" style="-fx-background-color: lightblue;">
+         <children>
+            <HBox prefHeight="78.0" prefWidth="91.0">
+              
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <children>
+                  <ButtonBar prefHeight="40.0" prefWidth="200.0" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+      <StackPane alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS">
+         <children>
+            <HBox minHeight="-Infinity" minWidth="-Infinity">
+               <children>
+                  <VBox minHeight="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="NEVER">
+                           <children>
+                              <Pane minWidth="-Infinity" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="12.0" styleClass="hbox-title" text="Report" />
+                                    <HBox layoutX="-250.0" layoutY="-32.0" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </HBox>
+                        <HBox minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="NEVER">
+                           <children>
+                              <BarChart fx:id="shiftviewChart" prefHeight="845.0" prefWidth="1603.0" title="Shifts" HBox.hgrow="ALWAYS">
+                                <xAxis>
+                                  <CategoryAxis fx:id="svxAxis" side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis fx:id="yAxis" side="LEFT" />
+                                </yAxis>
+                              </BarChart>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </StackPane>
+   </children>
+</VBox>

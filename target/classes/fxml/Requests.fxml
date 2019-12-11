@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.emojione.EmojiOneView?>
+<?import de.jensd.fx.glyphs.icons525.Icons525View?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="711.0" prefWidth="926.0" style="-fx-background-color: #CFD3D4;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.optaplanner.examples.view.StaffRequestController">
+   <children>
+      <Pane layoutX="10.0" layoutY="10.0" prefHeight="173.0" prefWidth="980.0" style="-fx-background-color: AA8AD1;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="applicatonname" layoutX="130.0" layoutY="44.0" text="Staff Requests" textFill="WHITE">
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Label>
+            <Label fx:id="applicatontitle" layoutX="136.0" layoutY="105.0" text="Staff Rostering" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Icons525View fill="#090014" glyphName="CONTACTS" layoutX="34.0" layoutY="129.0" size="80" />
+         </children>
+      </Pane>
+      <GridPane alignment="CENTER" hgap="10.0" layoutX="148.0" layoutY="237.0" prefHeight="426.0" prefWidth="688.0" vgap="10.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="148.0" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="237.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button fx:id="btnShiftOn" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: AA8AD1;" text="Shift On Request" GridPane.columnIndex="2">
+               <graphic>
+                  <MaterialDesignIconView glyphName="ACCOUNT_CHECK" size="80" />
+               </graphic></Button>
+            <Button fx:id="btnDayOn" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: AA8AD1;" text="Day On Request">
+               <graphic>
+                  <MaterialDesignIconView glyphName="CLIPBOARD_ACCOUNT" size="80" />
+               </graphic></Button>
+            <Button fx:id="btnDayOff" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: AA8AD1;" text="Day Off Request" GridPane.rowIndex="1">
+               <graphic>
+                  <MaterialDesignIconView glyphName="HOTEL" size="80" />
+               </graphic></Button>
+            <Button fx:id="btnShiftOff" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: AA8AD1;" text="Shift Off Request" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <graphic>
+                  <MaterialDesignIconView glyphName="TIMELAPSE" size="80" />
+               </graphic></Button>
+            <Button fx:id="btnHoliday" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: AA8AD1;" text="Long Term Leave" GridPane.columnIndex="1">
+               <graphic>
+                  <MaterialIconView glyphName="SENTIMENT_VERY_SATISFIED" size="80" />
+               </graphic></Button>
+            <Button fx:id="btnRosterDayOff" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: AA8AD1;" text="Allocated Day Off" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <graphic>
+                  <MaterialIconView glyphName="LOCAL_LIBRARY" size="80" />
+               </graphic></Button>
+            <Button fx:id="btnLeave" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: AA8AD1;" text="Leave " GridPane.columnIndex="3">
+               <graphic>
+                  <MaterialIconView glyphName="CARD_TRAVEL" size="80" />
+               </graphic>
+            </Button>
+            <Button fx:id="btnTraining" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: AA8AD1;" text="Training Request" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <graphic>
+                  <EmojiOneView glyphName="MORTAR_BOARD" size="80" />
+               </graphic>
+            </Button>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

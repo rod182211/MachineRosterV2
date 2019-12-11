@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- ~ Hibernate, Relational Persistence for Idiomatic Java ~ ~ License: 
+	GNU Lesser General Public License (LGPL), version 2.1 or later. ~ See the 
+	lgpl.txt file in the root directory or <http://www.gnu.org/licenses/lgpl-2.1.html>. -->
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+	<session-factory>
+	 	<property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/myroster?serverTimezone=Australia/Brisbane</property>
+		<property name="connection.username">rodney</property>
+		<property name="connection.password">A131607Dad</property>
+		<property name="hibernate.current_session_context_class">thread</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+
+		<property name="hibernate.c3p0.min_size">5</property>
+		<property name="hibernate.c3p0.max_size">20</property>
+		<property name="hibernate.c3p0.acquire_increment">5</property>
+		<property name="hibernate.c3p0.timeout">1800</property>
+
+		<!-- Mention here all the model classes along with their package name -->
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.contract.Contract" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.contract.ContractLine" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.contract.ContractLineType" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.Employee" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.ShiftDate" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.Shift" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.ShiftType" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.ShiftTypeSkillRequirement" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.contract.BooleanContractLine" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.contract.MinMaxContractLine" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.contract.PatternContractLine" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.pattern.FreeBefore2DaysWithAWorkDayPattern" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.pattern.WorkBeforeFreeSequencePattern" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.pattern.Pattern" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.pattern.ShiftType2DaysPattern" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.pattern.ShiftType3DaysPattern" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.request.DayOnRequest" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.request.DayOffRequest" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.request.ShiftOffRequest" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.request.ShiftOnRequest" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.request.HolidayRequest" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.request.RosterDay" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.request.LeaveRequest" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.request.TrainingRequest" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.Skill" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.SkillProficiency" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.CoverRequirements" />
+		<mapping
+			class="org.optaplanner.examples.pool.RosterParametrizationData" />
+		<mapping class="org.optaplanner.examples.pool.DayOffDate" />
+		<mapping class="org.optaplanner.examples.pool.DayOnDate" />
+		<mapping class="org.optaplanner.examples.pool.ShiftOnDate" />
+		<mapping class="org.optaplanner.examples.pool.ShiftOffDate" />
+		<mapping class="org.optaplanner.examples.pool.HolidaysData" />
+		<mapping class="org.optaplanner.examples.pool.RosterDayOff" />
+		<mapping class="org.optaplanner.examples.pool.LeaveData" />
+		<mapping class="org.optaplanner.examples.pool.TrainingData" />
+		<mapping class="org.optaplanner.examples.pool.CalendarData" />
+		<mapping
+			class="org.optaplanner.examples.nurserostering.domain.WeekendDefinition" />
+
+	</session-factory>
+</hibernate-configuration>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="397.0" prefWidth="872.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.optaplanner.examples.view.WorkBeforeController">
+   <children>
+      <Pane prefHeight="115.0" prefWidth="872.0" style="-fx-background-color: #8AC5D1;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <MaterialDesignIconView fill="#0a0a0a" glyphName="WORKER" layoutX="26.0" layoutY="76.0" size="50" />
+         </children>
+      </Pane>
+      <Label layoutX="116.0" layoutY="34.0" text="Work Before Free" textFill="WHITE">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <SplitPane dividerPositions="0.5206896551724138" layoutY="106.0" prefHeight="298.0" prefWidth="872.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="106.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TableView fx:id="workBeforeTable" layoutX="14.0" prefHeight="289.0" prefWidth="449.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="workBeforeCode" prefWidth="75.0" text="Code" />
+                        <TableColumn fx:id="workBeforeDayLength" prefWidth="75.0" text="Free Day Length" />
+                        <TableColumn fx:id="shiftType" prefWidth="75.0" text="Shift Type" />
+                        <TableColumn fx:id="workBeforeWeight" prefWidth="75.0" text="Weight" />
+                        <TableColumn fx:id="dayOfWeek" prefWidth="75.0" text="Day Of Week" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <GridPane layoutX="14.0" prefHeight="148.0" prefWidth="354.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Code" />
+                        <Label fx:id="beforeCode" text="Label" GridPane.columnIndex="1" />
+                        <Label text="Weight" GridPane.rowIndex="1" />
+                        <Label text="Free Day Length" GridPane.rowIndex="2" />
+                        <Label text="Shift Type" GridPane.rowIndex="3" />
+                        <Label fx:id="beforeWeight" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="beforeFreeDay" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="beforeShiftType" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="Day Of Week" GridPane.rowIndex="4" />
+                        <Label fx:id="beforeDayOfWeek" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                     </children>
+                  </GridPane>
+                  <ButtonBar layoutX="7.0" layoutY="235.0" prefHeight="40.0" prefWidth="402.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="249.0">
+                    <buttons>
+                      <Button mnemonicParsing="false" onAction="#handleNewWorkBefore" styleClass="buttonadd" stylesheets="@fullpackstyling.css" text="Add.." />
+                        <Button layoutX="338.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleEditWorkBefore" styleClass="buttonedit" stylesheets="@fullpackstyling.css" text="Edit.." />
+                        <Button layoutX="243.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleDeleteWorkBefore" styleClass="buttondelete" stylesheets="@fullpackstyling.css" text="Delete" />
+                    </buttons>
+                  </ButtonBar>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
