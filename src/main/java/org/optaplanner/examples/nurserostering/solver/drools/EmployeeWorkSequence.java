@@ -25,8 +25,7 @@ import org.optaplanner.examples.nurserostering.domain.Employee;
 
 public class EmployeeWorkSequence implements Comparable<EmployeeWorkSequence>, Serializable {
 
-    
-	private Employee employee;
+    private Employee employee;
     private int firstDayIndex;
     private int lastDayIndex;
 

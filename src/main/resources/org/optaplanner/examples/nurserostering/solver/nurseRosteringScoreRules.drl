@@ -103,7 +103,7 @@ end
      
        if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue())&& totalInt < $contractLine.getMaximumValue()){
      
-           scoreHolder.addSoftConstraintMatch(kcontext,($contractLine.getMaximumValue() - totalInt) * $contractLine.getMaximumWeight());
+           scoreHolder.addHardConstraintMatch(kcontext,($contractLine.getMaximumValue() - totalInt) * $contractLine.getMaximumWeight());
 	
 	    
        

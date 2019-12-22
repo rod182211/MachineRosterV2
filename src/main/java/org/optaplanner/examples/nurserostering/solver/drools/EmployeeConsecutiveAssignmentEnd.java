@@ -29,8 +29,7 @@ import org.optaplanner.examples.nurserostering.domain.contract.Contract;
 
 public class EmployeeConsecutiveAssignmentEnd implements Comparable<EmployeeConsecutiveAssignmentEnd>, Serializable {
 
-  
-	private Employee employee;
+    private Employee employee;
     private ShiftDate shiftDate;
 
     public EmployeeConsecutiveAssignmentEnd(Employee employee, ShiftDate shiftDate) {

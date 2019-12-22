@@ -26,8 +26,7 @@ import org.optaplanner.examples.nurserostering.domain.contract.Contract;
 
 public class EmployeeConsecutiveWeekendAssignmentEnd implements Comparable<EmployeeConsecutiveWeekendAssignmentEnd>, Serializable {
 
-   
-	private Employee employee;
+    private Employee employee;
     private int sundayIndex;
 
     public EmployeeConsecutiveWeekendAssignmentEnd(Employee employee, int sundayIndex) {
