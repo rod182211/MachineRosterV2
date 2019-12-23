@@ -17,6 +17,7 @@
 package org.optaplanner.examples.common.swingui;
 
 import java.awt.BorderLayout;
+import java.util.function.BiConsumer;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -51,13 +52,14 @@ import javax.swing.JToggleButton;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingWorker;
 import javax.swing.filechooser.FileFilter;
-
+import javax.swing.LayoutStyle;
 import org.apache.commons.io.FilenameUtils;
 
 import org.optaplanner.core.api.domain.solution.PlanningSolution;
 import org.optaplanner.core.api.score.FeasibilityScore;
 import org.optaplanner.core.api.score.Score;
 import org.optaplanner.database.DataLogic;
+import org.optaplanner.examples.common.app.CommonApp;
 import org.optaplanner.examples.common.business.SolutionBusiness;
 import org.optaplanner.examples.common.persistence.AbstractSolutionImporter;
 
@@ -92,8 +94,10 @@ public class SolverAndPersistenceFrame<Solution_> extends JFrame {
     private Action dataimportAction;
     private Action openAction;
     private Action saveAction;
-    private Action importAction;
+   // private Action importAction;
+   // private Action exportAction;
     private Action excelexportAction;
+    private Action[] extraActions;
     private JToggleButton refreshScreenDuringSolvingToggleButton;
     private JToggleButton indictmentHeatMapToggleButton;
     private Action solveAction;
@@ -107,13 +111,25 @@ public class SolverAndPersistenceFrame<Solution_> extends JFrame {
 
 
     public SolverAndPersistenceFrame(SolutionBusiness<Solution_> solutionBusiness,
-            SolutionPanel<Solution_> solutionPanel) {
+            SolutionPanel<Solution_> solutionPanel, CommonApp.ExtraAction<Solution_>[] extraActions) {
         super(solutionBusiness.getAppName() + " NeoPlexus Rostering");
         this.solutionBusiness = solutionBusiness;
         this.solutionPanel = solutionPanel;
         setIconImage(OPTA_PLANNER_ICON.getImage());
         solutionPanel.setSolutionBusiness(solutionBusiness);
         solutionPanel.setSolverAndPersistenceFrame(this);
+        this.extraActions = new Action[extraActions.length];
+        for (int i = 0; i < extraActions.length; i++) {
+            BiConsumer<SolutionBusiness<Solution_>, SolutionPanel<Solution_>> consumer
+                    = extraActions[i].getConsumer();
+            this.extraActions[i] = new AbstractAction(extraActions[i].getName()) {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    consumer.accept(SolverAndPersistenceFrame.this.solutionBusiness,
+                            SolverAndPersistenceFrame.this.solutionPanel);
+                }
+            };
+        }
         indictmentHeatMapTrueIcon = new ImageIcon(getClass().getResource("indictmentHeatMapTrueIcon.png"));
         indictmentHeatMapFalseIcon = new ImageIcon(getClass().getResource("indictmentHeatMapFalseIcon.png"));
         refreshScreenDuringSolvingTrueIcon = new ImageIcon(getClass().getResource("refreshScreenDuringSolvingTrueIcon.png"));
@@ -121,7 +137,6 @@ public class SolverAndPersistenceFrame<Solution_> extends JFrame {
         registerListeners();
         constraintMatchesDialog = new ConstraintMatchesDialog(this, solutionBusiness);
     }
-
     private void registerListeners() {
         solutionBusiness.registerForBestSolutionChanges(this);
         addWindowListener(new WindowAdapter() {
@@ -250,28 +265,38 @@ public class SolverAndPersistenceFrame<Solution_> extends JFrame {
 
     }
 
+
     private JComponent createToolBar() {
         // JToolBar looks ugly in Nimbus LookAndFeel
         JPanel toolBar = new JPanel();
         GroupLayout toolBarLayout = new GroupLayout(toolBar);
         toolBar.setLayout(toolBarLayout);
-        dataimportAction = new DataImportAction();
-        excelexportAction = new ExcelExportAction();
-        dataimportAction.setEnabled(true);
-        importAction = new ImportAction();
-        importAction.setEnabled(solutionBusiness.hasImporter());
-        JButton dataimportButton = new JButton(dataimportAction);
-        JButton excelexportButton = new JButton(excelexportAction);
-        JButton importButton = new JButton(importAction);
+
+        JButton importButton;
+        if (solutionBusiness.hasImporter()) {
+            dataimportAction = new DataImportAction();
+            importButton = new JButton(dataimportAction);
+        } else {
+            importButton = null;
+        }
         openAction = new OpenAction();
         openAction.setEnabled(true);
         JButton openButton = new JButton(openAction);
         saveAction = new SaveAction();
         saveAction.setEnabled(false);
         JButton saveButton = new JButton(saveAction);
-        excelexportAction.setEnabled(false);
-     
-        
+        JButton exportButton;
+        if (solutionBusiness.hasExporter()) {
+            excelexportAction = new ExcelExportAction();
+            excelexportAction.setEnabled(false);
+            exportButton = new JButton(excelexportAction);
+        } else {
+            exportButton = null;
+        }
+        JButton[] extraButtons = new JButton[extraActions.length];
+        for (int i = 0; i < extraActions.length; i++) {
+            extraButtons[i] = new JButton(extraActions[i]);
+        }
 
         progressBar = new JProgressBar(0, 100);
 
@@ -288,23 +313,39 @@ public class SolverAndPersistenceFrame<Solution_> extends JFrame {
         solveButton.setMinimumSize(terminateSolvingEarlyButton.getMinimumSize());
         solveButton.setPreferredSize(terminateSolvingEarlyButton.getPreferredSize());
 
-        toolBarLayout.setHorizontalGroup(toolBarLayout.createSequentialGroup()
-        		.addComponent(dataimportButton)
-        		.addComponent(importButton)
-                .addComponent(openButton)
-                .addComponent(saveButton)
-                .addComponent(excelexportButton)
-                .addGap(10)
-                .addComponent(solvePanel, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addComponent(progressBar, 20, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE));
-        toolBarLayout.setVerticalGroup(toolBarLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
-        		.addComponent(dataimportButton)
-                .addComponent(importButton)
-                .addComponent(openButton)
-                .addComponent(saveButton)
-                .addComponent(excelexportButton)
-                .addComponent(solvePanel)
-                .addComponent(progressBar));
+        GroupLayout.SequentialGroup horizontalGroup = toolBarLayout.createSequentialGroup();
+        if (solutionBusiness.hasImporter()) {
+           // horizontalGroup.addComponent(importButton);
+        	horizontalGroup.addComponent(importButton);
+        }
+        horizontalGroup.addComponent(openButton);
+        horizontalGroup.addComponent(saveButton);
+        if (solutionBusiness.hasExporter()) {
+            horizontalGroup.addComponent(exportButton);
+        }
+        for (JButton extraButton : extraButtons) {
+            horizontalGroup.addComponent(extraButton);
+        }
+        horizontalGroup.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED,
+                    GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        horizontalGroup.addComponent(solvePanel, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE);
+        horizontalGroup.addComponent(progressBar, 20, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE);
+        toolBarLayout.setHorizontalGroup(horizontalGroup);
+        GroupLayout.ParallelGroup verticalGroup = toolBarLayout.createParallelGroup(GroupLayout.Alignment.CENTER);
+        if (solutionBusiness.hasImporter()) {
+            verticalGroup.addComponent(importButton);
+        }
+        verticalGroup.addComponent(openButton);
+        verticalGroup.addComponent(saveButton);
+        if (solutionBusiness.hasExporter()) {
+            verticalGroup.addComponent(exportButton);
+        }
+        for (JButton extraButton : extraButtons) {
+            verticalGroup.addComponent(extraButton);
+        }
+        verticalGroup.addComponent(solvePanel);
+        verticalGroup.addComponent(progressBar);
+        toolBarLayout.setVerticalGroup(verticalGroup);
         return toolBar;
     }
 
@@ -394,7 +435,7 @@ public class SolverAndPersistenceFrame<Solution_> extends JFrame {
         	// gets the data from the database
    		    NurseRoster nurseRoster =  datalogic.readSolution();	
    		    //Sets the input into Solution Business ready
-   		 solutionBusiness.setSolution((Solution_) nurseRoster);
+   		    solutionBusiness.setSolution((Solution_) nurseRoster);
   		setSolutionLoaded(e.getSource());
         }
     }
@@ -743,9 +784,10 @@ public class SolverAndPersistenceFrame<Solution_> extends JFrame {
         quickOpenUnsolvedJList.setEnabled(!solving);
         quickOpenSolvedJList.setEnabled(!solving);
         dataimportAction.setEnabled(!solving);
-        importAction.setEnabled(!solving && solutionBusiness.hasImporter());
+        dataimportAction.setEnabled(!solving && solutionBusiness.hasImporter());
         openAction.setEnabled(!solving);
         saveAction.setEnabled(!solving);
+        excelexportAction.setEnabled(!solving);
         excelexportAction.setEnabled(!solving && solutionBusiness.hasExporter());
         solveAction.setEnabled(!solving);
         solveButton.setVisible(!solving);

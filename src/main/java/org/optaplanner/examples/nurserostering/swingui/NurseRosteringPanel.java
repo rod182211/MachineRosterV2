@@ -260,20 +260,6 @@ public class NurseRosteringPanel extends SolutionPanel<NurseRoster> {
 
 			contractMap = new HashMap<>(contractElementList.size());
 
-			
-			
-			/*
-			 * for (Contract element : contractElementList) { Contract contract = new
-			 * Contract(); long Id = element.getId(); contract.setId(Id);
-			 * contract.setCode(element.getCode());
-			 * contract.setDescription(element.getDescription()); WeekendDefinition weekend
-			 * = element.getWeekendDefinition(); contract.setWeekendDefinition(weekend);
-			 * contract.setContractLineList(new ArrayList<ContractLine>()); Contract
-			 * workingcontract = scoreDirector.lookUpWorkingObject(contract);
-			 * contractMap.put(workingcontract.getCode(), workingcontract);
-			 * contractList.add(workingcontract); }
-			 */
-					
 
 			List<Employee> employeeElementList = (List<Employee>) nurseRoster.getEmployeeList();
 			List<Employee> employeeList = new ArrayList<>(

@@ -43,7 +43,6 @@ import org.optaplanner.core.impl.heuristic.selector.move.generic.chained.Chained
 import org.optaplanner.core.impl.heuristic.selector.move.generic.chained.ChainedSwapMove;
 import org.optaplanner.core.impl.score.director.InnerScoreDirector;
 import org.optaplanner.core.impl.score.director.ScoreDirector;
-import org.optaplanner.core.impl.score.director.ScoreDirectorFactory;
 import org.optaplanner.core.impl.solver.ProblemFactChange;
 import org.optaplanner.database.DataLogic;
 import org.optaplanner.database.RosterService;
@@ -57,7 +56,6 @@ import org.optaplanner.examples.pool.CalendarData;
 import org.optaplanner.persistence.common.api.domain.solution.SolutionFileIO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -76,6 +74,7 @@ public class SolutionBusiness<Solution_> {
 
     private AbstractSolutionImporter<Solution_>[] importers;
     private AbstractSolutionExporter<Solution_> exporter;
+
     private File importDataDir;
     private File unsolvedDataDir;
     private File solvedDataDir;
@@ -87,17 +86,15 @@ public class SolutionBusiness<Solution_> {
     private ScoreDirector<Solution_> guiScoreDirector;
 
     private final AtomicReference<Solution_> skipToBestSolutionRef = new AtomicReference<>();
-    
     private RosterService rosterService = new RosterServiceImpl();
-	private ObservableList<CalendarData> calendarList = FXCollections.observableArrayList();
+   	private ObservableList<CalendarData> calendarList = FXCollections.observableArrayList();
 
-	//getting the data for the calendar table in database
-	  public ObservableList<CalendarData> getCalendarDataList() { if
-	  (!calendarList.isEmpty()) calendarList.clear(); calendarList =
-	  FXCollections.observableList((List<CalendarData>)
-	  rosterService.listCalendarData()); return calendarList; }
-	 
-    
+   	//getting the data for the calendar table in database
+   	  public ObservableList<CalendarData> getCalendarDataList() { if
+   	  (!calendarList.isEmpty()) calendarList.clear(); calendarList =
+   	  FXCollections.observableList((List<CalendarData>)
+   	  rosterService.listCalendarData()); return calendarList; }
+   	  
     public SolutionBusiness(CommonApp app) {
         this.app = app;
     }
@@ -121,7 +118,7 @@ public class SolutionBusiness<Solution_> {
     public void setDataDir(File dataDir) {
         this.dataDir = dataDir;
     }
-  
+
     public SolutionFileIO<Solution_> getSolutionFileIO() {
         return solutionFileIO;
     }
@@ -141,9 +138,8 @@ public class SolutionBusiness<Solution_> {
     public void setExporter(AbstractSolutionExporter<Solution_> exporter) {
         this.exporter = exporter;
     }
-   
-   	
-	public boolean hasImporter() {
+
+    public boolean hasImporter() {
         return importers.length > 0;
     }
 
@@ -193,14 +189,17 @@ public class SolutionBusiness<Solution_> {
     public File getExportDataDir() {
         return exportDataDir;
     }
+
     public String getExportFileSuffix() {
         return exporter.getOutputFileSuffix();
     }
- 
+
     public void setSolver(Solver<Solution_> solver) {
         this.solver = solver;
-        ScoreDirectorFactory<Solution_> scoreDirectorFactory = solver.getScoreDirectorFactory();
-        guiScoreDirector = scoreDirectorFactory.buildScoreDirector();
+    }
+
+    public void setGuiScoreDirector(ScoreDirector<Solution_> guiScoreDirector) {
+        this.guiScoreDirector = guiScoreDirector;
     }
 
     public List<File> getUnsolvedFileList() {
@@ -227,6 +226,10 @@ public class SolutionBusiness<Solution_> {
 
     public String getSolutionFileName() {
         return solutionFileName;
+    }
+
+    public void setSolutionFileName(String solutionFileName) {
+        this.solutionFileName = solutionFileName;
     }
 
     public Score getScore() {
@@ -313,11 +316,12 @@ public class SolutionBusiness<Solution_> {
         logger.info("Saved: {}", file);
     }
 
+
     public void exportSolution(File file) {
         Solution_ solution = guiScoreDirector.getWorkingSolution();
-         exporter.writeSolution(solution, file);
+        exporter.writeSolution(solution, file);
     }
-   
+
     public void doMove(Move<Solution_> move) {
         if (solver.isSolving()) {
             logger.error("Not doing user move ({}) because the solver is solving.", move);
@@ -349,7 +353,6 @@ public class SolutionBusiness<Solution_> {
      * @return never null
      */
     public Solution_ solve(Solution_ problem) {
-    	
         return solver.solve(problem);
     }
 
@@ -408,7 +411,4 @@ public class SolutionBusiness<Solution_> {
         SwapMove<Solution_> move = createSwapMove(leftEntity, rightEntity);
         doMove(move);
     }
-
-	
-    
 }
