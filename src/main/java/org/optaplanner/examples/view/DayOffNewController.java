@@ -142,6 +142,13 @@ public class DayOffNewController {
 		if (dayweight.getText() == null || dayweight.getText().length() == 0) {
 			errorMessage += "No valid weight!\n";
 		}
+		if (dayoffdate.getValue() == null ) {
+			errorMessage += "No valid Date!\n";
+		}
+		if ( namefield.getSelectionModel()
+				.getSelectedItem() == null ) {
+			errorMessage += "No valid Name!\n";
+		}
 
 		if (errorMessage.length() == 0) {
 			return true;
