@@ -144,9 +144,17 @@ public class WorkBeforeNewController implements Initializable {
 	 */
 	private boolean isInputValid() {
 		String errorMessage = "";
-		
 		if (beforeCode.getText() == null || beforeCode.getText().length() == 0) {
-			errorMessage += "No valid Work!\n";
+			errorMessage += "No valid Code!\n";
+		}
+		if (beforeWeight.getText() == null || beforeWeight.getText().length() == 0) {
+			errorMessage += "No valid Weight!\n";
+		}
+		if (beforeFreeDay.getText() == null || beforeFreeDay.getText().length() == 0) {
+			errorMessage += "No valid Free Day Length!\n";
+		}
+		if (beforeShiftType.getSelectionModel().getSelectedItem() == null ) {
+			errorMessage += "No valid Shift Type\n";
 		}
 
 		if (errorMessage.length() == 0) {

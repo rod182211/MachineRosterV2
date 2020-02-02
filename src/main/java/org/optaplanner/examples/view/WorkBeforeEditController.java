@@ -150,12 +150,17 @@ public class WorkBeforeEditController implements Initializable {
 	private boolean isInputValid() {
 		String errorMessage = "";
 		if (ebeforeCode.getText() == null || ebeforeCode.getText().length() == 0) {
-			errorMessage += "No valid Id Field!\n";
+			errorMessage += "No valid Code!\n";
 		}
-		if (ebeforeCode.getText() == null || ebeforeCode.getText().length() == 0) {
-			errorMessage += "No valid Work!\n";
+		if (ebeforeWeight.getText() == null || ebeforeWeight.getText().length() == 0) {
+			errorMessage += "No valid Weight!\n";
 		}
-
+		if (ebeforeFreeDay.getText() == null || ebeforeFreeDay.getText().length() == 0) {
+			errorMessage += "No valid Free Day Length!\n";
+		}
+		if (ebeforeShiftType.getSelectionModel().getSelectedItem() == null ) {
+			errorMessage += "No valid Shift Type\n";
+		}
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {
