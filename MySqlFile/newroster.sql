@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 31, 2020 at 10:48 AM
+-- Generation Time: Feb 02, 2020 at 11:30 PM
 -- Server version: 5.7.17-log
 -- PHP Version: 5.6.30
 
@@ -42,126 +42,131 @@ CREATE TABLE `calendardata` (
 --
 
 INSERT INTO `calendardata` (`id`, `employeename`, `endTime`, `isNight`, `shiftDate`, `shiftDescription`, `shiftType`, `startTIme`) VALUES
-(137, 'Employee 7', '14:30:00', b'0', '2020-02-03', 'Early', 'E', '06:30:00'),
-(138, 'Employee 11', '14:30:00', b'0', '2020-02-03', 'Early', 'E', '06:30:00'),
-(139, 'Employee 12', '14:30:00', b'0', '2020-02-03', 'Early', 'E', '06:30:00'),
-(140, 'Employee 8', '14:30:00', b'0', '2020-02-03', 'Early', 'E', '06:30:00'),
-(141, 'Employee 3', '23:45:00', b'0', '2020-02-03', 'Late', 'L', '14:30:00'),
-(142, 'Employee 6', '23:45:00', b'0', '2020-02-03', 'Late', 'L', '14:30:00'),
-(143, 'Employee 9', '06:30:00', b'1', '2020-02-03', 'Night', 'N', '23:45:00'),
-(144, 'Employee 4', '06:30:00', b'1', '2020-02-03', 'Night', 'N', '23:45:00'),
-(145, 'Employee 7', '14:30:00', b'0', '2020-02-04', 'Early', 'E', '06:30:00'),
-(146, 'Employee 11', '14:30:00', b'0', '2020-02-04', 'Early', 'E', '06:30:00'),
-(147, 'Employee 1', '14:30:00', b'0', '2020-02-04', 'Early', 'E', '06:30:00'),
-(148, 'Employee 12', '14:30:00', b'0', '2020-02-04', 'Early', 'E', '06:30:00'),
-(149, 'Employee 5', '14:30:00', b'0', '2020-02-04', 'Early', 'E', '06:30:00'),
-(150, 'Employee 8', '14:30:00', b'0', '2020-02-04', 'Early', 'E', '06:30:00'),
-(151, 'Employee 10', '23:45:00', b'0', '2020-02-04', 'Late', 'L', '14:30:00'),
-(152, 'Employee 6', '23:45:00', b'0', '2020-02-04', 'Late', 'L', '14:30:00'),
-(153, 'Employee 9', '06:30:00', b'1', '2020-02-04', 'Night', 'N', '23:45:00'),
-(154, 'Employee 4', '06:30:00', b'1', '2020-02-04', 'Night', 'N', '23:45:00'),
-(155, 'Employee 11', '14:30:00', b'0', '2020-02-05', 'Early', 'E', '06:30:00'),
-(156, 'Employee 2', '14:30:00', b'0', '2020-02-05', 'Early', 'E', '06:30:00'),
-(157, 'Employee 1', '14:30:00', b'0', '2020-02-05', 'Early', 'E', '06:30:00'),
-(158, 'Employee 12', '14:30:00', b'0', '2020-02-05', 'Early', 'E', '06:30:00'),
-(159, 'Employee 5', '14:30:00', b'0', '2020-02-05', 'Early', 'E', '06:30:00'),
-(160, 'Employee 8', '14:30:00', b'0', '2020-02-05', 'Early', 'E', '06:30:00'),
-(161, 'Employee 10', '23:45:00', b'0', '2020-02-05', 'Late', 'L', '14:30:00'),
-(162, 'Employee 6', '23:45:00', b'0', '2020-02-05', 'Late', 'L', '14:30:00'),
-(163, 'Employee 3', '06:30:00', b'1', '2020-02-05', 'Night', 'N', '23:45:00'),
-(164, 'Employee 4', '06:30:00', b'1', '2020-02-05', 'Night', 'N', '23:45:00'),
-(165, 'Employee 11', '14:30:00', b'0', '2020-02-06', 'Early', 'E', '06:30:00'),
-(166, 'Employee 2', '14:30:00', b'0', '2020-02-06', 'Early', 'E', '06:30:00'),
-(167, 'Employee 8', '14:30:00', b'0', '2020-02-06', 'Early', 'E', '06:30:00'),
-(168, 'Employee 9', '14:30:00', b'0', '2020-02-06', 'Early', 'E', '06:30:00'),
-(169, 'Employee 1', '14:30:00', b'0', '2020-02-06', 'Early', 'E', '06:30:00'),
-(170, 'Employee 12', '14:30:00', b'0', '2020-02-06', 'Early', 'E', '06:30:00'),
-(171, 'Employee 5', '23:45:00', b'0', '2020-02-06', 'Late', 'L', '14:30:00'),
-(172, 'Employee 7', '23:45:00', b'0', '2020-02-06', 'Late', 'L', '14:30:00'),
-(173, 'Employee 10', '06:30:00', b'1', '2020-02-06', 'Night', 'N', '23:45:00'),
-(174, 'Employee 6', '06:30:00', b'1', '2020-02-06', 'Night', 'N', '23:45:00'),
-(175, 'Employee 11', '14:30:00', b'0', '2020-02-07', 'Early', 'E', '06:30:00'),
-(176, 'Employee 2', '14:30:00', b'0', '2020-02-07', 'Early', 'E', '06:30:00'),
-(177, 'Employee 9', '14:30:00', b'0', '2020-02-07', 'Early', 'E', '06:30:00'),
-(178, 'Employee 4', '14:30:00', b'0', '2020-02-07', 'Early', 'E', '06:30:00'),
-(179, 'Employee 3', '14:30:00', b'0', '2020-02-07', 'Early', 'E', '06:30:00'),
-(180, 'Employee 12', '14:30:00', b'0', '2020-02-07', 'Early', 'E', '06:30:00'),
-(181, 'Employee 1', '23:45:00', b'0', '2020-02-07', 'Late', 'L', '14:30:00'),
-(182, 'Employee 8', '23:45:00', b'0', '2020-02-07', 'Late', 'L', '14:30:00'),
-(183, 'Employee 10', '06:30:00', b'1', '2020-02-07', 'Night', 'N', '23:45:00'),
-(184, 'Employee 6', '06:30:00', b'1', '2020-02-07', 'Night', 'N', '23:45:00'),
-(185, 'Employee 3', '14:30:00', b'0', '2020-02-08', 'Early', 'E', '06:30:00'),
-(186, 'Employee 2', '14:30:00', b'0', '2020-02-08', 'Early', 'E', '06:30:00'),
-(187, 'Employee 7', '23:45:00', b'0', '2020-02-08', 'Late', 'L', '14:30:00'),
-(188, 'Employee 5', '23:45:00', b'0', '2020-02-08', 'Late', 'L', '14:30:00'),
-(189, 'Employee 9', '06:30:00', b'1', '2020-02-08', 'Night', 'N', '23:45:00'),
-(190, 'Employee 4', '06:30:00', b'1', '2020-02-08', 'Night', 'N', '23:45:00'),
-(191, 'Employee 10', '14:30:00', b'0', '2020-02-09', 'Early', 'E', '06:30:00'),
-(192, 'Employee 2', '14:30:00', b'0', '2020-02-09', 'Early', 'E', '06:30:00'),
-(193, 'Employee 1', '23:45:00', b'0', '2020-02-09', 'Late', 'L', '14:30:00'),
-(194, 'Employee 8', '23:45:00', b'0', '2020-02-09', 'Late', 'L', '14:30:00'),
-(195, 'Employee 7', '06:30:00', b'1', '2020-02-09', 'Night', 'N', '23:45:00'),
-(196, 'Employee 5', '06:30:00', b'1', '2020-02-09', 'Night', 'N', '23:45:00'),
-(197, 'Employee 3', '14:30:00', b'0', '2020-02-10', 'Early', 'E', '06:30:00'),
-(198, 'Employee 4', '14:30:00', b'0', '2020-02-10', 'Early', 'E', '06:30:00'),
-(199, 'Employee 11', '14:30:00', b'0', '2020-02-10', 'Early', 'E', '06:30:00'),
-(200, 'Employee 12', '14:30:00', b'0', '2020-02-10', 'Early', 'E', '06:30:00'),
-(201, 'Employee 1', '23:45:00', b'0', '2020-02-10', 'Late', 'L', '14:30:00'),
-(202, 'Employee 6', '23:45:00', b'0', '2020-02-10', 'Late', 'L', '14:30:00'),
-(203, 'Employee 10', '06:30:00', b'1', '2020-02-10', 'Night', 'N', '23:45:00'),
-(204, 'Employee 5', '06:30:00', b'1', '2020-02-10', 'Night', 'N', '23:45:00'),
-(205, 'Employee 11', '14:30:00', b'0', '2020-02-11', 'Early', 'E', '06:30:00'),
-(206, 'Employee 9', '14:30:00', b'0', '2020-02-11', 'Early', 'E', '06:30:00'),
-(207, 'Employee 7', '14:30:00', b'0', '2020-02-11', 'Early', 'E', '06:30:00'),
-(208, 'Employee 2', '14:30:00', b'0', '2020-02-11', 'Early', 'E', '06:30:00'),
-(209, 'Employee 12', '14:30:00', b'0', '2020-02-11', 'Early', 'E', '06:30:00'),
-(210, 'Employee 8', '14:30:00', b'0', '2020-02-11', 'Early', 'E', '06:30:00'),
-(211, 'Employee 3', '23:45:00', b'0', '2020-02-11', 'Late', 'L', '14:30:00'),
-(212, 'Employee 4', '23:45:00', b'0', '2020-02-11', 'Late', 'L', '14:30:00'),
-(213, 'Employee 1', '06:30:00', b'1', '2020-02-11', 'Night', 'N', '23:45:00'),
-(214, 'Employee 6', '06:30:00', b'1', '2020-02-11', 'Night', 'N', '23:45:00'),
-(215, 'Employee 11', '14:30:00', b'0', '2020-02-12', 'Early', 'E', '06:30:00'),
-(216, 'Employee 12', '14:30:00', b'0', '2020-02-12', 'Early', 'E', '06:30:00'),
-(217, 'Employee 10', '14:30:00', b'0', '2020-02-12', 'Early', 'E', '06:30:00'),
-(218, 'Employee 5', '14:30:00', b'0', '2020-02-12', 'Early', 'E', '06:30:00'),
-(219, 'Employee 7', '14:30:00', b'0', '2020-02-12', 'Early', 'E', '06:30:00'),
-(220, 'Employee 2', '14:30:00', b'0', '2020-02-12', 'Early', 'E', '06:30:00'),
-(221, 'Employee 9', '23:45:00', b'0', '2020-02-12', 'Late', 'L', '14:30:00'),
-(222, 'Employee 8', '23:45:00', b'0', '2020-02-12', 'Late', 'L', '14:30:00'),
-(223, 'Employee 3', '06:30:00', b'1', '2020-02-12', 'Night', 'N', '23:45:00'),
-(224, 'Employee 4', '06:30:00', b'1', '2020-02-12', 'Night', 'N', '23:45:00'),
-(225, 'Employee 11', '14:30:00', b'0', '2020-02-13', 'Early', 'E', '06:30:00'),
-(226, 'Employee 12', '14:30:00', b'0', '2020-02-13', 'Early', 'E', '06:30:00'),
-(227, 'Employee 1', '14:30:00', b'0', '2020-02-13', 'Early', 'E', '06:30:00'),
-(228, 'Employee 6', '14:30:00', b'0', '2020-02-13', 'Early', 'E', '06:30:00'),
-(229, 'Employee 7', '14:30:00', b'0', '2020-02-13', 'Early', 'E', '06:30:00'),
-(230, 'Employee 2', '14:30:00', b'0', '2020-02-13', 'Early', 'E', '06:30:00'),
-(231, 'Employee 9', '23:45:00', b'0', '2020-02-13', 'Late', 'L', '14:30:00'),
-(232, 'Employee 5', '23:45:00', b'0', '2020-02-13', 'Late', 'L', '14:30:00'),
-(233, 'Employee 3', '06:30:00', b'1', '2020-02-13', 'Night', 'N', '23:45:00'),
-(234, 'Employee 4', '06:30:00', b'1', '2020-02-13', 'Night', 'N', '23:45:00'),
-(235, 'Employee 11', '14:30:00', b'0', '2020-02-14', 'Early', 'E', '06:30:00'),
-(236, 'Employee 12', '14:30:00', b'0', '2020-02-14', 'Early', 'E', '06:30:00'),
-(237, 'Employee 7', '14:30:00', b'0', '2020-02-14', 'Early', 'E', '06:30:00'),
-(238, 'Employee 2', '14:30:00', b'0', '2020-02-14', 'Early', 'E', '06:30:00'),
-(239, 'Employee 1', '14:30:00', b'0', '2020-02-14', 'Early', 'E', '06:30:00'),
-(240, 'Employee 8', '14:30:00', b'0', '2020-02-14', 'Early', 'E', '06:30:00'),
-(241, 'Employee 9', '23:45:00', b'0', '2020-02-14', 'Late', 'L', '14:30:00'),
-(242, 'Employee 10', '23:45:00', b'0', '2020-02-14', 'Late', 'L', '14:30:00'),
-(243, 'Employee 3', '06:30:00', b'1', '2020-02-14', 'Night', 'N', '23:45:00'),
-(244, 'Employee 6', '06:30:00', b'1', '2020-02-14', 'Night', 'N', '23:45:00'),
-(245, 'Employee 1', '14:30:00', b'0', '2020-02-15', 'Early', 'E', '06:30:00'),
-(246, 'Employee 8', '14:30:00', b'0', '2020-02-15', 'Early', 'E', '06:30:00'),
-(247, 'Employee 10', '23:45:00', b'0', '2020-02-15', 'Late', 'L', '14:30:00'),
-(248, 'Employee 5', '23:45:00', b'0', '2020-02-15', 'Late', 'L', '14:30:00'),
-(249, 'Employee 7', '06:30:00', b'1', '2020-02-15', 'Night', 'N', '23:45:00'),
-(250, 'Employee 2', '06:30:00', b'1', '2020-02-15', 'Night', 'N', '23:45:00'),
-(251, 'Employee 6', '14:30:00', b'0', '2020-02-16', 'Early', 'E', '06:30:00'),
-(252, 'Employee 4', '14:30:00', b'0', '2020-02-16', 'Early', 'E', '06:30:00'),
-(253, 'Employee 5', '23:45:00', b'0', '2020-02-16', 'Late', 'L', '14:30:00'),
-(254, 'Employee 10', '23:45:00', b'0', '2020-02-16', 'Late', 'L', '14:30:00'),
-(255, 'Employee 9', '06:30:00', b'1', '2020-02-16', 'Night', 'N', '23:45:00'),
-(256, 'Employee 3', '06:30:00', b'1', '2020-02-16', 'Night', 'N', '23:45:00');
+(593, 'Kim Farr', '24:00:00', b'0', '2020-02-09', 'Leave', 'Leave', '06:00:00'),
+(592, 'Graham Thomson', '21:00:00', b'0', '2020-02-09', 'LC', 'LC', '12:30:00'),
+(591, 'Genoveva Phillips', '07:15:00', b'1', '2020-02-09', 'Night', 'N', '23:45:00'),
+(590, 'Modupe Alofokhai', '07:15:00', b'1', '2020-02-09', 'Night', 'N', '23:45:00'),
+(588, 'Sharon Bamforth', '23:00:00', b'0', '2020-02-09', 'Late', 'L', '14:30:00'),
+(589, 'Louise Davidson', '23:00:00', b'0', '2020-02-09', 'Late', 'L', '14:30:00'),
+(587, 'Candida Blackwell', '15:30:00', b'0', '2020-02-09', 'Early', 'E', '07:00:00'),
+(585, 'Kim Farr', '24:00:00', b'0', '2020-02-08', 'Leave', 'Leave', '06:00:00'),
+(586, 'Richard Foreman', '15:30:00', b'0', '2020-02-09', 'Early', 'E', '07:00:00'),
+(584, 'Graham Thomson', '21:00:00', b'0', '2020-02-08', 'LC', 'LC', '12:30:00'),
+(583, 'Genoveva Phillips', '07:15:00', b'1', '2020-02-08', 'Night', 'N', '23:45:00'),
+(581, 'Sharon Bamforth', '23:00:00', b'0', '2020-02-08', 'Late', 'L', '14:30:00'),
+(582, 'Modupe Alofokhai', '07:15:00', b'1', '2020-02-08', 'Night', 'N', '23:45:00'),
+(580, 'Louise Davidson', '23:00:00', b'0', '2020-02-08', 'Late', 'L', '14:30:00'),
+(578, 'Richard Foreman', '15:30:00', b'0', '2020-02-08', 'Early', 'E', '07:00:00'),
+(579, 'Candida Blackwell', '15:30:00', b'0', '2020-02-08', 'Early', 'E', '07:00:00'),
+(577, 'Kim Farr', '24:00:00', b'0', '2020-02-07', 'Leave', 'Leave', '06:00:00'),
+(576, 'Rosmary Moloney', '21:00:00', b'0', '2020-02-07', 'LC', 'LC', '12:30:00'),
+(574, 'Joanne Muir', '07:15:00', b'1', '2020-02-07', 'Night', 'N', '23:45:00'),
+(575, 'Richard Foreman', '23:00:00', b'0', '2020-02-07', 'ADO', 'ADO', '06:30:00'),
+(573, 'Amanda Rees', '07:15:00', b'1', '2020-02-07', 'Night', 'N', '23:45:00'),
+(572, 'Modupe Alofokhai', '23:00:00', b'0', '2020-02-07', 'Late', 'L', '14:30:00'),
+(570, 'Genoveva Phillips', '15:30:00', b'0', '2020-02-07', 'Early', 'E', '07:00:00'),
+(571, 'Sharon Bamforth', '23:00:00', b'0', '2020-02-07', 'Late', 'L', '14:30:00'),
+(569, 'Candida Blackwell', '15:30:00', b'0', '2020-02-07', 'Early', 'E', '07:00:00'),
+(568, 'Graham Thomson', '15:30:00', b'0', '2020-02-07', 'Early', 'E', '07:00:00'),
+(567, 'Kim Farr', '24:00:00', b'0', '2020-02-06', 'Leave', 'Leave', '06:00:00'),
+(566, 'Genoveva Phillips', '21:00:00', b'0', '2020-02-06', 'LC', 'LC', '12:30:00'),
+(565, 'Joanne Muir', '07:15:00', b'1', '2020-02-06', 'Night', 'N', '23:45:00'),
+(563, 'Janette Pascoe', '23:00:00', b'0', '2020-02-06', 'Late', 'L', '14:30:00'),
+(564, 'Amanda Rees', '07:15:00', b'1', '2020-02-06', 'Night', 'N', '23:45:00'),
+(561, 'Sharon Bamforth', '15:30:00', b'0', '2020-02-06', 'Early', 'E', '07:00:00'),
+(562, 'Modupe Alofokhai', '23:00:00', b'0', '2020-02-06', 'Late', 'L', '14:30:00'),
+(560, 'Rosmary Moloney', '15:30:00', b'0', '2020-02-06', 'Early', 'E', '07:00:00'),
+(558, 'Kim Farr', '24:00:00', b'0', '2020-02-05', 'Leave', 'Leave', '06:00:00'),
+(559, 'Graham Thomson', '15:30:00', b'0', '2020-02-06', 'Early', 'E', '07:00:00'),
+(557, 'Janette Pascoe', '21:00:00', b'0', '2020-02-05', 'LC', 'LC', '12:30:00'),
+(556, 'Louise Davidson', '07:15:00', b'1', '2020-02-05', 'Night', 'N', '23:45:00'),
+(554, 'Casual', '23:00:00', b'0', '2020-02-05', 'Late', 'L', '14:30:00'),
+(555, 'Joanne Muir', '07:15:00', b'1', '2020-02-05', 'Night', 'N', '23:45:00'),
+(553, 'Amanda Rees', '23:00:00', b'0', '2020-02-05', 'Late', 'L', '14:30:00'),
+(551, 'Rosmary Moloney', '15:30:00', b'0', '2020-02-05', 'Early', 'E', '07:00:00'),
+(552, 'Genoveva Phillips', '15:30:00', b'0', '2020-02-05', 'Early', 'E', '07:00:00'),
+(550, 'Sharon Bamforth', '15:30:00', b'0', '2020-02-05', 'Early', 'E', '07:00:00'),
+(548, 'Janette Pascoe', '21:00:00', b'0', '2020-02-04', 'LC', 'LC', '12:30:00'),
+(549, 'Kim Farr', '24:00:00', b'0', '2020-02-04', 'Leave', 'Leave', '06:00:00'),
+(546, 'Joanne Muir', '07:15:00', b'1', '2020-02-04', 'Night', 'N', '23:45:00'),
+(547, 'Richard Foreman', '07:15:00', b'1', '2020-02-04', 'Night', 'N', '23:45:00'),
+(545, 'Amanda Rees', '23:00:00', b'0', '2020-02-04', 'Late', 'L', '14:30:00'),
+(543, 'Louise Davidson', '15:30:00', b'0', '2020-02-04', 'Early', 'E', '07:00:00'),
+(544, 'Casual', '23:00:00', b'0', '2020-02-04', 'Late', 'L', '14:30:00'),
+(542, 'Rosmary Moloney', '15:30:00', b'0', '2020-02-04', 'Early', 'E', '07:00:00'),
+(541, 'Candida Blackwell', '15:30:00', b'0', '2020-02-04', 'Early', 'E', '07:00:00'),
+(539, 'Rosmary Moloney', '23:00:00', b'0', '2020-02-03', 'ADO', 'ADO', '06:30:00'),
+(540, 'Candida Blackwell', '21:00:00', b'0', '2020-02-03', 'LC', 'LC', '12:30:00'),
+(538, 'Graham Thomson', '07:15:00', b'1', '2020-02-03', 'Night', 'N', '23:45:00'),
+(537, 'Richard Foreman', '07:15:00', b'1', '2020-02-03', 'Night', 'N', '23:45:00'),
+(535, 'Janette Pascoe', '23:00:00', b'0', '2020-02-03', 'Late', 'L', '14:30:00'),
+(536, 'Modupe Alofokhai', '23:00:00', b'0', '2020-02-03', 'Late', 'L', '14:30:00'),
+(534, 'Casual', '15:30:00', b'0', '2020-02-03', 'Early', 'E', '07:00:00'),
+(533, 'Joanne Muir', '15:30:00', b'0', '2020-02-03', 'Early', 'E', '07:00:00'),
+(531, 'Amanda Rees', '15:30:00', b'0', '2020-02-03', 'Early', 'E', '07:00:00'),
+(532, 'Louise Davidson', '15:30:00', b'0', '2020-02-03', 'Early', 'E', '07:00:00'),
+(530, 'Louise Davidson', '21:00:00', b'0', '2020-02-02', 'LC', 'LC', '12:30:00'),
+(528, 'Sharon Bamforth', '07:15:00', b'1', '2020-02-02', 'Night', 'N', '23:45:00'),
+(529, 'Graham Thomson', '07:15:00', b'1', '2020-02-02', 'Night', 'N', '23:45:00'),
+(527, 'Richard Foreman', '23:00:00', b'0', '2020-02-02', 'Late', 'L', '14:30:00'),
+(526, 'Modupe Alofokhai', '23:00:00', b'0', '2020-02-02', 'Late', 'L', '14:30:00'),
+(524, 'Candida Blackwell', '15:30:00', b'0', '2020-02-02', 'Early', 'E', '07:00:00'),
+(525, 'Genoveva Phillips', '15:30:00', b'0', '2020-02-02', 'Early', 'E', '07:00:00'),
+(523, 'Graham Thomson', '21:00:00', b'0', '2020-02-01', 'LC', 'LC', '12:30:00'),
+(521, 'Janette Pascoe', '07:15:00', b'1', '2020-02-01', 'Night', 'N', '23:45:00'),
+(522, 'Sharon Bamforth', '07:15:00', b'1', '2020-02-01', 'Night', 'N', '23:45:00'),
+(520, 'Richard Foreman', '23:00:00', b'0', '2020-02-01', 'Late', 'L', '14:30:00'),
+(519, 'Louise Davidson', '23:00:00', b'0', '2020-02-01', 'Late', 'L', '14:30:00'),
+(518, 'Genoveva Phillips', '15:30:00', b'0', '2020-02-01', 'Early', 'E', '07:00:00'),
+(517, 'Candida Blackwell', '15:30:00', b'0', '2020-02-01', 'Early', 'E', '07:00:00'),
+(515, 'Richard Foreman', '21:00:00', b'0', '2020-01-31', 'LC', 'LC', '12:30:00'),
+(516, 'Joanne Muir', '24:00:00', b'0', '2020-01-31', 'Leave', 'Leave', '06:00:00'),
+(514, 'Rosmary Moloney', '07:15:00', b'1', '2020-01-31', 'Night', 'N', '23:45:00'),
+(513, 'Janette Pascoe', '07:15:00', b'1', '2020-01-31', 'Night', 'N', '23:45:00'),
+(511, 'Amanda Rees', '23:00:00', b'0', '2020-01-31', 'Late', 'L', '14:30:00'),
+(512, 'Casual', '23:00:00', b'0', '2020-01-31', 'Late', 'L', '14:30:00'),
+(510, 'Sharon Bamforth', '15:30:00', b'0', '2020-01-31', 'Early', 'E', '07:00:00'),
+(509, 'Genoveva Phillips', '15:30:00', b'0', '2020-01-31', 'Early', 'E', '07:00:00'),
+(508, 'Candida Blackwell', '15:30:00', b'0', '2020-01-31', 'Early', 'E', '07:00:00'),
+(507, 'Joanne Muir', '24:00:00', b'0', '2020-01-30', 'Leave', 'Leave', '06:00:00'),
+(506, 'Sharon Bamforth', '21:00:00', b'0', '2020-01-30', 'LC', 'LC', '12:30:00'),
+(505, 'Kim Farr', '07:15:00', b'1', '2020-01-30', 'Night', 'N', '23:45:00'),
+(504, 'Rosmary Moloney', '07:15:00', b'1', '2020-01-30', 'Night', 'N', '23:45:00'),
+(503, 'Graham Thomson', '23:00:00', b'0', '2020-01-30', 'Late', 'L', '14:30:00'),
+(502, 'Amanda Rees', '23:00:00', b'0', '2020-01-30', 'Late', 'L', '14:30:00'),
+(501, 'Modupe Alofokhai', '15:30:00', b'0', '2020-01-30', 'Early', 'E', '07:00:00'),
+(500, 'Genoveva Phillips', '15:30:00', b'0', '2020-01-30', 'Early', 'E', '07:00:00'),
+(499, 'Casual', '15:30:00', b'0', '2020-01-30', 'Early', 'E', '07:00:00'),
+(498, 'Joanne Muir', '24:00:00', b'0', '2020-01-29', 'Leave', 'Leave', '06:00:00'),
+(497, 'Sharon Bamforth', '21:00:00', b'0', '2020-01-29', 'LC', 'LC', '12:30:00'),
+(496, 'Louise Davidson', '07:15:00', b'1', '2020-01-29', 'Night', 'N', '23:45:00'),
+(495, 'Kim Farr', '07:15:00', b'1', '2020-01-29', 'Night', 'N', '23:45:00'),
+(494, 'Rosmary Moloney', '23:00:00', b'0', '2020-01-29', 'Late', 'L', '14:30:00'),
+(493, 'Amanda Rees', '23:00:00', b'0', '2020-01-29', 'Late', 'L', '14:30:00'),
+(492, 'Modupe Alofokhai', '15:30:00', b'0', '2020-01-29', 'Early', 'E', '07:00:00'),
+(491, 'Graham Thomson', '15:30:00', b'0', '2020-01-29', 'Early', 'E', '07:00:00'),
+(490, 'Genoveva Phillips', '15:30:00', b'0', '2020-01-29', 'Early', 'E', '07:00:00'),
+(489, 'Joanne Muir', '24:00:00', b'0', '2020-01-28', 'Leave', 'Leave', '06:00:00'),
+(488, 'Janette Pascoe', '21:00:00', b'0', '2020-01-28', 'LC', 'LC', '12:30:00'),
+(487, 'Graham Thomson', '23:00:00', b'0', '2020-01-28', 'ADO', 'ADO', '06:30:00'),
+(486, 'Modupe Alofokhai', '23:00:00', b'0', '2020-01-28', 'ADO', 'ADO', '06:30:00'),
+(485, 'Louise Davidson', '07:15:00', b'1', '2020-01-28', 'Night', 'N', '23:45:00'),
+(484, 'Candida Blackwell', '07:15:00', b'1', '2020-01-28', 'Night', 'N', '23:45:00'),
+(483, 'Richard Foreman', '23:00:00', b'0', '2020-01-28', 'Late', 'L', '14:30:00'),
+(482, 'Rosmary Moloney', '23:00:00', b'0', '2020-01-28', 'Late', 'L', '14:30:00'),
+(481, 'Kim Farr', '15:30:00', b'0', '2020-01-28', 'Early', 'E', '07:00:00'),
+(480, 'Amanda Rees', '15:30:00', b'0', '2020-01-28', 'Early', 'E', '07:00:00'),
+(479, 'Casual', '15:30:00', b'0', '2020-01-28', 'Early', 'E', '07:00:00'),
+(478, 'Joanne Muir', '24:00:00', b'0', '2020-01-27', 'Leave', 'Leave', '06:00:00'),
+(477, 'Rosmary Moloney', '21:00:00', b'0', '2020-01-27', 'LC', 'LC', '12:30:00'),
+(476, 'Casual', '07:15:00', b'1', '2020-01-27', 'Night', 'N', '23:45:00'),
+(475, 'Candida Blackwell', '07:15:00', b'1', '2020-01-27', 'Night', 'N', '23:45:00'),
+(474, 'Louise Davidson', '23:00:00', b'0', '2020-01-27', 'Late', 'L', '14:30:00'),
+(473, 'Richard Foreman', '23:00:00', b'0', '2020-01-27', 'Late', 'L', '14:30:00'),
+(472, 'Kim Farr', '15:30:00', b'0', '2020-01-27', 'Early', 'E', '07:00:00'),
+(471, 'Modupe Alofokhai', '15:30:00', b'0', '2020-01-27', 'Early', 'E', '07:00:00'),
+(470, 'Amanda Rees', '15:30:00', b'0', '2020-01-27', 'Early', 'E', '07:00:00'),
+(469, 'Janette Pascoe', '15:30:00', b'0', '2020-01-27', 'Early', 'E', '07:00:00');
 
 -- --------------------------------------------------------
 
@@ -213,16 +218,16 @@ CREATE TABLE `contractline` (
 
 INSERT INTO `contractline` (`type`, `id`, `contractLineType`, `enabled`, `weight`, `maximumEnabled`, `maximumValue`, `maximumWeight`, `minimumEnabled`, `minimumValue`, `minimumWeight`, `contract_id`) VALUES
 ('MinMaxContractLine', 14, 'TOTAL_ASSIGNMENTS', NULL, NULL, b'1', 10, 1, b'1', 10, 1, 1),
-('MinMaxContractLine', 15, 'CONSECUTIVE_WORKING_DAYS', NULL, NULL, b'1', 5, 1, b'1', 1, 1, 1),
-('MinMaxContractLine', 16, 'CONSECUTIVE_FREE_DAYS', NULL, NULL, b'1', 4, 1, b'1', 1, 1, 1),
+('MinMaxContractLine', 15, 'CONSECUTIVE_WORKING_DAYS', NULL, NULL, b'1', 5, 3, b'1', 1, 1, 1),
+('MinMaxContractLine', 16, 'CONSECUTIVE_FREE_DAYS', NULL, NULL, b'1', 4, 1, b'1', 2, 3, 1),
 ('MinMaxContractLine', 17, 'CONSECUTIVE_WORKING_WEEKENDS', NULL, NULL, b'1', 4, 1, b'1', 1, 1, 1),
 ('MinMaxContractLine', 18, 'TOTAL_WORKING_WEEKENDS_IN_FOUR_WEEKS', NULL, NULL, b'1', 4, 1, b'1', 1, 1, 1),
-('MinMaxContractLine', 19, 'TOTAL_NIGHT_ASSIGNMENTS', NULL, NULL, b'0', 5, 1, b'0', 2, 1, 1),
+('MinMaxContractLine', 19, 'TOTAL_NIGHT_ASSIGNMENTS', NULL, NULL, b'1', 5, 1, b'1', 2, 1, 1),
 ('MinMaxContractLine', 20, 'CONSECUTIVE_LATE_ASSIGNMENTS', NULL, NULL, b'0', 0, 0, b'0', 0, 0, 1),
 ('MinMaxContractLine', 21, 'CONSECUTIVE_EARLY_ASSIGNMENTS', NULL, NULL, b'0', 0, 0, b'0', 0, 0, 1),
 ('MinMaxContractLine', 22, 'TOTAL_ASSIGNMENTS', NULL, NULL, b'1', 8, 1, b'1', 8, 1, 2),
-('MinMaxContractLine', 23, 'CONSECUTIVE_WORKING_DAYS', NULL, NULL, b'1', 5, 1, b'1', 1, 1, 2),
-('MinMaxContractLine', 24, 'CONSECUTIVE_FREE_DAYS', NULL, NULL, b'1', 6, 1, b'1', 2, 1, 2),
+('MinMaxContractLine', 23, 'CONSECUTIVE_WORKING_DAYS', NULL, NULL, b'1', 5, 3, b'1', 1, 1, 2),
+('MinMaxContractLine', 24, 'CONSECUTIVE_FREE_DAYS', NULL, NULL, b'1', 6, 1, b'1', 2, 3, 2),
 ('MinMaxContractLine', 25, 'CONSECUTIVE_WORKING_WEEKENDS', NULL, NULL, b'1', 4, 1, b'1', 1, 1, 2),
 ('MinMaxContractLine', 26, 'TOTAL_WORKING_WEEKENDS_IN_FOUR_WEEKS', NULL, NULL, b'1', 4, 1, b'1', 1, 1, 2),
 ('MinMaxContractLine', 27, 'TOTAL_NIGHT_ASSIGNMENTS', NULL, NULL, b'1', 5, 1, b'1', 2, 1, 2),
@@ -248,7 +253,7 @@ INSERT INTO `contractline` (`type`, `id`, `contractLineType`, `enabled`, `weight
 ('BooleanContractLine', 47, 'COMPLETE_WEEKENDS', b'0', 1, NULL, NULL, NULL, NULL, NULL, NULL, 1),
 ('BooleanContractLine', 48, 'IDENTICAL_SHIFT_TYPES_DURING_WEEKEND', b'0', 1, NULL, NULL, NULL, NULL, NULL, NULL, 1),
 ('BooleanContractLine', 49, 'NO_NIGHT_SHIFT_BEFORE_FREE_WEEKEND', b'0', 1, NULL, NULL, NULL, NULL, NULL, NULL, 1),
-('BooleanContractLine', 50, 'ALTERNATIVE_SKILL_CATEGORY', b'0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 1),
+('BooleanContractLine', 50, 'ALTERNATIVE_SKILL_CATEGORY', b'0', 1, NULL, NULL, NULL, NULL, NULL, NULL, 1),
 ('BooleanContractLine', 51, 'ALTERNATIVE_DEPARTMENT', b'0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 1),
 ('BooleanContractLine', 52, 'IS_LOADBALANCED', b'0', 1, NULL, NULL, NULL, NULL, NULL, NULL, 1),
 ('BooleanContractLine', 53, 'IS_CASUAL', b'0', 1, NULL, NULL, NULL, NULL, NULL, NULL, 1),
@@ -256,7 +261,7 @@ INSERT INTO `contractline` (`type`, `id`, `contractLineType`, `enabled`, `weight
 ('BooleanContractLine', 55, 'COMPLETE_WEEKENDS', b'0', 1, NULL, NULL, NULL, NULL, NULL, NULL, 2),
 ('BooleanContractLine', 56, 'IDENTICAL_SHIFT_TYPES_DURING_WEEKEND', b'0', 1, NULL, NULL, NULL, NULL, NULL, NULL, 2),
 ('BooleanContractLine', 57, 'NO_NIGHT_SHIFT_BEFORE_FREE_WEEKEND', b'0', 1, NULL, NULL, NULL, NULL, NULL, NULL, 2),
-('BooleanContractLine', 58, 'ALTERNATIVE_SKILL_CATEGORY', b'0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 2),
+('BooleanContractLine', 58, 'ALTERNATIVE_SKILL_CATEGORY', b'0', 1, NULL, NULL, NULL, NULL, NULL, NULL, 2),
 ('BooleanContractLine', 59, 'ALTERNATIVE_DEPARTMENT', b'0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 2),
 ('BooleanContractLine', 60, 'IS_LOADBALANCED', b'0', 1, NULL, NULL, NULL, NULL, NULL, NULL, 2),
 ('BooleanContractLine', 61, 'IS_CASUAL', b'0', 1, NULL, NULL, NULL, NULL, NULL, NULL, 2),
@@ -273,7 +278,7 @@ INSERT INTO `contractline` (`type`, `id`, `contractLineType`, `enabled`, `weight
 ('BooleanContractLine', 72, 'IDENTICAL_SHIFT_TYPES_DURING_WEEKEND', b'0', 1, NULL, NULL, NULL, NULL, NULL, NULL, 4),
 ('BooleanContractLine', 73, 'NO_NIGHT_SHIFT_BEFORE_FREE_WEEKEND', b'0', 1, NULL, NULL, NULL, NULL, NULL, NULL, 4),
 ('BooleanContractLine', 74, 'ALTERNATIVE_SKILL_CATEGORY', b'0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 4),
-('BooleanContractLine', 75, 'ALTERNATIVE_DEPARTMENT', b'1', 1, NULL, NULL, NULL, NULL, NULL, NULL, 4),
+('BooleanContractLine', 75, 'ALTERNATIVE_DEPARTMENT', b'0', 0, NULL, NULL, NULL, NULL, NULL, NULL, 4),
 ('BooleanContractLine', 76, 'IS_LOADBALANCED', b'0', 1, NULL, NULL, NULL, NULL, NULL, NULL, 4),
 ('BooleanContractLine', 77, 'IS_CASUAL', b'0', 1, NULL, NULL, NULL, NULL, NULL, NULL, 4);
 
@@ -296,10 +301,10 @@ CREATE TABLE `coverrequirements` (
 
 INSERT INTO `coverrequirements` (`id`, `dayOfWeek`, `requiredEmployeesize`, `shiftType_id`) VALUES
 (113, 0, 4, 11),
-(114, 1, 6, 11),
-(115, 2, 6, 11),
-(117, 3, 6, 11),
-(118, 4, 6, 11),
+(114, 1, 3, 11),
+(115, 2, 3, 11),
+(117, 3, 3, 11),
+(118, 4, 3, 11),
 (119, 5, 2, 11),
 (120, 6, 2, 11),
 (121, 0, 2, 12),
@@ -315,7 +320,14 @@ INSERT INTO `coverrequirements` (`id`, `dayOfWeek`, `requiredEmployeesize`, `shi
 (131, 3, 2, 13),
 (132, 4, 2, 13),
 (133, 5, 2, 13),
-(134, 6, 2, 13);
+(134, 6, 2, 13),
+(297, 0, 1, 264),
+(298, 1, 1, 264),
+(299, 2, 1, 264),
+(300, 3, 1, 264),
+(301, 4, 1, 264),
+(302, 5, 1, 264),
+(303, 6, 1, 264);
 
 -- --------------------------------------------------------
 
@@ -329,6 +341,15 @@ CREATE TABLE `dayoffdate` (
   `weight` int(11) NOT NULL,
   `employee_id` bigint(20) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `dayoffdate`
+--
+
+INSERT INTO `dayoffdate` (`id`, `date`, `weight`, `employee_id`) VALUES
+(270, '2020-02-06', 2, 99),
+(273, '2020-02-07', 2, 101),
+(314, '2020-01-31', 2, 96);
 
 -- --------------------------------------------------------
 
@@ -385,9 +406,7 @@ CREATE TABLE `department` (
 --
 
 INSERT INTO `department` (`id`, `code`) VALUES
-(9, 'Logan'),
-(10, 'Cleveland'),
-(90, 'Medical');
+(261, 'CCU');
 
 -- --------------------------------------------------------
 
@@ -415,18 +434,20 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`id`, `address`, `code`, `contactdetails`, `employeeId`, `name`, `postcode`, `streetnum`, `suburb`, `contract_id`, `department_id`, `skill_id`) VALUES
-(96, '', '1', '', '1', 'Employee 1', '', '', '', 1, 9, 5),
-(97, '', '2', '', '2', 'Employee 2', '', '', '', 1, 9, 5),
-(98, '', '3', '', '3', 'Employee 3', '', '', '', 1, 9, 5),
-(99, '', '4', '', '4', 'Employee 4', '', '', '', 1, 9, 5),
-(100, '', '5', '', '5', 'Employee 5', '', '', '', 1, 9, 5),
-(101, '', '6', '', '6', 'Employee 6', '', '', '', 1, 9, 5),
-(102, '', '7', '', '7', 'Employee 7', '', '', '', 1, 9, 5),
-(103, '', '8', '', '8', 'Employee 8', '', '', '', 1, 9, 5),
-(104, '', '9', '', '9', 'Employee 9', '', '', '', 1, 9, 5),
-(105, '', '10', '', '10', 'Employee 10', '', '', '', 1, 9, 5),
-(106, '', '11', '', '11', 'Employee 11', '', '', '', 4, 90, 8),
-(107, '', '12', '', '12', 'Employee 12', '', '', '', 4, 90, 8);
+(96, '', '1', '', '1', 'Employee 1', '', '', '', 1, 261, 5),
+(97, '', '2', '', '2', 'Employee 2', '', '', '', 1, 261, 5),
+(98, '', '3', '', '3', 'Employee 3', '', '', '', 1, 261, 5),
+(99, '', '4', '', '4', 'Employee 4', '', '', '', 1, 261, 5),
+(101, '', '6', '', '6', 'Employee 6', '', '', '', 2, 261, 7),
+(102, '', '7', '', '7', 'Employee 7', '', '', '', 1, 261, 7),
+(103, '', '8', '', '8', 'Employee 8', '', '', '', 1, 261, 7),
+(104, '', '9', '', '9', 'Employee 9', '', '', '', 1, 261, 7),
+(105, '', '10', '', '10', 'Employee 10', '', '', '', 1, 261, 7),
+(106, '', '11', '', '11', 'Employee 11', '', '', '', 1, 261, 7),
+(304, '', 'Casual', '', 'Casual', 'Casual', '', '', '', 3, 261, 6),
+(262, '', '12', '', '12', 'Employee 12', '', '', '', 1, 261, 8),
+(263, '', '13', '', '13', 'Employee 13', '', '', '', 1, 261, 8),
+(619, '', 'Casual 2', '', 'Casual 2', 'Casual 2', '', '', '', 3, 261, 6);
 
 -- --------------------------------------------------------
 
@@ -543,38 +564,38 @@ CREATE TABLE `hibernate_sequence` (
 --
 
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257),
-(257);
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622),
+(622);
 
 -- --------------------------------------------------------
 
@@ -604,6 +625,15 @@ CREATE TABLE `holidaysdata` (
   `employee_id` bigint(20) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `holidaysdata`
+--
+
+INSERT INTO `holidaysdata` (`id`, `enddate`, `startdate`, `weight`, `employee_id`) VALUES
+(317, '2020-01-28', '2020-01-27', 1, 106),
+(318, '2020-01-28', '2020-01-27', 1, 262),
+(319, '2020-01-27', '2020-01-27', 1, 96);
+
 -- --------------------------------------------------------
 
 --
@@ -618,6 +648,14 @@ CREATE TABLE `leavedata` (
   `employee_id` bigint(20) DEFAULT NULL,
   `shiftType_id` bigint(20) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `leavedata`
+--
+
+INSERT INTO `leavedata` (`id`, `enddate`, `startdate`, `weight`, `employee_id`, `shiftType_id`) VALUES
+(281, '2020-02-09', '2020-02-04', 0, 263, NULL),
+(315, '2020-01-31', '2020-01-27', 0, 104, NULL);
 
 -- --------------------------------------------------------
 
@@ -649,7 +687,9 @@ CREATE TABLE `pattern` (
   `freeDayOfWeek` int(11) DEFAULT NULL,
   `freeDayLength` int(11) DEFAULT NULL,
   `workDayOfWeek` int(11) DEFAULT NULL,
+  `shiftLength` int(11) DEFAULT NULL,
   `workShiftType_id` bigint(20) DEFAULT NULL,
+  `employee_id` bigint(20) DEFAULT NULL,
   `dayIndex0ShiftType_id` bigint(20) DEFAULT NULL,
   `dayIndex1ShiftType_id` bigint(20) DEFAULT NULL,
   `dayIndex2ShiftType_id` bigint(20) DEFAULT NULL
@@ -659,11 +699,22 @@ CREATE TABLE `pattern` (
 -- Dumping data for table `pattern`
 --
 
-INSERT INTO `pattern` (`type`, `id`, `code`, `weight`, `freeDayOfWeek`, `freeDayLength`, `workDayOfWeek`, `workShiftType_id`, `dayIndex0ShiftType_id`, `dayIndex1ShiftType_id`, `dayIndex2ShiftType_id`) VALUES
-('WorkBefore', 78, 'WB', 1, NULL, 2, NULL, 13, NULL, NULL, NULL),
-('Shift2Days', 79, 'NE', 1, NULL, NULL, NULL, NULL, 13, 11, NULL),
-('Shift2Days', 80, 'NL', 1, NULL, NULL, NULL, NULL, 13, 12, NULL),
-('Shift2Days', 81, 'LE', 1, NULL, NULL, NULL, NULL, 12, 11, NULL);
+INSERT INTO `pattern` (`type`, `id`, `code`, `weight`, `freeDayOfWeek`, `freeDayLength`, `workDayOfWeek`, `shiftLength`, `workShiftType_id`, `employee_id`, `dayIndex0ShiftType_id`, `dayIndex1ShiftType_id`, `dayIndex2ShiftType_id`) VALUES
+('Shift2Days', 445, 'NE', 4, NULL, NULL, NULL, NULL, NULL, NULL, 13, 11, NULL),
+('Shift2Days', 446, 'NL', 4, NULL, NULL, NULL, NULL, NULL, NULL, 13, 12, NULL),
+('Shift2Days', 447, 'NLC', 4, NULL, NULL, NULL, NULL, NULL, NULL, 13, 264, NULL),
+('Shift2Days', 448, 'NADO', 4, NULL, NULL, NULL, NULL, NULL, NULL, 13, 258, NULL),
+('Shift2Days', 449, 'NLeave', 4, NULL, NULL, NULL, NULL, NULL, NULL, 13, 265, NULL),
+('Shift2Days', 450, 'NTraining', 4, NULL, NULL, NULL, NULL, NULL, NULL, 13, 260, NULL),
+('Shift2Days', 465, 'LE', 1, NULL, NULL, NULL, NULL, NULL, NULL, 12, 11, NULL),
+('FreeBefore', 468, 'FB', 1, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('WorkBefore', 596, 'WB', 5, NULL, 2, NULL, NULL, 13, NULL, NULL, NULL, NULL),
+('Shift3Days', 599, 'LCLE', 3, NULL, NULL, NULL, NULL, NULL, NULL, 264, 12, 11),
+('Shift2Days', 602, 'EN', 1, NULL, NULL, NULL, NULL, NULL, NULL, 11, 13, NULL),
+('Shift3Days', 604, 'ELN', 3, NULL, NULL, NULL, NULL, NULL, NULL, 11, 12, 13),
+('Shift3Days', 607, 'LLCE', 3, NULL, NULL, NULL, NULL, NULL, NULL, 12, 264, 11),
+('Shift2Days', 610, 'EL', 1, NULL, NULL, NULL, NULL, NULL, NULL, 11, 12, NULL),
+('Shift2Days', 613, 'LCN', 1, NULL, NULL, NULL, NULL, NULL, NULL, 264, 13, NULL);
 
 -- --------------------------------------------------------
 
@@ -682,13 +733,33 @@ CREATE TABLE `patterncontractline` (
 --
 
 INSERT INTO `patterncontractline` (`id`, `contract_id`, `pattern_id`) VALUES
-(83, 1, 79),
-(84, 1, 80),
-(85, 1, 81),
-(86, 2, 78),
-(87, 2, 79),
-(88, 2, 80),
-(89, 2, 81);
+(452, 1, 445),
+(453, 1, 446),
+(454, 1, 447),
+(455, 1, 448),
+(456, 1, 449),
+(457, 1, 450),
+(459, 2, 445),
+(460, 2, 446),
+(461, 2, 447),
+(462, 2, 448),
+(463, 2, 449),
+(464, 2, 450),
+(466, 1, 465),
+(467, 2, 465),
+(617, 2, 468),
+(616, 1, 468),
+(600, 1, 599),
+(601, 2, 599),
+(603, 1, 602),
+(605, 1, 604),
+(606, 2, 604),
+(608, 1, 607),
+(609, 2, 607),
+(611, 1, 610),
+(612, 2, 610),
+(614, 1, 613),
+(615, 2, 613);
 
 -- --------------------------------------------------------
 
@@ -720,6 +791,16 @@ CREATE TABLE `rosterdayoff` (
   `shiftType_id` bigint(20) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `rosterdayoff`
+--
+
+INSERT INTO `rosterdayoff` (`id`, `date`, `weight`, `employee_id`, `shift_id`, `shiftType_id`) VALUES
+(257, '2020-01-28', 0, 96, NULL, NULL),
+(269, '2020-02-07', 0, 99, NULL, NULL),
+(274, '2020-02-03', 0, 103, NULL, NULL),
+(307, '2020-01-28', 0, 105, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -738,7 +819,7 @@ CREATE TABLE `rosterparametrizationdata` (
 --
 
 INSERT INTO `rosterparametrizationdata` (`id`, `code`, `endDate`, `startDate`) VALUES
-(0, 'Test', '2020-02-16', '2020-02-03');
+(0, 'Test', '2020-02-09', '2020-01-27');
 
 -- --------------------------------------------------------
 
@@ -809,6 +890,21 @@ CREATE TABLE `shiftondate` (
   `shiftType_id` bigint(20) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `shiftondate`
+--
+
+INSERT INTO `shiftondate` (`id`, `date`, `weight`, `employee_id`, `shiftType_id`) VALUES
+(266, '2020-01-27', 2, 97, 12),
+(267, '2020-01-28', 2, 97, 13),
+(268, '2020-01-29', 2, 97, 13),
+(271, '2020-01-31', 2, 101, 13),
+(272, '2020-02-01', 2, 101, 13),
+(275, '2020-01-27', 2, 105, 11),
+(276, '2020-02-08', 2, 105, 13),
+(277, '2020-01-27', 2, 98, 13),
+(278, '2020-01-28', 2, 98, 13);
+
 -- --------------------------------------------------------
 
 --
@@ -843,9 +939,13 @@ CREATE TABLE `shifttype` (
 --
 
 INSERT INTO `shifttype` (`id`, `code`, `description`, `endTimeString`, `shift_index`, `night`, `startTimeString`) VALUES
-(11, 'E', 'Early', '14:30:00', 0, b'0', '06:30:00'),
-(12, 'L', 'Late', '23:45:00', 0, b'0', '14:30:00'),
-(13, 'N', 'Night', '06:30:00', 0, b'1', '23:45:00');
+(11, 'E', 'Early', '15:30:00', 0, b'0', '07:00:00'),
+(12, 'L', 'Late', '23:00:00', 0, b'0', '14:30:00'),
+(13, 'N', 'Night', '07:15:00', 0, b'0', '23:45:00'),
+(258, 'ADO', 'ADO', '23:00:00', 0, b'0', '06:30:00'),
+(260, 'Training', 'Training', '16:30:00', 0, b'0', '06:30:00'),
+(264, 'LC', 'LC', '21:00:00', 0, b'0', '12:30:00'),
+(265, 'Leave', 'Leave', '24:00:00', 0, b'0', '06:00:00');
 
 -- --------------------------------------------------------
 
@@ -864,11 +964,13 @@ CREATE TABLE `shifttypedepartmentrequirement` (
 --
 
 INSERT INTO `shifttypedepartmentrequirement` (`id`, `department_id`, `shiftType_id`) VALUES
-(91, 90, 11),
-(92, 9, 11),
-(136, 9, 12),
-(94, 9, 13),
-(95, 10, 11);
+(294, 261, 260),
+(293, 261, 258),
+(292, 261, 13),
+(291, 261, 12),
+(290, 261, 11),
+(295, 261, 264),
+(296, 261, 265);
 
 -- --------------------------------------------------------
 
@@ -891,7 +993,15 @@ INSERT INTO `shifttypeskillrequirement` (`id`, `shiftType_id`, `skill_id`) VALUE
 (109, 11, 7),
 (110, 12, 5),
 (135, 11, 5),
-(112, 13, 5);
+(112, 13, 5),
+(282, 11, 5),
+(283, 12, 7),
+(284, 12, 8),
+(285, 13, 7),
+(286, 13, 8),
+(288, 264, 7),
+(289, 264, 8),
+(620, 264, 5);
 
 -- --------------------------------------------------------
 
@@ -909,10 +1019,10 @@ CREATE TABLE `skill` (
 --
 
 INSERT INTO `skill` (`id`, `code`) VALUES
-(5, 'HP3'),
+(5, 'G6'),
 (6, 'Casual'),
-(7, 'Cleaner'),
-(8, 'Doctor');
+(7, 'G5'),
+(8, 'G3');
 
 -- --------------------------------------------------------
 
@@ -1136,6 +1246,7 @@ ALTER TABLE `leaverequest`
 ALTER TABLE `pattern`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FKieddnrui1m77eui84r2s1wgjg` (`workShiftType_id`),
+  ADD KEY `FKyjoriwu3ccd7cfejqah46ttm` (`employee_id`),
   ADD KEY `FKcgeu0vfp7jfnaamat7eepp7l6` (`dayIndex0ShiftType_id`),
   ADD KEY `FK82htfcv0vdjipn65758v8gke3` (`dayIndex1ShiftType_id`),
   ADD KEY `FKdelr3729occ5v17cq587ixd1a` (`dayIndex2ShiftType_id`);
