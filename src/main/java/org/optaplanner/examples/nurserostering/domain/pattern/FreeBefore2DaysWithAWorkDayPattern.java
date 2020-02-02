@@ -23,14 +23,12 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-
-
-@Entity (name = "FreeBefore2DaysWithAWorkDayPattern")
-@DiscriminatorValue("FreeBefore2DaysWithAWorkDayPattern")
+@Entity
+@DiscriminatorValue(value ="FreeBefore") 
 @XStreamAlias("FreeBefore2DaysWithAWorkDayPattern")
 public class FreeBefore2DaysWithAWorkDayPattern extends Pattern {
 
-	private DayOfWeek freeDayOfWeek;
+    private DayOfWeek freeDayOfWeek;
 
     public DayOfWeek getFreeDayOfWeek() {
         return freeDayOfWeek;

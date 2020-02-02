@@ -22,6 +22,7 @@ import java.util.ResourceBundle;
 
 import org.optaplanner.database.RosterService;
 import org.optaplanner.database.RosterServiceImpl;
+import org.optaplanner.examples.nurserostering.domain.Department;
 import org.optaplanner.examples.nurserostering.domain.Employee;
 import org.optaplanner.examples.nurserostering.domain.Skill;
 import org.optaplanner.examples.nurserostering.domain.contract.Contract;
@@ -42,11 +43,15 @@ public class EmployeeEditDialogController implements Initializable {
 	@FXML
 	private TextField employeeIdField;
 	@FXML
-	private TextField NameField;
+	private TextField employeename;
 	
 
 	@FXML
-	private ComboBox<Contract> contracttype;
+	private ComboBox<Contract> contract;
+	@FXML
+	private ComboBox<Skill> skill;
+	@FXML
+	private ComboBox<Department> department;
 	/*
 	 * @FXML private ComboBox<Skill> skill;
 	 */
@@ -81,18 +86,23 @@ public class EmployeeEditDialogController implements Initializable {
 		return contractList;
 	}
 	
-	public ObservableList<Skill> skillsList = FXCollections.observableArrayList();
+	
+	private ObservableList<Skill> skillsList = FXCollections.observableArrayList();
 
 	public ObservableList<Skill> getSkillsList() {
 		if (!skillsList.isEmpty())
 			skillsList.clear();
 		skillsList = FXCollections.observableList((List<Skill>) rosterService.listSkill());
 		return skillsList;
-	
-	
-	
 	}
-	
+	private ObservableList<Department> departmentList = FXCollections.observableArrayList();
+
+	public ObservableList<Department> getDepartmentList() {
+		if (!departmentList.isEmpty())
+			departmentList.clear();
+		departmentList = FXCollections.observableList((List<Department>) rosterService.listDepartment());
+		return departmentList;
+	}
 
 	 
 	/**
@@ -121,21 +131,22 @@ public class EmployeeEditDialogController implements Initializable {
 	public void setEmployee(Employee employee ) {
 		this.employee = employee;
 		employeeIdField.setText(employee.getEmployeeId());
-		NameField.setText(employee.getName());
+		employeename.setText(employee.getName());
 		getContractList();	
 		getSkillsList();
-	 	//skill.getItems().addAll(skillsList);
-	 //	skill.setItems(skillsList);
-		contracttype.setItems(contractList);
+		getDepartmentList();
+	 	skill.getItems().addAll(skillsList);
+	 	skill.setItems(skillsList);
+		contract.setItems(contractList);
+		department.setItems(departmentList);
 		streetnum.setText(employee.getStreetnum());
 		address.setText(employee.getAddress());
 		suburb.setText(employee.getSuburb());		
 		postcode.setText(employee.getPostcode());
-	//skill.setValue(employee.getSkill());
+	    skill.setValue(employee.getSkill());
 		contactdetails.setText(employee.getContactdetails());
-		
-		
-		contracttype.setValue(employee.getContract());
+		contract.setValue(employee.getContract());
+		department.setValue(employee.getDepartment());
 	}
 
 	/**
@@ -156,19 +167,7 @@ public class EmployeeEditDialogController implements Initializable {
 			
 			String employeeId = employeeIdField.getText();
 	    	String stnum = streetnum.getText();
-	    	
-			/*
-			 * //TODO Figure out how to enter two skills List<Skill> skilltype =
-			 * skill.getCheckModel().getCheckedItems(); for (Skill item:
-			 * skilltype) { employee.setSkill(item);
-			 * 
-			 * }
-			 */
-			/*
-			 * Skill skilltype = skill.getSelectionModel().getSelectedItem();
-			 * employee.setSkill(skilltype);
-			 */
-		    employee.setStreetnum(stnum);
+	    	employee.setStreetnum(stnum);
 			String addr = address.getText();
 			employee.setAddress(addr);
 			String sub = suburb.getText();
@@ -178,10 +177,14 @@ public class EmployeeEditDialogController implements Initializable {
 			String contdetail = contactdetails.getText();
 			employee.setContactdetails(contdetail);
 			employee.setCode(employeeId);
-			String name = NameField.getText();
+			String name = employeename.getText();
 			employee.setEmployeeId(employeeId);
 			employee.setName(name);
-			Contract contractcode = contracttype.getSelectionModel().getSelectedItem();
+			Department departmentcode = department.getSelectionModel().getSelectedItem();
+			Skill skillcode = skill.getSelectionModel().getSelectedItem();
+			Contract contractcode = contract.getSelectionModel().getSelectedItem();
+			employee.setSkill(skillcode);
+			employee.setDepartment(departmentcode);
 			employee.setContract(contractcode);
 			okClicked = true;
 			rosterService.updateEmployee(employee);
@@ -210,7 +213,7 @@ public class EmployeeEditDialogController implements Initializable {
 	private boolean isInputValid() {
 		String errorMessage = "";
 
-		if (NameField.getText() == null || NameField.getText().length() == 0) {
+		if (employeename.getText() == null || employeename.getText().length() == 0) {
 			errorMessage += "No valid first name!\n";
 		}
 

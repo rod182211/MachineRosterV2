@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="200.0" prefWidth="664.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.optaplanner.examples.view.MinMaxEditController">
+<AnchorPane prefHeight="200.0" prefWidth="664.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.optaplanner.examples.view.MinMaxEditController">
    <children>
       <Pane layoutX="-2.0" prefHeight="163.0" prefWidth="800.0" style="-fx-background-color: #8AC5D1;" AnchorPane.bottomAnchor="437.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -44,24 +44,24 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label text="Contract Line" GridPane.rowIndex="3" />
-            <Label text="Contract" GridPane.rowIndex="2" />
             <Label text="Id" GridPane.rowIndex="1" />
+            <Label text="Contract" GridPane.rowIndex="2" />
+            <Label text="Contract Line" GridPane.rowIndex="3" />
             <Label text="Max Value" GridPane.rowIndex="5" />
-            <Label text="Min Value" GridPane.rowIndex="8" />
             <Label text="Max Weight" GridPane.rowIndex="6" />
+            <Label text="Min Value" GridPane.rowIndex="8" />
             <Label text="Min Weight" GridPane.rowIndex="9" />
-            <TextField fx:id="maxvalue" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField fx:id="minvalue" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <TextField fx:id="maxweight" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <TextField fx:id="minweight" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-            <Label fx:id="contractline" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label fx:id="contract" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label fx:id="Id" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="contract" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="contractline" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <CheckBox fx:id="maxwenabled" mnemonicParsing="false" text="Max Enabled" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="maxvalue" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="maxweight" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <CheckBox fx:id="minwenabled" mnemonicParsing="false" text="Min Enabled" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField fx:id="minvalue" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <TextField fx:id="minweight" GridPane.columnIndex="1" GridPane.rowIndex="9" />
             <Label text="Max Enabled" GridPane.rowIndex="4" />
             <Label text="Min Enabled" GridPane.rowIndex="7" />
-            <CheckBox fx:id="maxwenabled" mnemonicParsing="false" text="Max Enabled" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <CheckBox fx:id="minwenabled" mnemonicParsing="false" text="Min Enabled" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
       <ButtonBar layoutX="6.0" layoutY="552.0" prefHeight="40.0" prefWidth="652.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="552.0">

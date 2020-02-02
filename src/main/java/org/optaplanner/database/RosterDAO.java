@@ -42,7 +42,7 @@ public void removeEmployee(ObservableList<Employee> itemsSelected);
 public void updateEmployee(Employee employee);
 public void insertEmployee(Employee employee);
 public List<Employee> listEmployeename();   
-public List<Employee> listEmployeeId();
+public List<Employee> listEmployeeId(long empid);
 
     //get all skills data
  public void addSkill(Skill skills);
@@ -52,15 +52,14 @@ public List<Employee> listEmployeeId();
  public void removeSkill(ObservableList<Skill> itemsSelected);
  public void updateSkill(Skill skills);
  
- //get all skills data
+
 public void addShiftType(ShiftType shifttype);
 public List<ShiftType> listShiftType();
 public List<ShiftType> listShiftTypeId();
 public List<ShiftType> listShiftTypecode();
 public void removeShiftType(ObservableList<ShiftType> itemsSelected);
 public void updateShiftType(ShiftType shifttype);
-//get schedule date data
- //get schedule date data
+
  
  public void addRosterParametrizationData(RosterParametrizationData scheddates);
  public List<RosterParametrizationData> listRosterParametrizationData();
@@ -74,7 +73,7 @@ public List<Pattern> listPatternId();
 public List<Pattern> listPatterncode();
 public void removePattern(ObservableList<Pattern> itemsSelected);
 public void updatePattern(Pattern pattern);
-
+public void deletePattern(Pattern itemsSelected);
  //get all contract data
  public List<Contract> listContract();
  public void addContract(Contract contract);
@@ -108,6 +107,7 @@ public void updatePattern(Pattern pattern);
  public void addPatternContractLine(PatternContractLine patterndata);
  public void removePatternContractLine(ObservableList<PatternContractLine> itemsSelected);
  public void updatePatternContractLine(PatternContractLine patterndata);
+ public void deletePatternContractLine(PatternContractLine patterndata);
  public List<PatternContractLine> listPatternContractLineId();
  public List<PatternContractLine> listPatternContractLinecode();
  public List<PatternContractLine> listPatternContractLine();
@@ -138,27 +138,34 @@ public void updatePattern(Pattern pattern);
  public List<ShiftOffRequest>listShiftOffRequest();
  
  public void addWorkBeforeFreeSequencePattern(WorkBeforeFreeSequencePattern  workbeforedata);
- public void removeWorkBeforeFreeSequencePattern (ObservableList<WorkBeforeFreeSequencePattern> itemsSelected);
+ public void removeWorkBeforeFreeSequencePattern (WorkBeforeFreeSequencePattern itemsSelected);
  public void updateWorkBeforeFreeSequencePattern(WorkBeforeFreeSequencePattern workbeforedata);
  public List<WorkBeforeFreeSequencePattern> listWorkBeforeFreeSequencePatternId();
  public List<WorkBeforeFreeSequencePattern>listWorkBeforeFreeSequencePattern ();
  public List<WorkBeforeFreeSequencePattern> listWorkBeforeFreeSequencePatterncode();
  
+ public void addWorkEarlyPattern(WorkEarlyPattern  workbeforedata);
+ public void removeWorkEarlyPattern (ObservableList<WorkEarlyPattern> itemsSelected);
+ public void updateWorkEarlyPattern(WorkEarlyPattern workbeforedata);
+ public List<WorkEarlyPattern> listWorkEarlyPatternId();
+ public List<WorkEarlyPattern>listWorkEarlyPattern ();
+ public List<WorkEarlyPattern> listWorkEarlyPatterncode();
+ 
  public void addShiftType2DaysPattern(ShiftType2DaysPattern  shift2daydata);
- public void removeShiftType2DaysPattern(ObservableList<ShiftType2DaysPattern> itemsSelected);
+ public void removeShiftType2DaysPattern(ShiftType2DaysPattern itemsSelected);
  public void updateShiftType2DaysPattern (ShiftType2DaysPattern shift2daydata);
  public List<ShiftType2DaysPattern> listShiftType2DaysPatternId();
  public List<ShiftType2DaysPattern>listShiftType2DaysPattern();
  public List<ShiftType2DaysPattern> listShiftType2DaysPatterncode();
  
  public void addShiftType3DaysPattern(ShiftType3DaysPattern  shift3daydata);
- public void removeShiftType3DaysPattern(ObservableList<ShiftType3DaysPattern> itemsSelected);
+ public void removeShiftType3DaysPattern(ShiftType3DaysPattern itemsSelected);
  public void updateShiftType3DaysPattern (ShiftType3DaysPattern shift3daydata);
  public List<ShiftType3DaysPattern> listShiftType3DaysPatternId();
  public List<ShiftType3DaysPattern>listShiftType3DaysPattern();
  
  public void addFreeBefore2DaysWithAWorkDayPattern(FreeBefore2DaysWithAWorkDayPattern  freeday);
- public void removeFreeBefore2DaysWithAWorkDayPattern(ObservableList<FreeBefore2DaysWithAWorkDayPattern> itemsSelected);
+ public void removeFreeBefore2DaysWithAWorkDayPattern(FreeBefore2DaysWithAWorkDayPattern itemsSelected);
  public void updateFreeBefore2DaysWithAWorkDayPattern (FreeBefore2DaysWithAWorkDayPattern freeday);
  public List<FreeBefore2DaysWithAWorkDayPattern> listFreeBefore2DaysWithAWorkDayPatternId();
  public List<FreeBefore2DaysWithAWorkDayPattern>listFreeBefore2DaysWithAWorkDayPattern();
@@ -261,4 +268,26 @@ public void updatePattern(Pattern pattern);
  public void updateCalendarData(CalendarData  calendardata);
  public List<CalendarData> listCalendarDataId();
  public List<CalendarData>listCalendarData();
+ 
+ 
+ public void addDepartment(Department department);
+ public List<Department> listDepartment();
+ public List<Department> listDepartmentId();
+ public List<Department> listDepartmentcode();
+ public void removeDepartment(ObservableList<Department> itemsSelected);
+ public void updateDepartment(Department department);
+ 
+ 
+ 
+ public void addShiftTypeDepartmentRequirement(ShiftTypeDepartmentRequirement shiftTypeDepartmentRequirement);
+ public void removeShiftTypeDepartmentRequirement (ObservableList<ShiftTypeDepartmentRequirement> itemsSelected);
+ public void updateShiftTypeDepartmentRequirement(ShiftTypeDepartmentRequirement  shiftTypeDepartmentRequirement);
+ public List<ShiftTypeDepartmentRequirement> listShiftTypeDepartmentRequirementId();
+ public List<ShiftTypeDepartmentRequirement>listShiftTypeDepartmentRequirement();
+ 
+ public void addEmployeeDepartment(EmployeeDepartment employeeDepartment);
+ public void removeEmployeeDepartment (ObservableList<EmployeeDepartment> itemsSelected);
+ public void updateEmployeeDepartment(EmployeeDepartment  employeeDepartment);
+ public List<EmployeeDepartment> listEmployeeDepartmentId();
+ public List<EmployeeDepartment>listEmployeeDepartment();
 }

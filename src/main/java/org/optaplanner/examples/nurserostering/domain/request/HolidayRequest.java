@@ -1,24 +1,30 @@
 package org.optaplanner.examples.nurserostering.domain.request;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 import org.optaplanner.examples.nurserostering.domain.Employee;
 import org.optaplanner.examples.nurserostering.domain.ShiftDate;
 
+
+
 @Entity
 public class HolidayRequest extends AbstractPersistable {
 
-	@ManyToOne(cascade = CascadeType.MERGE)
-    private Employee employee;
 
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
+	private Employee employee;
+
+	@ManyToOne
 	private ShiftDate startshiftDate;
 
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	private ShiftDate endshiftDate;
+
     private int weight;
 
   

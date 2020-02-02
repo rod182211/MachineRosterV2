@@ -46,14 +46,17 @@ import org.optaplanner.examples.nurserostering.domain.request.TrainingRequest;
 
 @Entity(name = "Employee")
 @XStreamAlias("Employee")
-public class Employee extends AbstractPersistable implements Labeled {
+public class Employee extends AbstractPersistable implements Labeled, Comparable<Employee> {
 
 	private String employeeId;
 	private String code;
 	private String name;
 	@ManyToOne(cascade = CascadeType.MERGE)
 	private Contract contract;
-
+	@ManyToOne
+	private Skill skill;
+	@ManyToOne
+	private Department department;
 	private String streetnum;
 	private String address;
 	private String suburb;
@@ -79,12 +82,11 @@ public class Employee extends AbstractPersistable implements Labeled {
 	@MapKey(name = "id")
 	private Map<Shift, RosterDay> rosterdayMap;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	 @MapKey(name = "id") 
-	 private Map<Shift, LeaveRequest> leaveMap;
+	@MapKey(name = "id")
+	private Map<Shift, LeaveRequest> leaveMap;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	 @MapKey(name = "id") 
-	 private Map<Shift, TrainingRequest> trainingRequestMap;
-	 
+	@MapKey(name = "id")
+	private Map<Shift, TrainingRequest> trainingRequestMap;
 
 	public String getEmployeeId() {
 		return employeeId;
@@ -118,6 +120,22 @@ public class Employee extends AbstractPersistable implements Labeled {
 		this.contract = contract;
 	}
 
+	public Skill getSkill() {
+		return skill;
+	}
+
+	public void setSkill(Skill skill) {
+		this.skill = skill;
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+
 	public int getWeekendLength() {
 		return getContract().getWeekendLength();
 	}
@@ -126,8 +144,7 @@ public class Employee extends AbstractPersistable implements Labeled {
 		return dayOffRequestMap;
 	}
 
-	public void setDayOffRequestMap(
-			Map<ShiftDate, DayOffRequest> dayOffRequestMap) {
+	public void setDayOffRequestMap(Map<ShiftDate, DayOffRequest> dayOffRequestMap) {
 		this.dayOffRequestMap = dayOffRequestMap;
 	}
 
@@ -135,8 +152,7 @@ public class Employee extends AbstractPersistable implements Labeled {
 		return dayOnRequestMap;
 	}
 
-	public void setDayOnRequestMap(
-			Map<ShiftDate, DayOnRequest> dayOnRequestMap) {
+	public void setDayOnRequestMap(Map<ShiftDate, DayOnRequest> dayOnRequestMap) {
 		this.dayOnRequestMap = dayOnRequestMap;
 	}
 
@@ -144,8 +160,7 @@ public class Employee extends AbstractPersistable implements Labeled {
 		return shiftOffRequestMap;
 	}
 
-	public void setShiftOffRequestMap(
-			Map<Shift, ShiftOffRequest> shiftOffRequestMap) {
+	public void setShiftOffRequestMap(Map<Shift, ShiftOffRequest> shiftOffRequestMap) {
 		this.shiftOffRequestMap = shiftOffRequestMap;
 	}
 
@@ -153,8 +168,7 @@ public class Employee extends AbstractPersistable implements Labeled {
 		return shiftOnRequestMap;
 	}
 
-	public void setShiftOnRequestMap(
-			Map<Shift, ShiftOnRequest> shiftOnRequestMap) {
+	public void setShiftOnRequestMap(Map<Shift, ShiftOnRequest> shiftOnRequestMap) {
 		this.shiftOnRequestMap = shiftOnRequestMap;
 	}
 
@@ -162,12 +176,9 @@ public class Employee extends AbstractPersistable implements Labeled {
 		return holidayRequestMap;
 	}
 
-	public void setHolidayRequestMap(
-			Map<ShiftDate, HolidayRequest> holidayRequestMap) {
+	public void setHolidayRequestMap(Map<ShiftDate, HolidayRequest> holidayRequestMap) {
 		this.holidayRequestMap = holidayRequestMap;
 	}
-
-	
 
 	public Map<Shift, RosterDay> getRosterdayMap() {
 		return rosterdayMap;
@@ -176,8 +187,6 @@ public class Employee extends AbstractPersistable implements Labeled {
 	public void setRosterdayMap(Map<Shift, RosterDay> rosterdayMap) {
 		this.rosterdayMap = rosterdayMap;
 	}
-
-
 
 	public Map<Shift, LeaveRequest> getLeaveMap() {
 		return leaveMap;
@@ -235,17 +244,23 @@ public class Employee extends AbstractPersistable implements Labeled {
 		this.contactdetails = contactdetails;
 	}
 
-	@Override
-	public String getLabel() {
-		return name;
-	}
 
-	@Override
-	public String toString() {
-		if (name == null) {
-			return super.toString();
-		}
-		return name;
-	}
 
+    @Override
+    public String getLabel() {
+        return "" + name;
+    }
+
+    @Override
+    public String toString() {
+        if (name == null) {
+            return super.toString();
+        }
+        return name;
+    }
+
+    @Override
+    public int compareTo(Employee employee) {
+        return name.compareTo(employee.name);
+    }
 }

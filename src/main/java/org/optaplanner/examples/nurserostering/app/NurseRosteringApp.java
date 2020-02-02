@@ -16,16 +16,13 @@
 
 package org.optaplanner.examples.nurserostering.app;
 
-
 import org.optaplanner.examples.common.app.CommonApp;
 import org.optaplanner.examples.common.persistence.AbstractSolutionExporter;
 import org.optaplanner.examples.common.persistence.AbstractSolutionImporter;
 import org.optaplanner.examples.nurserostering.domain.NurseRoster;
-import org.optaplanner.examples.view.NurseRosterExcelExporter;
-
+import org.optaplanner.examples.nurserostering.persistence.NurseRosteringExporter;
 import org.optaplanner.examples.nurserostering.persistence.NurseRosteringImporter;
 import org.optaplanner.examples.nurserostering.swingui.NurseRosteringPanel;
-
 import org.optaplanner.persistence.common.api.domain.solution.SolutionFileIO;
 import org.optaplanner.persistence.xstream.impl.domain.solution.XStreamSolutionFileIO;
 
@@ -42,16 +39,13 @@ public class NurseRosteringApp extends CommonApp<NurseRoster> {
     }
 
     public NurseRosteringApp() {
-        super("Staff rostering",
-                " Staff rostering\n\n" +
-                        "Assign shifts to Staff.",
+        super("Nurse rostering",
+                "Official competition name: INRC2010 - Nurse rostering\n\n" +
+                        "Assign shifts to nurses.",
                 SOLVER_CONFIG, DATA_DIR_NAME,
                 NurseRosteringPanel.LOGO_PATH);
-        
     }
-  
-    
-   
+
     @Override
     protected NurseRosteringPanel createSolutionPanel() {
         return new NurseRosteringPanel();
@@ -68,12 +62,10 @@ public class NurseRosteringApp extends CommonApp<NurseRoster> {
                 new NurseRosteringImporter()
         };
     }
-    
-// Change here to implement the Excel output
-   @Override
+
+    @Override
     protected AbstractSolutionExporter createSolutionExporter() {
-        return new NurseRosterExcelExporter();
+        return new NurseRosteringExporter();
     }
-   
 
 }

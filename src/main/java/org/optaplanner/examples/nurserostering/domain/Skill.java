@@ -20,19 +20,13 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import javax.persistence.Entity;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 
-
-
-
-@Entity (name = "Skill")
+@Entity
 @XStreamAlias("Skill")
-public class Skill extends AbstractPersistable {
-	
+public class Skill extends AbstractPersistable implements Comparable<Skill>{
 
+    private String code;
 
-	private String code;
-
-   
-	public String getCode() {
+    public String getCode() {
         return code;
     }
 
@@ -44,5 +38,8 @@ public class Skill extends AbstractPersistable {
     public String toString() {
         return code;
     }
-
+    @Override
+    public int compareTo(Skill o) {
+        return this.getCode().compareTo(o.getCode());
+    }
 }

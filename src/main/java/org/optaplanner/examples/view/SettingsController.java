@@ -57,7 +57,10 @@ public class SettingsController implements Initializable {
 	@FXML
 	private Button btnCoverRequiremtns;
 	@FXML
-	private Button btnSkillProficiency;
+	private Button btnShiftTypeDepartmentRequirement;
+	@FXML
+	private Button btnDepartment;
+
 
 	@FXML
 	void handleButtonClick(ActionEvent event) {
@@ -92,8 +95,11 @@ public class SettingsController implements Initializable {
 		else if (event.getSource() == btnCoverRequiremtns) {
 			loadStage("/fxml/CoverRequirements.fxml");
 		}
-		else if (event.getSource() ==  btnSkillProficiency) {
-			loadStage("/fxml/SkillProficiency.fxml");
+		else if (event.getSource() == btnShiftTypeDepartmentRequirement ) {
+			loadStage("/fxml/ShiftTypeDepartmentRequirement.fxml");
+		}
+		else if (event.getSource() == btnDepartment ) {
+			loadStage("/fxml/Department.fxml");
 		}
 	}
 

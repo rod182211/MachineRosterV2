@@ -3,23 +3,25 @@ package org.optaplanner.examples.nurserostering.domain;
 import java.time.DayOfWeek;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-
+import javax.persistence.Table;
 import javax.persistence.ManyToOne;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
-@Entity(name="CoverRequirements")
+
+
+@Entity
 public class CoverRequirements extends AbstractPersistable {
 	
 
 
 	private DayOfWeek dayOfWeek;
-	
+ 
 	private int requiredEmployeesize;
-	@ManyToOne(cascade = CascadeType.MERGE)
-	private ShiftType shiftType;
-	
-	
-	
+
+
+	@ManyToOne
+	private ShiftType shiftType;	
 	public DayOfWeek getDayOfWeek() {
 		return dayOfWeek;
 	}

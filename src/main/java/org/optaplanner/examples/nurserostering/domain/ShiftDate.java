@@ -22,42 +22,21 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-
-import javax.persistence.CascadeType;
-
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-
 import javax.persistence.OneToMany;
-
-
-
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 import org.optaplanner.examples.common.domain.AbstractPersistable;
-
-
-
-
-
-
 
 @Entity
 @XStreamAlias("ShiftDate")
-public class ShiftDate extends AbstractPersistable {
+public class ShiftDate extends AbstractPersistable implements Comparable<ShiftDate> {
 
- 
-
-	private static final DateTimeFormatter LABEL_FORMATTER = DateTimeFormatter.ofPattern("E d MMM");
+    private static final DateTimeFormatter LABEL_FORMATTER = DateTimeFormatter.ofPattern("E d MMM");
 
     private int dayIndex; // TODO check if still needed/faster now that we use LocalDate instead of java.util.Date
-   
     private LocalDate date;
-  
-    @OneToMany(mappedBy = "shiftDate",cascade = CascadeType.MERGE,orphanRemoval = true,fetch = FetchType.EAGER)
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-   	private List<Shift> shiftList;
+
+    @OneToMany(mappedBy = "shiftDate")
+	private List<Shift> shiftList;
 
     public int getDayIndex() {
         return dayIndex;
@@ -79,12 +58,7 @@ public class ShiftDate extends AbstractPersistable {
         return date.getDayOfWeek();
     }
 
-   
-
-	
-
-	
-	public List<Shift> getShiftList() {
+    public List<Shift> getShiftList() {
         return shiftList;
     }
 
@@ -122,4 +96,8 @@ public class ShiftDate extends AbstractPersistable {
         return date.format(DateTimeFormatter.ISO_DATE);
     }
 
+    @Override
+    public int compareTo(ShiftDate o) {
+        return this.getDate().compareTo(o.getDate());
+    }
 }

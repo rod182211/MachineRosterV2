@@ -18,34 +18,24 @@ package org.optaplanner.examples.nurserostering.domain.pattern;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
-import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import org.optaplanner.examples.nurserostering.domain.ShiftType;
 
-
-
-@Entity (name = "ShiftType3DaysPattern")
-@DiscriminatorValue("ShiftType3DaysPattern")
+@Entity
+@DiscriminatorValue(value ="Shift3Days") 
 @XStreamAlias("ShiftType3DaysPattern")
 public class ShiftType3DaysPattern extends Pattern {
 
+    @ManyToOne
+	private ShiftType dayIndex0ShiftType;
+    @ManyToOne
+	private ShiftType dayIndex1ShiftType;
+    @ManyToOne
+	private ShiftType dayIndex2ShiftType;
 
-	@ManyToOne
-    private ShiftType dayIndex0ShiftType;
-
-	@ManyToOne
-    private ShiftType dayIndex1ShiftType;
-	@ManyToOne
-    private ShiftType dayIndex2ShiftType;
-
-   
-
-	
-
-	public ShiftType getDayIndex0ShiftType() {
+    public ShiftType getDayIndex0ShiftType() {
         return dayIndex0ShiftType;
     }
 
@@ -53,9 +43,7 @@ public class ShiftType3DaysPattern extends Pattern {
         this.dayIndex0ShiftType = dayIndex0ShiftType;
     }
 
-
-	
-	public ShiftType getDayIndex1ShiftType() {
+    public ShiftType getDayIndex1ShiftType() {
         return dayIndex1ShiftType;
     }
 
@@ -63,11 +51,7 @@ public class ShiftType3DaysPattern extends Pattern {
         this.dayIndex1ShiftType = dayIndex1ShiftType;
     }
 
-   
-
-	
-	
-	public ShiftType getDayIndex2ShiftType() {
+    public ShiftType getDayIndex2ShiftType() {
         return dayIndex2ShiftType;
     }
 

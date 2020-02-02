@@ -24,12 +24,7 @@ import java.util.Comparator;
  */
 public class AlphaNumericStringComparator implements Comparator<String>, Serializable {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -8630061120613637159L;
-
-	@Override
+    @Override
     public int compare(String a, String b) {
         char[] aChars = a.toCharArray();
         char[] bChars = b.toCharArray();

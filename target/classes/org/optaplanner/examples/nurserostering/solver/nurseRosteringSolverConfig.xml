@@ -12,7 +12,7 @@
   </scoreDirectorFactory>
 
   <termination>
-    <minutesSpentLimit>15</minutesSpentLimit>
+    <minutesSpentLimit>60</minutesSpentLimit>
   </termination>
    <constructionHeuristic>
     <constructionHeuristicType>WEAKEST_FIT</constructionHeuristicType>

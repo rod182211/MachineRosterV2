@@ -18,23 +18,14 @@ package org.optaplanner.examples.nurserostering.domain.pattern;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamInclude;
-
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.DiscriminatorType;
+import javax.persistence.MappedSuperclass;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
+import javax.persistence.*;
 
 
-
-
-
-
-@Entity (name = "Pattern")
+@Entity
+@DiscriminatorColumn(name = "type")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "DTYPE",discriminatorType=DiscriminatorType.STRING)
-
 @XStreamAlias("Pattern")
 @XStreamInclude({
         ShiftType2DaysPattern.class,
@@ -44,8 +35,7 @@ import org.optaplanner.examples.common.domain.AbstractPersistable;
 })
 public abstract class Pattern extends AbstractPersistable {
 
-   
-	protected String code;
+    protected String code;
     protected int weight;
 
     public String getCode() {

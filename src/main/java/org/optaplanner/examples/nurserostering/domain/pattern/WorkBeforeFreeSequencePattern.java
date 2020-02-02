@@ -20,24 +20,19 @@ import java.time.DayOfWeek;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
-import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import org.optaplanner.examples.nurserostering.domain.ShiftType;
 
-
-
-
-@Entity (name = "WorkBeforeFreeSequencePattern")
-@DiscriminatorValue("WorkBeforeFreeSequencePattern")
+@Entity
+@DiscriminatorValue(value ="WorkBefore")  
 @XStreamAlias("WorkBeforeFreeSequencePattern")
 public class WorkBeforeFreeSequencePattern extends Pattern {
 
-   
-	private DayOfWeek workDayOfWeek; // null means any
-	@ManyToOne(cascade = CascadeType.MERGE)
-    private ShiftType workShiftType; // null means any
+    private DayOfWeek workDayOfWeek; // null means any
+    @ManyToOne
+	private ShiftType workShiftType; // null means any
 
     private int freeDayLength;
 
@@ -48,11 +43,8 @@ public class WorkBeforeFreeSequencePattern extends Pattern {
     public void setWorkDayOfWeek(DayOfWeek workDayOfWeek) {
         this.workDayOfWeek = workDayOfWeek;
     }
-	
-	
 
-
-	public ShiftType getWorkShiftType() {
+    public ShiftType getWorkShiftType() {
         return workShiftType;
     }
 

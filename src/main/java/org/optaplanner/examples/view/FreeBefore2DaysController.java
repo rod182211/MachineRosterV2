@@ -7,9 +7,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import org.hibernate.Session;
+import org.optaplanner.database.HibernateUtil;
 import org.optaplanner.database.RosterService;
 import org.optaplanner.database.RosterServiceImpl;
+import org.optaplanner.examples.nurserostering.domain.contract.PatternContractLine;
 import org.optaplanner.examples.nurserostering.domain.pattern.FreeBefore2DaysWithAWorkDayPattern;
+import org.optaplanner.examples.nurserostering.domain.pattern.WorkBeforeFreeSequencePattern;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -54,7 +58,7 @@ public class FreeBefore2DaysController implements Initializable {
 	@FXML
 	private Label freedayofweek;
 
-	
+	private static Session session;
 
 	private RosterService rosterService = new RosterServiceImpl();
 	private ObservableList<FreeBefore2DaysWithAWorkDayPattern> freedayList = FXCollections.observableArrayList();
@@ -66,7 +70,15 @@ public class FreeBefore2DaysController implements Initializable {
 				.listFreeBefore2DaysWithAWorkDayPattern());
 		return freedayList;
 	}
+	private ObservableList<PatternContractLine> patterndataList = FXCollections.observableArrayList();
 
+	public ObservableList<PatternContractLine> getPatternContractLineList() {
+		if (!patterndataList.isEmpty())
+			patterndataList.clear();
+		patterndataList = FXCollections
+				.observableList((List<PatternContractLine>) rosterService.listPatternContractLine());
+		return patterndataList;
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -74,7 +86,7 @@ public class FreeBefore2DaysController implements Initializable {
 	}
 
 	public void loadFreeDay() {
-		freedayTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		freedayTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		freedayTable.getItems().clear();
 		freedayTable.setItems(getFreeBefore2DaysWithAWorkDayPatternList());
 		freedayweight.setCellValueFactory(
@@ -111,16 +123,34 @@ public class FreeBefore2DaysController implements Initializable {
 	private void handleDeletefreeday() {
 		int selectItem = freedayTable.getSelectionModel().getSelectedIndex();
 		if (selectItem >= 0) {
-			 ObservableList<FreeBefore2DaysWithAWorkDayPattern> itemsSelected;
-			 itemsSelected = freedayTable.getSelectionModel().getSelectedItems();
+			FreeBefore2DaysWithAWorkDayPattern itemsSelected = freedayTable.getSelectionModel().getSelectedItem();
+			long id = itemsSelected.getId();
+			getPatternContractLineList();
 			Alert alertpattern = new Alert(AlertType.CONFIRMATION);
-			alertpattern.setTitle("Request Confirmation");
-			alertpattern.setHeaderText("YOU MUST DELETE the Pattern entery First");
-			alertpattern.setContentText("Click OK if already deleted or Cancel to delete the Pattern");
+			alertpattern.setTitle("STOP");
+			alertpattern.setHeaderText("Are you sure");
+			alertpattern.setContentText("Click OK if continued or Cancel ");
 			Optional<ButtonType> resultpattern = alertpattern.showAndWait();
-
-			
+		    
 			if (resultpattern.get() == ButtonType.OK) {
+
+				for (PatternContractLine element : patterndataList) {
+					long checkedvalue = element.getId();
+					long patid = element.getPattern().getId();
+                  
+					if (patid == id) {
+						
+						
+						session = HibernateUtil.getSessionFactory().getCurrentSession();
+						session.beginTransaction();
+
+						PatternContractLine p = (PatternContractLine) session.get(PatternContractLine.class,
+								checkedvalue);
+						session.close();
+						rosterService.deletePatternContractLine(p);
+
+					}
+				}
 				rosterService.removeFreeBefore2DaysWithAWorkDayPattern(itemsSelected);
 				loadFreeDay();
 				

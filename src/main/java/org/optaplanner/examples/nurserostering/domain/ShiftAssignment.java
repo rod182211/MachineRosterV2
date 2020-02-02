@@ -17,36 +17,40 @@
 package org.optaplanner.examples.nurserostering.domain;
 
 import java.time.DayOfWeek;
+import java.util.Comparator;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 import org.optaplanner.examples.nurserostering.domain.contract.Contract;
-import org.optaplanner.examples.nurserostering.domain.request.RosterDay;
 import org.optaplanner.examples.nurserostering.domain.solver.EmployeeStrengthComparator;
 import org.optaplanner.examples.nurserostering.domain.solver.MovableShiftAssignmentSelectionFilter;
 import org.optaplanner.examples.nurserostering.domain.solver.ShiftAssignmentDifficultyComparator;
 
-
-
+@Entity
 @PlanningEntity(movableEntitySelectionFilter = MovableShiftAssignmentSelectionFilter.class,
         difficultyComparatorClass = ShiftAssignmentDifficultyComparator.class)
 @XStreamAlias("ShiftAssignment")
-public class ShiftAssignment extends AbstractPersistable {
+public class ShiftAssignment extends AbstractPersistable implements Comparable<ShiftAssignment> {
 
- 
+    private static final Comparator<Shift> COMPARATOR = Comparator.comparing(Shift::getShiftDate)
+            .thenComparing(a -> a.getShiftType().getStartTimeString())
+            .thenComparing(a -> a.getShiftType().getEndTimeString());
+
+    @ManyToOne
 	private Shift shift;
     private int indexInShift;
 
     // Planning variables: changes during planning, between score calculations.
-    @PlanningVariable(valueRangeProviderRefs = {"employeeRange"},
+    @ManyToOne
+	@PlanningVariable(valueRangeProviderRefs = {"employeeRange"},
             strengthComparatorClass = EmployeeStrengthComparator.class)
     private Employee employee;
 
-
-	public Shift getShift() {
+    public Shift getShift() {
         return shift;
     }
 
@@ -62,23 +66,19 @@ public class ShiftAssignment extends AbstractPersistable {
         this.indexInShift = indexInShift;
     }
 
- 
-	public Employee getEmployee() {
+    public Employee getEmployee() {
         return employee;
     }
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
-    
-    
 
     // ************************************************************************
     // Complex methods
     // ************************************************************************
 
-   
-	public ShiftDate getShiftDate() {
+    public ShiftDate getShiftDate() {
         return shift.getShiftDate();
     }
 
@@ -100,8 +100,7 @@ public class ShiftAssignment extends AbstractPersistable {
         }
         return employee.getContract();
     }
-    
-  
+
     public boolean isWeekend() {
         if (employee == null) {
             return false;
@@ -120,4 +119,8 @@ public class ShiftAssignment extends AbstractPersistable {
         return shift.toString();
     }
 
+    @Override
+    public int compareTo(ShiftAssignment o) {
+        return COMPARATOR.compare(shift, o.shift);
+    }
 }

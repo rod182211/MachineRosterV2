@@ -17,29 +17,23 @@
 package org.optaplanner.examples.nurserostering.domain.request;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 import org.optaplanner.examples.nurserostering.domain.Employee;
 import org.optaplanner.examples.nurserostering.domain.Shift;
 
-
-
-
 @Entity
 @XStreamAlias("ShiftOnRequest")
 public class ShiftOnRequest extends AbstractPersistable {
 
-	@ManyToOne(cascade = CascadeType.MERGE)
-    private Employee employee;
-	@ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
+	private Employee employee;
+    @ManyToOne
 	private Shift shift;
     private int weight;
 
- 
-	public Employee getEmployee() {
+    public Employee getEmployee() {
         return employee;
     }
 
@@ -47,8 +41,7 @@ public class ShiftOnRequest extends AbstractPersistable {
         this.employee = employee;
     }
 
-	
-	public Shift getShift() {
+    public Shift getShift() {
         return shift;
     }
 

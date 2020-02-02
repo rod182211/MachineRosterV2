@@ -22,7 +22,6 @@ import org.optaplanner.examples.nurserostering.domain.request.DayOffRequest;
 import org.optaplanner.examples.nurserostering.domain.request.DayOnRequest;
 import org.optaplanner.examples.nurserostering.domain.request.ShiftOffRequest;
 import org.optaplanner.examples.nurserostering.domain.request.ShiftOnRequest;
-import org.optaplanner.examples.nurserostering.domain.SkillProficiency;
 
 public class RosterServiceImpl implements RosterService {
 
@@ -33,7 +32,7 @@ public class RosterServiceImpl implements RosterService {
 	}
 
 	@Override
-	public void removeShiftType2DaysPattern(ObservableList<ShiftType2DaysPattern> itemsSelected) {
+	public void removeShiftType2DaysPattern(ShiftType2DaysPattern itemsSelected) {
 		rosterDAO.removeShiftType2DaysPattern(itemsSelected);
 	}
 	@Override
@@ -78,8 +77,8 @@ public class RosterServiceImpl implements RosterService {
 		rosterDAO.insertEmployee(employee);
 	}
 	@Override
-	public List<Employee> listEmployeeId() {
-		return rosterDAO.listEmployeeId();
+	public List<Employee> listEmployeeId(long empid) {
+		return rosterDAO.listEmployeeId(empid);
 	}
 	@Override
 	public List<Employee> listEmployeename() {
@@ -93,6 +92,11 @@ public class RosterServiceImpl implements RosterService {
 	@Override
 	public void removePattern(ObservableList<Pattern> itemsSelected) {
 		rosterDAO.removePattern(itemsSelected);
+	}
+	
+	@Override
+	public void deletePattern(Pattern itemsSelected) {
+		rosterDAO.deletePattern(itemsSelected);
 	}
 	@Override
 	public List<Pattern> listPatterncode() {
@@ -275,7 +279,10 @@ public class RosterServiceImpl implements RosterService {
 	public void updatePatternContractLine(PatternContractLine patterndata) {
 		rosterDAO.updatePatternContractLine(patterndata);
 	}
-	
+	@Override
+	public void deletePatternContractLine(PatternContractLine patterndata) {
+		rosterDAO.deletePatternContractLine(patterndata);
+	}
 	@Override
 	public List<DayOnRequest> listDayOnRequest() {
 		return rosterDAO.listDayOnRequest();
@@ -396,7 +403,7 @@ public class RosterServiceImpl implements RosterService {
 	}
 
 	@Override
-	public void removeWorkBeforeFreeSequencePattern(ObservableList<WorkBeforeFreeSequencePattern> itemsSelected) {
+	public void removeWorkBeforeFreeSequencePattern(WorkBeforeFreeSequencePattern itemsSelected) {
 		rosterDAO.removeWorkBeforeFreeSequencePattern(itemsSelected);
 	}
 
@@ -424,7 +431,7 @@ public class RosterServiceImpl implements RosterService {
 		return rosterDAO.listShiftType3DaysPattern();
 	}
 	@Override
-	public void removeShiftType3DaysPattern(ObservableList<ShiftType3DaysPattern> itemsSelected) {
+	public void removeShiftType3DaysPattern(ShiftType3DaysPattern itemsSelected) {
 		rosterDAO.removeShiftType3DaysPattern(itemsSelected);
 	}
 
@@ -448,7 +455,7 @@ public class RosterServiceImpl implements RosterService {
 	}
 
 	@Override
-	public void removeFreeBefore2DaysWithAWorkDayPattern(ObservableList<FreeBefore2DaysWithAWorkDayPattern> itemsSelected) {
+	public void removeFreeBefore2DaysWithAWorkDayPattern(FreeBefore2DaysWithAWorkDayPattern itemsSelected) {
 		rosterDAO.removeFreeBefore2DaysWithAWorkDayPattern(itemsSelected);
 	}
 	@Override
@@ -892,7 +899,119 @@ public class RosterServiceImpl implements RosterService {
 	public void updateCalendarData(CalendarData calendardata) {
 		rosterDAO.updateCalendarData(calendardata);
 	}
+	@Override
+	public List<WorkEarlyPattern> listWorkEarlyPattern() {
+		return rosterDAO.listWorkEarlyPattern();
+	}
+
+	@Override
+	public void addWorkEarlyPattern(WorkEarlyPattern workbeforedata) {
+		rosterDAO.addWorkEarlyPattern(workbeforedata);
+	}
+
+	@Override
+	public List<WorkEarlyPattern> listWorkEarlyPatternId() {
+		return rosterDAO.listWorkEarlyPatternId();
+	}
+	@Override
+	public List<WorkEarlyPattern> listWorkEarlyPatterncode() {
+		return rosterDAO.listWorkEarlyPatterncode();
+	}
+
+	@Override
+	public void removeWorkEarlyPattern(ObservableList<WorkEarlyPattern> itemsSelected) {
+		rosterDAO.removeWorkEarlyPattern(itemsSelected);
+	}
+
+	@Override
+	public void updateWorkEarlyPattern(WorkEarlyPattern workbeforedata) {
+		rosterDAO.updateWorkEarlyPattern(workbeforedata);
+	}
+	
+	@Override
+	public void addDepartment(Department Department) {
+		rosterDAO.addDepartment(Department);
+	}
+
+	@Override
+	public List<Department> listDepartment() {
+		return rosterDAO.listDepartment();
+	}
+	
+	@Override
+	public void removeDepartment(ObservableList<Department> itemsSelected) {
+		rosterDAO.removeDepartment(itemsSelected);
+	}
+
+	@Override
+	public void updateDepartment(Department department) {
+		rosterDAO.updateDepartment(department);
+	}
+
+	@Override
+	public List<Department> listDepartmentId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Department> listDepartmentcode() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ShiftTypeDepartmentRequirement> listShiftTypeDepartmentRequirement() {
+		return rosterDAO.listShiftTypeDepartmentRequirement();
+	}
+	
+	@Override
+	public void removeShiftTypeDepartmentRequirement(ObservableList<ShiftTypeDepartmentRequirement> itemsSelected) {
+		rosterDAO.removeShiftTypeDepartmentRequirement(itemsSelected);
+	}
 	
 	
+
+	@Override
+	public void updateShiftTypeDepartmentRequirement(ShiftTypeDepartmentRequirement shiftTypeDepartmentRequirement) {
+		rosterDAO.updateShiftTypeDepartmentRequirement(shiftTypeDepartmentRequirement);
+	}
+
+	@Override
+	public void addShiftTypeDepartmentRequirement(ShiftTypeDepartmentRequirement shiftTypeDepartmentRequirement) {
+		rosterDAO.addShiftTypeDepartmentRequirement(shiftTypeDepartmentRequirement);
+	}
+	@Override
+	public List<ShiftTypeDepartmentRequirement> listShiftTypeDepartmentRequirementId() {
+		return rosterDAO.listShiftTypeDepartmentRequirementId();
+	}
+
+	
+
+	@Override
+	public List<EmployeeDepartment> listEmployeeDepartment() {
+		return rosterDAO.listEmployeeDepartment();
+	}
+	
+	@Override
+	public void removeEmployeeDepartment(ObservableList<EmployeeDepartment> itemsSelected) {
+		rosterDAO.removeEmployeeDepartment(itemsSelected);
+	}
+	
+	
+
+	@Override
+	public void updateEmployeeDepartment(EmployeeDepartment employeeDepartment) {
+		rosterDAO.updateEmployeeDepartment(employeeDepartment);
+	}
+
+	@Override
+	public void addEmployeeDepartment(EmployeeDepartment employeeDepartment) {
+		rosterDAO.addEmployeeDepartment(employeeDepartment);
+	}
+	@Override
+	public List<EmployeeDepartment> listEmployeeDepartmentId() {
+		return rosterDAO.listEmployeeDepartmentId();
+	}
 }
 	

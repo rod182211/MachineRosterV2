@@ -21,7 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -43,6 +43,8 @@ public class PatternContractLineController implements Initializable {
 
 	@FXML
 	private Label contractfield;
+	@FXML
+	private ComboBox<Pattern> patterns;
 
 	@FXML
 	private Label patternfield;
@@ -84,13 +86,15 @@ public class PatternContractLineController implements Initializable {
 	}
 
 	public void loadPatternContractLine() {
-		// initialize the employee table
+		
 		patternTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		patternTable.getItems().clear();
+		getPatternList();
 		patternTable.setItems(getPatternContractLineList());
 		contract.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContract().getCode()));
 		patterntype
 				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPattern().getCode()));
+		
 		// is set to allow for editing of the table
 		patternTable.setEditable(true);
 		// sets the name field of the table
@@ -104,9 +108,10 @@ public class PatternContractLineController implements Initializable {
 
 	private void showPatternContractLineDetails(PatternContractLine patterndata) {
 		if (patterndata != null) {
+			getPatternList();
 			contractfield.setText(patterndata.getContract().getCode());
 			patternfield.setText(patterndata.getPattern().getCode());
-
+			
 		} else {
 
 			contractfield.setText("");

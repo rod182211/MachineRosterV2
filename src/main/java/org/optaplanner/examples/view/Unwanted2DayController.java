@@ -6,10 +6,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import org.hibernate.Session;
+import org.optaplanner.database.HibernateUtil;
 import org.optaplanner.database.RosterService;
 import org.optaplanner.database.RosterServiceImpl;
+import org.optaplanner.examples.nurserostering.domain.contract.PatternContractLine;
 
 import org.optaplanner.examples.nurserostering.domain.pattern.ShiftType2DaysPattern;
+
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -32,8 +36,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-
-public class Unwanted2DayController implements Initializable {
+public class Unwanted2DayController extends PatternContractLine implements Initializable {
 
 	@FXML
 	private TableView<ShiftType2DaysPattern> unwanted2dayTable;
@@ -45,38 +48,46 @@ public class Unwanted2DayController implements Initializable {
 	private TableColumn<ShiftType2DaysPattern, Integer> weight;
 	@FXML
 	private TableColumn<ShiftType2DaysPattern, String> dayIndex0ShiftType;
-	
+
 	@FXML
 	private TableColumn<ShiftType2DaysPattern, String> dayIndex1ShiftType;
-	
 
 	@FXML
 	private Label dayweight;
 
 	@FXML
 	private Label codefield;
-
+  
+    private long patterncontractid;
+ 
 	@FXML
 	private Label dayIndex0ShiftTypefield;
 	@FXML
 	private Label dayIndex1ShiftTypefield;
-	
 
 	private ShiftType2DaysPattern shift2daydata;
-
+	private static Session session;
 	private RosterService rosterService = new RosterServiceImpl();
 	private ObservableList<ShiftType2DaysPattern> shift2daydataList = FXCollections.observableArrayList();
 
 	public ObservableList<ShiftType2DaysPattern> getShiftType2DaysPatternList() {
 		if (!shift2daydataList.isEmpty())
 			shift2daydataList.clear();
-		shift2daydataList = FXCollections.observableList((List<ShiftType2DaysPattern>) rosterService.listShiftType2DaysPattern());
+		shift2daydataList = FXCollections
+				.observableList((List<ShiftType2DaysPattern>) rosterService.listShiftType2DaysPattern());
 		return shift2daydataList;
 	}
 
+	private ObservableList<PatternContractLine> patterndataList = FXCollections.observableArrayList();
 
+	public ObservableList<PatternContractLine> getPatternContractLineList() {
+		if (!patterndataList.isEmpty())
+			patterndataList.clear();
+		patterndataList = FXCollections
+				.observableList((List<PatternContractLine>) rosterService.listPatternContractLine());
+		return patterndataList;
+	}
 
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		loadShiftType2DaysPattern();
@@ -84,15 +95,17 @@ public class Unwanted2DayController implements Initializable {
 	}
 
 	public void loadShiftType2DaysPattern() {
-		unwanted2dayTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		unwanted2dayTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		unwanted2dayTable.getItems().clear();
 		unwanted2dayTable.setItems(getShiftType2DaysPatternList());
-		dayIndex0ShiftType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDayIndex0ShiftType().getCode()));
-		dayIndex1ShiftType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDayIndex1ShiftType().getCode()));
+		dayIndex0ShiftType.setCellValueFactory(
+				cellData -> new SimpleStringProperty(cellData.getValue().getDayIndex0ShiftType().getCode()));
+		dayIndex1ShiftType.setCellValueFactory(
+				cellData -> new SimpleStringProperty(cellData.getValue().getDayIndex1ShiftType().getCode()));
 		code.setCellValueFactory(new PropertyValueFactory<ShiftType2DaysPattern, String>("code"));
 		weight.setCellValueFactory(new PropertyValueFactory<ShiftType2DaysPattern, Integer>("weight"));
-		
-			showShiftType2DaysPatternDetails(null);
+
+		showShiftType2DaysPatternDetails(null);
 		unwanted2dayTable.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> showShiftType2DaysPatternDetails(newValue));
 
@@ -102,10 +115,9 @@ public class Unwanted2DayController implements Initializable {
 		if (shift2daydata != null) {
 			dayIndex0ShiftTypefield.setText(shift2daydata.getDayIndex0ShiftType().getCode());
 			dayIndex1ShiftTypefield.setText(shift2daydata.getDayIndex1ShiftType().getCode());
-		
-			codefield.setText(shift2daydata.getCode());
+           	codefield.setText(shift2daydata.getCode());
 			dayweight.setText(Integer.toString(shift2daydata.getWeight()));
-
+			
 		} else {
 
 			dayIndex0ShiftTypefield.setText("");
@@ -119,24 +131,44 @@ public class Unwanted2DayController implements Initializable {
 	@FXML
 	private void handleDeleteShiftType2DaysPattern() {
 		int select = unwanted2dayTable.getSelectionModel().getSelectedIndex();
-		
+
 		if (select >= 0) {
-			 ObservableList<ShiftType2DaysPattern> itemsSelected;
-			 itemsSelected = unwanted2dayTable.getSelectionModel().getSelectedItems();
-		Alert alertpattern = new Alert(AlertType.CONFIRMATION);
-		alertpattern.setTitle("STOP");
-		alertpattern.setHeaderText("YOU MUST DELETE the Pattern entery First");
-		alertpattern.setContentText("Click OK if already deleted or Cancel to delete the Pattern");
-		Optional<ButtonType> resultpattern = alertpattern.showAndWait();
-		if (resultpattern.get() == ButtonType.OK) {
-			rosterService.removeShiftType2DaysPattern(itemsSelected);
-			loadShiftType2DaysPattern();
-			
-		}
+			ShiftType2DaysPattern itemsSelected = unwanted2dayTable.getSelectionModel().getSelectedItem();
+			long id = itemsSelected.getId();
 		
-		else {
-			  loadStage("/fxml/Pattern.fxml");
-		}
+			getPatternContractLineList();
+			Alert alertpattern = new Alert(AlertType.CONFIRMATION);
+			alertpattern.setTitle("STOP");
+			alertpattern.setHeaderText("Are you sure");
+			alertpattern.setContentText("Click OK if continued or Cancel ");
+			Optional<ButtonType> resultpattern = alertpattern.showAndWait();
+		    
+			if (resultpattern.get() == ButtonType.OK) {
+
+				for (PatternContractLine element : patterndataList) {
+					long checkedvalue = element.getId();
+					long patid = element.getPattern().getId();
+                  
+					if (patid == id) {
+						session = HibernateUtil.getSessionFactory().getCurrentSession();
+						session.beginTransaction();
+
+						PatternContractLine p = (PatternContractLine) session.get(PatternContractLine.class,
+								checkedvalue);
+						session.close();
+						rosterService.deletePatternContractLine(p);
+
+					}
+				}
+				 
+				rosterService.removeShiftType2DaysPattern(itemsSelected);
+				loadShiftType2DaysPattern();
+
+			}
+
+			else {
+				loadStage("/fxml/Pattern.fxml");
+			}
 
 		} else {
 			// Nothing selected.
@@ -163,7 +195,6 @@ public class Unwanted2DayController implements Initializable {
 
 	}
 
-	
 	@FXML
 	private void handleEditShiftType2DaysPattern() {
 
@@ -199,11 +230,10 @@ public class Unwanted2DayController implements Initializable {
 			// Create the dialog Stage.
 			Stage dialogStage = new Stage();
 			dialogStage.setTitle("Edit Unwanted 2 day Pattern");
-			
+
 			Scene scene = new Scene(page);
 			dialogStage.setScene(scene);
 
-			
 			ShiftType2DaysPatternEditController controller = loader.getController();
 			controller.setDialogStage(dialogStage);
 			controller.setShiftType2DaysPatternDetails(shift2daydata);
@@ -228,14 +258,14 @@ public class Unwanted2DayController implements Initializable {
 			// Create the dialog Stage.
 			Stage dialogStage = new Stage();
 			dialogStage.setTitle("New 2 Day Pattern");
-			
+
 			Scene scene = new Scene(page);
 			dialogStage.setScene(scene);
-			
+
 			ShiftType2DaysPatternNewController controller = loader.getController();
 			controller.setDialogStage(dialogStage);
 			controller.setShiftType2DaysPatternDetails(shift2daydata);
-			
+
 			dialogStage.showAndWait();
 
 			return controller.isOkClicked();
@@ -244,16 +274,17 @@ public class Unwanted2DayController implements Initializable {
 			return false;
 		}
 	}
-	  private void loadStage(String fxml) {
-	        try {
-	            Parent root = FXMLLoader.load(getClass().getResource(fxml));
-	            Stage stage = new Stage();
-	            stage.setScene(new Scene(root));
-	         //   stage.getIcons().add(new Image("/icons/icon.png"));
-	            stage.initModality(Modality.APPLICATION_MODAL);
-	            stage.show();
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
+
+	private void loadStage(String fxml) {
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource(fxml));
+			Stage stage = new Stage();
+			stage.setScene(new Scene(root));
+			// stage.getIcons().add(new Image("/icons/icon.png"));
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

@@ -35,7 +35,7 @@ public class PatternEditController implements Initializable {
 		@FXML
 		private ComboBox<Pattern> patternl;
 		
-		private PatternContractLine patterndata;
+		
 		
 		
 		private Stage dialogStage;
@@ -45,8 +45,8 @@ public class PatternEditController implements Initializable {
 		private RosterService rosterService = new RosterServiceImpl();
 
 		
-		
-		
+		private Pattern pattern;
+		private PatternContractLine patterndata;
 		private ObservableList<PatternContractLine> patterndataList = FXCollections.observableArrayList();
 
 		public ObservableList<PatternContractLine> getPatternContractLineList() {
@@ -107,6 +107,7 @@ public class PatternEditController implements Initializable {
 		getPatternList();
 	    patternl.setItems(patternList);
 	    patternl.setValue(patterndata.getPattern());
+	    
 	}
 
 	/**

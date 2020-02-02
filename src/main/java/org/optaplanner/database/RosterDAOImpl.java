@@ -26,9 +26,6 @@ import org.optaplanner.examples.nurserostering.domain.request.DayOffRequest;
 import org.optaplanner.examples.nurserostering.domain.request.DayOnRequest;
 import org.optaplanner.examples.nurserostering.domain.request.ShiftOffRequest;
 import org.optaplanner.examples.nurserostering.domain.request.ShiftOnRequest;
-import org.optaplanner.examples.nurserostering.domain.SkillProficiency;
-import org.optaplanner.examples.nurserostering.domain.CoverRequirements;
-import org.optaplanner.examples.nurserostering.domain.Skill;
 
 public class RosterDAOImpl implements RosterDAO {
 
@@ -111,12 +108,12 @@ public class RosterDAOImpl implements RosterDAO {
 	}
 
 	@Override
-	public List<Employee> listEmployeeId() {
+	public List<Employee> listEmployeeId(long empid) {
 		List<Employee> empidlist = new ArrayList<>();
 
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		empidlist = session.createQuery("select id from Employee ").list();
+		empidlist = session.createQuery("select empid from Employee ").list();
 		session.getTransaction().commit();
 
 		session.close();
@@ -605,6 +602,18 @@ public class RosterDAOImpl implements RosterDAO {
 
 		session.close();
 	}
+	
+	@Override
+	public void deletePattern(Pattern itemsSelected) {
+
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		session.delete(itemsSelected);
+		
+		session.getTransaction().commit();
+
+		session.close();
+	}
 
 	@Override
 	public void updatePattern(Pattern pattern) {
@@ -920,19 +929,13 @@ public class RosterDAOImpl implements RosterDAO {
 	}
 
 	@Override
-	public void removeWorkBeforeFreeSequencePattern(ObservableList<WorkBeforeFreeSequencePattern> itemsSelected) {
-
+	public void removeWorkBeforeFreeSequencePattern(WorkBeforeFreeSequencePattern itemsSelected) {
+		List<PatternContractLine> patternidlist = new ArrayList<>();
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		for (WorkBeforeFreeSequencePattern idvalue : itemsSelected) {
-			long id = idvalue.getId();
-			WorkBeforeFreeSequencePattern s = (WorkBeforeFreeSequencePattern) session
-					.load(WorkBeforeFreeSequencePattern.class, id);
-			session.delete(s);
-		}
+		session.delete(itemsSelected);
 		session.getTransaction().commit();
-
-		session.close();
+     	session.close();
 	}
 
 	@Override
@@ -946,6 +949,8 @@ public class RosterDAOImpl implements RosterDAO {
 		session.close();
 	}
 
+	
+	
 	@Override
 	public List<ShiftType2DaysPattern> listShiftType2DaysPattern() {
 		List<ShiftType2DaysPattern> shift2daydatalist = new ArrayList<>();
@@ -997,17 +1002,12 @@ public class RosterDAOImpl implements RosterDAO {
 	}
 
 	@Override
-	public void removeShiftType2DaysPattern(ObservableList<ShiftType2DaysPattern> itemsSelected) {
+	public void removeShiftType2DaysPattern(ShiftType2DaysPattern itemsSelected) {
 
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		for (ShiftType2DaysPattern idvalue : itemsSelected) {
-			long id = idvalue.getId();
-			ShiftType2DaysPattern s = (ShiftType2DaysPattern) session.load(ShiftType2DaysPattern.class, id);
-			session.delete(s);
-		}
+		session.delete(itemsSelected);
 		session.getTransaction().commit();
-
 		session.close();
 	}
 
@@ -1060,17 +1060,12 @@ public class RosterDAOImpl implements RosterDAO {
 	}
 
 	@Override
-	public void removeShiftType3DaysPattern(ObservableList<ShiftType3DaysPattern> itemsSelected) {
+	public void removeShiftType3DaysPattern(ShiftType3DaysPattern itemsSelected) {
 
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		for (ShiftType3DaysPattern idvalue : itemsSelected) {
-			long id = idvalue.getId();
-			ShiftType3DaysPattern s = (ShiftType3DaysPattern) session.load(ShiftType3DaysPattern.class, id);
-			session.delete(s);
-		}
+		session.delete(itemsSelected);
 		session.getTransaction().commit();
-
 		session.close();
 	}
 
@@ -1124,18 +1119,11 @@ public class RosterDAOImpl implements RosterDAO {
 
 	@Override
 	public void removeFreeBefore2DaysWithAWorkDayPattern(
-			ObservableList<FreeBefore2DaysWithAWorkDayPattern> itemsSelected) {
-
+		FreeBefore2DaysWithAWorkDayPattern itemsSelected) {
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		for (FreeBefore2DaysWithAWorkDayPattern idvalue : itemsSelected) {
-			long id = idvalue.getId();
-			FreeBefore2DaysWithAWorkDayPattern s = (FreeBefore2DaysWithAWorkDayPattern) session
-					.load(FreeBefore2DaysWithAWorkDayPattern.class, id);
-			session.delete(s);
-		}
+		session.delete(itemsSelected);
 		session.getTransaction().commit();
-
 		session.close();
 	}
 
@@ -1286,7 +1274,16 @@ public class RosterDAOImpl implements RosterDAO {
 
 		session.close();
 	}
+	@Override
+	public void deletePatternContractLine(PatternContractLine patterndata) {
 
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		session.delete(patterndata);
+		session.getTransaction().commit();
+
+		session.close();
+	}
 	@Override
 	public void removePatternContractLine(ObservableList<PatternContractLine> itemsSelected) {
 
@@ -2295,5 +2292,283 @@ public class RosterDAOImpl implements RosterDAO {
 		// TODO Auto-generated method stub
 
 	}
+	@Override
+	public List<WorkEarlyPattern> listWorkEarlyPattern() {
+		List<WorkEarlyPattern> workbeforedatalist = new ArrayList<>();
 
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		workbeforedatalist = session.createQuery("from WorkEarlyPattern").list();
+		session.getTransaction().commit();
+
+		session.close();
+		return workbeforedatalist;
+	}
+
+	@Override
+	public List<WorkEarlyPattern> listWorkEarlyPatternId() {
+		List<WorkEarlyPattern> workbeforedataidlist = new ArrayList<>();
+
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		workbeforedataidlist = session.createQuery("select id from WorkEarlyPattern").list();
+		session.getTransaction().commit();
+
+		session.close();
+		return workbeforedataidlist;
+	}
+
+	@Override
+	public List<WorkEarlyPattern> listWorkEarlyPatterncode() {
+		List<WorkEarlyPattern> workbeforedatacodelist = new ArrayList<>();
+
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		workbeforedatacodelist = session.createQuery("select code from WorkEarlyPattern").list();
+		session.getTransaction().commit();
+
+		session.close();
+		return workbeforedatacodelist;
+	}
+
+	@Override
+	public void addWorkEarlyPattern(WorkEarlyPattern workbeforedata) {
+
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		session.save(workbeforedata);
+		session.getTransaction().commit();
+
+		session.close();
+	}
+
+	@Override
+	public void removeWorkEarlyPattern(ObservableList<WorkEarlyPattern> itemsSelected) {
+		List<PatternContractLine> patternidlist = new ArrayList<>();
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		for (WorkEarlyPattern idvalue : itemsSelected) {
+			long id = idvalue.getId();
+			WorkEarlyPattern s = (WorkEarlyPattern) session
+					.load(WorkEarlyPattern.class, id);
+			
+			session.delete(s);
+		}
+		session.getTransaction().commit();
+
+		session.close();
+	}
+
+	@Override
+	public void updateWorkEarlyPattern(WorkEarlyPattern workbeforedata) {
+
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		session.update(workbeforedata);
+		session.getTransaction().commit();
+
+		session.close();
+	}
+
+	@Override
+	public List<Department> listDepartment() {
+		List<Department> Departmentlist = new ArrayList<>();
+
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		Departmentlist = session.createQuery("from Department").list();
+		session.getTransaction().commit();
+
+		session.close();
+		return Departmentlist;
+	}
+
+	@Override
+	public List<Department> listDepartmentId() {
+		List<Department> departmentidlist = new ArrayList<>();
+
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		departmentidlist = session.createQuery("select id from Department").list();
+		session.getTransaction().commit();
+
+		session.close();
+		return departmentidlist;
+	}
+
+	@Override
+	public void addDepartment(Department assignmentdata) {
+
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		session.save(assignmentdata);
+		session.getTransaction().commit();
+
+		session.close();
+	}
+
+	@Override
+	public void removeDepartment(ObservableList<Department> itemsSelected) {
+
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		for (Department idvalue : itemsSelected) {
+			long id = idvalue.getId();
+			Department s = (Department) session.load(Department.class, id);
+			session.delete(s);
+		}
+		session.getTransaction().commit();
+
+		session.close();
+	}
+
+	@Override
+	public void updateDepartment(Department department) {
+
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		session.update(department);
+		session.getTransaction().commit();
+
+		session.close();
+	}
+
+	@Override
+	public List<Department> listDepartmentcode() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<ShiftTypeDepartmentRequirement> listShiftTypeDepartmentRequirement() {
+		List<ShiftTypeDepartmentRequirement> shiftTypeDepartmentRequirementslist = new ArrayList<>();
+
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		shiftTypeDepartmentRequirementslist = session.createQuery("from ShiftTypeDepartmentRequirement").list();
+		session.getTransaction().commit();
+
+		session.close();
+		return shiftTypeDepartmentRequirementslist;
+	}
+
+	@Override
+	public List<ShiftTypeDepartmentRequirement> listShiftTypeDepartmentRequirementId() {
+		List<ShiftTypeDepartmentRequirement> shiftTypeDepartmentRequirementsidlist = new ArrayList<>();
+
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		shiftTypeDepartmentRequirementsidlist = session.createQuery("select id from ShiftTypeDepartmentRequirement").list();
+		session.getTransaction().commit();
+
+		session.close();
+		return shiftTypeDepartmentRequirementsidlist;
+	}
+
+	
+
+	@Override
+	public void addShiftTypeDepartmentRequirement(ShiftTypeDepartmentRequirement shiftTypeDepartmentRequirement) {
+
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		session.save(shiftTypeDepartmentRequirement);
+		session.getTransaction().commit();
+
+		session.close();
+	}
+
+	@Override
+	public void removeShiftTypeDepartmentRequirement(ObservableList<ShiftTypeDepartmentRequirement> itemsSelected) {
+
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		for (ShiftTypeDepartmentRequirement idvalue : itemsSelected) {
+			long id = idvalue.getId();
+			ShiftTypeDepartmentRequirement s = (ShiftTypeDepartmentRequirement) session.load(ShiftTypeDepartmentRequirement.class, id);
+			session.delete(s);
+		}
+		session.getTransaction().commit();
+
+		session.close();
+	}
+
+	@Override
+	public void updateShiftTypeDepartmentRequirement(ShiftTypeDepartmentRequirement shiftTypeDepartmentRequirement) {
+
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		session.update(shiftTypeDepartmentRequirement);
+		session.getTransaction().commit();
+
+		session.close();
+	}
+
+///////////
+	@Override
+	public List<EmployeeDepartment> listEmployeeDepartment() {
+		List<EmployeeDepartment> EmployeeDepartmentslist = new ArrayList<>();
+
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		EmployeeDepartmentslist = session.createQuery("from EmployeeDepartment").list();
+		session.getTransaction().commit();
+
+		session.close();
+		return EmployeeDepartmentslist;
+	}
+
+	@Override
+	public List<EmployeeDepartment> listEmployeeDepartmentId() {
+		List<EmployeeDepartment> EmployeeDepartmentsidlist = new ArrayList<>();
+
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		EmployeeDepartmentsidlist = session.createQuery("select id from EmployeeDepartment").list();
+		session.getTransaction().commit();
+
+		session.close();
+		return EmployeeDepartmentsidlist;
+	}
+
+	
+
+	@Override
+	public void addEmployeeDepartment(EmployeeDepartment employeeDepartments) {
+
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		session.save(employeeDepartments);
+		session.getTransaction().commit();
+
+		session.close();
+	}
+
+	@Override
+	public void removeEmployeeDepartment(ObservableList<EmployeeDepartment> itemsSelected) {
+
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		for (EmployeeDepartment idvalue : itemsSelected) {
+			long id = idvalue.getId();
+			EmployeeDepartment s = (EmployeeDepartment) session.load(EmployeeDepartment.class, id);
+			session.delete(s);
+		}
+		session.getTransaction().commit();
+
+		session.close();
+	}
+
+	@Override
+	public void updateEmployeeDepartment(EmployeeDepartment employeeDepartment) {
+
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		session.update(employeeDepartment);
+		session.getTransaction().commit();
+		session.close();
+	}
+
+	
 }

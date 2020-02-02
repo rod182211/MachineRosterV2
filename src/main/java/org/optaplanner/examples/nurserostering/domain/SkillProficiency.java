@@ -17,29 +17,20 @@
 package org.optaplanner.examples.nurserostering.domain;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 
-@Entity (name = "SkillProficiency")
-
+@Entity
 @XStreamAlias("SkillProficiency")
-public class SkillProficiency extends AbstractPersistable  {
-	
-		
-	@OneToOne (cascade = CascadeType.MERGE)
-	private Employee employee;
+public class SkillProficiency extends AbstractPersistable {
 
-	@ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
+	private Employee employee;
+    @ManyToOne
 	private Skill skill;
 
-  	public Employee getEmployee() {
+    public Employee getEmployee() {
         return employee;
     }
 
@@ -47,9 +38,7 @@ public class SkillProficiency extends AbstractPersistable  {
         this.employee = employee;
     }
 
-
-	
-	public Skill getSkill() {
+    public Skill getSkill() {
         return skill;
     }
 

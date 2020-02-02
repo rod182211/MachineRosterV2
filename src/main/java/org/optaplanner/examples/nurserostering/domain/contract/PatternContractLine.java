@@ -17,25 +17,21 @@
 package org.optaplanner.examples.nurserostering.domain.contract;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-
 import javax.persistence.ManyToOne;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 import org.optaplanner.examples.nurserostering.domain.pattern.Pattern;
 
-@Entity (name = "PatternContractLine" )
+@Entity
 @XStreamAlias("PatternContractLine")
-public class PatternContractLine  extends AbstractPersistable {
-	
+public class PatternContractLine extends AbstractPersistable {
 
-	@ManyToOne(cascade = CascadeType.MERGE)
-    private Contract contract;
-	@ManyToOne(cascade = CascadeType.ALL)
-    private Pattern pattern;
+    @ManyToOne
+	private Contract contract;
+    @ManyToOne
+	private Pattern pattern;
 
-	public Contract getContract() {
+    public Contract getContract() {
         return contract;
     }
 
@@ -43,9 +39,7 @@ public class PatternContractLine  extends AbstractPersistable {
         this.contract = contract;
     }
 
-
-
-	public Pattern getPattern() {
+    public Pattern getPattern() {
         return pattern;
     }
 

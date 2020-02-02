@@ -8,7 +8,10 @@ import java.util.ResourceBundle;
 
 import org.optaplanner.database.RosterService;
 import org.optaplanner.database.RosterServiceImpl;
+import org.optaplanner.examples.nurserostering.domain.Department;
 import org.optaplanner.examples.nurserostering.domain.Employee;
+import org.optaplanner.examples.nurserostering.domain.Skill;
+import org.optaplanner.examples.nurserostering.domain.SkillProficiency;
 import org.optaplanner.examples.nurserostering.domain.contract.Contract;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -48,7 +51,11 @@ public class EmployeeController implements Initializable {
 	@FXML
 	private Label contractfield;
 	@FXML
+	private Label skillfield;
+	@FXML
 	private Label streetnum;
+	@FXML
+	private Label department;
 	@FXML
 	private Label address;
 	@FXML
@@ -85,6 +92,9 @@ public class EmployeeController implements Initializable {
 
 	// -----------------------------------------------------------------------------------------------------------------------
 
+	
+	
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		loadEmployee();
@@ -108,14 +118,32 @@ public class EmployeeController implements Initializable {
 
 	private void showEmployeeDetails(Employee employee) {
 		if (employee != null) {
+	int x = 1;
+	do {
+		try {
 			employeeId.setText(employee.getEmployeeId());
 			name.setText(employee.getName());
 			contractfield.setText(employee.getContract().getCode());
 			streetnum.setText(employee.getStreetnum());
 			address.setText(employee.getAddress());
 			suburb.setText(employee.getSuburb());
+		    skillfield.setText(employee.getSkill().getCode());
+		    department.setText(employee.getDepartment().getCode());
 			postcode.setText(employee.getPostcode());
 			contactdetails.setText(employee.getContactdetails());
+			 x = 2;
+		}
+		catch(Exception e) {
+			Alert alertpattern = new Alert(AlertType.CONFIRMATION);
+			alertpattern.setTitle("Missed Field");
+			alertpattern.setHeaderText("You missed an Input Try Again");
+			alertpattern.setContentText("missing field");
+			
+		}
+	}
+		while(x==1);
+	
+		
 
 		} else { // Employee is null, remove all the text. name.setText("");
 
@@ -123,14 +151,18 @@ public class EmployeeController implements Initializable {
 			name.setText("");
 			contractfield.setText("");
 			streetnum.setText("");
+			skillfield.setText("");
 			address.setText("");
 			suburb.setText("");
 			postcode.setText("");
-
+            skillfield.setText("");
+            department.setText("");
 			contactdetails.setText("");
 		}
+		
 	}
-
+	
+	
 	@FXML
 	private void handleDeleteEmployee() {
 
@@ -142,7 +174,7 @@ public class EmployeeController implements Initializable {
 			Alert alertpattern = new Alert(AlertType.CONFIRMATION);
 			alertpattern.setTitle("Request Confirmation");
 			alertpattern.setHeaderText("YOU MUST DELETE the Employee's Skill Proficency First");
-			alertpattern.setContentText("Click OK if already deleted or Cancel to delete the Proficiency");
+			alertpattern.setContentText("Click OK or Cancel ");
 			Optional<ButtonType> resultpattern = alertpattern.showAndWait();
 
 			if (resultpattern.get() == ButtonType.OK) {
@@ -152,7 +184,7 @@ public class EmployeeController implements Initializable {
 			}
 
 			else {
-				loadStage("/fxml/SkillProficiency.fxml");
+				loadStage("/fxml/Employee.fxml");
 			}
 
 		} else {

@@ -17,36 +17,23 @@
 package org.optaplanner.examples.common.persistence;
 
 import java.io.File;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.Arrays;
 
 import org.optaplanner.core.api.domain.solution.PlanningSolution;
 import org.optaplanner.examples.common.app.LoggingMain;
-
-import javafx.fxml.Initializable;
-
+import org.optaplanner.examples.common.business.ProblemFileComparator;
 
 /**
  * @param <Solution_> the solution type, the class with the {@link PlanningSolution} annotation
  */
 public abstract class AbstractSolutionExporter<Solution_> extends LoggingMain {
-	
 
     public abstract String getOutputFileSuffix();
-   
+
     public abstract void writeSolution(Solution_ solution, File outputFile);
-    
+
     public static abstract class OutputBuilder extends LoggingMain {
 
-  
-		
-	}
-
-  
-
-	
-	
-
-	 
+    }
 
 }

@@ -299,5 +299,4 @@ public class EmployeePanel extends JPanel {
 		}
 
 	}
-
 }

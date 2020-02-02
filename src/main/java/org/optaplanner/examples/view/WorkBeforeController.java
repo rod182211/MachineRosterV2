@@ -7,8 +7,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import org.optaplanner.examples.nurserostering.domain.contract.PatternContractLine;
+import org.optaplanner.examples.nurserostering.domain.pattern.FreeBefore2DaysWithAWorkDayPattern;
 import org.optaplanner.examples.nurserostering.domain.pattern.WorkBeforeFreeSequencePattern;
-
+import org.hibernate.Session;
+import org.optaplanner.database.HibernateUtil;
 import org.optaplanner.database.RosterService;
 import org.optaplanner.database.RosterServiceImpl;
 
@@ -71,7 +74,7 @@ public class WorkBeforeController implements Initializable {
 
 	@FXML
 	private Label beforeDayOfWeek;
-
+	private static Session session;
 	private RosterService rosterService = new RosterServiceImpl();
 	private ObservableList<WorkBeforeFreeSequencePattern> workbeforeList = FXCollections.observableArrayList();
 
@@ -82,7 +85,15 @@ public class WorkBeforeController implements Initializable {
 				(List<WorkBeforeFreeSequencePattern>) rosterService.listWorkBeforeFreeSequencePattern());
 		return workbeforeList;
 	}
+	private ObservableList<PatternContractLine> patterndataList = FXCollections.observableArrayList();
 
+	public ObservableList<PatternContractLine> getPatternContractLineList() {
+		if (!patterndataList.isEmpty())
+			patterndataList.clear();
+		patterndataList = FXCollections
+				.observableList((List<PatternContractLine>) rosterService.listPatternContractLine());
+		return patterndataList;
+	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -91,7 +102,7 @@ public class WorkBeforeController implements Initializable {
 	}
 
 	public void loadWorkBefore() {
-		workBeforeTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		workBeforeTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		workBeforeTable.getItems().clear();
 		workBeforeTable.setItems(getWorkBeforeFreeSequencePatternList());
 		workBeforeWeight.setCellValueFactory(new PropertyValueFactory<WorkBeforeFreeSequencePattern, Integer>("weight"));
@@ -130,16 +141,34 @@ public class WorkBeforeController implements Initializable {
 	private void handleDeleteWorkBefore() {
 		int selectItem = workBeforeTable.getSelectionModel().getSelectedIndex();
 		if (selectItem >= 0) {
-			 ObservableList<WorkBeforeFreeSequencePattern> itemsSelected;
-			 itemsSelected = workBeforeTable.getSelectionModel().getSelectedItems();
+			WorkBeforeFreeSequencePattern itemsSelected = workBeforeTable.getSelectionModel().getSelectedItem();
+			long id = itemsSelected.getId();
+			getPatternContractLineList();
 			Alert alertpattern = new Alert(AlertType.CONFIRMATION);
-			alertpattern.setTitle("Request Confirmation");
-			alertpattern.setHeaderText("YOU MUST DELETE the Pattern entery First");
-			alertpattern.setContentText("Click OK if already deleted or Cancel to delete the Pattern");
+			alertpattern.setTitle("STOP");
+			alertpattern.setHeaderText("Are you sure");
+			alertpattern.setContentText("Click OK if continued or Cancel ");
 			Optional<ButtonType> resultpattern = alertpattern.showAndWait();
-
-			
+		    
 			if (resultpattern.get() == ButtonType.OK) {
+
+				for (PatternContractLine element : patterndataList) {
+					long checkedvalue = element.getId();
+					long patid = element.getPattern().getId();
+                  
+					if (patid == id) {
+						
+						
+						session = HibernateUtil.getSessionFactory().getCurrentSession();
+						session.beginTransaction();
+
+						PatternContractLine p = (PatternContractLine) session.get(PatternContractLine.class,
+								checkedvalue);
+						session.close();
+						rosterService.deletePatternContractLine(p);
+
+					}
+				}
 				rosterService.removeWorkBeforeFreeSequencePattern(itemsSelected);
 				loadWorkBefore();
 				

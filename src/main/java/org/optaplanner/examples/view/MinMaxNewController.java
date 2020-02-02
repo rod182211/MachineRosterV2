@@ -73,7 +73,7 @@ public class MinMaxNewController implements Initializable {
 		return contractList;
 	}
 
-	private ObservableList<String> contractLineTypeList =  FXCollections.observableArrayList("TOTAL_ASSIGNMENTS","CONSECUTIVE_WORKING_DAYS","CONSECUTIVE_FREE_DAYS", "CONSECUTIVE_WORKING_WEEKENDS","TOTAL_WORKING_WEEKENDS_IN_FOUR_WEEKS");
+	private ObservableList<String> contractLineTypeList =  FXCollections.observableArrayList("TOTAL_ASSIGNMENTS","CONSECUTIVE_WORKING_DAYS","CONSECUTIVE_FREE_DAYS", "CONSECUTIVE_WORKING_WEEKENDS","TOTAL_WORKING_WEEKENDS_IN_FOUR_WEEKS","TOTAL_NIGHT_ASSIGNMENTS","CONSECUTIVE_LATE_ASSIGNMENTS","CONSECUTIVE_EARLY_ASSIGNMENTS");
 	/**
 	/**
 	 * Initializes the controller class. This method is automatically called after

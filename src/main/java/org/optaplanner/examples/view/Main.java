@@ -27,20 +27,16 @@ public class Main extends Application {
 
    
        public static void main(String[] args) {     
-    	   if (HibernateUtil.setSessionFactory()) {
+    	 //  if (HibernateUtil.setSessionFactory()) {
                launch(args);
-               HibernateUtil.getSessionFactory().close();
-           } else {
-               Platform.runLater(() -> {
-                   Alert alert = new Alert(Alert.AlertType.ERROR);
-                   alert.setTitle("An error has occured!");
-                   alert.setHeaderText("Database Connection Error!");
-                   alert.setContentText("Please contact the developer");
-                   alert.showAndWait();
-                   Platform.exit();
-               });
-           }
-
+		/*
+		 * HibernateUtil.getSessionFactory().close(); } else { Platform.runLater(() -> {
+		 * Alert alert = new Alert(Alert.AlertType.ERROR);
+		 * alert.setTitle("An error has occured!");
+		 * alert.setHeaderText("Database Connection Error!");
+		 * alert.setContentText("Please contact the developer"); alert.showAndWait();
+		 * Platform.exit(); }); }
+		 */
        }
 
    }

@@ -18,79 +18,66 @@ package org.optaplanner.examples.nurserostering.domain;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-
 import javax.persistence.ManyToOne;
-
-import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
 
 import org.optaplanner.examples.common.domain.AbstractPersistable;
-import org.optaplanner.examples.nurserostering.domain.request.RosterDay;
 
-
-
-
-
-@Entity(name = "Shift")
+@Entity
 @XStreamAlias("Shift")
 public class Shift extends AbstractPersistable {
 
-	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
+    @ManyToOne
 	private ShiftDate shiftDate;
-	@ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
 	private ShiftType shiftType;
-	@Column(name = "shift_index")
-	@OrderColumn
-	private int index;
-	
+    @Column(name = "shift_index")
+    @OrderColumn
+    private int index;
 
-	private int requiredEmployeeSize;
+    private int requiredEmployeeSize;
 
-	public ShiftDate getShiftDate() {
-		return shiftDate;
-	}
+    public ShiftDate getShiftDate() {
+        return shiftDate;
+    }
 
-	public void setShiftDate(ShiftDate shiftDate) {
-		this.shiftDate = shiftDate;
-	}
+    public void setShiftDate(ShiftDate shiftDate) {
+        this.shiftDate = shiftDate;
+    }
 
-	public ShiftType getShiftType() {
-		return shiftType;
-	}
+    public ShiftType getShiftType() {
+        return shiftType;
+    }
 
-	public void setShiftType(ShiftType shiftType) {
-		this.shiftType = shiftType;
-	}
+    public void setShiftType(ShiftType shiftType) {
+        this.shiftType = shiftType;
+    }
 
-	public int getIndex() {
-		return index;
-	}
+    public int getIndex() {
+        return index;
+    }
 
-	public void setIndex(int index) {
-		this.index = index;
-	}
+    public void setIndex(int index) {
+        this.index = index;
+    }
 
-	public int getRequiredEmployeeSize() {
-		return requiredEmployeeSize;
-	}
+    public int getRequiredEmployeeSize() {
+        return requiredEmployeeSize;
+    }
 
-	
+    public void setRequiredEmployeeSize(int requiredEmployeeSize) {
+        this.requiredEmployeeSize = requiredEmployeeSize;
+    }
 
-	public void setRequiredEmployeeSize(int requiredEmployeeSize) {
-		this.requiredEmployeeSize = requiredEmployeeSize;
-	}
+    public String getLabel() {
+        return shiftType.getLabel() + " of " + shiftDate.getLabel();
+    }
 
-	public String getLabel() {
-		return shiftType.getLabel() + " of " + shiftDate.getLabel();
-	}
-
-	@Override
-	public String toString() {
-		return shiftDate + "/" + shiftType;
-	}
+    @Override
+    public String toString() {
+        return shiftDate + "/" + shiftType;
+    }
 
 }

@@ -17,53 +17,49 @@
 package org.optaplanner.examples.nurserostering.domain.request;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 import org.optaplanner.examples.nurserostering.domain.Employee;
 import org.optaplanner.examples.nurserostering.domain.ShiftDate;
 
-@Entity(name = "DayOffRequest")
+@Entity
 @XStreamAlias("DayOffRequest")
 public class DayOffRequest extends AbstractPersistable {
 
-	@ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
 	private Employee employee;
-	@ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
 	private ShiftDate shiftDate;
+    private int weight;
 
-	private int weight;
+    public Employee getEmployee() {
+        return employee;
+    }
 
-	public Employee getEmployee() {
-		return employee;
-	}
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
+    public ShiftDate getShiftDate() {
+        return shiftDate;
+    }
 
-	public ShiftDate getShiftDate() {
-		return shiftDate;
-	}
+    public void setShiftDate(ShiftDate shiftDate) {
+        this.shiftDate = shiftDate;
+    }
 
-	public void setShiftDate(ShiftDate shiftDate) {
-		this.shiftDate = shiftDate;
-	}
+    public int getWeight() {
+        return weight;
+    }
 
-	public int getWeight() {
-		return weight;
-	}
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
 
-	public void setWeight(int weight) {
-		this.weight = weight;
-	}
-
-	@Override
-	public String toString() {
-		return shiftDate + "_OFF_" + employee;
-	}
+    @Override
+    public String toString() {
+        return shiftDate + "_OFF_" + employee;
+    }
 
 }

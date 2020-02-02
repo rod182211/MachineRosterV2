@@ -19,8 +19,6 @@ package org.optaplanner.examples.nurserostering.domain;
 import java.time.DayOfWeek;
 import java.util.EnumSet;
 
-
-
 public enum WeekendDefinition {
     SATURDAY_SUNDAY("SaturdaySunday",
             DayOfWeek.SATURDAY, DayOfWeek.SUNDAY),

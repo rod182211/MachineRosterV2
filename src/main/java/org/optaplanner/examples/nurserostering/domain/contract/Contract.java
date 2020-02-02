@@ -19,43 +19,26 @@ package org.optaplanner.examples.nurserostering.domain.contract;
 import java.util.List;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-
-import javax.persistence.CascadeType;
-
 import javax.persistence.Entity;
-
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-
-import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 import org.optaplanner.examples.nurserostering.domain.WeekendDefinition;
 
-
-
-
-
-@Entity (name = "Contract")
+@Entity
 @XStreamAlias("Contract")
+public class Contract extends AbstractPersistable {
 
-public class Contract  extends AbstractPersistable {
-   
-   
-
-	private String code;
-    
+    private String code;
     private String description;
-	
-	@Enumerated
-    private WeekendDefinition weekendDefinition;
+ 	@Enumerated(EnumType.STRING)
+	private WeekendDefinition weekendDefinition;
 
-	
-	@OneToMany(fetch = FetchType.EAGER,mappedBy = "contract", cascade = CascadeType.ALL, targetEntity=ContractLine.class)	
-    private List<ContractLine> contractLineList;
+    @OneToMany(mappedBy = "contract")
+	private List<ContractLine> contractLineList;
 
-    
-
-	public String getCode() {
+    public String getCode() {
         return code;
     }
 
@@ -70,17 +53,16 @@ public class Contract  extends AbstractPersistable {
     public void setDescription(String description) {
         this.description = description;
     }
-	
-	public WeekendDefinition getWeekendDefinition() {
+
+    public WeekendDefinition getWeekendDefinition() {
         return weekendDefinition;
     }
 
     public void setWeekendDefinition(WeekendDefinition weekendDefinition) {
         this.weekendDefinition = weekendDefinition;
     }
-  
 
-	public List<ContractLine> getContractLineList() {
+    public List<ContractLine> getContractLineList() {
         return contractLineList;
     }
 

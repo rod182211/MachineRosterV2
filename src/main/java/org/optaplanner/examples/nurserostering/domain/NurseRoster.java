@@ -50,14 +50,18 @@ import org.optaplanner.persistence.xstream.api.score.buildin.hardsoft.HardSoftSc
 public class NurseRoster extends AbstractPersistable {
 
 	private String code;
-
     @ProblemFactProperty
-    private NurseRosterParametrization nurseRosterParametrization;
-   
+    private NurseRosterParametrization nurseRosterParametrization;   
     @ProblemFactCollectionProperty
     private List<Skill> skillList;
     @ProblemFactCollectionProperty
     private List<ShiftType> shiftTypeList;
+    @ProblemFactCollectionProperty
+    private List<Department> departmentList;
+    @ProblemFactCollectionProperty
+    private List<ShiftTypeDepartmentRequirement> shiftTypeDepartmentRequirementList;
+    @ProblemFactCollectionProperty
+    private List<EmployeeDepartment> employeeDepartmentList;
     @ProblemFactCollectionProperty
     private List<ShiftTypeSkillRequirement> shiftTypeSkillRequirementList;
     @ProblemFactCollectionProperty
@@ -84,8 +88,7 @@ public class NurseRoster extends AbstractPersistable {
     @ProblemFactCollectionProperty
     private List<ShiftOffRequest> shiftOffRequestList;
     @ProblemFactCollectionProperty
-    private List<ShiftOnRequest> shiftOnRequestList;
-    
+    private List<ShiftOnRequest> shiftOnRequestList;    
     @ProblemFactCollectionProperty
     private List<HolidayRequest> holidayRequestList;
     @ProblemFactCollectionProperty
@@ -294,6 +297,34 @@ public class NurseRoster extends AbstractPersistable {
 	public void setTrainingRequestList(List<TrainingRequest> trainingRequestList) {
 		this.trainingRequestList = trainingRequestList;
 	}
+	
+	
+
+	public List<Department> getDepartmentList() {
+		return departmentList;
+	}
+
+	public void setDepartmentList(List<Department> departmentList) {
+		this.departmentList = departmentList;
+	}
+
+	public List<ShiftTypeDepartmentRequirement> getShiftTypeDepartmentRequirementList() {
+		return shiftTypeDepartmentRequirementList;
+	}
+
+	public void setShiftTypeDepartmentRequirementList(
+			List<ShiftTypeDepartmentRequirement> shiftTypeDepartmentRequirementList) {
+		this.shiftTypeDepartmentRequirementList = shiftTypeDepartmentRequirementList;
+	}
+
+	public List<EmployeeDepartment> getEmployeeDepartmentList() {
+		return employeeDepartmentList;
+	}
+
+	public void setEmployeeDepartmentList(List<EmployeeDepartment> employeeDepartmentList) {
+		this.employeeDepartmentList = employeeDepartmentList;
+	}
+
 	public HardSoftScore getScore() {
         return score;
     }

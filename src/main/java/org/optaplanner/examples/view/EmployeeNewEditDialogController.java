@@ -23,6 +23,7 @@ import java.util.ResourceBundle;
 
 import org.optaplanner.database.RosterService;
 import org.optaplanner.database.RosterServiceImpl;
+import org.optaplanner.examples.nurserostering.domain.Department;
 import org.optaplanner.examples.nurserostering.domain.Employee;
 import org.optaplanner.examples.nurserostering.domain.Skill;
 
@@ -42,12 +43,16 @@ public class EmployeeNewEditDialogController implements Initializable {
 	@FXML
 	private TextField employeeIdField;
 	@FXML
-	private TextField NameField;
+	private TextField employeename;
+	
+
 	@FXML
-	private ComboBox<Contract> contracttype;
-	/*
-	 * @FXML private ComboBox<Skill> skill;
-	 */
+	private ComboBox<Contract> contract;
+	@FXML
+	private ComboBox<Skill> skill;
+	@FXML
+	private ComboBox<Department> department;
+	
 	@FXML
 	private TextField streetnum;
 	@FXML
@@ -59,39 +64,27 @@ public class EmployeeNewEditDialogController implements Initializable {
 	@FXML
 	private TextField contactdetails;
 
+
 	private Stage dialogStage;
 	private Employee employee;
 	
 	
 	private boolean okClicked = false;
-	private RosterService rosterService = new RosterServiceImpl();
-	private ObservableList<Contract> contractcodelist = FXCollections.observableArrayList();
-	
-	public ObservableList<Contract> getContractList() {
-		if (!contractcodelist.isEmpty())
-			contractcodelist.clear();
-		contractcodelist = FXCollections.observableList((List<Contract>) rosterService.listContractcode());
-		return contractcodelist;
-	}
 
+	private RosterService rosterService = new RosterServiceImpl();
+	
+
+	
 	private ObservableList<Contract> contractList = FXCollections.observableArrayList();
 
-	public ObservableList<Contract> getContract() {
+	public ObservableList<Contract> getContractList() {
 		if (!contractList.isEmpty())
 			contractList.clear();
 		contractList = FXCollections.observableList((List<Contract>) rosterService.listContract());
 		return contractList;
 	}
-
-
-	private ObservableList<Employee> employeenameList = FXCollections.observableArrayList();
-
-	public ObservableList<Employee> getEmployeeListname() {
-		if (!employeenameList.isEmpty())
-			employeenameList.clear();
-		employeenameList = FXCollections.observableList((List<Employee>) rosterService.listEmployee());
-		return employeenameList;
-	}
+	
+	
 	private ObservableList<Skill> skillsList = FXCollections.observableArrayList();
 
 	public ObservableList<Skill> getSkillsList() {
@@ -100,13 +93,22 @@ public class EmployeeNewEditDialogController implements Initializable {
 		skillsList = FXCollections.observableList((List<Skill>) rosterService.listSkill());
 		return skillsList;
 	}
+	private ObservableList<Department> departmentList = FXCollections.observableArrayList();
+
+	public ObservableList<Department> getDepartmentList() {
+		if (!departmentList.isEmpty())
+			departmentList.clear();
+		departmentList = FXCollections.observableList((List<Department>) rosterService.listDepartment());
+		return departmentList;
+	}
+
+	 
 	/**
 	 * Initializes the controller class. This method is automatically called after
 	 * the fxml file has been loaded.
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
 	}
 
 	/**
@@ -124,13 +126,15 @@ public class EmployeeNewEditDialogController implements Initializable {
 	 * @param employee
 	 */
 	
-	public void setEmployee(Employee employee) {
+	public void setEmployee(Employee employee ) {
 		this.employee = employee;
-		getContract();
-		contracttype.setItems(contractList);
+		getContractList();	
 		getSkillsList();
-	//	skill.setItems(skillsList);
-
+		getDepartmentList();
+		contract.setItems(contractList);
+		skill.setItems(skillsList);
+		department.setItems(departmentList);
+	 
 	}
 
 	/**
@@ -148,10 +152,13 @@ public class EmployeeNewEditDialogController implements Initializable {
 	@FXML
 	private void handleOk() {
 		if (isInputValid()) {
-
+		
+		int x = 1;
+		do {
+			try {
 			String employeeId = employeeIdField.getText();
 	    	String stnum = streetnum.getText();
-		    employee.setStreetnum(stnum);
+	    	employee.setStreetnum(stnum);
 			String addr = address.getText();
 			employee.setAddress(addr);
 			String sub = suburb.getText();
@@ -161,27 +168,39 @@ public class EmployeeNewEditDialogController implements Initializable {
 			String contdetail = contactdetails.getText();
 			employee.setContactdetails(contdetail);
 			employee.setCode(employeeId);
-			String name = NameField.getText();
+			String name = employeename.getText();
 			employee.setEmployeeId(employeeId);
 			employee.setName(name);
-			Contract contractcode = contracttype.getSelectionModel().getSelectedItem();
+			Department departmentcode = department.getSelectionModel().getSelectedItem();
+			Skill skillcode = skill.getSelectionModel().getSelectedItem();
+			Contract contractcode = contract.getSelectionModel().getSelectedItem();
+			employee.setSkill(skillcode);
+			employee.setDepartment(departmentcode);
 			employee.setContract(contractcode);
-			
-			rosterService.addEmployee(employee);
-		
 			okClicked = true;
-			
-			
+			rosterService.addEmployee(employee);
+			x=2;
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Information Dialog");
-			alert.setHeaderText("REMEMBER");
-			alert.setContentText("Don't forget to Add this Employee's Skill Proficiency");
+			alert.setHeaderText(null);
+			alert.setContentText("Update Succesfull!");
 			alert.showAndWait();
 			dialogStage.close();
-			loadStage("/fxml/SkillProficiency.fxml");
 		}
-		  
-	}
+		
+		catch(Exception e) {
+			Alert alertpattern = new Alert(AlertType.CONFIRMATION);
+			alertpattern.setTitle("Missed Field");
+			alertpattern.setHeaderText("You missed an Input Try Again");
+			alertpattern.setContentText("missing field");
+			
+		}
+		}
+		while(x==1);
+		}
+		}
+		
+	
 
 	/**
 	 * Called when the user clicks cancel.
@@ -199,10 +218,18 @@ public class EmployeeNewEditDialogController implements Initializable {
 	private boolean isInputValid() {
 		String errorMessage = "";
 
-		if (employeeIdField.getText() == null || employeeIdField.getText().length() == 0) {
+		if (employeename.getText() == null || employeename.getText().length() == 0) {
 			errorMessage += "No valid first name!\n";
 		}
-
+		if (skill.getSelectionModel().getSelectedItem()  == null)  {
+			errorMessage += "No valid Skill!\n";
+		}
+		if (department.getSelectionModel().getSelectedItem()  == null)  {
+			errorMessage += "No valid Department!\n";
+		}
+		if (contract.getSelectionModel().getSelectedItem()  == null)  {
+			errorMessage += "No valid contract!\n";
+		}
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {
@@ -218,17 +245,4 @@ public class EmployeeNewEditDialogController implements Initializable {
 			return false;
 		}
 	}
-	 private void loadStage(String fxml) {
-	        try {
-	            Parent root = FXMLLoader.load(getClass().getResource(fxml));
-	            Stage stage = new Stage();
-	            stage.setScene(new Scene(root));
-	         //   stage.getIcons().add(new Image("/icons/icon.png"));
-	            stage.initModality(Modality.APPLICATION_MODAL);
-	            stage.show();
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
-		
 }

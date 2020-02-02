@@ -79,6 +79,8 @@ public class ContractController implements Initializable {
 		contractTable.setItems(getContractList());
 		contractCol.setCellValueFactory(
 				new PropertyValueFactory<Contract, String>("code"));
+		descriptionCol.setCellValueFactory(
+				new PropertyValueFactory<Contract, String>("description"));
 		showContractDetails(null);
 		contractTable.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue,

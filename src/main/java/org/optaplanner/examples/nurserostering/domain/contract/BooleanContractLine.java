@@ -16,21 +16,17 @@
 
 package org.optaplanner.examples.nurserostering.domain.contract;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-
 import javax.persistence.DiscriminatorValue;
+
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import javax.persistence.Entity;
 
-
-
-
-@Entity (name ="BooleanContractLine" )
-@DiscriminatorValue("BooleanContractLine")
+@Entity
 @XStreamAlias("BooleanContractLine")
+@DiscriminatorValue(value ="BooleanContractLine") 
 public class BooleanContractLine extends ContractLine {
 
- 
-	private boolean enabled;
+    private boolean enabled;
     private int weight;
 
     @Override

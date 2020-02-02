@@ -31,6 +31,9 @@ import org.optaplanner.examples.nurserostering.domain.ShiftDate;
 import org.optaplanner.examples.nurserostering.domain.ShiftType;
 import org.optaplanner.examples.nurserostering.domain.ShiftTypeSkillRequirement;
 import org.optaplanner.examples.nurserostering.domain.Skill;
+import org.optaplanner.examples.nurserostering.domain.Department;
+import org.optaplanner.examples.nurserostering.domain.EmployeeDepartment;
+import org.optaplanner.examples.nurserostering.domain.ShiftTypeDepartmentRequirement;
 import org.optaplanner.examples.nurserostering.domain.SkillProficiency;
 import org.optaplanner.examples.nurserostering.domain.WeekendDefinition;
 import org.optaplanner.examples.nurserostering.domain.pattern.FreeBefore2DaysWithAWorkDayPattern;
@@ -38,6 +41,7 @@ import org.optaplanner.examples.nurserostering.domain.pattern.Pattern;
 import org.optaplanner.examples.nurserostering.domain.pattern.ShiftType2DaysPattern;
 import org.optaplanner.examples.nurserostering.domain.pattern.ShiftType3DaysPattern;
 import org.optaplanner.examples.nurserostering.domain.pattern.WorkBeforeFreeSequencePattern;
+import org.optaplanner.examples.nurserostering.domain.pattern.WorkEarlyPattern;
 import org.optaplanner.examples.nurserostering.domain.contract.Contract;
 import org.optaplanner.examples.nurserostering.domain.contract.BooleanContractLine;
 import org.optaplanner.examples.nurserostering.domain.contract.ContractLine;
@@ -59,6 +63,7 @@ import org.optaplanner.examples.nurserostering.solver.drools.EmployeeConsecutive
 import org.optaplanner.examples.nurserostering.solver.drools.EmployeeFreeSequence;
 import org.optaplanner.examples.nurserostering.solver.drools.EmployeeWeekendSequence;
 import org.optaplanner.examples.nurserostering.solver.drools.EmployeeWorkSequence;
+import org.optaplanner.examples.nurserostering.solver.drools.EmployeeEarlyWorkSequence;
 import org.apache.commons.lang3.tuple.Pair;
 import accumulate org.optaplanner.examples.common.solver.drools.functions.LoadBalanceByCountAccumulateFunction loadBalanceByCount;
 import accumulate org.optaplanner.examples.common.solver.drools.functions.LoadBalanceAccumulateFunction loadBalance;
@@ -97,236 +102,38 @@ end
         accumulate(
             $assignment : ShiftAssignment(employee == $employee);
             $total : count($assignment)
+          
  )
-    then
+ then
        int totalInt = $total.intValue();
-     
-       if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue())&& totalInt < $contractLine.getMaximumValue()){
-     
-           scoreHolder.addHardConstraintMatch(kcontext,($contractLine.getMaximumValue() - totalInt) * $contractLine.getMaximumWeight());
-	
-	    
+      
+  if ($contractLine.isMaximumEnabled() && totalInt > $contractLine.getMaximumValue()) {
+   
+       double coefficient = Math.ceil(totalInt/$contractLine.getMaximumValue());
+       double  score = (((coefficient * $contractLine.getMaximumValue() - totalInt ) * coefficient) * $contractLine.getMaximumWeight());
+       scoreHolder.addSoftConstraintMatch(kcontext, (int) score);
        
-	}
-
-      else if  ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue() ) && totalInt < ($contractLine.getMaximumValue()* 2 )){
-     
-           scoreHolder.addHardConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue()  )- (totalInt)) * $contractLine.getMaximumWeight());
-                 
-       
-        }
-        else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 2 ) && totalInt < ($contractLine.getMaximumValue()* 3 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() *2 )- (totalInt)) * $contractLine.getMaximumWeight());
-                             
-       
-       
-          }
-          
         
-         else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 3 ) && totalInt < ($contractLine.getMaximumValue()* 4 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() *3 )- (totalInt)) * $contractLine.getMaximumWeight());
-                         
        
-       
-          }
- 
-    else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 4 ) && totalInt < ($contractLine.getMaximumValue()* 5 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() *4 )- (totalInt)) * $contractLine.getMaximumWeight());
-          
-       
-          }
-         
-            else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 5 ) && totalInt < ($contractLine.getMaximumValue()* 6 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() *5 )- (totalInt)) * $contractLine.getMaximumWeight());
-                         
-       
-          }
-         
-            else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 6 ) && totalInt < ($contractLine.getMaximumValue()* 7 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() *6 )- (totalInt)) * $contractLine.getMaximumWeight());
-                         
-       
-          }
-            else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 7 ) && totalInt < ($contractLine.getMaximumValue()* 8 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() *7 )- (totalInt)) * $contractLine.getMaximumWeight());
-                         
-       
-          }
-            else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 8 ) && totalInt < ($contractLine.getMaximumValue()* 9 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() *8 )- (totalInt)) * $contractLine.getMaximumWeight());
-                         
-       
-          }
-           else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 9 ) && totalInt < ($contractLine.getMaximumValue()* 10 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() *9 )- (totalInt)) * $contractLine.getMaximumWeight());
-                         
-       
-          }
-           else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 10 ) && totalInt < ($contractLine.getMaximumValue()* 11 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() * 10 )- (totalInt)) * $contractLine.getMaximumWeight());
-                         
-       
-          }
-          else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 11 ) && totalInt < ($contractLine.getMaximumValue()* 12 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() * 11 )- (totalInt)) * $contractLine.getMaximumWeight());
-                         
-       
-          }
-         
-          else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 12 ) && totalInt < ($contractLine.getMaximumValue()* 13 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() * 12 )- (totalInt)) * $contractLine.getMaximumWeight());
-                         
-       
-          }
-           else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 13 ) && totalInt < ($contractLine.getMaximumValue()* 14 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() * 13 )- (totalInt)) * $contractLine.getMaximumWeight());
-                         
-       
-          }
-            else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 14 ) && totalInt < ($contractLine.getMaximumValue()* 15 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() * 14 )- (totalInt)) * $contractLine.getMaximumWeight());
-                         
-       
-          }
-          else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 15 ) && totalInt < ($contractLine.getMaximumValue()* 16 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() * 15 )- (totalInt)) * $contractLine.getMaximumWeight());
-                         
-       
-          }
-           else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 16 ) && totalInt < ($contractLine.getMaximumValue()* 17 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() * 16 )- (totalInt)) * $contractLine.getMaximumWeight());
-                         
-       
-          }
-           else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 17 ) && totalInt < ($contractLine.getMaximumValue()* 18 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() * 17 )- (totalInt)) * $contractLine.getMaximumWeight());
-                         
-       
-          }
-           else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 18 ) && totalInt < ($contractLine.getMaximumValue()* 19 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() * 18 )- (totalInt)) * $contractLine.getMaximumWeight());
-                         
-       
-          }
-          else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 19 ) && totalInt < ($contractLine.getMaximumValue()* 20 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() * 19 )- (totalInt)) * $contractLine.getMaximumWeight());
-                         
-       
-          }
-           else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 20 ) && totalInt < ($contractLine.getMaximumValue()* 21 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() * 20 )- (totalInt)) * $contractLine.getMaximumWeight());
-                         
-       
-          }
-           else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 21 ) && totalInt < ($contractLine.getMaximumValue()* 22 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() * 21 )- (totalInt)) * $contractLine.getMaximumWeight());
-                         
-       
-          }
-           else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 22 ) && totalInt < ($contractLine.getMaximumValue()* 23 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() * 22 )- (totalInt)) * $contractLine.getMaximumWeight());
-                         
-       
-          }
-             else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 23 ) && totalInt < ($contractLine.getMaximumValue()* 24 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() * 23 )- (totalInt)) * $contractLine.getMaximumWeight());
-                         
-       
-          }
-            else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 24 ) && totalInt < ($contractLine.getMaximumValue()* 25 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() * 24 )- (totalInt)) * $contractLine.getMaximumWeight());
-                         
-       
-          }
-          else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 25 ) && totalInt < ($contractLine.getMaximumValue()* 26 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() * 25 )- (totalInt)) * $contractLine.getMaximumWeight());
-                         
-       
-          }
-          else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 26 ) && totalInt < ($contractLine.getMaximumValue()* 27 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() * 26 )- (totalInt)) * $contractLine.getMaximumWeight());
-                         
-       
-          }
-          
-              else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 27 ) && totalInt < ($contractLine.getMaximumValue()* 28 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() * 27 )- (totalInt)) * $contractLine.getMaximumWeight());
-                         
-       
-          }
-       
-      else  if ($contractLine.isMaximumEnabled() && totalInt > ($contractLine.getMaximumValue()* 28 ) && totalInt < ($contractLine.getMaximumValue()* 29 )){
-     
-           scoreHolder.addSoftConstraintMatch(kcontext,
-                    (($contractLine.getMaximumValue() * 28 )- (totalInt)) * $contractLine.getMaximumWeight());
-                         
-     
-          }
-       
-        else {
-            // Workaround for https://issues.jboss.org/browse/PLANNER-761
-
+       }
+  else if ($contractLine.isMinimumEnabled() && totalInt < $contractLine.getMinimumValue()) {
+       double coefficient = Math.ceil(totalInt / $contractLine.getMinimumValue());
+       double  score = ((totalInt * coefficient) - $contractLine.getMinimumValue()  * $contractLine.getMinimumWeight() );
+       scoreHolder.addSoftConstraintMatch(kcontext, (int) score);
            
+       
+        } 
+ 
+     else {
+            // Workaround for https://issues.jboss.org/browse/PLANNER-761
             scoreHolder.addSoftConstraintMatch(kcontext, 0);
-             
         }
+         
 end
 
+
  rule "Minimum and maximum number of assignments with Casuals"
- //salience 
+ 
  when
         $contractLine : MinMaxContractLine(contractLineType == ContractLineType.TOTAL_ASSIGNMENTS, enabled == false,  $contract : contract)&& BooleanContractLine(contractLineType == ContractLineType.IS_CASUAL, enabled == true, contract == $contract)
          $employee : Employee(contract == $contract)
@@ -342,31 +149,13 @@ then
 end
 
 
-      /*rule "fairAssignmentCountPerEmployee"
-salience 2
-    when  //$contractLine : BooleanContractLine(contractLineType == ContractLineType. IS_LOADBALANCED, enabled == true, $contract : contract) 
 
-       
-          $e : Employee()
-          
-        $result : loadBalance()  from accumulate(
-       
-        ShiftAssignment(employee == $e),
-        count()
-         );
-       
-        
-     then
-    
-        scoreHolder.addSoftConstraintMatch(kcontext, -(int)$result.getMeanDeviationSquaredSumRootMillis());
-        
-        end*/  
 
 rule "fairAssignmentCountPerEmployee"
 
     when $contractLine : BooleanContractLine(contractLineType == ContractLineType. IS_LOADBALANCED, enabled == true, $contract : contract) 
     
-        accumulate(
+       accumulate(
             ShiftAssignment(employee != null, $e : employee, contract == $contract, $shift:shift);
             $total : loadBalanceByCount($e)
         )
@@ -426,10 +215,59 @@ rule "insertEmployeeWorkSequence"
         insertLogical(new EmployeeWorkSequence($employee, $firstDayIndex, $lastDayIndex));
 end
 
+
+rule "MaxMinNightShifts"
+      salience 1     
+   when
+        $contractLine : MinMaxContractLine(contractLineType == ContractLineType.TOTAL_NIGHT_ASSIGNMENTS, enabled == true,
+          $contract : contract) 
+       $employee : Employee(contract == $contract)
+         $shiftType : ShiftType(night == true)
+         
+        accumulate(
+            $assignment : ShiftAssignment(employee == $employee, shiftType == $shiftType);
+            $total : count($assignment)
+    
+        )
+
+
+    then
+        int totalInt = $total.intValue();
+        if ($contractLine.isMinimumEnabled() && totalInt < $contractLine.getMinimumValue()) {
+            scoreHolder.addSoftConstraintMatch(kcontext,
+                    (totalInt - $contractLine.getMinimumValue()) * $contractLine.getMinimumWeight());
+        } else if ($contractLine.isMaximumEnabled() && totalInt > $contractLine.getMaximumValue()) {
+            scoreHolder.addSoftConstraintMatch(kcontext,
+                    ($contractLine.getMaximumValue() - totalInt) * $contractLine.getMaximumWeight());
+        } else {
+            // Workaround for https://issues.jboss.org/browse/PLANNER-761
+            scoreHolder.addSoftConstraintMatch(kcontext, 0);
+        }
+end
+
+
+//Maximum number of consecutive working days
+rule "maximumConsecutiveWorkingDays"
+ when
+      $contractLine : MinMaxContractLine(
+            contractLineType == ContractLineType.CONSECUTIVE_WORKING_DAYS, maximumEnabled == true,
+            $contract : contract, $maximumValue : maximumValue
+        )
+        
+        EmployeeWorkSequence(
+            getEmployee().getContract() == $contract,
+            dayLength > $maximumValue,
+            $dayLength : dayLength
+        )
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, ($maximumValue - $dayLength) * $contractLine.getMaximumWeight());
+end
+
+
 // Minimum number of consecutive working days
 rule "minimumConsecutiveWorkingDays"
-    when
-        $contractLine : MinMaxContractLine(
+   when
+       $contractLine : MinMaxContractLine(
             contractLineType == ContractLineType.CONSECUTIVE_WORKING_DAYS, minimumEnabled == true,
             $contract : contract, $minimumValue : minimumValue
         )
@@ -440,24 +278,8 @@ rule "minimumConsecutiveWorkingDays"
             $dayLength : dayLength
         )
     then
+   
         scoreHolder.addSoftConstraintMatch(kcontext, ($dayLength - $minimumValue) * $contractLine.getMinimumWeight());
-end
-
-// Maximum number of consecutive working days
-rule "maximumConsecutiveWorkingDays"
-    when
-        $contractLine : MinMaxContractLine(
-            contractLineType == ContractLineType.CONSECUTIVE_WORKING_DAYS, maximumEnabled == true,
-            $contract : contract, $maximumValue : maximumValue
-        )
-
-        EmployeeWorkSequence(
-            getEmployee().getContract() == $contract,
-            dayLength > $maximumValue,
-            $dayLength : dayLength
-        )
-    then
-        scoreHolder.addSoftConstraintMatch(kcontext, ($maximumValue - $dayLength) * $contractLine.getMaximumWeight());
 end
 
 
@@ -483,6 +305,8 @@ rule "insertEmployeeFreeSequence"
     then
         insertLogical(new EmployeeFreeSequence($employee, $firstDayIndexMinusOne + 1, $lastDayIndexPlusOne - 1));
 end
+
+
 rule "insertFirstEmployeeFreeSequence"
         salience 1 // Do these rules first (optional, for performance)
     when
@@ -500,6 +324,8 @@ rule "insertFirstEmployeeFreeSequence"
     then
         insertLogical(new EmployeeFreeSequence($employee, $firstDayIndex, $lastDayIndexPlusOne - 1));
 end
+
+
 rule "insertLastEmployeeFreeSequence"
         salience 1 // Do these rules first (optional, for performance)
     when
@@ -517,6 +343,8 @@ rule "insertLastEmployeeFreeSequence"
     then
         insertLogical(new EmployeeFreeSequence($employee, $firstDayIndexMinusOne + 1, $lastDayIndex));
 end
+
+
 rule "insertEntireEmployeeFreeSequence"
         salience 1 // Do these rules first (optional, for performance)
     when
@@ -532,12 +360,13 @@ end
 
 // Minimum number of consecutive free days
 rule "minimumConsecutiveFreeDays"
+ salience 1
     when
         $contractLine : MinMaxContractLine(
             contractLineType == ContractLineType.CONSECUTIVE_FREE_DAYS, minimumEnabled == true,
             $contract : contract, $minimumValue : minimumValue
         )
-
+     
         EmployeeFreeSequence(
             getEmployee().getContract() == $contract,
             dayLength < $minimumValue,
@@ -549,6 +378,7 @@ end
 
 // Maximum number of consecutive free days
 rule "maximumConsecutiveFreeDays"
+
     when
         $contractLine : MinMaxContractLine(
             contractLineType == ContractLineType.CONSECUTIVE_FREE_DAYS, maximumEnabled == true,
@@ -561,6 +391,7 @@ rule "maximumConsecutiveFreeDays"
             $dayLength : dayLength
         )
     then
+        
         scoreHolder.addSoftConstraintMatch(kcontext, ($maximumValue - $dayLength) * $contractLine.getMaximumWeight());
 end
 
@@ -582,6 +413,7 @@ rule "insertEmployeeConsecutiveWeekendAssignmentStart"
     then
         insertLogical(new EmployeeConsecutiveWeekendAssignmentStart($employee, $weekendSundayIndex));
 end
+
 rule "insertEmployeeConsecutiveWeekendAssignmentEnd"
         salience 2 // Do these rules first (optional, for performance)
     when
@@ -674,6 +506,8 @@ rule "startOnNotFirstDayOfWeekend"
     then
         scoreHolder.addSoftConstraintMatch(kcontext, - $distanceToFirstDayOfWeekend * $contractLine.getWeight());
 end
+
+
 rule "endOnNotLastDayOfWeekend"
     when
         $contractLine : BooleanContractLine(
@@ -729,7 +563,7 @@ rule "dayOnRequest"
 end
 
 rule "Roster Day Off"
- salience 1
+
     when
         RosterDay($employee : employee, $shift : shift, $weight : weight)
         not ShiftAssignment(employee == $employee, shift == $shift)
@@ -752,7 +586,7 @@ rule "Leave Day Off"
         LeaveRequest($employee : employee, $shift : shift, $weight : weight)
         not ShiftAssignment(employee == $employee, shift == $shift)
     then
-        scoreHolder.addSoftConstraintMatch(kcontext, - $weight);
+        scoreHolder.addHardConstraintMatch(kcontext, - $weight);
 end
 
 // Requested shift on/off
@@ -779,7 +613,6 @@ rule "holidayRequest"
         scoreHolder.addHardConstraintMatch(kcontext, - $weight);
 end
 
-// Alternative skill
 rule "alternativeSkill"
     when
         $contractLine : BooleanContractLine(contractLineType == ContractLineType.ALTERNATIVE_SKILL_CATEGORY, enabled == true,
@@ -787,6 +620,21 @@ rule "alternativeSkill"
         ShiftAssignment(contract == $contract, $employee : employee, $shiftType : shiftType)
         ShiftTypeSkillRequirement(shiftType == $shiftType, $skill : skill)
         not SkillProficiency(employee == $employee, skill == $skill)
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, - $contractLine.getWeight());
+end
+
+
+// Alternative Department
+rule "alternativeDepartment"
+    when
+        $contractLine : BooleanContractLine(contractLineType == ContractLineType.ALTERNATIVE_DEPARTMENT, enabled == true,
+            $contract : contract)
+        ShiftAssignment(contract == $contract, $employee : employee, $shiftType : shiftType )
+        ShiftTypeDepartmentRequirement(shiftType == $shiftType, $department : department)        
+        not EmployeeDepartment(employee == $employee, department == $department)
+        
+        
     then
    
      scoreHolder.addSoftConstraintMatch(kcontext, - $contractLine.getWeight());
@@ -816,6 +664,35 @@ rule "unwantedPatternFreeBefore2DaysWithAWorkDayPattern"
         scoreHolder.addSoftConstraintMatch(kcontext, - $pattern.getWeight());
 end
 
+rule "WantedPatternWorkEarlySequencePattern"
+
+    when
+        $pattern : WorkEarlyPattern(
+            $workShiftType : workShiftType,
+            $shiftLength : shiftLength
+        )
+        PatternContractLine(
+            pattern == $pattern, $contract : contract
+        )
+
+        ShiftAssignment(
+           
+           ($workShiftType == null) || (shiftType == $workShiftType),
+            contract == $contract,
+            $employee : employee, $workDayIndex : shiftDateDayIndex
+        )
+        EmployeeFreeSequence(
+            employee == $employee,
+            firstDayIndex == ($workDayIndex + 1),
+            dayLength == $shiftLength
+        )
+    then
+    System.out.println("using this");
+      scoreHolder.addSoftConstraintMatch(kcontext, - $pattern.getWeight());
+       
+end
+
+
 rule "WantedPatternWorkBeforeFreeSequencePattern"
 
     when
@@ -840,9 +717,12 @@ rule "WantedPatternWorkBeforeFreeSequencePattern"
             dayLength == $freeDayLength
         )
     then
+    
       scoreHolder.addSoftConstraintMatch(kcontext, + $pattern.getWeight());
        
 end
+
+
 rule "unwantedPatternShiftType2DaysPattern"
     when
         $pattern : ShiftType2DaysPattern(
@@ -864,8 +744,9 @@ rule "unwantedPatternShiftType2DaysPattern"
             shiftDateDayIndex == ($firstDayIndex + 1)
         )
     then
-        scoreHolder.addSoftConstraintMatch(kcontext, - $pattern.getWeight());
+            scoreHolder.addSoftConstraintMatch(kcontext, - $pattern.getWeight());
 end
+
 rule "unwantedPatternShiftType3DaysPattern"
     when
         $pattern : ShiftType3DaysPattern(
@@ -882,16 +763,18 @@ rule "unwantedPatternShiftType3DaysPattern"
             contract == $contract,
             $employee : employee, $firstDayIndex : shiftDateDayIndex
         )
-        ShiftAssignment(
-            shiftType == $dayIndex1ShiftType,
+      ShiftAssignment(
+            (shiftType == $dayIndex1ShiftType),
             employee == $employee,
             shiftDateDayIndex == ($firstDayIndex + 1)
         )
         ShiftAssignment(
-            shiftType == $dayIndex2ShiftType,
+            (shiftType == $dayIndex2ShiftType),
             employee == $employee,
             shiftDateDayIndex == ($firstDayIndex + 2)
         )
     then
+    System.out.println("using");
         scoreHolder.addSoftConstraintMatch(kcontext, - $pattern.getWeight());
 end
+

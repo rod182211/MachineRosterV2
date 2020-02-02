@@ -19,23 +19,19 @@ package org.optaplanner.examples.nurserostering.domain.contract;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamInclude;
 
-import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
-
+import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.persistence.MappedSuperclass;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 
-@Entity (name= "ContractLine")
+
+
+@Entity
+@DiscriminatorColumn(name = "type")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "DTYPE",discriminatorType=DiscriminatorType.STRING)
 @XStreamAlias("ContractLine")
 @XStreamInclude({
         BooleanContractLine.class,
@@ -43,23 +39,21 @@ import org.optaplanner.examples.common.domain.AbstractPersistable;
 })
 public abstract class ContractLine extends AbstractPersistable {
 
-	@ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
 	private Contract contract;
-
-
-
+ 
 	@Enumerated(EnumType.STRING)
-    private ContractLineType contractLineType;
+	private ContractLineType contractLineType;
 
- 	public Contract getContract() {
+    public Contract getContract() {
         return contract;
     }
 
     public void setContract(Contract contract) {
         this.contract = contract;
     }
-  
-	public ContractLineType getContractLineType() {
+
+    public ContractLineType getContractLineType() {
         return contractLineType;
     }
 
@@ -69,7 +63,7 @@ public abstract class ContractLine extends AbstractPersistable {
 
     public abstract boolean isEnabled();
 
-
+    @Override
     public String toString() {
         return contract + "-" + contractLineType;
     }

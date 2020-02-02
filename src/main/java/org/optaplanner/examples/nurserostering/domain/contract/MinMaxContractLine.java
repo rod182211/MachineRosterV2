@@ -16,22 +16,17 @@
 
 package org.optaplanner.examples.nurserostering.domain.contract;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-
 import javax.persistence.DiscriminatorValue;
+
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import javax.persistence.Entity;
 
-
-
-
-@Entity (name ="MinMaxContractLine" )
-@DiscriminatorValue("MinMaxContractLine")
+@Entity
 @XStreamAlias("MinMaxContractLine")
-
+@DiscriminatorValue(value ="MinMaxContractLine") 
 public class MinMaxContractLine extends ContractLine {
 
-  
-	private boolean minimumEnabled;
+    private boolean minimumEnabled;
     private int minimumValue;
     private int minimumWeight;
 

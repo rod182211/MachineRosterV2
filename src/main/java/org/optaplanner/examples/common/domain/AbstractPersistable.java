@@ -21,21 +21,13 @@ import java.io.Serializable;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.optaplanner.core.api.domain.lookup.PlanningId;
-import org.optaplanner.core.api.score.constraint.ConstraintMatch;
 
 @MappedSuperclass
-public abstract class AbstractPersistable implements Serializable, Comparable<AbstractPersistable> {
+public abstract class AbstractPersistable implements Serializable {
 
- 
-
-
-
-
- 
+    @Id
 	@GeneratedValue
-	@Id
 	protected Long id;
 
     protected AbstractPersistable() {
@@ -78,20 +70,6 @@ public abstract class AbstractPersistable implements Serializable, Comparable<Ab
 //                    + id.hashCode();
 //        }
 //    }
-
-    /**
-     * Used by the GUI to sort the {@link ConstraintMatch} list
-     * by {@link ConstraintMatch#getJustificationList()}.
-     * @param other never null
-     * @return comparison
-     */
-    @Override
-    public int compareTo(AbstractPersistable other) {
-        return new CompareToBuilder()
-                .append(getClass().getName(), other.getClass().getName())
-                .append(id, other.id)
-                .toComparison();
-    }
 
     @Override
     public String toString() {

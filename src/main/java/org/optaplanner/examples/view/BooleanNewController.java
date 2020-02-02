@@ -79,7 +79,7 @@ public class BooleanNewController implements Initializable {
 			.observableArrayList("SINGLE_ASSIGNMENT_PER_DAY",
 					"COMPLETE_WEEKENDS", "IDENTICAL_SHIFT_TYPES_DURING_WEEKEND",
 					"NO_NIGHT_SHIFT_BEFORE_FREE_WEEKEND",
-					"ALTERNATIVE_SKILL_CATEGORY", "IS_LOADBALANCED",
+					"ALTERNATIVE_SKILL_CATEGORY","ALTERNATIVE_DEPARTMENT","IS_LOADBALANCED",
 					"IS_CASUAL");
 	/**
 	 * Initializes the controller class. This method is automatically called
@@ -180,7 +180,13 @@ public class BooleanNewController implements Initializable {
 		String errorMessage = "";
 
 		if (weight.getText() == null || weight.getText().length() == 0) {
-			errorMessage += "No valid Request!\n";
+			errorMessage += "No valid weight\n";
+		}
+		if (contract.getSelectionModel().getSelectedItem() == null ) {
+			errorMessage += "No valid Contract\n";
+		}
+		if (contractLine.getSelectionModel().getSelectedItem() == null ) {
+			errorMessage += "No valid ContractLine\n";
 		}
 
 		if (errorMessage.length() == 0) {

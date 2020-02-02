@@ -20,22 +20,13 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 
-
-
-
-
-
-
-@Entity (name = "ShiftType")
-
+@Entity
 @XStreamAlias("ShiftType")
-public class ShiftType extends AbstractPersistable {
+public class ShiftType extends AbstractPersistable implements Comparable<ShiftType> {
 
-
-	private String code;
+    String code;
     @Column(name="Shift_index")
     private int index;
     private String startTimeString;
@@ -98,6 +89,10 @@ public class ShiftType extends AbstractPersistable {
     @Override
     public String toString() {
         return code;
+    }
+    @Override
+    public int compareTo(ShiftType o) {
+        return this.getCode().compareTo(o.getCode());
     }
 
 }

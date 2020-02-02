@@ -3,9 +3,10 @@ package org.optaplanner.examples.pool;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import org.optaplanner.examples.common.domain.AbstractPersistable;
-@Entity
+@Entity(name="CalendarData")
 public class CalendarData extends AbstractPersistable{
 	
 private String employeename;

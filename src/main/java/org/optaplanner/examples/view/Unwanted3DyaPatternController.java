@@ -6,9 +6,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import org.hibernate.Session;
+import org.optaplanner.database.HibernateUtil;
 import org.optaplanner.database.RosterService;
 import org.optaplanner.database.RosterServiceImpl;
 import org.optaplanner.examples.nurserostering.domain.ShiftType;
+import org.optaplanner.examples.nurserostering.domain.contract.PatternContractLine;
 import org.optaplanner.examples.nurserostering.domain.pattern.ShiftType3DaysPattern;
 
 
@@ -62,8 +65,8 @@ public class Unwanted3DyaPatternController implements Initializable {
 	@FXML
 	private Label dayIndex2ShiftTypefield;
 	
-	
-
+	 private long patterncontractid;
+	 private static Session session;
 	private ShiftType3DaysPattern shift3daydata;
 
 	private RosterService rosterService = new RosterServiceImpl();
@@ -84,7 +87,15 @@ public class Unwanted3DyaPatternController implements Initializable {
 		shift3daydataListId = FXCollections.observableList((List<ShiftType3DaysPattern>) rosterService.listShiftType3DaysPatternId());
 		return shift3daydataListId;
 	}
+	private ObservableList<PatternContractLine> patterndataList = FXCollections.observableArrayList();
 
+	public ObservableList<PatternContractLine> getPatternContractLineList() {
+		if (!patterndataList.isEmpty())
+			patterndataList.clear();
+		patterndataList = FXCollections
+				.observableList((List<PatternContractLine>) rosterService.listPatternContractLine());
+		return patterndataList;
+	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -93,7 +104,7 @@ public class Unwanted3DyaPatternController implements Initializable {
 	}
 
 	public void loadShiftType3DaysPattern() {
-		unwanted3dayTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		unwanted3dayTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		unwanted3dayTable.getItems().clear();
 		unwanted3dayTable.setItems(getShiftType3DaysPatternList());
 		dayIndex0ShiftType.setCellValueFactory(new PropertyValueFactory<ShiftType3DaysPattern, ShiftType>("dayIndex0ShiftType"));
@@ -131,14 +142,33 @@ public class Unwanted3DyaPatternController implements Initializable {
 int select = unwanted3dayTable.getSelectionModel().getSelectedIndex();
 		
 		if (select >= 0) {
-			 ObservableList<ShiftType3DaysPattern> itemsSelected;
-			 itemsSelected = unwanted3dayTable.getSelectionModel().getSelectedItems();
+			
+			ShiftType3DaysPattern itemsSelected = unwanted3dayTable.getSelectionModel().getSelectedItem();
+			long id = itemsSelected.getId();
+			patterncontractid = id +1L;
+			getPatternContractLineList();
 		Alert alertpattern = new Alert(AlertType.CONFIRMATION);
 		alertpattern.setTitle("Request Confirmation");
-		alertpattern.setHeaderText("YOU MUST DELETE the Pattern entery First");
-		alertpattern.setContentText("Click OK if already deleted or Cancel to delete the Pattern");
+		alertpattern.setHeaderText("Are Your Sure");
+		alertpattern.setContentText("Click OK if already deleted or Cancel");
 		Optional<ButtonType> resultpattern = alertpattern.showAndWait();
 		if (resultpattern.get() == ButtonType.OK) {
+
+			for (PatternContractLine element : patterndataList) {
+				long checkedvalue = element.getId();
+				long patid = element.getPattern().getId();
+              
+				if (patid == id) {
+					session = HibernateUtil.getSessionFactory().getCurrentSession();
+					session.beginTransaction();
+
+					PatternContractLine p = (PatternContractLine) session.get(PatternContractLine.class,
+							checkedvalue);
+					session.close();
+					rosterService.deletePatternContractLine(p);
+
+				}
+			}
 			rosterService.removeShiftType3DaysPattern(itemsSelected);
 			loadShiftType3DaysPattern();
 			

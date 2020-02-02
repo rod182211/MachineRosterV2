@@ -18,43 +18,49 @@ package org.optaplanner.examples.nurserostering.domain;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
-import javax.persistence.CascadeType;
+import java.io.Serializable;
+import java.util.Comparator;
+import java.util.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+
+
 import org.optaplanner.examples.common.domain.AbstractPersistable;
-@Entity (name = "ShiftTypeSkillRequirement")
+import org.optaplanner.examples.nurserostering.solver.drools.EmployeeConsecutiveAssignmentEnd;
+
+
+@Entity
 @XStreamAlias("ShiftTypeSkillRequirement")
 public class ShiftTypeSkillRequirement extends AbstractPersistable {
-
-
-	@ManyToOne(cascade = CascadeType.MERGE)
-    private ShiftType shiftType;
-
-	@ManyToOne(cascade = CascadeType.MERGE)
-    private Skill skill;
-   
-   
 	
+	@ManyToOne
+	private ShiftType shiftType;
+	@ManyToOne
+	private Skill skill;
+
+	
+
 	public ShiftType getShiftType() {
-        return shiftType;
-    }
+		return shiftType;
+	}
 
-    public void setShiftType(ShiftType shiftType) {
-        this.shiftType = shiftType;
-    }
-
+	public void setShiftType(ShiftType shiftType) {
+		this.shiftType = shiftType;
+	}
 
 	public Skill getSkill() {
-        return skill;
-    }
+		return skill;
+	}
 
-    public void setSkill(Skill skill) {
-        this.skill = skill;
-    }
+	public void setSkill(Skill skill) {
+		this.skill = skill;
+	}
 
-    @Override
-    public String toString() {
-        return shiftType + "-" + skill;
-    }
+	@Override
+	public String toString() {
+		return shiftType + "-" + skill;
+	}
 
+	
 }

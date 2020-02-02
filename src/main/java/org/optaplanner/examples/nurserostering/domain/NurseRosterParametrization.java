@@ -17,21 +17,17 @@
 package org.optaplanner.examples.nurserostering.domain;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-
 import org.optaplanner.examples.common.domain.AbstractPersistable;
-
 
 @XStreamAlias("NurseRosterParametrization")
 public class NurseRosterParametrization extends AbstractPersistable {
 
-
-	private ShiftDate firstShiftDate;
+    private ShiftDate firstShiftDate;
     private ShiftDate lastShiftDate;
 
     private ShiftDate planningWindowStart;
 
-
-	public ShiftDate getFirstShiftDate() {
+    public ShiftDate getFirstShiftDate() {
         return firstShiftDate;
     }
 
@@ -39,8 +35,7 @@ public class NurseRosterParametrization extends AbstractPersistable {
         this.firstShiftDate = firstShiftDate;
     }
 
-   
-	public ShiftDate getLastShiftDate() {
+    public ShiftDate getLastShiftDate() {
         return lastShiftDate;
     }
 
@@ -56,8 +51,7 @@ public class NurseRosterParametrization extends AbstractPersistable {
         return lastShiftDate.getDayIndex();
     }
 
- 
-	public ShiftDate getPlanningWindowStart() {
+    public ShiftDate getPlanningWindowStart() {
         return planningWindowStart;
     }
 

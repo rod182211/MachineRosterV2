@@ -8,7 +8,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 import java.util.ArrayList;
-
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.swing.AbstractAction;
 import javax.swing.BoxLayout;
@@ -80,6 +81,7 @@ public class NurseRosteringPanel extends SolutionPanel<NurseRoster> {
 	protected Map<String, Pattern> patternMap;
 	protected Map<String, Contract> contractMap;
 	protected Map<String, Employee> employeeMap;
+//protected Map<ShiftAssignment, Integer> frequencyMap = new HashMap<>();
 	// private final ImageIcon employeeIcon;
 	private RosterService rosterService = new RosterServiceImpl();
 	private final ImageIcon deleteEmployeeIcon;
@@ -89,6 +91,10 @@ public class NurseRosteringPanel extends SolutionPanel<NurseRoster> {
 	private AbstractAction advancePlanningWindowStartAction;
 	private EmployeePanel unassignedPanel;
 	private Map<Employee, EmployeePanel> employeeToPanelMap;
+
+	private int count;
+
+	
 
 	public NurseRosteringPanel() {
 		// employeeIcon = new ImageIcon(getClass().getResource("employee.png"));
@@ -217,9 +223,7 @@ public class NurseRosteringPanel extends SolutionPanel<NurseRoster> {
 		doProblemFactChange(scoreDirector -> {
 			NurseRoster nurseRoster = scoreDirector.getWorkingSolution();
 			NurseRosterParametrization nurseRosterParametrization = nurseRoster.getNurseRosterParametrization();
-
 			List<ShiftDate> shiftDateList = nurseRoster.getShiftDateList();
-
 			Shift oldLastShift = nurseRoster.getShiftList().get(nurseRoster.getShiftList().size() - 1);
 			long shiftId = oldLastShift.getId() + 1L;
 			int shiftIndex = oldLastShift.getIndex() + 1;
