@@ -134,7 +134,10 @@ public class ContractEditController implements Initializable {
 		String errorMessage = "";
 
 		if (contractcode.getText() == null || contractcode.getText().length() == 0) {
-			errorMessage += "No valid Skill!\n";
+			errorMessage += "No valid Code!\n";
+		}
+		if (contractDescription.getText() == null ||contractDescription.getText().length() == 0) {
+			errorMessage += "No valid Decription!\n";
 		}
 
 		if (errorMessage.length() == 0) {

@@ -141,6 +141,10 @@ public class ScheduleInitialiseEditController implements Initializable {
 		if (schedulename.getText() == null || schedulename.getText().length() == 0) {
 			errorMessage += "No valid Request!\n";
 		}
+		if (startdate.getValue() == null ) {
+			errorMessage += "No valid Date!\n";
+		}
+
 
 		if (errorMessage.length() == 0) {
 			return true;

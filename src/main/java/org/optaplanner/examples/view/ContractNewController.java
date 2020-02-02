@@ -125,7 +125,10 @@ public class ContractNewController implements Initializable {
 		String errorMessage = "";
 
 		if (contractField.getText() == null || contractField.getText().length() == 0) {
-			errorMessage += "No valid first name!\n";
+			errorMessage += "No valid Code!\n";
+		}
+		if (contractdescription.getText() == null ||contractdescription.getText().length() == 0) {
+			errorMessage += "No valid Decription!\n";
 		}
 
 		if (errorMessage.length() == 0) {

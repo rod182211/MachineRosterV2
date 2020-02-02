@@ -147,7 +147,13 @@ public class FreeDayNewEditController implements Initializable {
 		String errorMessage = "";
 		
 		if (freecode.getText() == null || freecode.getText().length() == 0) {
-			errorMessage += "No valid first name!\n";
+			errorMessage += "No valid Free Day Code!\n";
+		}
+		if (freeweight.getText()== null || freeweight.getText().length() == 0) {
+			errorMessage += "No valid Weight!\n";
+		}
+		if (freedayofweek.getSelectionModel().getSelectedItem() == null ) {
+			errorMessage += "No valid Free Day \n";
 		}
 
 		if (errorMessage.length() == 0) {

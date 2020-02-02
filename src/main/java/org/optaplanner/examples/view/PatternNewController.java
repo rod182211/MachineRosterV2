@@ -117,7 +117,7 @@ return okClicked;
 */
 @FXML
 private void handleOk() {
-
+	if (isInputValid()) {
 	Pattern pattern =  patternl.getSelectionModel().getSelectedItem();
 	Contract contract = contractforpattern.getSelectionModel().getSelectedItem();
 	patterndata.setContract(contract);
@@ -131,7 +131,7 @@ private void handleOk() {
 	alert.showAndWait();
 	dialogStage.close();
 }
-
+}
 
 /**
 * Called when the user clicks cancel.
@@ -141,5 +141,28 @@ private void handleCancel() {
 dialogStage.close();
 }
 
+private boolean isInputValid() {
+	String errorMessage = "";
+	if (patternl.getSelectionModel().getSelectedItem() == null ) {
+		errorMessage += "No valid Pattern\n";
+	}
+	if (contractforpattern.getSelectionModel().getSelectedItem() == null ) {
+		errorMessage += "No valid Contract!\n";
+	}
+	
+	if (errorMessage.length() == 0) {
+		return true;
+	} else {
+		// Show the error message.
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.initOwner(dialogStage);
+		alert.setTitle("Invalid Fields");
+		alert.setHeaderText("Please correct invalid fields");
+		alert.setContentText(errorMessage);
 
+		alert.showAndWait();
+
+		return false;
+	}
+}
 }

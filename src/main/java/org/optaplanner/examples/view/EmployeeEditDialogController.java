@@ -216,6 +216,15 @@ public class EmployeeEditDialogController implements Initializable {
 		if (employeename.getText() == null || employeename.getText().length() == 0) {
 			errorMessage += "No valid first name!\n";
 		}
+		if (skill.getSelectionModel().getSelectedItem()  == null)  {
+			errorMessage += "No valid Skill!\n";
+		}
+		if (department.getSelectionModel().getSelectedItem()  == null)  {
+			errorMessage += "No valid Department!\n";
+		}
+		if (contract.getSelectionModel().getSelectedItem()  == null)  {
+			errorMessage += "No valid contract!\n";
+		}
 
 		if (errorMessage.length() == 0) {
 			return true;

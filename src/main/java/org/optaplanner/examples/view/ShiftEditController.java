@@ -157,6 +157,15 @@ public class ShiftEditController implements Initializable {
 		if (Shift.getText() == null || Shift.getText().length() == 0) {
 			errorMessage += "No valid Shift!\n";
 		}
+		if (shiftdescription.getText() == null || shiftdescription.getText().length() == 0) {
+			errorMessage += "No valid Description!\n";
+		}
+		if (startTime.getText() == null || startTime.getText().length() == 0) {
+			errorMessage += "No valid Start Timet!\n";
+		}
+		if (finishTime.getText() == null || finishTime.getText().length() == 0) {
+			errorMessage += "No valid Finish Timet!\n";
+		}
 
 		if (errorMessage.length() == 0) {
 			return true;

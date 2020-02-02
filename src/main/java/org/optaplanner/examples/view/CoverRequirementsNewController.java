@@ -160,8 +160,11 @@ private ObservableList<ShiftType> shifttypeList = FXCollections.observableArrayL
 		if (size.getText() == null || size.getText().length() == 0) {
 			errorMessage += "No valid Request!\n";
 		}
-		if (sday.getSelectionModel().getSelectedItem() == null  {
+		if (sday.getSelectionModel().getSelectedItem() == null)  {
 			errorMessage += "No valid Day!\n";
+		}
+		if (shift.getSelectionModel().getSelectedItem() == null)  {
+			errorMessage += "No valid Shift Type!\n";
 		}
 
 		if (errorMessage.length() == 0) {

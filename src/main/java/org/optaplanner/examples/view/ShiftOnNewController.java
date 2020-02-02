@@ -155,9 +155,17 @@ public class ShiftOnNewController implements Initializable{
 		String errorMessage = "";
 		
 		if (shiftonweight.getText() == null || shiftonweight.getText().length() == 0) {
-			errorMessage += "No valid weight!\n";
+			errorMessage += "No valid Request!\n";
 		}
-
+		if (shiftdaterequested.getValue() == null ) {
+			errorMessage += "No valid Date!\n";
+		}
+		if (namefield.getSelectionModel().getSelectedItem() == null ) {
+			errorMessage += "No valid Date!\n";
+		}
+		if ( shiftrequested.getSelectionModel().getSelectedItem() == null ) {
+			errorMessage += "No valid Shift Type!\n";
+		}
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {

@@ -98,8 +98,7 @@ public class TrainingDataEditDialog implements Initializable {
 	 */
 	@FXML
 	private void handleOk() {
-		
-	
+		if (isInputValid()) {
 		
 			LocalDate shiftdate = shiftdaterequested.getValue();
 			trainingdata.setDate(shiftdate);
@@ -116,7 +115,7 @@ public class TrainingDataEditDialog implements Initializable {
 			alert.showAndWait();
 			dialogStage.close();
 		}
-	
+	}
 
 	/**
 	 * Called when the user clicks cancel.
@@ -125,7 +124,35 @@ public class TrainingDataEditDialog implements Initializable {
 	private void handleCancel() {
 		dialogStage.close();
 	}
+	private boolean isInputValid() {
+		String errorMessage = "";
+		
+		if (shiftdaterequested.getValue() == null ) {
+			errorMessage += "No valid Date!\n";
+		}
+		if (namefield.getSelectionModel().getSelectedItem() == null ) {
+			errorMessage += "No valid Employee!\n";
+		}
+		if (trainingshift.getSelectionModel().getSelectedItem() == null ) {
+			errorMessage += "No valid Shift Type!\n";
+		}
+		
 
+		if (errorMessage.length() == 0) {
+			return true;
+		} else {
+			// Show the error message.
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.initOwner(dialogStage);
+			alert.setTitle("Invalid Fields");
+			alert.setHeaderText("Please correct invalid fields");
+			alert.setContentText(errorMessage);
+
+			alert.showAndWait();
+
+			return false;
+		}
+	}
 	
 	}
 

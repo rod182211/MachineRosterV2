@@ -126,7 +126,7 @@ private ObservableList<ShiftType> shifttypeList = FXCollections.observableArrayL
 	 */
 	@FXML
 	private void handleOk() {
-		
+		if (isInputValid()) {
 			Skill skill = skills.getSelectionModel().getSelectedItem();
 			skillsrequirement.setSkill(skill);
 			ShiftType shiftype = shift.getSelectionModel().getSelectedItem();
@@ -140,7 +140,7 @@ private ObservableList<ShiftType> shifttypeList = FXCollections.observableArrayL
 			alert.showAndWait();
 			dialogStage.close();
 		}
-
+	}
 
 	/**
 	 * Called when the user clicks cancel.
@@ -158,11 +158,12 @@ private ObservableList<ShiftType> shifttypeList = FXCollections.observableArrayL
 	@SuppressWarnings("unused")
 	private boolean isInputValid() {
 		String errorMessage = "";
-
-		if (size.getText() == null || size.getText().length() == 0) {
-			errorMessage += "No valid Request!\n";
+		if (skills.getSelectionModel().getSelectedItem() == null ) {
+			errorMessage += "No valid Skill!\n";
 		}
-
+		if (shift.getSelectionModel().getSelectedItem() == null ) {
+			errorMessage += "No valid Shift!\n";
+		}
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {

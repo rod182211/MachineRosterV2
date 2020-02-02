@@ -163,6 +163,12 @@ public class DayOnEditController implements Initializable {
 		if (dayweight.getText() == null || dayweight.getText().length() == 0) {
 			errorMessage += "No valid Request!\n";
 		}
+		if (namefield.getSelectionModel().getSelectedItem() == null ) {
+			errorMessage += "No valid Employee!\n";
+		}
+		if (dayondate.getValue() == null ) {
+			errorMessage += "No valid Date!\n";
+		}
 
 		if (errorMessage.length() == 0) {
 			return true;

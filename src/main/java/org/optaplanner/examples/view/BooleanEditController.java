@@ -155,6 +155,9 @@ public class BooleanEditController implements Initializable {
 		if (weight.getText() == null || weight.getText().length() == 0) {
 			errorMessage += "No valid Request!\n";
 		}
+		if (contract.getSelectionModel().getSelectedItem() == null ) {
+			errorMessage += "No valid Contract!\n";
+		}
 
 		if (errorMessage.length() == 0) {
 			return true;

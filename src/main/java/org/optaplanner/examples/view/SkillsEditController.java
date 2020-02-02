@@ -96,7 +96,7 @@ public class SkillsEditController implements Initializable {
 	 */
 	@FXML
 	private void handleOk() {
-			
+		if (isInputValid()) {	
 			String skill = Skill.getText();
 			skills.setCode(skill);
 			okClicked = true;
@@ -108,7 +108,7 @@ public class SkillsEditController implements Initializable {
 			alert.showAndWait();
 			dialogStage.close();
 		}
-	
+	}
 
 	/**
 	 * Called when the user clicks cancel.
@@ -118,5 +118,26 @@ public class SkillsEditController implements Initializable {
 		dialogStage.close();
 	}
 
-	
+	private boolean isInputValid() {
+		String errorMessage = "";
+
+			
+		if (Skill.getText() == null ||Skill.getText().length() == 0) { errorMessage +=
+				  "No valid Skill!\n"; }
+		 
+		if (errorMessage.length() == 0) {
+			return true;
+		} else {
+			// Show the error message.
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.initOwner(dialogStage);
+			alert.setTitle("Invalid Fields");
+			alert.setHeaderText("Please correct invalid fields");
+			alert.setContentText(errorMessage);
+
+			alert.showAndWait();
+
+			return false;
+		}
+	}
 }

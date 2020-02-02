@@ -119,9 +119,7 @@ public class ShiftOffEditController implements Initializable {
 	private void handleOk() {
 		if (isInputValid()) {
 
-			/*String shiftoffIdtemp = shiftoffId.getText();
-			long shiftoffIdnew = Long.parseLong(shiftoffIdtemp);
-            shiftoffdata.setId(shiftoffIdnew);		*/	
+			
 			String weightval = shiftoffweight.getText();
 			int weightnew = Integer.parseInt(weightval);
 			shiftoffdata.setWeight(weightnew);
@@ -163,7 +161,15 @@ public class ShiftOffEditController implements Initializable {
 		if (shiftoffweight.getText() == null || shiftoffweight.getText().length() == 0) {
 			errorMessage += "No valid weight!\n";
 		}
-
+		if (requesteddayfield.getValue() == null ) {
+			errorMessage += "No valid Date!\n";
+		}
+		if ( namefield.getSelectionModel().getSelectedItem() == null ) {
+			errorMessage += "No valid Employee!\n";
+		}
+		if (shiftrequested.getSelectionModel().getSelectedItem() == null ) {
+			errorMessage += "No valid Shift Type!\n";
+		}
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {

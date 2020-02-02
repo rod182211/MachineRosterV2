@@ -147,7 +147,9 @@ public class LeaveDataEditDialog implements Initializable {
 		if (((ChronoLocalDate) startdate.getValue()).isAfter((ChronoLocalDate) enddate.getValue())) {
 			errorMessage += "Invalid Dates!\n";
 		}
-
+		if ( namefield.getSelectionModel().getSelectedItem() == null) {
+			errorMessage += "Invalid Employee!\n";
+		}
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {

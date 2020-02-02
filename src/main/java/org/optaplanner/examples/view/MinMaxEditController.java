@@ -176,7 +176,18 @@ public class MinMaxEditController implements Initializable {
 		if (contract.getText() == null || contract.getText().length() == 0) {
 			errorMessage += "No valid Request!\n";
 		}
-
+		if (maxvalue.getText() == null || maxvalue.getText().length() == 0) {
+			errorMessage += "No valid Max Value!\n";
+		}
+		if (maxweight.getText() == null || maxweight.getText().length() == 0) {
+			errorMessage += "No valid Max Weight!\n";
+		}
+		if (minvalue.getText() == null || minvalue.getText().length() == 0) {
+			errorMessage += "No valid Min Value!\n";
+		}
+		if (minweight.getText() == null || minweight.getText().length() == 0) {
+			errorMessage += "No valid Min Weight!\n";
+		}
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {

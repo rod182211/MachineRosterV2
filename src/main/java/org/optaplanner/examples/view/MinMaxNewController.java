@@ -188,10 +188,24 @@ public class MinMaxNewController implements Initializable {
 	 */
 	private boolean isInputValid() {
 		String errorMessage = "";
-		if (minvalue.getText() == null || minvalue.getText().length() == 0) {
-			errorMessage += "No valid Id Field!\n";
+		if (contractline.getSelectionModel().getSelectedItem() == null ) {
+			errorMessage += "No valid Contract Line!\n";
 		}
-		
+		if (contract.getSelectionModel().getSelectedItem() == null ) {
+			errorMessage += "No valid Contract!\n";
+		}
+		if (maxvalue.getText() == null || maxvalue.getText().length() == 0) {
+			errorMessage += "No valid Max Value!\n";
+		}
+		if (maxweight.getText() == null || maxweight.getText().length() == 0) {
+			errorMessage += "No valid Max Weight!\n";
+		}
+		if (minvalue.getText() == null || minvalue.getText().length() == 0) {
+			errorMessage += "No valid Min Value!\n";
+		}
+		if (minweight.getText() == null || minweight.getText().length() == 0) {
+			errorMessage += "No valid Min Weight!\n";
+		}
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {

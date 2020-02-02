@@ -159,10 +159,16 @@ public class ShiftType3DaysPatternEditController implements Initializable {
 	private boolean isInputValid() {
 		String errorMessage = "";
 
-		if (Id.getText() == null || Id.getText().length() == 0) {
-			errorMessage += "No valid Request!\n";
-		}
-
+		if (codefield.getText() == null ||codefield.getText().length() == 0) { errorMessage +=
+				  "No valid Code!\n"; }
+		  if (dayweight.getText() == null ||dayweight.getText().length() == 0) { errorMessage +=
+		  "No valid Weight!\n"; }
+		  if (dayIndex0ShiftTypefield.getSelectionModel().getSelectedItem() == null) {
+			  errorMessage += "No valid First Shift Type!\n"; }
+		  if (dayIndex1ShiftTypefield.getSelectionModel().getSelectedItem() == null) {
+			  errorMessage += "No valid Second Shift Type!\n"; }
+		  if (dayIndex2ShiftTypefield.getSelectionModel().getSelectedItem() == null) {
+			  errorMessage += "No valid Second Shift Type!\n"; }
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {

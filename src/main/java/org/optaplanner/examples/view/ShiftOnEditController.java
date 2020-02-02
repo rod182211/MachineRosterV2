@@ -118,10 +118,7 @@ public class ShiftOnEditController implements Initializable {
 	@FXML
 	private void handleOk() {
 		if (isInputValid()) {
-	
-		/*	String shiftoffIdtemp = shiftonId.getText();
-			long shiftoffIdnew = Long.parseLong(shiftoffIdtemp);
-            shiftondata.setId(shiftoffIdnew);*/			
+				
 			String weightval = shiftonweight.getText();
 			int weightnew = Integer.parseInt(weightval);
 			shiftondata.setWeight(weightnew);
@@ -160,6 +157,15 @@ public class ShiftOnEditController implements Initializable {
 
 		if (shiftonweight.getText() == null || shiftonweight.getText().length() == 0) {
 			errorMessage += "No valid Request!\n";
+		}
+		if (shiftdaterequested.getValue() == null ) {
+			errorMessage += "No valid Date!\n";
+		}
+		if (namefield.getSelectionModel().getSelectedItem() == null ) {
+			errorMessage += "No valid Date!\n";
+		}
+		if ( shiftrequested.getSelectionModel().getSelectedItem() == null ) {
+			errorMessage += "No valid Shift Type!\n";
 		}
 
 		if (errorMessage.length() == 0) {

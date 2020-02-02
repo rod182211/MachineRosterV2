@@ -152,6 +152,12 @@ public class HolidayNewController implements Initializable {
 		if (((ChronoLocalDate) startdate.getValue()).isAfter((ChronoLocalDate) enddate.getValue())) {
 			errorMessage += "Invalid Dates!\n";
 		}
+		if ( namefield.getSelectionModel().getSelectedItem() == null) {
+			errorMessage += "Invalid Employee!\n";
+		}
+		if (dayweight.getText()== null || dayweight.getText().length() == 0) {
+			errorMessage += "No valid Weight!\n";
+		}
 
 		if (errorMessage.length() == 0) {
 			return true;

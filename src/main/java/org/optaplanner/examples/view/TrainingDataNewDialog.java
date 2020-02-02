@@ -100,7 +100,7 @@ public class TrainingDataNewDialog implements Initializable {
 	@FXML
 	private void handleOk() {
 		
-	
+		if (isInputValid()) {
 		
 			LocalDate shiftdate = shiftdaterequested.getValue();
 			trainingdata.setDate(shiftdate);
@@ -117,7 +117,7 @@ public class TrainingDataNewDialog implements Initializable {
 			alert.showAndWait();
 			dialogStage.close();
 		}
-	
+	}
 
 	/**
 	 * Called when the user clicks cancel.
@@ -126,18 +126,19 @@ public class TrainingDataNewDialog implements Initializable {
 	private void handleCancel() {
 		dialogStage.close();
 	}
-
-	/**
-	 * Validates the user input in the text fields.
-	 * 
-	 * @return true if the input is valid
-	 */
-	/*private boolean isInputValid() {
+	private boolean isInputValid() {
 		String errorMessage = "";
-
-		if (shiftonweight.getText() == null || shiftonweight.getText().length() == 0) {
-			errorMessage += "No valid Request!\n";
+		
+		if (shiftdaterequested.getValue() == null ) {
+			errorMessage += "No valid Date!\n";
 		}
+		if (namefield.getSelectionModel().getSelectedItem() == null ) {
+			errorMessage += "No valid Employee!\n";
+		}
+		if (trainingshift.getSelectionModel().getSelectedItem() == null ) {
+			errorMessage += "No valid Shift Type!\n";
+		}
+		
 
 		if (errorMessage.length() == 0) {
 			return true;
@@ -152,6 +153,8 @@ public class TrainingDataNewDialog implements Initializable {
 			alert.showAndWait();
 
 			return false;
-		}*/
+		}
 	}
+	
+		}
 

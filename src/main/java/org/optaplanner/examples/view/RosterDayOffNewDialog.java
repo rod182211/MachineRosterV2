@@ -100,7 +100,7 @@ public class RosterDayOffNewDialog implements Initializable {
 	@FXML
 	private void handleOk() {
 		
-	
+		if (isInputValid()) {
 		
 			LocalDate shiftdate = shiftdaterequested.getValue();
 			rdodata.setDate(shiftdate);
@@ -117,7 +117,7 @@ public class RosterDayOffNewDialog implements Initializable {
 			dialogStage.close();
 		}
 	
-
+	}
 	/**
 	 * Called when the user clicks cancel.
 	 */
@@ -131,11 +131,14 @@ public class RosterDayOffNewDialog implements Initializable {
 	 * 
 	 * @return true if the input is valid
 	 */
-	/*private boolean isInputValid() {
+	private boolean isInputValid() {
 		String errorMessage = "";
 
-		if (shiftonweight.getText() == null || shiftonweight.getText().length() == 0) {
-			errorMessage += "No valid Request!\n";
+			if (shiftdaterequested.getValue()== null ) {
+			errorMessage += "No valid Date!\n";
+		}
+		if (namefield.getSelectionModel().getSelectedItem()== null ) {
+			errorMessage += "No valid Employee!\n";
 		}
 
 		if (errorMessage.length() == 0) {
@@ -151,6 +154,6 @@ public class RosterDayOffNewDialog implements Initializable {
 			alert.showAndWait();
 
 			return false;
-		}*/
+		}
 	}
-
+}
