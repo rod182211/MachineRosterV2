@@ -8,7 +8,6 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -17,8 +16,6 @@ import java.util.List;
 import java.util.Map;
 
 import java.util.Set;
-import java.util.stream.Collectors;
-
 import javax.swing.AbstractAction;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
@@ -40,11 +37,7 @@ import org.optaplanner.examples.nurserostering.domain.ShiftDate;
 import org.optaplanner.examples.nurserostering.domain.ShiftType;
 import org.optaplanner.examples.nurserostering.domain.ShiftTypeSkillRequirement;
 import org.optaplanner.examples.nurserostering.domain.Skill;
-import org.optaplanner.examples.nurserostering.domain.WeekendDefinition;
-
 import org.optaplanner.examples.nurserostering.domain.contract.Contract;
-import org.optaplanner.examples.nurserostering.domain.contract.ContractLine;
-
 import org.optaplanner.examples.nurserostering.domain.pattern.Pattern;
 
 import org.optaplanner.examples.nurserostering.domain.request.DayOffRequest;

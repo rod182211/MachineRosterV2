@@ -24,7 +24,7 @@ import org.optaplanner.examples.common.domain.AbstractPersistable;
 
 @Entity
 @XStreamAlias("ShiftType")
-public class ShiftType extends AbstractPersistable implements Comparable<ShiftType> {
+public class ShiftType extends AbstractPersistable  {
 
     String code;
     @Column(name="Shift_index")
@@ -90,9 +90,6 @@ public class ShiftType extends AbstractPersistable implements Comparable<ShiftTy
     public String toString() {
         return code;
     }
-    @Override
-    public int compareTo(ShiftType o) {
-        return this.getCode().compareTo(o.getCode());
-    }
+  
 
 }

@@ -8,11 +8,7 @@ import java.util.ResourceBundle;
 
 import org.optaplanner.database.RosterService;
 import org.optaplanner.database.RosterServiceImpl;
-import org.optaplanner.examples.nurserostering.domain.Employee;
-import org.optaplanner.examples.nurserostering.domain.EmployeeDepartment;
 import org.optaplanner.examples.nurserostering.domain.ShiftTypeDepartmentRequirement;
-import org.optaplanner.examples.nurserostering.domain.contract.Contract;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -19,11 +19,14 @@ package org.optaplanner.examples.nurserostering.domain;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+
+import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 
 @Entity
 @XStreamAlias("SkillProficiency")
-public class SkillProficiency extends AbstractPersistable {
+public class SkillProficiency extends AbstractPersistable  {
+ 
 
     @ManyToOne
 	private Employee employee;
@@ -46,6 +49,8 @@ public class SkillProficiency extends AbstractPersistable {
         this.skill = skill;
     }
 
+
+   
     @Override
     public String toString() {
         return employee + "-" + skill;

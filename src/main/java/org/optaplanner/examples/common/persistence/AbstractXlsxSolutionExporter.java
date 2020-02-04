@@ -2,14 +2,6 @@ package org.optaplanner.examples.common.persistence;
 
 import java.io.File;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import org.jdom.JDOMException;
-
-import javafx.fxml.Initializable;
-
 
 
 

@@ -18,11 +18,13 @@ package org.optaplanner.examples.nurserostering.domain;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import javax.persistence.Entity;
+
+import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 
 @Entity
 @XStreamAlias("Skill")
-public class Skill extends AbstractPersistable implements Comparable<Skill>{
+public class Skill extends AbstractPersistable  {
 
     private String code;
 
@@ -38,8 +40,5 @@ public class Skill extends AbstractPersistable implements Comparable<Skill>{
     public String toString() {
         return code;
     }
-    @Override
-    public int compareTo(Skill o) {
-        return this.getCode().compareTo(o.getCode());
-    }
+
 }

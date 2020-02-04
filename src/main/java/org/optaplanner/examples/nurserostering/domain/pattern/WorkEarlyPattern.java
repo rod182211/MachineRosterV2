@@ -1,8 +1,5 @@
 package org.optaplanner.examples.nurserostering.domain.pattern;
 
-import java.time.DayOfWeek;
-
-
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;

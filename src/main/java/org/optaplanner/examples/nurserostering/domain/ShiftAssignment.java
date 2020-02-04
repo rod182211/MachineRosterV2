@@ -26,6 +26,8 @@ import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 import org.optaplanner.examples.nurserostering.domain.contract.Contract;
+import org.optaplanner.examples.nurserostering.domain.Department;
+import org.optaplanner.examples.nurserostering.domain.ShiftTypeDepartmentRequirement;
 import org.optaplanner.examples.nurserostering.domain.solver.EmployeeStrengthComparator;
 import org.optaplanner.examples.nurserostering.domain.solver.MovableShiftAssignmentSelectionFilter;
 import org.optaplanner.examples.nurserostering.domain.solver.ShiftAssignmentDifficultyComparator;
@@ -85,7 +87,7 @@ public class ShiftAssignment extends AbstractPersistable implements Comparable<S
     public ShiftType getShiftType() {
         return shift.getShiftType();
     }
-
+  
     public int getShiftDateDayIndex() {
         return shift.getShiftDate().getDayIndex();
     }
@@ -100,7 +102,7 @@ public class ShiftAssignment extends AbstractPersistable implements Comparable<S
         }
         return employee.getContract();
     }
-
+  
     public boolean isWeekend() {
         if (employee == null) {
             return false;

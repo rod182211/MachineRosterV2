@@ -8,7 +8,6 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import org.optaplanner.examples.nurserostering.domain.contract.PatternContractLine;
-import org.optaplanner.examples.nurserostering.domain.pattern.FreeBefore2DaysWithAWorkDayPattern;
 import org.optaplanner.examples.nurserostering.domain.pattern.WorkBeforeFreeSequencePattern;
 import org.hibernate.Session;
 import org.optaplanner.database.HibernateUtil;

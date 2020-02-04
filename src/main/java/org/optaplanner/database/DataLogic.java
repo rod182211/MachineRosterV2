@@ -65,9 +65,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
-import org.hibernate.cfg.Configuration;
 
 
 public class DataLogic {
@@ -79,6 +76,7 @@ public class DataLogic {
 	protected Map<Pair<LocalDate, String>, Shift> dateAndShiftTypeToShiftMap;
 	protected Map<Pair<DayOfWeek, ShiftType>, List<Shift>> dayOfWeekAndShiftTypeToShiftListMap;
 	protected Map<String, Pattern> patternMap;
+	protected Map<Employee, Skill> employeeSkillMap;
 	protected Map<String, Contract> contractMap;
 	protected Map<String, Employee> employeeMap;
 	private RosterService rosterService = new RosterServiceImpl();
@@ -100,6 +98,8 @@ public class DataLogic {
 		readSkillList(nurseRoster);
 		readDepartmentList(nurseRoster);
 		readShiftTypeList(nurseRoster);
+		readShiftTypeSkills(nurseRoster);
+		readDepartmentSkills(nurseRoster);
 		generateShiftList(nurseRoster);
 		readPatternList(nurseRoster);
 		readContractList(nurseRoster);
@@ -160,22 +160,23 @@ public class DataLogic {
 
 	private void readSkillList(NurseRoster nurseRoster) {
 		List<Skill> skillList;
-
+long skillId = 0L;
 		List<Skill> skillElementList = (List<Skill>) rosterService.listSkill();
 		skillList = new ArrayList<>(skillElementList.size());
 		skillMap = new HashMap<>(skillElementList.size());
 
 		for (Skill element : skillElementList) {
-			long Id = element.getId();
+			
 			Skill skill = new Skill();
-			skill.setId(Id);
+			long id = element.getId();
+			skill.setId(id);
 			skill.setCode(element.getCode());
 			skillList.add(skill);
 			if (skillMap.containsKey(skill.getCode())) {
 				throw new IllegalArgumentException("There are 2 skills with the same code (" + skill.getCode() + ").");
 			}
 			skillMap.put(skill.getCode(), skill);
-
+			
 		}
 
 		nurseRoster.setSkillList(skillList);
@@ -207,23 +208,16 @@ public class DataLogic {
 	}
 
 	private void readShiftTypeList(NurseRoster nurseRoster) {
-
+	
 		List<ShiftType> shiftTypeElementList = (List<ShiftType>) rosterService.listShiftType();
 		List<ShiftType> shiftTypeList = new ArrayList<>(shiftTypeElementList.size());
 		shiftTypeMap = new HashMap<>(shiftTypeElementList.size());
-		int index = 0;
-
-		List<ShiftTypeSkillRequirement> shiftTypeSkillRequirementList = new ArrayList<>(
-				shiftTypeElementList.size() * 2);
-
-		List<ShiftTypeDepartmentRequirement> shiftTypeDepartmentRequirementList = new ArrayList<>(
-				shiftTypeElementList.size() * 2);
-
-		for (ShiftType element : shiftTypeElementList) {
+		 long id = 0L;
+         int index = 0;
+        for (ShiftType element : shiftTypeElementList) {
 
 			ShiftType shiftType = new ShiftType();
-			long Id = element.getId();
-			shiftType.setId(Id);
+			shiftType.setId(id);
 			shiftType.setCode(element.getCode());
 			shiftType.setIndex(index);
 			String startTimeString = element.getStartTimeString();
@@ -239,40 +233,51 @@ public class DataLogic {
 						"There are 2 shiftTypes with the same code (" + shiftType.getCode() + ").");
 			}
 			shiftTypeMap.put(shiftType.getCode(), shiftType);
-			index++;
-			nurseRoster.setShiftTypeList(shiftTypeList);
+			 id++;
+             index++;
 		}
-		List<ShiftTypeSkillRequirement> coverRequirementElementList = (List<ShiftTypeSkillRequirement>) rosterService
-				.listShiftTypeSkillRequirement();
+    	nurseRoster.setShiftTypeList(shiftTypeList);
+	}
+	private void readShiftTypeSkills(NurseRoster nurseRoster) {
+	List<ShiftTypeSkillRequirement> coverRequirementElementList = (List<ShiftTypeSkillRequirement>) rosterService
+			.listShiftTypeSkillRequirement();
+	List<ShiftTypeSkillRequirement> shiftTypeSkillRequirementList = new ArrayList<>(
+			coverRequirementElementList.size() * 2);
+	 long shiftTypeSkillRequirementId = 0L;
 		for (ShiftTypeSkillRequirement skillElement : coverRequirementElementList) {
 			ShiftTypeSkillRequirement shiftTypeSkillRequirement = new ShiftTypeSkillRequirement();
-			long shiftTypeSkillRequirementId = skillElement.getId();
 			shiftTypeSkillRequirement.setId(shiftTypeSkillRequirementId);
-			ShiftType shifttypecover = shiftTypeMap.get(skillElement.getShiftType().getCode());
-			shiftTypeSkillRequirement.setShiftType(shifttypecover);
+			ShiftType wanted = shiftTypeMap.get(skillElement.getShiftType().getCode());
+			shiftTypeSkillRequirement.setShiftType(wanted);
 			Skill skill = skillMap.get(skillElement.getSkill().getCode());
 			shiftTypeSkillRequirement.setSkill(skill);
 			shiftTypeSkillRequirementList.add(shiftTypeSkillRequirement);
-
+			shiftTypeSkillRequirementId++;
 		}
-		List<ShiftTypeDepartmentRequirement> coverElementList = (List<ShiftTypeDepartmentRequirement>) rosterService
-				.listShiftTypeDepartmentRequirement();
-		for (ShiftTypeDepartmentRequirement skillElement : coverElementList) {
-			ShiftTypeDepartmentRequirement ShiftTypeDepartmentRequirement = new ShiftTypeDepartmentRequirement();
-			long ShiftTypeDepartmentRequirementId = skillElement.getId();
-			Department depart = departmentMap.get(skillElement.getDepartment().getCode());
-			ShiftTypeDepartmentRequirement.setDepartment(depart);
-			ShiftTypeDepartmentRequirement.setId(ShiftTypeDepartmentRequirementId);
-			ShiftType shifttypecover = shiftTypeMap.get(skillElement.getShiftType().getCode());
-			ShiftTypeDepartmentRequirement.setShiftType(shifttypecover);
-			
-			shiftTypeDepartmentRequirementList.add(ShiftTypeDepartmentRequirement);
-
-		}
-		nurseRoster.setShiftTypeDepartmentRequirementList(shiftTypeDepartmentRequirementList);
 		nurseRoster.setShiftTypeSkillRequirementList(shiftTypeSkillRequirementList);
 	}
-
+	
+	private void readDepartmentSkills(NurseRoster nurseRoster) {
+		List<ShiftTypeDepartmentRequirement> coverElementList = (List<ShiftTypeDepartmentRequirement>) rosterService
+				.listShiftTypeDepartmentRequirement();
+		List<ShiftTypeDepartmentRequirement> shiftTypeDepartmentRequirementList = new ArrayList<>(
+				coverElementList.size() * 2);
+		  long ShiftTypeDepartmentRequirementId = 0L;
+		for (ShiftTypeDepartmentRequirement skillElement1 : coverElementList) {
+			ShiftTypeDepartmentRequirement ShiftTypeDepartmentRequirement = new ShiftTypeDepartmentRequirement();
+			ShiftTypeDepartmentRequirement.setId(ShiftTypeDepartmentRequirementId);
+			Department depart = departmentMap.get(skillElement1.getDepartment().getCode());
+			ShiftTypeDepartmentRequirement.setDepartment(depart);			
+		    ShiftType shiftTypereq = shiftTypeMap.get(skillElement1.getShiftType().getCode());
+		    ShiftTypeDepartmentRequirement.setShiftType(shiftTypereq);
+			shiftTypeDepartmentRequirementList.add(ShiftTypeDepartmentRequirement);
+			ShiftTypeDepartmentRequirementId++;
+		
+		}	
+	
+		nurseRoster.setShiftTypeDepartmentRequirementList(shiftTypeDepartmentRequirementList);
+	}
+		
 	private void generateShiftList(NurseRoster nurseRoster) {
 		List<ShiftType> shiftTypeList = nurseRoster.getShiftTypeList();
 		int shiftListSize = shiftDateMap.size() * shiftTypeList.size();
@@ -391,15 +396,18 @@ public class DataLogic {
 			long Id = threedayselement.getId();
 			String code = threedayselement.getCode();
 			int weight = threedayselement.getWeight();
-			ShiftType type1 = threedayselement.getDayIndex0ShiftType();
-			ShiftType type2 = threedayselement.getDayIndex1ShiftType();
-			ShiftType type3 = threedayselement.getDayIndex2ShiftType();
+			String type1 = threedayselement.getDayIndex0ShiftType().getCode();
+			String type2 = threedayselement.getDayIndex1ShiftType().getCode();
+			String type3 = threedayselement.getDayIndex2ShiftType().getCode();
+			ShiftType one = shiftTypeMap.get(type1);
+			ShiftType two = shiftTypeMap.get(type2);
+			ShiftType three = shiftTypeMap.get(type3);
 			pattern3.setId(Id);
 			pattern3.setCode(code);
 			pattern3.setWeight(weight);
-			pattern3.setDayIndex0ShiftType(type1);
-			pattern3.setDayIndex1ShiftType(type2);
-			pattern3.setDayIndex2ShiftType(type3);
+			pattern3.setDayIndex0ShiftType(one);
+			pattern3.setDayIndex1ShiftType(two);
+			pattern3.setDayIndex2ShiftType(three);
 
 			patternList.add(pattern3);
 			patternMap.put(pattern3.getCode(), pattern3);
@@ -460,54 +468,6 @@ public class DataLogic {
 			contractList.add(contract);
 		}
 
-		List<BooleanContractLine> booleanElementList = (List<BooleanContractLine>) rosterService
-				.listBooleanContractLine();
-
-		for (BooleanContractLine element : booleanElementList) {
-			BooleanContractLine contractLine = new BooleanContractLine();
-			long Id = element.getId();
-			int weight = element.getWeight();
-			boolean enabled = element.isEnabled();
-			ContractLineType lineType = element.getContractLineType();
-			Contract c = contractMap.get(element.getContract().getCode());
-
-			contractLine.setId((long) Id);
-			contractLine.setWeight(weight);
-			contractLine.setEnabled(enabled);
-			contractLine.setContractLineType(lineType);
-			contractLine.setContract(c);
-			c.getContractLineList().add(contractLine);
-			contractLineList.add(contractLine);
-
-		}
-
-		List<MinMaxContractLine> minmaxElementList = (List<MinMaxContractLine>) rosterService.listMinMaxContractLine();
-
-		for (MinMaxContractLine element : minmaxElementList) {
-			MinMaxContractLine contractLine = new MinMaxContractLine();
-
-			long Id = element.getId();
-			int minWeight = element.getMinimumWeight();
-			boolean minEn = element.isEnabled();
-			int minVal = element.getMinimumValue();
-			int maxWeight = element.getMaximumWeight();
-			boolean maxEn = element.isMaximumEnabled();
-			int maxVal = element.getMaximumValue();
-			ContractLineType lineType = element.getContractLineType();
-			Contract c = contractMap.get(element.getContract().getCode());
-			contractLine.setId((long) Id);
-			contractLine.setMinimumEnabled(minEn);
-			contractLine.setMinimumValue(minVal);
-			contractLine.setMinimumWeight(minWeight);
-			contractLine.setMaximumEnabled(maxEn);
-			contractLine.setMaximumValue(maxVal);
-			contractLine.setMaximumWeight(maxWeight);
-			contractLine.setContractLineType(lineType);
-			contractLine.setContract(c);
-			c.getContractLineList().add(contractLine);
-			contractLineList.add(contractLine);
-
-		}
 
 		List<PatternContractLine> patterncontractElementList = (List<PatternContractLine>) rosterService
 				.listPatternContractLine();
@@ -521,12 +481,64 @@ public class DataLogic {
 			patterncontractLine.setPattern(type);
 			patterncontractLine.setContract(c);
 			patternContractLineList.add(patterncontractLine);
-
+		
 		}
-		nurseRoster.setContractList(contractList);
-		nurseRoster.setContractLineList(contractLineList);
+		
+		
 		nurseRoster.setPatternContractLineList(patternContractLineList);
 
+	
+
+	List<BooleanContractLine> booleanElementList = (List<BooleanContractLine>) rosterService
+			.listBooleanContractLine();
+	
+	for (BooleanContractLine bolelement : booleanElementList) {
+		BooleanContractLine contractLine = new BooleanContractLine();
+		long Id = bolelement.getId();
+		int weight = bolelement.getWeight();
+		boolean enabled = bolelement.isEnabled();
+		ContractLineType lineType = bolelement.getContractLineType();
+		Contract c = contractMap.get(bolelement.getContract().getCode());
+
+		contractLine.setId((long) Id);
+		contractLine.setWeight(weight);
+		contractLine.setEnabled(enabled);
+		contractLine.setContractLineType(lineType);
+		contractLine.setContract(c);
+		c.getContractLineList().add(contractLine);
+		contractLineList.add(contractLine);
+
+	}
+
+	List<MinMaxContractLine> minmaxElementList = (List<MinMaxContractLine>) rosterService.listMinMaxContractLine();
+
+	for (MinMaxContractLine element : minmaxElementList) {
+		MinMaxContractLine contractLine = new MinMaxContractLine();
+
+		long Id = element.getId();
+		int minWeight = element.getMinimumWeight();
+		boolean minEn = element.isEnabled();
+		int minVal = element.getMinimumValue();
+		int maxWeight = element.getMaximumWeight();
+		boolean maxEn = element.isMaximumEnabled();
+		int maxVal = element.getMaximumValue();
+		ContractLineType lineType = element.getContractLineType();
+		Contract c = contractMap.get(element.getContract().getCode());
+		contractLine.setId((long) Id);
+		contractLine.setMinimumEnabled(minEn);
+		contractLine.setMinimumValue(minVal);
+		contractLine.setMinimumWeight(minWeight);
+		contractLine.setMaximumEnabled(maxEn);
+		contractLine.setMaximumValue(maxVal);
+		contractLine.setMaximumWeight(maxWeight);
+		contractLine.setContractLineType(lineType);
+		contractLine.setContract(c);
+		c.getContractLineList().add(contractLine);
+		contractLineList.add(contractLine);
+
+	}
+	nurseRoster.setContractList(contractList);
+	nurseRoster.setContractLineList(contractLineList);
 	}
 
 	private void readEmployeeList(NurseRoster nurseRoster) {
@@ -536,37 +548,44 @@ public class DataLogic {
 		List<Employee> employeeList = new ArrayList<>(employeeElementList.size());
 
 		employeeMap = new HashMap<>(employeeElementList.size());
+		employeeSkillMap = new HashMap<>(employeeElementList.size());
 
-	//	List<SkillProficiency> skillElementList = (List<SkillProficiency>) rosterService.listSkillProficiency();
 		List<SkillProficiency> skillProficiencyList = new ArrayList<>(employeeElementList.size() * 2);
-		
-	//	List<EmployeeDepartment> departmentElementList = (List<EmployeeDepartment>) rosterService.listEmployeeDepartment();
+
 		List<EmployeeDepartment> employeeDepartmentList = new ArrayList<>(employeeElementList.size() * 2);
-		
+		long skillProficiencyId = 0L;
+
+		long employeeDepartmentId = 0L;
+	
 		for (Employee element : employeeElementList) {
 
 			Employee employee = new Employee();
 			long Id = element.getId();
-			String name = element.getName();
-			String code = element.getCode();
-			Skill skill = element.getSkill();
-			Department department = element.getDepartment();
 			employee.setId(Id);
+			String name = element.getName();
+			employee.setName(name);
+			String code = element.getCode();
+			employee.setCode(code);
+			String skilltype = element.getSkill().getCode();
+			Skill skill = skillMap.get(skilltype);
+			employee.setSkill(skill);
+			String departmenttype = element.getDepartment().getCode();
+			Department department = departmentMap.get(departmenttype);
+			employee.setDepartment(department);
 
 			Contract c = contractMap.get(element.getContract().getCode());
 			if (c == null) {
 				throw new IllegalArgumentException("The contract (" + element.getContract().getCode()
 						+ ") of employee (" + employee.getCode() + ") does not exist.");
 			}
-			employee.setCode(code);
 			employee.setContract(c);
-			employee.setName(name);
+			
 
 			if (employeeMap.containsKey(employee.getCode())) {
 				throw new IllegalArgumentException(
 						"There are 2 employees with the same code (" + employee.getCode() + ").");
 			}
-
+			employeeMap.put(employee.getName(), employee);
 			int estimatedRequestSize = (shiftDateMap.size() / employeeElementList.size()) + 1;
 			employee.setDayOffRequestMap(new HashMap<>(estimatedRequestSize));
 			employee.setDayOnRequestMap(new HashMap<>(estimatedRequestSize));
@@ -576,25 +595,30 @@ public class DataLogic {
 			employee.setLeaveMap(new HashMap<>(estimatedRequestSize));
 			employee.setRosterdayMap(new HashMap<>(estimatedRequestSize));
 			employee.setTrainingRequestMap(new HashMap<>(estimatedRequestSize));
-			employeeList.add(employee);
-			employeeMap.put(employee.getName(), employee);
-			nurseRoster.setEmployeeList(employeeList);
-		
-		
+
+			
+			
+
 			SkillProficiency skillProficiency = new SkillProficiency();
-			skillProficiency.setId(employee.getId());
-			skillProficiency.setSkill(skill);
-			Employee thisemployee = employeeMap.get(employee.getName());
-			skillProficiency.setEmployee(thisemployee);
+			skillProficiency.setId(skillProficiencyId);
+            Employee skillemployee = employeeMap.get(employee.getName());
+			skillProficiency.setEmployee(skillemployee);
 			skillProficiency.setSkill(skill);
 			skillProficiencyList.add(skillProficiency);
+			skillProficiencyId++;
 			EmployeeDepartment employeeDepartment = new EmployeeDepartment();
-			employeeDepartment.setId(employee.getId());
-			employeeDepartment.setEmployee(thisemployee);
+			employeeDepartment.setId(employeeDepartmentId);
+			Employee depemployee = employeeMap.get(employee.getName());
+			employeeDepartment.setEmployee(depemployee);
 			employeeDepartment.setDepartment(department);
 			employeeDepartmentList.add(employeeDepartment);
+			employeeDepartmentId++;
+			
+			employeeList.add(employee);
+		
 
 		}
+		nurseRoster.setEmployeeList(employeeList);
 		nurseRoster.setSkillProficiencyList(skillProficiencyList);
 		nurseRoster.setEmployeeDepartmentList(employeeDepartmentList);
 	}

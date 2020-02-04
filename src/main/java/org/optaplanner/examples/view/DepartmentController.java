@@ -10,8 +10,6 @@ import org.optaplanner.database.RosterService;
 import org.optaplanner.database.RosterServiceImpl;
 
 import org.optaplanner.examples.nurserostering.domain.Department;
-import org.optaplanner.examples.nurserostering.domain.Skill;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

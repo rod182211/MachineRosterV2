@@ -24,7 +24,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.Entity;
 import javax.persistence.*;
-import javax.persistence.MappedSuperclass;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 
 

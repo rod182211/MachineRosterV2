@@ -23,11 +23,12 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OrderColumn;
 
+import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 
 @Entity
 @XStreamAlias("Shift")
-public class Shift extends AbstractPersistable {
+public class Shift extends AbstractPersistable{
 
     @ManyToOne
 	private ShiftDate shiftDate;
@@ -36,8 +37,11 @@ public class Shift extends AbstractPersistable {
     @Column(name = "shift_index")
     @OrderColumn
     private int index;
+   
 
-    private int requiredEmployeeSize;
+
+
+	private int requiredEmployeeSize;
 
     public ShiftDate getShiftDate() {
         return shiftDate;
@@ -54,7 +58,7 @@ public class Shift extends AbstractPersistable {
     public void setShiftType(ShiftType shiftType) {
         this.shiftType = shiftType;
     }
-
+  
     public int getIndex() {
         return index;
     }
@@ -70,14 +74,18 @@ public class Shift extends AbstractPersistable {
     public void setRequiredEmployeeSize(int requiredEmployeeSize) {
         this.requiredEmployeeSize = requiredEmployeeSize;
     }
-
+    
     public String getLabel() {
         return shiftType.getLabel() + " of " + shiftDate.getLabel();
     }
 
+
+   
     @Override
     public String toString() {
         return shiftDate + "/" + shiftType;
     }
+
+	
 
 }

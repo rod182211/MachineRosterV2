@@ -56,13 +56,6 @@ public class NurseRoster extends AbstractPersistable {
     private List<Skill> skillList;
     @ProblemFactCollectionProperty
     private List<ShiftType> shiftTypeList;
-    @ProblemFactCollectionProperty
-    private List<Department> departmentList;
-    @ProblemFactCollectionProperty
-    private List<ShiftTypeDepartmentRequirement> shiftTypeDepartmentRequirementList;
-    @ProblemFactCollectionProperty
-    private List<EmployeeDepartment> employeeDepartmentList;
-    @ProblemFactCollectionProperty
     private List<ShiftTypeSkillRequirement> shiftTypeSkillRequirementList;
     @ProblemFactCollectionProperty
     private List<Pattern> patternList;
@@ -99,8 +92,13 @@ public class NurseRoster extends AbstractPersistable {
     private List<TrainingRequest> trainingRequestList;
     @PlanningEntityCollectionProperty
     private List<ShiftAssignment> shiftAssignmentList;
-        
-
+    @ProblemFactCollectionProperty  
+    private List<Department> departmentList;
+    @ProblemFactCollectionProperty
+    private List<ShiftTypeDepartmentRequirement> shiftTypeDepartmentRequirementList;
+    @ProblemFactCollectionProperty
+    private List<EmployeeDepartment> employeeDepartmentList;
+    
 
 	@PlanningScore
     @XStreamConverter(HardSoftScoreXStreamConverter.class)

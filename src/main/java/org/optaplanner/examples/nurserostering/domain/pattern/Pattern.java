@@ -18,7 +18,6 @@ package org.optaplanner.examples.nurserostering.domain.pattern;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamInclude;
-import javax.persistence.MappedSuperclass;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 import javax.persistence.*;
 

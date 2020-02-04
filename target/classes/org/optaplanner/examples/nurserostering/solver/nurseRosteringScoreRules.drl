@@ -63,7 +63,6 @@ import org.optaplanner.examples.nurserostering.solver.drools.EmployeeConsecutive
 import org.optaplanner.examples.nurserostering.solver.drools.EmployeeFreeSequence;
 import org.optaplanner.examples.nurserostering.solver.drools.EmployeeWeekendSequence;
 import org.optaplanner.examples.nurserostering.solver.drools.EmployeeWorkSequence;
-import org.optaplanner.examples.nurserostering.solver.drools.EmployeeEarlyWorkSequence;
 import org.apache.commons.lang3.tuple.Pair;
 import accumulate org.optaplanner.examples.common.solver.drools.functions.LoadBalanceByCountAccumulateFunction loadBalanceByCount;
 import accumulate org.optaplanner.examples.common.solver.drools.functions.LoadBalanceAccumulateFunction loadBalance;
@@ -414,6 +413,8 @@ rule "insertEmployeeConsecutiveWeekendAssignmentStart"
         insertLogical(new EmployeeConsecutiveWeekendAssignmentStart($employee, $weekendSundayIndex));
 end
 
+
+
 rule "insertEmployeeConsecutiveWeekendAssignmentEnd"
         salience 2 // Do these rules first (optional, for performance)
     when
@@ -640,6 +641,8 @@ rule "alternativeDepartment"
      scoreHolder.addSoftConstraintMatch(kcontext, - $contractLine.getWeight());
 end
 
+
+
 // Unwanted patterns
 rule "unwantedPatternFreeBefore2DaysWithAWorkDayPattern"
     when
@@ -687,7 +690,7 @@ rule "WantedPatternWorkEarlySequencePattern"
             dayLength == $shiftLength
         )
     then
-    System.out.println("using this");
+   
       scoreHolder.addSoftConstraintMatch(kcontext, - $pattern.getWeight());
        
 end
@@ -774,7 +777,7 @@ rule "unwantedPatternShiftType3DaysPattern"
             shiftDateDayIndex == ($firstDayIndex + 2)
         )
     then
-    System.out.println("using");
+    
         scoreHolder.addSoftConstraintMatch(kcontext, - $pattern.getWeight());
 end
 
