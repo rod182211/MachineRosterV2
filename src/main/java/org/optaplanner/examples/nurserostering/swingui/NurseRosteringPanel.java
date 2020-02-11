@@ -619,21 +619,20 @@ public class NurseRosteringPanel extends SolutionPanel<NurseRoster> {
 				Employee employee = element.getEmployee();
 				Employee workingEmployee = scoreDirector.lookUpWorkingObject(employee);
 				ShiftDate shiftDate = shiftDateMap.get(date1);
-				String shiftcode = "WLC";
-				Shift shift = dateAndShiftTypeToShiftMap
-						.get(Pair.of(date1, shiftcode));
+				String shiftcode = element.getShiftType();
+				Shift shift1 = dateAndShiftTypeToShiftMap.get(Pair.of(date1, shiftcode));
 				TrainingRequest training = new TrainingRequest();
 				training.setId(Id);
-				training.setShift(shift);
+				training.setShift(shift1);
 				training.setWeight(10);
 				training.setEmployee(workingEmployee);
 				training.setShiftDate(shiftDate);
-				if(shiftDate != null) {
-					shift.setRequiredEmployeeSize(
-							shift.getRequiredEmployeeSize() + 1);
+				if(shift1 != null && shiftDate != null) {
+					shift1.setRequiredEmployeeSize(
+							shift1.getRequiredEmployeeSize() + 1);
 					}
 				trainingRequestList.add(training);
-				workingEmployee.getTrainingRequestMap().put(shift, training);
+				workingEmployee.getTrainingRequestMap().put(shift1, training);
 				nurseRoster.setTrainingRequestList(trainingRequestList);
 
 			}

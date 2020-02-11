@@ -6,10 +6,15 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import org.hibernate.Session;
+import org.optaplanner.database.HibernateUtil;
 import org.optaplanner.database.RosterService;
 import org.optaplanner.database.RosterServiceImpl;
 import org.optaplanner.examples.nurserostering.domain.Employee;
+import org.optaplanner.examples.nurserostering.domain.SkillProficiency;
 import org.optaplanner.examples.nurserostering.domain.contract.Contract;
+
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
@@ -64,7 +69,7 @@ public class EmployeeController implements Initializable {
 
 	@FXML
 	private Label employeeId;
-
+	private static Session session;
 	private RosterService rosterService = new RosterServiceImpl();
 
 	private ObservableList<Employee> employeeList = FXCollections.observableArrayList();
@@ -88,7 +93,14 @@ public class EmployeeController implements Initializable {
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------------
+	private ObservableList<SkillProficiency> skillprofList = FXCollections.observableArrayList();
 
+	public ObservableList<SkillProficiency> getSkillprofList() {
+		if (!skillprofList.isEmpty())
+			skillprofList.clear();
+		skillprofList = FXCollections.observableList((List<SkillProficiency>) rosterService.listSkillProficiency());
+		return skillprofList;
+	}
 	
 	
 	
@@ -100,7 +112,7 @@ public class EmployeeController implements Initializable {
 
 	public void loadEmployee() {
 		// initialize the employee table
-		employeeTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		employeeTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		employeeTable.getItems().clear();
 		employeeTable.setItems(getEmployeeList());
 
@@ -115,32 +127,23 @@ public class EmployeeController implements Initializable {
 
 	private void showEmployeeDetails(Employee employee) {
 		if (employee != null) {
-	int x = 1;
-	do {
-		try {
+
+			
 			employeeId.setText(employee.getEmployeeId());
 			name.setText(employee.getName());
 			contractfield.setText(employee.getContract().getCode());
 			streetnum.setText(employee.getStreetnum());
 			address.setText(employee.getAddress());
 			suburb.setText(employee.getSuburb());
-		    skillfield.setText(employee.getSkill().getCode());
 		    department.setText(employee.getDepartment().getCode());
 			postcode.setText(employee.getPostcode());
 			contactdetails.setText(employee.getContactdetails());
-			 x = 2;
-		}
-		catch(Exception e) {
-			Alert alertpattern = new Alert(AlertType.CONFIRMATION);
-			alertpattern.setTitle("Missed Field");
-			alertpattern.setHeaderText("You missed an Input Try Again");
-			alertpattern.setContentText("missing field");
 			
+			  for (SkillProficiency element: skillprofList) { if
+			  (element.getEmployee().getName().equals(employee.getName())) {
+			  skillfield.setText(element.getSkill().getCode()); }
+			 
 		}
-	}
-		while(x==1);
-	
-		
 
 		} else { // Employee is null, remove all the text. name.setText("");
 
@@ -162,12 +165,11 @@ public class EmployeeController implements Initializable {
 	
 	@FXML
 	private void handleDeleteEmployee() {
-
 		int selectedIndex = employeeTable.getSelectionModel().getSelectedIndex();
-
 		if (selectedIndex >= 0) {
-			ObservableList<Employee> itemsSelected;
-			itemsSelected = employeeTable.getSelectionModel().getSelectedItems();
+			Employee itemsSelected = employeeTable.getSelectionModel().getSelectedItem();
+			String empname = itemsSelected.getName();
+			getSkillprofList();
 			Alert alertpattern = new Alert(AlertType.CONFIRMATION);
 			alertpattern.setTitle("Request Confirmation");
 			alertpattern.setHeaderText("YOU MUST DELETE the Employee's Skill Proficency First");
@@ -175,10 +177,26 @@ public class EmployeeController implements Initializable {
 			Optional<ButtonType> resultpattern = alertpattern.showAndWait();
 
 			if (resultpattern.get() == ButtonType.OK) {
+				for (SkillProficiency element : skillprofList) {
+					String checkedemployee = element.getEmployee().getName();
+					long checkedvalue = element.getId();
+
+					if (checkedemployee.contentEquals(empname) ) {
+						System.out.println(empname);
+						session = HibernateUtil.getSessionFactory().getCurrentSession();
+						session.beginTransaction();
+						SkillProficiency p = (SkillProficiency) session.get(SkillProficiency.class, checkedvalue);
+						session.close();
+						rosterService.removeSkillProficiency(p);
+
+					}
+				}
+				
 				rosterService.removeEmployee(itemsSelected);
 				loadEmployee();
+		}
 
-			}
+			
 
 			else {
 				loadStage("/fxml/Employee.fxml");

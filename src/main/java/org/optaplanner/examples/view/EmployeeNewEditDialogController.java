@@ -15,13 +15,13 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-
+import org.controlsfx.control.CheckComboBox;
 import org.optaplanner.database.RosterService;
 import org.optaplanner.database.RosterServiceImpl;
 import org.optaplanner.examples.nurserostering.domain.Department;
 import org.optaplanner.examples.nurserostering.domain.Employee;
 import org.optaplanner.examples.nurserostering.domain.Skill;
-
+import org.optaplanner.examples.nurserostering.domain.SkillProficiency;
 import org.optaplanner.examples.nurserostering.domain.contract.Contract;
 
 
@@ -44,7 +44,7 @@ public class EmployeeNewEditDialogController implements Initializable {
 	@FXML
 	private ComboBox<Contract> contract;
 	@FXML
-	private ComboBox<Skill> skill;
+	private CheckComboBox<Skill> skill;
 	@FXML
 	private ComboBox<Department> department;
 	
@@ -127,8 +127,8 @@ public class EmployeeNewEditDialogController implements Initializable {
 		getSkillsList();
 		getDepartmentList();
 		contract.setItems(contractList);
-		skill.setItems(skillsList);
 		department.setItems(departmentList);
+		skill.getItems().addAll(skillsList);
 	 
 	}
 
@@ -148,9 +148,6 @@ public class EmployeeNewEditDialogController implements Initializable {
 	private void handleOk() {
 		if (isInputValid()) {
 		
-		int x = 1;
-		do {
-			try {
 			String employeeId = employeeIdField.getText();
 	    	String stnum = streetnum.getText();
 	    	employee.setStreetnum(stnum);
@@ -167,14 +164,19 @@ public class EmployeeNewEditDialogController implements Initializable {
 			employee.setEmployeeId(employeeId);
 			employee.setName(name);
 			Department departmentcode = department.getSelectionModel().getSelectedItem();
-			Skill skillcode = skill.getSelectionModel().getSelectedItem();
 			Contract contractcode = contract.getSelectionModel().getSelectedItem();
-			employee.setSkill(skillcode);
 			employee.setDepartment(departmentcode);
 			employee.setContract(contractcode);
 			okClicked = true;
 			rosterService.addEmployee(employee);
-			x=2;
+			ObservableList<Skill> skillcode = skill.getCheckModel().getCheckedItems();
+			SkillProficiency prof = new SkillProficiency();
+			prof.setEmployee(employee);
+			for (Skill obj: skillcode) {
+				prof.setSkill(obj);
+				rosterService.addSkillProficiency(prof);
+			
+			}
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Information Dialog");
 			alert.setHeaderText(null);
@@ -183,17 +185,8 @@ public class EmployeeNewEditDialogController implements Initializable {
 			dialogStage.close();
 		}
 		
-		catch(Exception e) {
-			Alert alertpattern = new Alert(AlertType.CONFIRMATION);
-			alertpattern.setTitle("Missed Field");
-			alertpattern.setHeaderText("You missed an Input Try Again");
-			alertpattern.setContentText("missing field");
-			
-		}
-		}
-		while(x==1);
-		}
-		}
+	}
+		
 		
 	
 
@@ -216,9 +209,7 @@ public class EmployeeNewEditDialogController implements Initializable {
 		if (employeename.getText() == null || employeename.getText().length() == 0) {
 			errorMessage += "No valid first name!\n";
 		}
-		if (skill.getSelectionModel().getSelectedItem()  == null)  {
-			errorMessage += "No valid Skill!\n";
-		}
+	
 		if (department.getSelectionModel().getSelectedItem()  == null)  {
 			errorMessage += "No valid Department!\n";
 		}

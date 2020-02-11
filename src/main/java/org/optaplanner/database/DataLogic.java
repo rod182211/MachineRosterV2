@@ -544,16 +544,17 @@ long skillId = 0L;
 	private void readEmployeeList(NurseRoster nurseRoster) {
 
 		List<Employee> employeeElementList = (List<Employee>) rosterService.listEmployee();
+		
 
 		List<Employee> employeeList = new ArrayList<>(employeeElementList.size());
 
 		employeeMap = new HashMap<>(employeeElementList.size());
 		employeeSkillMap = new HashMap<>(employeeElementList.size());
 
-		List<SkillProficiency> skillProficiencyList = new ArrayList<>(employeeElementList.size() * 2);
+	
 
 		List<EmployeeDepartment> employeeDepartmentList = new ArrayList<>(employeeElementList.size() * 2);
-		long skillProficiencyId = 0L;
+	
 
 		long employeeDepartmentId = 0L;
 	
@@ -566,9 +567,6 @@ long skillId = 0L;
 			employee.setName(name);
 			String code = element.getCode();
 			employee.setCode(code);
-			String skilltype = element.getSkill().getCode();
-			Skill skill = skillMap.get(skilltype);
-			employee.setSkill(skill);
 			String departmenttype = element.getDepartment().getCode();
 			Department department = departmentMap.get(departmenttype);
 			employee.setDepartment(department);
@@ -596,16 +594,6 @@ long skillId = 0L;
 			employee.setRosterdayMap(new HashMap<>(estimatedRequestSize));
 			employee.setTrainingRequestMap(new HashMap<>(estimatedRequestSize));
 
-			
-			
-
-			SkillProficiency skillProficiency = new SkillProficiency();
-			skillProficiency.setId(skillProficiencyId);
-            Employee skillemployee = employeeMap.get(employee.getName());
-			skillProficiency.setEmployee(skillemployee);
-			skillProficiency.setSkill(skill);
-			skillProficiencyList.add(skillProficiency);
-			skillProficiencyId++;
 			EmployeeDepartment employeeDepartment = new EmployeeDepartment();
 			employeeDepartment.setId(employeeDepartmentId);
 			Employee depemployee = employeeMap.get(employee.getName());
@@ -613,11 +601,27 @@ long skillId = 0L;
 			employeeDepartment.setDepartment(department);
 			employeeDepartmentList.add(employeeDepartment);
 			employeeDepartmentId++;
-			
 			employeeList.add(employee);
+			
+		}
+			List<SkillProficiency> skillProf = (List<SkillProficiency>) rosterService.listSkillProficiency();	
+		
+			List<SkillProficiency> skillProficiencyList = new ArrayList<>(employeeElementList.size() * 2);
+			for (SkillProficiency skillelement : skillProf) {
+			SkillProficiency skillProficiency = new SkillProficiency();
+			long id = skillelement.getId();
+			skillProficiency.setId(id);
+			Employee skillemployee = employeeMap.get(skillelement.getEmployee().getName());
+			skillProficiency.setEmployee(skillemployee);
+			skillProficiency.setSkill(skillelement.getSkill());
+			skillProficiencyList.add(skillProficiency);
+		
+			}
+			
+			
 		
 
-		}
+		
 		nurseRoster.setEmployeeList(employeeList);
 		nurseRoster.setSkillProficiencyList(skillProficiencyList);
 		nurseRoster.setEmployeeDepartmentList(employeeDepartmentList);

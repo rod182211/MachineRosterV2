@@ -54,8 +54,6 @@ public class Employee extends AbstractPersistable implements Labeled, Comparable
 	@ManyToOne(cascade = CascadeType.MERGE)
 	private Contract contract;
 	@ManyToOne
-	private Skill skill;
-	@ManyToOne
 	private Department department;
 	private String streetnum;
 	private String address;
@@ -118,14 +116,6 @@ public class Employee extends AbstractPersistable implements Labeled, Comparable
 
 	public void setContract(Contract contract) {
 		this.contract = contract;
-	}
-
-	public Skill getSkill() {
-		return skill;
-	}
-
-	public void setSkill(Skill skill) {
-		this.skill = skill;
 	}
 
 	public Department getDepartment() {

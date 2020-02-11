@@ -38,7 +38,7 @@ public interface  RosterService {
 	
     public void addEmployee(Employee employee);
     public List<Employee> listEmployee();
-    public void removeEmployee(ObservableList<Employee> itemsSelected);
+    public void removeEmployee(Employee itemsSelected);
     public void updateEmployee(Employee employee);
     public void insertEmployee(Employee employee);
     public List<Employee> listEmployeename();
@@ -166,7 +166,7 @@ public interface  RosterService {
     
     public void addSkillProficiency(SkillProficiency skillprof);
     public List<SkillProficiency> listSkillProficiency();
-    public void removeSkillProficiency(ObservableList<SkillProficiency> itemsSelected);
+    public void removeSkillProficiency(SkillProficiency itemsSelected);
     public void updateSkillProficiency(SkillProficiency employee);
     public void insertSkillProficiency(SkillProficiency employee);
     public List<SkillProficiency> listSkillProficiencyId();

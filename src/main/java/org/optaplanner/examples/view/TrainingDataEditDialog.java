@@ -82,6 +82,7 @@ public class TrainingDataEditDialog implements Initializable {
 		namefield.setValue(trainingdata.getEmployee());
 		shiftdaterequested.setValue(trainingdata.getDate());
 		trainingshift.setItems(shiftList);
+		trainingshift.setValue(trainingdata.getShiftType());
 	}
 
 	/**

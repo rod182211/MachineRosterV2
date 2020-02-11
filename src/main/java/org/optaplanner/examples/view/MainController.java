@@ -79,7 +79,7 @@ public class MainController implements Initializable {
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() == ButtonType.OK) {
 				// I don't think I need to prepare a I like the other look
-				// prepareSwingEnvironment();
+		 prepareSwingEnvironment();
 				new NurseRosteringApp().init();
 				
 			} else {

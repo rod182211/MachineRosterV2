@@ -32,7 +32,8 @@ public class Contract extends AbstractPersistable {
 
     private String code;
     private String description;
- 	@Enumerated(EnumType.STRING)
+ 
+	@Enumerated(EnumType.STRING)
 	private WeekendDefinition weekendDefinition;
 
     @OneToMany(mappedBy = "contract")

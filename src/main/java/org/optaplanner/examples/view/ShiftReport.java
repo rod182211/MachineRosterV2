@@ -35,7 +35,6 @@ import javafx.stage.Stage;
 public class ShiftReport implements Initializable {
 	
 	private String shiftType;
-	private Stage dialogStage;
 	@FXML
 	private Button mainmenue;
 	
@@ -92,7 +91,7 @@ public class ShiftReport implements Initializable {
 		getCalendarDataList();
 		Map<String, List<CalendarData>> assignmentMap = calendarList.stream()
 				.collect(Collectors.groupingBy(CalendarData::getEmployeename));
-		yAxis.setLabel("Shifts");
+	//	yAxis.setLabel("Shifts");
 		Set<String> keyset = assignmentMap.keySet();
 		XYChart.Series<String, Integer> series = new XYChart.Series<>();
 		XYChart.Series<String, Integer> series1 = new XYChart.Series<>();
@@ -103,7 +102,7 @@ public class ShiftReport implements Initializable {
 		XYChart.Series<String, Integer> series6 = new XYChart.Series<>();
 		XYChart.Series<String, Integer> series7 = new XYChart.Series<>();
 		XYChart.Series<String, Integer> series8 = new XYChart.Series<>();
-		svxAxis.setLabel("Employees");
+	//	svxAxis.setLabel("Employees");
 
 		for (String key : keyset) {
 			earlyshiftcounter = 0;

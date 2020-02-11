@@ -56,17 +56,11 @@ public class RosterDAOImpl implements RosterDAO {
 	}
 
 	@Override
-	public void removeEmployee(ObservableList<Employee> itemsSelected) {
-
+	public void removeEmployee(Employee itemsSelected) {
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		for (Employee idvalue : itemsSelected) {
-			long id = idvalue.getId();
-			Employee s = (Employee) session.load(Employee.class, id);
-			session.delete(s);
-		}
+		session.delete(itemsSelected);		
 		session.getTransaction().commit();
-
 		session.close();
 	}
 
@@ -930,7 +924,6 @@ public class RosterDAOImpl implements RosterDAO {
 
 	@Override
 	public void removeWorkBeforeFreeSequencePattern(WorkBeforeFreeSequencePattern itemsSelected) {
-		List<PatternContractLine> patternidlist = new ArrayList<>();
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		session.delete(itemsSelected);
@@ -1400,17 +1393,12 @@ public class RosterDAOImpl implements RosterDAO {
 	}
 
 	@Override
-	public void removeSkillProficiency(ObservableList<SkillProficiency> itemsSelected) {
+	public void removeSkillProficiency(SkillProficiency itemsSelected) {
 
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		for (SkillProficiency idvalue : itemsSelected) {
-			long id = idvalue.getId();
-			SkillProficiency s = (SkillProficiency) session.load(SkillProficiency.class, id);
-			session.delete(s);
-		}
+		session.delete(itemsSelected);
 		session.getTransaction().commit();
-
 		session.close();
 	}
 

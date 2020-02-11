@@ -24,6 +24,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.Entity;
 import javax.persistence.*;
+import javax.persistence.MappedSuperclass;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 
 
@@ -41,6 +42,7 @@ public abstract class ContractLine extends AbstractPersistable {
     @ManyToOne
 	private Contract contract;
  
+	
 	@Enumerated(EnumType.STRING)
 	private ContractLineType contractLineType;
 

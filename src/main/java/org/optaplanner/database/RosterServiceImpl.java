@@ -63,7 +63,7 @@ public class RosterServiceImpl implements RosterService {
 	}
 	
 	@Override
-	public void removeEmployee(ObservableList<Employee> itemsSelected) {
+	public void removeEmployee(Employee itemsSelected) {
 		rosterDAO.removeEmployee(itemsSelected);
 	}
 
@@ -559,7 +559,7 @@ public class RosterServiceImpl implements RosterService {
 	}
 	
 	@Override
-	public void removeSkillProficiency(ObservableList<SkillProficiency> itemsSelected) {
+	public void removeSkillProficiency(SkillProficiency itemsSelected) {
 		rosterDAO.removeSkillProficiency(itemsSelected);
 	}
 

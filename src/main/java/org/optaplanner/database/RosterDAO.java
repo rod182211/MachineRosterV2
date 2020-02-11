@@ -38,7 +38,7 @@ public interface RosterDAO {
 	//get all employee Data
 public void addEmployee(Employee employee);
 public List<Employee> listEmployee();
-public void removeEmployee(ObservableList<Employee> itemsSelected);
+public void removeEmployee(Employee itemsSelected);
 public void updateEmployee(Employee employee);
 public void insertEmployee(Employee employee);
 public List<Employee> listEmployeename();   
@@ -180,7 +180,7 @@ public void deletePattern(Pattern itemsSelected);
  
  public void addSkillProficiency(SkillProficiency skillprof);
  public List<SkillProficiency> listSkillProficiency();
- public void removeSkillProficiency(ObservableList<SkillProficiency> itemsSelected);
+ public void removeSkillProficiency(SkillProficiency itemsSelected);
  public void updateSkillProficiency(SkillProficiency skillprof);
  public void insertSkillProficiency(SkillProficiency skillprof);
  public List<SkillProficiency> listSkillProficiencyId();
