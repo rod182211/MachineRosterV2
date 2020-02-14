@@ -174,9 +174,9 @@ public class EmployeeNewEditDialogController implements Initializable {
 			prof.setEmployee(employee);
 			for (Skill obj: skillcode) {
 				prof.setSkill(obj);
-				rosterService.addSkillProficiency(prof);
 			
 			}
+			rosterService.addSkillProficiency(prof);
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Information Dialog");
 			alert.setHeaderText(null);

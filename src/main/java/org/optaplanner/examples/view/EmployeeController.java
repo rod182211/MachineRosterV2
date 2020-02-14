@@ -18,6 +18,7 @@ import org.optaplanner.examples.nurserostering.domain.contract.Contract;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,7 +29,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -53,7 +55,7 @@ public class EmployeeController implements Initializable {
 	@FXML
 	private Label contractfield;
 	@FXML
-	private Label skillfield;
+	private ListView<String> skillfield;
 	@FXML
 	private Label streetnum;
 	@FXML
@@ -101,7 +103,7 @@ public class EmployeeController implements Initializable {
 		skillprofList = FXCollections.observableList((List<SkillProficiency>) rosterService.listSkillProficiency());
 		return skillprofList;
 	}
-	
+	 final ObservableList<String> strings = FXCollections.observableArrayList();
 	
 	
 	@Override
@@ -127,8 +129,8 @@ public class EmployeeController implements Initializable {
 
 	private void showEmployeeDetails(Employee employee) {
 		if (employee != null) {
-
-			
+			strings.clear();
+			getSkillprofList();			 
 			employeeId.setText(employee.getEmployeeId());
 			name.setText(employee.getName());
 			contractfield.setText(employee.getContract().getCode());
@@ -139,10 +141,15 @@ public class EmployeeController implements Initializable {
 			postcode.setText(employee.getPostcode());
 			contactdetails.setText(employee.getContactdetails());
 			
-			  for (SkillProficiency element: skillprofList) { if
-			  (element.getEmployee().getName().equals(employee.getName())) {
-			  skillfield.setText(element.getSkill().getCode()); }
-			 
+		  for (SkillProficiency element: skillprofList)
+			  {
+				  if (element.getEmployee().getName().equals(employee.getName())) {
+				  //place skills into a list
+				  strings.add(element.getSkill().getCode());
+				 			
+			 }
+				  skillfield.setItems(strings);
+				  skillfield.setVisible(true);
 		}
 
 		} else { // Employee is null, remove all the text. name.setText("");
@@ -151,11 +158,9 @@ public class EmployeeController implements Initializable {
 			name.setText("");
 			contractfield.setText("");
 			streetnum.setText("");
-			skillfield.setText("");
 			address.setText("");
 			suburb.setText("");
 			postcode.setText("");
-            skillfield.setText("");
             department.setText("");
 			contactdetails.setText("");
 		}
@@ -172,7 +177,7 @@ public class EmployeeController implements Initializable {
 			getSkillprofList();
 			Alert alertpattern = new Alert(AlertType.CONFIRMATION);
 			alertpattern.setTitle("Request Confirmation");
-			alertpattern.setHeaderText("YOU MUST DELETE the Employee's Skill Proficency First");
+			alertpattern.setHeaderText("Are you sure?");
 			alertpattern.setContentText("Click OK or Cancel ");
 			Optional<ButtonType> resultpattern = alertpattern.showAndWait();
 
@@ -182,7 +187,7 @@ public class EmployeeController implements Initializable {
 					long checkedvalue = element.getId();
 
 					if (checkedemployee.contentEquals(empname) ) {
-						System.out.println(empname);
+						
 						session = HibernateUtil.getSessionFactory().getCurrentSession();
 						session.beginTransaction();
 						SkillProficiency p = (SkillProficiency) session.get(SkillProficiency.class, checkedvalue);

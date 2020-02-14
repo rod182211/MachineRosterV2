@@ -564,8 +564,8 @@ public class RosterServiceImpl implements RosterService {
 	}
 
 	@Override
-	public void updateSkillProficiency(SkillProficiency skillprof) {
-		rosterDAO.updateSkillProficiency(skillprof);
+	public void mergeSkillProficiency(SkillProficiency skillprof) {
+		rosterDAO.mergeSkillProficiency(skillprof);
 	}
 
 	@Override

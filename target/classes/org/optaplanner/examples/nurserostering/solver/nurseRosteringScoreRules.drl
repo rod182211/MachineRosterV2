@@ -668,7 +668,7 @@ rule "unwantedPatternFreeBefore2DaysWithAWorkDayPattern"
 end
 
 rule "WantedPatternWorkEarlySequencePattern"
-
+salience 1
     when
         $pattern : WorkEarlyPattern(
             $workShiftType : workShiftType,

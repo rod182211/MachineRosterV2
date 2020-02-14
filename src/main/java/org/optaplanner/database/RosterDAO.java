@@ -181,7 +181,7 @@ public void deletePattern(Pattern itemsSelected);
  public void addSkillProficiency(SkillProficiency skillprof);
  public List<SkillProficiency> listSkillProficiency();
  public void removeSkillProficiency(SkillProficiency itemsSelected);
- public void updateSkillProficiency(SkillProficiency skillprof);
+ public void mergeSkillProficiency(SkillProficiency skillprof);
  public void insertSkillProficiency(SkillProficiency skillprof);
  public List<SkillProficiency> listSkillProficiencyId();
  public List<SkillProficiency> listSkillProficiencyempId();

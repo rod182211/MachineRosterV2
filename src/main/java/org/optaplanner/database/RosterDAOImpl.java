@@ -1403,16 +1403,16 @@ public class RosterDAOImpl implements RosterDAO {
 	}
 
 	@Override
-	public void updateSkillProficiency(SkillProficiency skillprof) {
+	public void mergeSkillProficiency(SkillProficiency skillprof) {
 
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		session.update(skillprof);
+		session.merge(skillprof);
 		session.getTransaction().commit();
-
 		session.close();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 
 	public List<SkillProficiency> listSkillProficiencyempId() {

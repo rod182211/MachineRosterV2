@@ -66,7 +66,6 @@ import javafx.collections.ObservableList;
 
 import org.hibernate.Session;
 
-
 public class DataLogic {
 
 	protected Map<LocalDate, ShiftDate> shiftDateMap;
@@ -81,8 +80,9 @@ public class DataLogic {
 	protected Map<String, Employee> employeeMap;
 	private RosterService rosterService = new RosterServiceImpl();
 	private static Session session;
+
 	public NurseRoster readSolution() {
-		
+
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 
@@ -160,13 +160,12 @@ public class DataLogic {
 
 	private void readSkillList(NurseRoster nurseRoster) {
 		List<Skill> skillList;
-long skillId = 0L;
 		List<Skill> skillElementList = (List<Skill>) rosterService.listSkill();
 		skillList = new ArrayList<>(skillElementList.size());
 		skillMap = new HashMap<>(skillElementList.size());
 
 		for (Skill element : skillElementList) {
-			
+
 			Skill skill = new Skill();
 			long id = element.getId();
 			skill.setId(id);
@@ -176,13 +175,13 @@ long skillId = 0L;
 				throw new IllegalArgumentException("There are 2 skills with the same code (" + skill.getCode() + ").");
 			}
 			skillMap.put(skill.getCode(), skill);
-			
+
 		}
 
 		nurseRoster.setSkillList(skillList);
 
 	}
-	
+
 	private void readDepartmentList(NurseRoster nurseRoster) {
 		List<Department> departmentList;
 
@@ -197,7 +196,8 @@ long skillId = 0L;
 			department.setCode(element.getCode());
 			departmentList.add(department);
 			if (departmentMap.containsKey(department.getCode())) {
-				throw new IllegalArgumentException("There are 2 departments with the same code (" + department.getCode() + ").");
+				throw new IllegalArgumentException(
+						"There are 2 departments with the same code (" + department.getCode() + ").");
 			}
 			departmentMap.put(department.getCode(), department);
 
@@ -208,13 +208,13 @@ long skillId = 0L;
 	}
 
 	private void readShiftTypeList(NurseRoster nurseRoster) {
-	
+
 		List<ShiftType> shiftTypeElementList = (List<ShiftType>) rosterService.listShiftType();
 		List<ShiftType> shiftTypeList = new ArrayList<>(shiftTypeElementList.size());
 		shiftTypeMap = new HashMap<>(shiftTypeElementList.size());
-		 long id = 0L;
-         int index = 0;
-        for (ShiftType element : shiftTypeElementList) {
+		long id = 0L;
+		int index = 0;
+		for (ShiftType element : shiftTypeElementList) {
 
 			ShiftType shiftType = new ShiftType();
 			shiftType.setId(id);
@@ -233,17 +233,18 @@ long skillId = 0L;
 						"There are 2 shiftTypes with the same code (" + shiftType.getCode() + ").");
 			}
 			shiftTypeMap.put(shiftType.getCode(), shiftType);
-			 id++;
-             index++;
+			id++;
+			index++;
 		}
-    	nurseRoster.setShiftTypeList(shiftTypeList);
+		nurseRoster.setShiftTypeList(shiftTypeList);
 	}
+
 	private void readShiftTypeSkills(NurseRoster nurseRoster) {
-	List<ShiftTypeSkillRequirement> coverRequirementElementList = (List<ShiftTypeSkillRequirement>) rosterService
-			.listShiftTypeSkillRequirement();
-	List<ShiftTypeSkillRequirement> shiftTypeSkillRequirementList = new ArrayList<>(
-			coverRequirementElementList.size() * 2);
-	 long shiftTypeSkillRequirementId = 0L;
+		List<ShiftTypeSkillRequirement> coverRequirementElementList = (List<ShiftTypeSkillRequirement>) rosterService
+				.listShiftTypeSkillRequirement();
+		List<ShiftTypeSkillRequirement> shiftTypeSkillRequirementList = new ArrayList<>(
+				coverRequirementElementList.size() * 2);
+		long shiftTypeSkillRequirementId = 0L;
 		for (ShiftTypeSkillRequirement skillElement : coverRequirementElementList) {
 			ShiftTypeSkillRequirement shiftTypeSkillRequirement = new ShiftTypeSkillRequirement();
 			shiftTypeSkillRequirement.setId(shiftTypeSkillRequirementId);
@@ -256,28 +257,28 @@ long skillId = 0L;
 		}
 		nurseRoster.setShiftTypeSkillRequirementList(shiftTypeSkillRequirementList);
 	}
-	
+
 	private void readDepartmentSkills(NurseRoster nurseRoster) {
 		List<ShiftTypeDepartmentRequirement> coverElementList = (List<ShiftTypeDepartmentRequirement>) rosterService
 				.listShiftTypeDepartmentRequirement();
 		List<ShiftTypeDepartmentRequirement> shiftTypeDepartmentRequirementList = new ArrayList<>(
 				coverElementList.size() * 2);
-		  long ShiftTypeDepartmentRequirementId = 0L;
+		long ShiftTypeDepartmentRequirementId = 0L;
 		for (ShiftTypeDepartmentRequirement skillElement1 : coverElementList) {
 			ShiftTypeDepartmentRequirement ShiftTypeDepartmentRequirement = new ShiftTypeDepartmentRequirement();
 			ShiftTypeDepartmentRequirement.setId(ShiftTypeDepartmentRequirementId);
 			Department depart = departmentMap.get(skillElement1.getDepartment().getCode());
-			ShiftTypeDepartmentRequirement.setDepartment(depart);			
-		    ShiftType shiftTypereq = shiftTypeMap.get(skillElement1.getShiftType().getCode());
-		    ShiftTypeDepartmentRequirement.setShiftType(shiftTypereq);
+			ShiftTypeDepartmentRequirement.setDepartment(depart);
+			ShiftType shiftTypereq = shiftTypeMap.get(skillElement1.getShiftType().getCode());
+			ShiftTypeDepartmentRequirement.setShiftType(shiftTypereq);
 			shiftTypeDepartmentRequirementList.add(ShiftTypeDepartmentRequirement);
 			ShiftTypeDepartmentRequirementId++;
-		
-		}	
-	
+
+		}
+
 		nurseRoster.setShiftTypeDepartmentRequirementList(shiftTypeDepartmentRequirementList);
 	}
-		
+
 	private void generateShiftList(NurseRoster nurseRoster) {
 		List<ShiftType> shiftTypeList = nurseRoster.getShiftTypeList();
 		int shiftListSize = shiftDateMap.size() * shiftTypeList.size();
@@ -413,8 +414,7 @@ long skillId = 0L;
 			patternMap.put(pattern3.getCode(), pattern3);
 
 		}
-		List<WorkEarlyPattern> workbelementList = (List<WorkEarlyPattern>) rosterService
-				.listWorkEarlyPattern();
+		List<WorkEarlyPattern> workbelementList = (List<WorkEarlyPattern>) rosterService.listWorkEarlyPattern();
 
 		for (WorkEarlyPattern workbelement : workbelementList) {
 			WorkEarlyPattern pattern4 = new WorkEarlyPattern();
@@ -428,15 +428,13 @@ long skillId = 0L;
 			pattern4.setId(Id);
 			pattern4.setCode(code);
 			pattern4.setWeight(weight);
-			pattern4.setShiftLength(shiftLength);			
+			pattern4.setShiftLength(shiftLength);
 			pattern4.setWorkShiftType(type);
 			patternList.add(pattern4);
 			patternMap.put(pattern4.getCode(), pattern4);
 
 		}
 
-		
-		
 		nurseRoster.setPatternList(patternList);
 
 	}
@@ -468,7 +466,6 @@ long skillId = 0L;
 			contractList.add(contract);
 		}
 
-
 		List<PatternContractLine> patterncontractElementList = (List<PatternContractLine>) rosterService
 				.listPatternContractLine();
 		for (PatternContractLine patterncontractselement : patterncontractElementList) {
@@ -481,83 +478,76 @@ long skillId = 0L;
 			patterncontractLine.setPattern(type);
 			patterncontractLine.setContract(c);
 			patternContractLineList.add(patterncontractLine);
-		
+
 		}
-		
-		
+
 		nurseRoster.setPatternContractLineList(patternContractLineList);
 
-	
+		List<BooleanContractLine> booleanElementList = (List<BooleanContractLine>) rosterService
+				.listBooleanContractLine();
 
-	List<BooleanContractLine> booleanElementList = (List<BooleanContractLine>) rosterService
-			.listBooleanContractLine();
-	
-	for (BooleanContractLine bolelement : booleanElementList) {
-		BooleanContractLine contractLine = new BooleanContractLine();
-		long Id = bolelement.getId();
-		int weight = bolelement.getWeight();
-		boolean enabled = bolelement.isEnabled();
-		ContractLineType lineType = bolelement.getContractLineType();
-		Contract c = contractMap.get(bolelement.getContract().getCode());
+		for (BooleanContractLine bolelement : booleanElementList) {
+			BooleanContractLine contractLine = new BooleanContractLine();
+			long Id = bolelement.getId();
+			int weight = bolelement.getWeight();
+			boolean enabled = bolelement.isEnabled();
+			ContractLineType lineType = bolelement.getContractLineType();
+			Contract c = contractMap.get(bolelement.getContract().getCode());
 
-		contractLine.setId((long) Id);
-		contractLine.setWeight(weight);
-		contractLine.setEnabled(enabled);
-		contractLine.setContractLineType(lineType);
-		contractLine.setContract(c);
-		c.getContractLineList().add(contractLine);
-		contractLineList.add(contractLine);
+			contractLine.setId((long) Id);
+			contractLine.setWeight(weight);
+			contractLine.setEnabled(enabled);
+			contractLine.setContractLineType(lineType);
+			contractLine.setContract(c);
+			c.getContractLineList().add(contractLine);
+			contractLineList.add(contractLine);
 
-	}
+		}
 
-	List<MinMaxContractLine> minmaxElementList = (List<MinMaxContractLine>) rosterService.listMinMaxContractLine();
+		List<MinMaxContractLine> minmaxElementList = (List<MinMaxContractLine>) rosterService.listMinMaxContractLine();
 
-	for (MinMaxContractLine element : minmaxElementList) {
-		MinMaxContractLine contractLine = new MinMaxContractLine();
+		for (MinMaxContractLine element : minmaxElementList) {
+			MinMaxContractLine contractLine = new MinMaxContractLine();
 
-		long Id = element.getId();
-		int minWeight = element.getMinimumWeight();
-		boolean minEn = element.isEnabled();
-		int minVal = element.getMinimumValue();
-		int maxWeight = element.getMaximumWeight();
-		boolean maxEn = element.isMaximumEnabled();
-		int maxVal = element.getMaximumValue();
-		ContractLineType lineType = element.getContractLineType();
-		Contract c = contractMap.get(element.getContract().getCode());
-		contractLine.setId((long) Id);
-		contractLine.setMinimumEnabled(minEn);
-		contractLine.setMinimumValue(minVal);
-		contractLine.setMinimumWeight(minWeight);
-		contractLine.setMaximumEnabled(maxEn);
-		contractLine.setMaximumValue(maxVal);
-		contractLine.setMaximumWeight(maxWeight);
-		contractLine.setContractLineType(lineType);
-		contractLine.setContract(c);
-		c.getContractLineList().add(contractLine);
-		contractLineList.add(contractLine);
+			long Id = element.getId();
+			int minWeight = element.getMinimumWeight();
+			boolean minEn = element.isEnabled();
+			int minVal = element.getMinimumValue();
+			int maxWeight = element.getMaximumWeight();
+			boolean maxEn = element.isMaximumEnabled();
+			int maxVal = element.getMaximumValue();
+			ContractLineType lineType = element.getContractLineType();
+			Contract c = contractMap.get(element.getContract().getCode());
+			contractLine.setId((long) Id);
+			contractLine.setMinimumEnabled(minEn);
+			contractLine.setMinimumValue(minVal);
+			contractLine.setMinimumWeight(minWeight);
+			contractLine.setMaximumEnabled(maxEn);
+			contractLine.setMaximumValue(maxVal);
+			contractLine.setMaximumWeight(maxWeight);
+			contractLine.setContractLineType(lineType);
+			contractLine.setContract(c);
+			c.getContractLineList().add(contractLine);
+			contractLineList.add(contractLine);
 
-	}
-	nurseRoster.setContractList(contractList);
-	nurseRoster.setContractLineList(contractLineList);
+		}
+		nurseRoster.setContractList(contractList);
+		nurseRoster.setContractLineList(contractLineList);
 	}
 
 	private void readEmployeeList(NurseRoster nurseRoster) {
 
 		List<Employee> employeeElementList = (List<Employee>) rosterService.listEmployee();
-		
 
 		List<Employee> employeeList = new ArrayList<>(employeeElementList.size());
 
 		employeeMap = new HashMap<>(employeeElementList.size());
 		employeeSkillMap = new HashMap<>(employeeElementList.size());
 
-	
-
 		List<EmployeeDepartment> employeeDepartmentList = new ArrayList<>(employeeElementList.size() * 2);
-	
 
 		long employeeDepartmentId = 0L;
-	
+
 		for (Employee element : employeeElementList) {
 
 			Employee employee = new Employee();
@@ -577,7 +567,6 @@ long skillId = 0L;
 						+ ") of employee (" + employee.getCode() + ") does not exist.");
 			}
 			employee.setContract(c);
-			
 
 			if (employeeMap.containsKey(employee.getCode())) {
 				throw new IllegalArgumentException(
@@ -602,26 +591,23 @@ long skillId = 0L;
 			employeeDepartmentList.add(employeeDepartment);
 			employeeDepartmentId++;
 			employeeList.add(employee);
-			
+
 		}
-			List<SkillProficiency> skillProf = (List<SkillProficiency>) rosterService.listSkillProficiency();	
-		
-			List<SkillProficiency> skillProficiencyList = new ArrayList<>(employeeElementList.size() * 2);
-			for (SkillProficiency skillelement : skillProf) {
+		List<SkillProficiency> skillProf = (List<SkillProficiency>) rosterService.listSkillProficiency();
+
+		List<SkillProficiency> skillProficiencyList = new ArrayList<>(employeeElementList.size() * 2);
+		for (SkillProficiency skillelement : skillProf) {
 			SkillProficiency skillProficiency = new SkillProficiency();
 			long id = skillelement.getId();
 			skillProficiency.setId(id);
 			Employee skillemployee = employeeMap.get(skillelement.getEmployee().getName());
 			skillProficiency.setEmployee(skillemployee);
-			skillProficiency.setSkill(skillelement.getSkill());
+			Skill skillprof = skillMap.get(skillelement.getSkill().getCode());
+			skillProficiency.setSkill(skillprof);
 			skillProficiencyList.add(skillProficiency);
-		
-			}
-			
-			
-		
 
-		
+		}
+
 		nurseRoster.setEmployeeList(employeeList);
 		nurseRoster.setSkillProficiencyList(skillProficiencyList);
 		nurseRoster.setEmployeeDepartmentList(employeeDepartmentList);
@@ -922,15 +908,15 @@ long skillId = 0L;
 		nurseRoster.setShiftAssignmentList(shiftAssignmentList);
 
 	}
-	//loads the database for use with the calendar and reporting
+
+	// loads the database for use with the calendar and reporting
 	public void createCalander(NurseRoster calendar) {
-		
+
 		List<ShiftAssignment> assignments = (List<ShiftAssignment>) calendar.getShiftAssignmentList();
 		List<CalendarData> shiftAssignmentList = new ArrayList<>(assignments.size());
-		 ObservableList<CalendarData> calendardata = FXCollections
-					.observableArrayList();
-		for (ShiftAssignment assign: assignments) {
-			long empid =(assign.getId());
+		ObservableList<CalendarData> calendardata = FXCollections.observableArrayList();
+		for (ShiftAssignment assign : assignments) {
+			long empid = (assign.getId());
 			String employeename = assign.getEmployee().getName();
 			String shiftType = assign.getShiftType().getCode();
 			String shiftDescription = assign.getShiftType().getDescription();
@@ -939,19 +925,19 @@ long skillId = 0L;
 			LocalDate shiftDate = assign.getShiftDate().getDate();
 			Boolean isNight = assign.getShiftType().isNight();
 			CalendarData asignmentdata = new CalendarData();
-		    asignmentdata.setEmployeename(employeename);
-		    asignmentdata.setEndTime(endTime);
-		    asignmentdata.setId(empid);
-		    asignmentdata.setNight(isNight);
-		    asignmentdata.setShiftDate(shiftDate);
-		    asignmentdata.setShiftDescription(shiftDescription);
-		    asignmentdata.setShiftType(shiftType);
-		    asignmentdata.setStartTIme(startTime);
-		    calendardata.add(asignmentdata);
-		    shiftAssignmentList.add(asignmentdata);
-		    rosterService.addCalendarData(asignmentdata);
+			asignmentdata.setEmployeename(employeename);
+			asignmentdata.setEndTime(endTime);
+			asignmentdata.setId(empid);
+			asignmentdata.setNight(isNight);
+			asignmentdata.setShiftDate(shiftDate);
+			asignmentdata.setShiftDescription(shiftDescription);
+			asignmentdata.setShiftType(shiftType);
+			asignmentdata.setStartTIme(startTime);
+			calendardata.add(asignmentdata);
+			shiftAssignmentList.add(asignmentdata);
+			rosterService.addCalendarData(asignmentdata);
 		}
-		
+
 	}
 
 }

@@ -167,7 +167,7 @@ public interface  RosterService {
     public void addSkillProficiency(SkillProficiency skillprof);
     public List<SkillProficiency> listSkillProficiency();
     public void removeSkillProficiency(SkillProficiency itemsSelected);
-    public void updateSkillProficiency(SkillProficiency employee);
+    public void mergeSkillProficiency(SkillProficiency employee);
     public void insertSkillProficiency(SkillProficiency employee);
     public List<SkillProficiency> listSkillProficiencyId();
     public List<SkillProficiency> listSkillProficiencycode();

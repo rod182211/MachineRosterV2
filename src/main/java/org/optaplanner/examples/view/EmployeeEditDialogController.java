@@ -22,6 +22,8 @@ import java.util.ResourceBundle;
 
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.IndexedCheckModel;
+import org.hibernate.Session;
+import org.optaplanner.database.HibernateUtil;
 import org.optaplanner.database.RosterService;
 import org.optaplanner.database.RosterServiceImpl;
 import org.optaplanner.examples.nurserostering.domain.Department;
@@ -68,7 +70,7 @@ public class EmployeeEditDialogController implements Initializable {
 	private TextField postcode;
 	@FXML
 	private TextField contactdetails;
-
+	private static Session session;
 
 	private Stage dialogStage;
 	private Employee employee;
@@ -114,6 +116,15 @@ public class EmployeeEditDialogController implements Initializable {
 		skillprofList = FXCollections.observableList((List<SkillProficiency>) rosterService.listSkillProficiency());
 		return skillprofList;
 	}
+	private ObservableList<SkillProficiency> skillprofempList = FXCollections.observableArrayList();
+
+	public ObservableList<SkillProficiency> getSkillemployeeList() {
+		if (!skillprofempList.isEmpty())
+			skillprofempList.clear();
+		skillprofempList = FXCollections.observableList((List<SkillProficiency>) rosterService.listSkillProficiencyempId());
+		return skillprofempList;
+	}
+	 
 	 
 	/**
 	 * Initializes the controller class. This method is automatically called after
@@ -147,9 +158,7 @@ public class EmployeeEditDialogController implements Initializable {
 		getDepartmentList();
 		getSkillprofList();
 	 	skill.getItems().addAll(skillsList);
-		
 		skill.getCheckModel().getCheckedItems();
-	
 	 	contract.setItems(contractList);
 		department.setItems(departmentList);
 		streetnum.setText(employee.getStreetnum());
@@ -177,10 +186,10 @@ public class EmployeeEditDialogController implements Initializable {
 	@FXML
 	private void handleOk() {
 		if (isInputValid()) {
-			
+			getSkillprofList();
 			String employeeId = employeeIdField.getText();
-	    	String stnum = streetnum.getText();
-	    	employee.setStreetnum(stnum);
+			String stnum = streetnum.getText();
+			employee.setStreetnum(stnum);
 			String addr = address.getText();
 			employee.setAddress(addr);
 			String sub = suburb.getText();
@@ -194,20 +203,34 @@ public class EmployeeEditDialogController implements Initializable {
 			employee.setEmployeeId(employeeId);
 			employee.setName(name);
 			Department departmentcode = department.getSelectionModel().getSelectedItem();
-			
 			Contract contractcode = contract.getSelectionModel().getSelectedItem();
-			
 			employee.setDepartment(departmentcode);
 			employee.setContract(contractcode);
 			okClicked = true;
 			rosterService.updateEmployee(employee);
+			String empname = employee.getName();
 			ObservableList<Skill> skillcode = skill.getCheckModel().getCheckedItems();
+
+			for (SkillProficiency element : skillprofList) {
+				String checkedemployee = element.getEmployee().getName();
+				long checkedvalue = element.getId();
+
+				if (checkedemployee.contentEquals(empname)) {
+
+					session = HibernateUtil.getSessionFactory().getCurrentSession();
+					session.beginTransaction();
+					SkillProficiency p = (SkillProficiency) session.get(SkillProficiency.class, checkedvalue);
+					session.close();
+					rosterService.removeSkillProficiency(p);
+
+				}
+			}
 			SkillProficiency prof = new SkillProficiency();
 			prof.setEmployee(employee);
-			for (Skill obj: skillcode) {
+			for (Skill obj : skillcode) {
 				prof.setSkill(obj);
-				rosterService.updateSkillProficiency(prof);
-			
+				rosterService.mergeSkillProficiency(prof);
+
 			}
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Information Dialog");
