@@ -214,7 +214,6 @@ rule "insertEmployeeWorkSequence"
         insertLogical(new EmployeeWorkSequence($employee, $firstDayIndex, $lastDayIndex));
 end
 
-
 rule "MaxMinNightShifts"
       salience 1     
    when
@@ -230,18 +229,31 @@ rule "MaxMinNightShifts"
         )
 
 
-    then
-        int totalInt = $total.intValue();
-        if ($contractLine.isMinimumEnabled() && totalInt < $contractLine.getMinimumValue()) {
-            scoreHolder.addSoftConstraintMatch(kcontext,
-                    (totalInt - $contractLine.getMinimumValue()) * $contractLine.getMinimumWeight());
-        } else if ($contractLine.isMaximumEnabled() && totalInt > $contractLine.getMaximumValue()) {
-            scoreHolder.addSoftConstraintMatch(kcontext,
-                    ($contractLine.getMaximumValue() - totalInt) * $contractLine.getMaximumWeight());
-        } else {
+  then
+       int totalInt = $total.intValue();
+      
+  if ($contractLine.isMaximumEnabled() && totalInt > $contractLine.getMaximumValue()) {
+   
+       double coefficient = Math.ceil(totalInt/$contractLine.getMaximumValue());
+       double  score = (((coefficient * $contractLine.getMaximumValue() - totalInt ) * coefficient) * $contractLine.getMaximumWeight());
+       scoreHolder.addSoftConstraintMatch(kcontext, (int) score);
+       
+        
+       
+       }
+  else if ($contractLine.isMinimumEnabled() && totalInt < $contractLine.getMinimumValue()) {
+       double coefficient = Math.ceil(totalInt / $contractLine.getMinimumValue());
+       double  score = ((totalInt * coefficient) - $contractLine.getMinimumValue()  * $contractLine.getMinimumWeight() );
+       scoreHolder.addSoftConstraintMatch(kcontext, (int) score);
+           
+       
+        } 
+ 
+     else {
             // Workaround for https://issues.jboss.org/browse/PLANNER-761
             scoreHolder.addSoftConstraintMatch(kcontext, 0);
         }
+         
 end
 
 

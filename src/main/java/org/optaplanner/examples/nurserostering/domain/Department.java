@@ -18,7 +18,6 @@ public class Department extends AbstractPersistable  {
         this.code = code;
     }
 
-   
 
     @Override
     public String toString() {

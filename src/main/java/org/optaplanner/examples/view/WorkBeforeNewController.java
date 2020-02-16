@@ -84,9 +84,6 @@ public class WorkBeforeNewController implements Initializable {
 
 	public void setWorkBeforeFreeSequencePattern(WorkBeforeFreeSequencePattern workbeforedata) {
 		this.workbeforedata = workbeforedata;
-		beforeCode.setText(workbeforedata.getCode());
-		beforeWeight.setText(Integer.toString(workbeforedata.getWeight()));
-		freedaylength.setText(Integer.toString(workbeforedata.getFreeDayLength()));
 		getShiftTypeList();
 		beforeShiftType.setItems(shiftList);
 		
@@ -150,7 +147,7 @@ public class WorkBeforeNewController implements Initializable {
 		if (beforeWeight.getText() == null || beforeWeight.getText().length() == 0) {
 			errorMessage += "No valid Weight!\n";
 		}
-		if (beforeFreeDay.getText() == null || beforeFreeDay.getText().length() == 0) {
+		if (freedaylength.getText() == null || freedaylength.getText().length() == 0) {
 			errorMessage += "No valid Free Day Length!\n";
 		}
 		if (beforeShiftType.getSelectionModel().getSelectedItem() == null ) {

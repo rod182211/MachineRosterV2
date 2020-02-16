@@ -28,7 +28,7 @@ public class CoverRequirementsEditController implements Initializable {
 	@FXML
 	private ComboBox<ShiftType> shift;
 	@FXML
-	private ComboBox<DayOfWeek> dayOfWeek;
+	private ComboBox<String> dayOfWeek;
 
 	@FXML
 	private TextField size;
@@ -75,7 +75,7 @@ private ObservableList<ShiftType> shifttypeList = FXCollections.observableArrayL
 		return shifttypeList;
 	}
 	
-
+	private ObservableList<String> dayList =  FXCollections.observableArrayList("MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY","SUNDAY");
 
 	/**
 	 * Initializes the controller class. This method is automatically called after
@@ -107,7 +107,8 @@ private ObservableList<ShiftType> shifttypeList = FXCollections.observableArrayL
 		getShiftTypeList();
 		shift.setItems(shifttypeList);
 		shift.setValue(cover.getShiftType());
-		dayOfWeek.setValue(cover.getDayOfWeek());
+		dayOfWeek.setItems(dayList);
+		dayOfWeek.setValue(cover.getDayOfWeek().toString());
 		size.setText(Integer.toString(cover.getRequiredEmployeesize()));
 		
 	}
@@ -131,7 +132,9 @@ private ObservableList<ShiftType> shifttypeList = FXCollections.observableArrayL
 			
 			String sizpas = size.getText();
 			int sizeint = Integer.parseInt(sizpas);
-			DayOfWeek day = dayOfWeek.getSelectionModel().getSelectedItem();
+			String day1 = dayOfWeek.getSelectionModel().getSelectedItem();
+			DayOfWeek day = DayOfWeek.valueOf(day1);
+			
 			cover.setDayOfWeek(day);
 			cover.setRequiredEmployeesize(sizeint);
 			ShiftType shiftype = shift.getSelectionModel().getSelectedItem();
