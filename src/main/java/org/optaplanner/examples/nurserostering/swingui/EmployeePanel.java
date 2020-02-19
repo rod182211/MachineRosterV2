@@ -37,11 +37,13 @@ import javax.swing.JPanel;
 
 import org.optaplanner.examples.common.swingui.components.LabeledComboBoxRenderer;
 import org.optaplanner.examples.nurserostering.domain.Employee;
-
+import org.optaplanner.examples.nurserostering.domain.Machine;
+import org.optaplanner.examples.nurserostering.domain.MachineTypeSkillsRequirement;
 import org.optaplanner.examples.nurserostering.domain.Shift;
 import org.optaplanner.examples.nurserostering.domain.ShiftAssignment;
 import org.optaplanner.examples.nurserostering.domain.ShiftDate;
 import org.optaplanner.examples.nurserostering.domain.ShiftType;
+import org.optaplanner.examples.nurserostering.domain.ShiftTypeMachineRequirement;
 import org.optaplanner.examples.nurserostering.domain.WeekendDefinition;
 
 import org.optaplanner.swing.impl.SwingUtils;
@@ -222,6 +224,7 @@ public class EmployeePanel extends JPanel {
 	}
 
 	public void addShiftAssignment(ShiftAssignment shiftAssignment) {
+		
 		Shift shift = shiftAssignment.getShift();
 		JPanel shiftPanel = shiftPanelMap.get(shift);
 		JButton shiftAssignmentButton = SwingUtils.makeSmallButton(
@@ -237,8 +240,7 @@ public class EmployeePanel extends JPanel {
 		Color color = nurseRosteringPanel.determinePlanningEntityColor(
 				shiftAssignment, shift.getShiftType());
 		shiftAssignmentButton.setBackground(color);
-		String toolTip = nurseRosteringPanel
-				.determinePlanningEntityTooltip(shiftAssignment);
+	String toolTip = nurseRosteringPanel.determinePlanningEntityTooltip(shiftAssignment);
 		shiftAssignmentButton.setToolTipText(toolTip);
 		shiftPanel.add(shiftAssignmentButton);
 		shiftPanel.repaint();
@@ -267,10 +269,11 @@ public class EmployeePanel extends JPanel {
 			this.shiftAssignment = shiftAssignment;
 			Shift shift = shiftAssignment.getShift();
 			ShiftType shiftType = shift.getShiftType();
+			
 			// Tooltip
 			putValue(SHORT_DESCRIPTION, "<html>Date: "
 					+ shift.getShiftDate().getLabel() + "<br/>" + "Shift type: "
-					+ shiftType.getLabel() + " (from "
+					+ shiftType.getLabel() + " (from"
 					+ shiftType.getStartTimeString() + " to "
 					+ shiftType.getEndTimeString() + ")<br/>" + "Employee: "
 					+ (employee == null ? "unassigned" : employee.getLabel())

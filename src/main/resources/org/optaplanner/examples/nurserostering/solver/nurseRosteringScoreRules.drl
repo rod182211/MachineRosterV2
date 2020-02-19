@@ -30,10 +30,11 @@ import org.optaplanner.examples.nurserostering.domain.Shift;
 import org.optaplanner.examples.nurserostering.domain.ShiftDate;
 import org.optaplanner.examples.nurserostering.domain.ShiftType;
 import org.optaplanner.examples.nurserostering.domain.ShiftTypeSkillRequirement;
+import org.optaplanner.examples.nurserostering.domain.MachineTypeSkillsRequirement;
 import org.optaplanner.examples.nurserostering.domain.Skill;
-import org.optaplanner.examples.nurserostering.domain.Department;
-import org.optaplanner.examples.nurserostering.domain.EmployeeDepartment;
-import org.optaplanner.examples.nurserostering.domain.ShiftTypeDepartmentRequirement;
+import org.optaplanner.examples.nurserostering.domain.Machine;
+import org.optaplanner.examples.nurserostering.domain.EmployeeMachine;
+import org.optaplanner.examples.nurserostering.domain.ShiftTypeMachineRequirement;
 import org.optaplanner.examples.nurserostering.domain.SkillProficiency;
 import org.optaplanner.examples.nurserostering.domain.WeekendDefinition;
 import org.optaplanner.examples.nurserostering.domain.pattern.FreeBefore2DaysWithAWorkDayPattern;
@@ -147,7 +148,31 @@ then
          
 end
 
-
+rule "MaxMinNightShifts"
+  
+   when
+        $contractLine : MinMaxContractLine(contractLineType == ContractLineType.TOTAL_NIGHT_ASSIGNMENTS, enabled == true,$contract : contract) 
+          $employee : Employee(contract == $contract)
+          $shiftType : ShiftType(night == true)
+         
+        accumulate(
+            $assignment : ShiftAssignment(employee == $employee, shiftType == $shiftType);
+            $total : count($assignment)
+    
+        )
+   then
+        int totalInt = $total.intValue();
+        if ($contractLine.isMinimumEnabled() && totalInt < $contractLine.getMinimumValue()) {
+            scoreHolder.addSoftConstraintMatch(kcontext,
+                    (totalInt - $contractLine.getMinimumValue()) * $contractLine.getMinimumWeight());
+        } else if ($contractLine.isMaximumEnabled() && totalInt > $contractLine.getMaximumValue()) {
+            scoreHolder.addSoftConstraintMatch(kcontext,
+                    ($contractLine.getMaximumValue() - totalInt) * $contractLine.getMaximumWeight());
+        } else {
+            // Workaround for https://issues.jboss.org/browse/PLANNER-761
+            scoreHolder.addSoftConstraintMatch(kcontext, 0);
+        }
+end
 
 
 rule "fairAssignmentCountPerEmployee"
@@ -214,47 +239,7 @@ rule "insertEmployeeWorkSequence"
         insertLogical(new EmployeeWorkSequence($employee, $firstDayIndex, $lastDayIndex));
 end
 
-rule "MaxMinNightShifts"
-      salience 1     
-   when
-        $contractLine : MinMaxContractLine(contractLineType == ContractLineType.TOTAL_NIGHT_ASSIGNMENTS, enabled == true,
-          $contract : contract) 
-       $employee : Employee(contract == $contract)
-         $shiftType : ShiftType(night == true)
-         
-        accumulate(
-            $assignment : ShiftAssignment(employee == $employee, shiftType == $shiftType);
-            $total : count($assignment)
-    
-        )
 
-
-  then
-       int totalInt = $total.intValue();
-      
-  if ($contractLine.isMaximumEnabled() && totalInt > $contractLine.getMaximumValue()) {
-   
-       double coefficient = Math.ceil(totalInt/$contractLine.getMaximumValue());
-       double  score = (((coefficient * $contractLine.getMaximumValue() - totalInt ) * coefficient) * $contractLine.getMaximumWeight());
-       scoreHolder.addSoftConstraintMatch(kcontext, (int) score);
-       
-        
-       
-       }
-  else if ($contractLine.isMinimumEnabled() && totalInt < $contractLine.getMinimumValue()) {
-       double coefficient = Math.ceil(totalInt / $contractLine.getMinimumValue());
-       double  score = ((totalInt * coefficient) - $contractLine.getMinimumValue()  * $contractLine.getMinimumWeight() );
-       scoreHolder.addSoftConstraintMatch(kcontext, (int) score);
-           
-       
-        } 
- 
-     else {
-            // Workaround for https://issues.jboss.org/browse/PLANNER-761
-            scoreHolder.addSoftConstraintMatch(kcontext, 0);
-        }
-         
-end
 
 
 //Maximum number of consecutive working days
@@ -638,15 +623,14 @@ rule "alternativeSkill"
 end
 
 
-// Alternative Department
-rule "alternativeDepartment"
+// Alternative Machine
+rule "alternativeMachine"
     when
-        $contractLine : BooleanContractLine(contractLineType == ContractLineType.ALTERNATIVE_DEPARTMENT, enabled == true,
+        $contractLine : BooleanContractLine(contractLineType == ContractLineType.ALTERNATIVE_MACHINE, enabled == true,
             $contract : contract)
         ShiftAssignment(contract == $contract, $employee : employee, $shiftType : shiftType )
-        ShiftTypeDepartmentRequirement(shiftType == $shiftType, $department : department)        
-        not EmployeeDepartment(employee == $employee, department == $department)
-        
+        ShiftTypeMachineRequirement(shiftType == $shiftType, $machine : machine)        
+        MachineTypeSkillsRequirement(machine ==$machine, $skill : skill)
         
     then
    

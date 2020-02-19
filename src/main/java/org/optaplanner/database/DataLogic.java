@@ -14,16 +14,17 @@ import java.util.Map;
 import org.apache.commons.lang3.tuple.Pair;
 
 import org.optaplanner.examples.nurserostering.domain.CoverRequirements;
-import org.optaplanner.examples.nurserostering.domain.Department;
+import org.optaplanner.examples.nurserostering.domain.Machine;
+import org.optaplanner.examples.nurserostering.domain.MachineTypeSkillsRequirement;
 import org.optaplanner.examples.nurserostering.domain.Employee;
-import org.optaplanner.examples.nurserostering.domain.EmployeeDepartment;
+import org.optaplanner.examples.nurserostering.domain.EmployeeMachine;
 import org.optaplanner.examples.nurserostering.domain.NurseRoster;
 import org.optaplanner.examples.nurserostering.domain.NurseRosterParametrization;
 import org.optaplanner.examples.nurserostering.domain.Shift;
 import org.optaplanner.examples.nurserostering.domain.ShiftAssignment;
 import org.optaplanner.examples.nurserostering.domain.ShiftDate;
 import org.optaplanner.examples.nurserostering.domain.ShiftType;
-import org.optaplanner.examples.nurserostering.domain.ShiftTypeDepartmentRequirement;
+import org.optaplanner.examples.nurserostering.domain.ShiftTypeMachineRequirement;
 import org.optaplanner.examples.nurserostering.domain.ShiftTypeSkillRequirement;
 import org.optaplanner.examples.nurserostering.domain.Skill;
 import org.optaplanner.examples.nurserostering.domain.SkillProficiency;
@@ -70,7 +71,7 @@ public class DataLogic {
 
 	protected Map<LocalDate, ShiftDate> shiftDateMap;
 	protected Map<String, Skill> skillMap;
-	protected Map<String, Department> departmentMap;
+	protected Map<String, Machine> machineMap;
 	protected Map<String, ShiftType> shiftTypeMap;
 	protected Map<Pair<LocalDate, String>, Shift> dateAndShiftTypeToShiftMap;
 	protected Map<Pair<DayOfWeek, ShiftType>, List<Shift>> dayOfWeekAndShiftTypeToShiftListMap;
@@ -96,10 +97,11 @@ public class DataLogic {
 		session.close();
 		generateNurseRosterInfo(nurseRoster);
 		readSkillList(nurseRoster);
-		readDepartmentList(nurseRoster);
+		readMachineList(nurseRoster);
 		readShiftTypeList(nurseRoster);
-		readShiftTypeSkills(nurseRoster);
-		readDepartmentSkills(nurseRoster);
+		//readShiftTypeSkills(nurseRoster);
+		readMachineTypeSkills(nurseRoster);
+		readMachineShiftType(nurseRoster);
 		generateShiftList(nurseRoster);
 		readPatternList(nurseRoster);
 		readContractList(nurseRoster);
@@ -182,28 +184,28 @@ public class DataLogic {
 
 	}
 
-	private void readDepartmentList(NurseRoster nurseRoster) {
-		List<Department> departmentList;
+	private void readMachineList(NurseRoster nurseRoster) {
+		List<Machine> departmentList;
 
-		List<Department> departmentElementList = (List<Department>) rosterService.listDepartment();
+		List<Machine> departmentElementList = (List<Machine>) rosterService.listMachine();
 		departmentList = new ArrayList<>(departmentElementList.size());
-		departmentMap = new HashMap<>(departmentElementList.size());
+		machineMap = new HashMap<>(departmentElementList.size());
 
-		for (Department element : departmentElementList) {
+		for (Machine element : departmentElementList) {
 			long Id = element.getId();
-			Department department = new Department();
+			Machine department = new Machine();
 			department.setId(Id);
 			department.setCode(element.getCode());
 			departmentList.add(department);
-			if (departmentMap.containsKey(department.getCode())) {
+			if (machineMap.containsKey(department.getCode())) {
 				throw new IllegalArgumentException(
 						"There are 2 departments with the same code (" + department.getCode() + ").");
 			}
-			departmentMap.put(department.getCode(), department);
+			machineMap.put(department.getCode(), department);
 
 		}
 
-		nurseRoster.setDepartmentList(departmentList);
+		nurseRoster.setMachineList(departmentList);
 
 	}
 
@@ -239,7 +241,7 @@ public class DataLogic {
 		nurseRoster.setShiftTypeList(shiftTypeList);
 	}
 
-	private void readShiftTypeSkills(NurseRoster nurseRoster) {
+	/*private void readShiftTypeSkills(NurseRoster nurseRoster) {
 		List<ShiftTypeSkillRequirement> coverRequirementElementList = (List<ShiftTypeSkillRequirement>) rosterService
 				.listShiftTypeSkillRequirement();
 		List<ShiftTypeSkillRequirement> shiftTypeSkillRequirementList = new ArrayList<>(
@@ -256,27 +258,46 @@ public class DataLogic {
 			shiftTypeSkillRequirementId++;
 		}
 		nurseRoster.setShiftTypeSkillRequirementList(shiftTypeSkillRequirementList);
+	}*/
+	
+	private void readMachineTypeSkills(NurseRoster nurseRoster) {
+		List<MachineTypeSkillsRequirement> coverRequirementElementList = (List<MachineTypeSkillsRequirement>) rosterService
+				.listMachineTypeSkillsRequirement();
+		List<MachineTypeSkillsRequirement> machineTypeSkillsRequirementList = new ArrayList<>(
+				coverRequirementElementList.size() * 2);
+		long machineTypeSkillRequirementId = 0L;
+		for (MachineTypeSkillsRequirement skillElement : coverRequirementElementList) {
+			MachineTypeSkillsRequirement machineTypeSkillsRequirement = new MachineTypeSkillsRequirement();
+			machineTypeSkillsRequirement.setId(machineTypeSkillRequirementId);
+			Machine wanted = machineMap.get(skillElement.getMachine().getCode());
+			machineTypeSkillsRequirement.setMachine(wanted);
+			Skill skill = skillMap.get(skillElement.getSkill().getCode());
+			machineTypeSkillsRequirement.setSkill(skill);
+			machineTypeSkillsRequirementList.add(machineTypeSkillsRequirement);
+			machineTypeSkillRequirementId++;
+		}
+		nurseRoster.setMachineTypeSkillsRequirementList(machineTypeSkillsRequirementList);
 	}
 
-	private void readDepartmentSkills(NurseRoster nurseRoster) {
-		List<ShiftTypeDepartmentRequirement> coverElementList = (List<ShiftTypeDepartmentRequirement>) rosterService
-				.listShiftTypeDepartmentRequirement();
-		List<ShiftTypeDepartmentRequirement> shiftTypeDepartmentRequirementList = new ArrayList<>(
+	private void readMachineShiftType(NurseRoster nurseRoster) {
+		List<ShiftTypeMachineRequirement> coverElementList = (List<ShiftTypeMachineRequirement>) rosterService
+				.listShiftTypeMachineRequirement();
+		List<ShiftTypeMachineRequirement> shiftTypeMachineRequirementList = new ArrayList<>(
 				coverElementList.size() * 2);
-		long ShiftTypeDepartmentRequirementId = 0L;
-		for (ShiftTypeDepartmentRequirement skillElement1 : coverElementList) {
-			ShiftTypeDepartmentRequirement ShiftTypeDepartmentRequirement = new ShiftTypeDepartmentRequirement();
-			ShiftTypeDepartmentRequirement.setId(ShiftTypeDepartmentRequirementId);
-			Department depart = departmentMap.get(skillElement1.getDepartment().getCode());
-			ShiftTypeDepartmentRequirement.setDepartment(depart);
+		long ShiftTypeMachineRequirementId = 0L;
+		for (ShiftTypeMachineRequirement skillElement1 : coverElementList) {
+			ShiftTypeMachineRequirement ShiftTypeMachineRequirement = new ShiftTypeMachineRequirement();
+			ShiftTypeMachineRequirement.setId(ShiftTypeMachineRequirementId);
+			Machine depart = machineMap.get(skillElement1.getMachine().getCode());
+			ShiftTypeMachineRequirement.setMachine(depart);
 			ShiftType shiftTypereq = shiftTypeMap.get(skillElement1.getShiftType().getCode());
-			ShiftTypeDepartmentRequirement.setShiftType(shiftTypereq);
-			shiftTypeDepartmentRequirementList.add(ShiftTypeDepartmentRequirement);
-			ShiftTypeDepartmentRequirementId++;
+			ShiftTypeMachineRequirement.setShiftType(shiftTypereq);
+			shiftTypeMachineRequirementList.add(ShiftTypeMachineRequirement);
+			ShiftTypeMachineRequirementId++;
 
 		}
 
-		nurseRoster.setShiftTypeDepartmentRequirementList(shiftTypeDepartmentRequirementList);
+		nurseRoster.setShiftTypeMachineRequirementList(shiftTypeMachineRequirementList);
 	}
 
 	private void generateShiftList(NurseRoster nurseRoster) {
@@ -544,9 +565,9 @@ public class DataLogic {
 		employeeMap = new HashMap<>(employeeElementList.size());
 		employeeSkillMap = new HashMap<>(employeeElementList.size());
 
-		List<EmployeeDepartment> employeeDepartmentList = new ArrayList<>(employeeElementList.size() * 2);
+		
 
-		long employeeDepartmentId = 0L;
+		long employeeMachineId = 0L;
 
 		for (Employee element : employeeElementList) {
 
@@ -557,10 +578,6 @@ public class DataLogic {
 			employee.setName(name);
 			String code = element.getCode();
 			employee.setCode(code);
-			String departmenttype = element.getDepartment().getCode();
-			Department department = departmentMap.get(departmenttype);
-			employee.setDepartment(department);
-
 			Contract c = contractMap.get(element.getContract().getCode());
 			if (c == null) {
 				throw new IllegalArgumentException("The contract (" + element.getContract().getCode()
@@ -582,15 +599,22 @@ public class DataLogic {
 			employee.setLeaveMap(new HashMap<>(estimatedRequestSize));
 			employee.setRosterdayMap(new HashMap<>(estimatedRequestSize));
 			employee.setTrainingRequestMap(new HashMap<>(estimatedRequestSize));
-
-			EmployeeDepartment employeeDepartment = new EmployeeDepartment();
-			employeeDepartment.setId(employeeDepartmentId);
-			Employee depemployee = employeeMap.get(employee.getName());
-			employeeDepartment.setEmployee(depemployee);
-			employeeDepartment.setDepartment(department);
-			employeeDepartmentList.add(employeeDepartment);
-			employeeDepartmentId++;
 			employeeList.add(employee);
+			
+		}
+			List<EmployeeMachine> employeeMachine1 = (List<EmployeeMachine>) rosterService.listEmployeeMachine();
+			List<EmployeeMachine> employeeMachineList = new ArrayList<>(employeeElementList.size() * 2);
+			
+			for (EmployeeMachine machineelement : employeeMachine1) {
+			EmployeeMachine employeeMachine = new EmployeeMachine();
+			employeeMachine.setId(employeeMachineId);
+			Employee depemployee = employeeMap.get(machineelement.getEmployee().getName());
+			Machine machinetype = machineMap.get(machineelement.getMachine().getCode());
+			employeeMachine.setEmployee(depemployee);
+			employeeMachine.setMachine(machinetype);
+			employeeMachineList.add(employeeMachine);
+			employeeMachineId++;
+			
 
 		}
 		List<SkillProficiency> skillProf = (List<SkillProficiency>) rosterService.listSkillProficiency();
@@ -610,9 +634,9 @@ public class DataLogic {
 
 		nurseRoster.setEmployeeList(employeeList);
 		nurseRoster.setSkillProficiencyList(skillProficiencyList);
-		nurseRoster.setEmployeeDepartmentList(employeeDepartmentList);
+		nurseRoster.setEmployeeMachineList(employeeMachineList);
 	}
-
+	
 	private void readDayOffRequestList(NurseRoster nurseRoster) {
 
 		List<DayOffRequest> dayOffRequestList;

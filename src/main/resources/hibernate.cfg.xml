@@ -11,12 +11,13 @@
 	<session-factory>
 	 	<property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
 	 	<property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
-		<property name="connection.url">jdbc:mysql://localhost:3306/newroster?useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;useSSL=false</property>
-		<property name="connection.username">myrosterapp</property>
-		<property name="connection.password">myroster</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/machineroster?useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;useSSL=false</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password">rod182211</property>
 	   	<property name="hibernate.current_session_context_class">thread</property>
 		<property name="hibernate.show_sql">true</property>
-
+	   <property name="hbm2ddl.auto">update</property>
+	
 	
 	   <property name="hibernate.c3p0.min_size">5</property>
 		<property name="hibernate.c3p0.max_size">20</property>
@@ -28,13 +29,14 @@
 		<mapping class="org.optaplanner.examples.nurserostering.domain.contract.ContractLineType" />
 		<mapping class="org.optaplanner.examples.nurserostering.domain.contract.ContractLine" />
 		<mapping class="org.optaplanner.examples.nurserostering.domain.Employee" />
-		<mapping class="org.optaplanner.examples.nurserostering.domain.Department" />
-		<mapping class="org.optaplanner.examples.nurserostering.domain.EmployeeDepartment" />
+		<mapping class="org.optaplanner.examples.nurserostering.domain.Machine" />
+		<mapping class="org.optaplanner.examples.nurserostering.domain.EmployeeMachine" />
 		<mapping class="org.optaplanner.examples.nurserostering.domain.ShiftDate" />
 		<mapping class="org.optaplanner.examples.nurserostering.domain.Shift" />
 		<mapping class="org.optaplanner.examples.nurserostering.domain.ShiftType" />
-		<mapping class="org.optaplanner.examples.nurserostering.domain.ShiftTypeDepartmentRequirement" />
+		<mapping class="org.optaplanner.examples.nurserostering.domain.ShiftTypeMachineRequirement" />
 		<mapping class="org.optaplanner.examples.nurserostering.domain.ShiftTypeSkillRequirement" />
+		<mapping class="org.optaplanner.examples.nurserostering.domain.MachineTypeSkillsRequirement" />
 		<mapping class="org.optaplanner.examples.nurserostering.domain.contract.BooleanContractLine" />
 		<mapping class="org.optaplanner.examples.nurserostering.domain.contract.MinMaxContractLine" />
 		<mapping class="org.optaplanner.examples.nurserostering.domain.contract.PatternContractLine" />

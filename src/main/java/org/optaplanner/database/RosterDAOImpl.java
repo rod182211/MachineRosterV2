@@ -2359,25 +2359,25 @@ public class RosterDAOImpl implements RosterDAO {
 	}
 
 	@Override
-	public List<Department> listDepartment() {
-		List<Department> Departmentlist = new ArrayList<>();
+	public List<Machine> listMachine() {
+		List<Machine> machinelist = new ArrayList<>();
 
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		Departmentlist = session.createQuery("from Department").list();
+		machinelist = session.createQuery("from Machine").list();
 		session.getTransaction().commit();
 
 		session.close();
-		return Departmentlist;
+		return machinelist;
 	}
 
 	@Override
-	public List<Department> listDepartmentId() {
-		List<Department> departmentidlist = new ArrayList<>();
+	public List<Machine> listMachineId() {
+		List<Machine> departmentidlist = new ArrayList<>();
 
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		departmentidlist = session.createQuery("select id from Department").list();
+		departmentidlist = session.createQuery("select id from Machine").list();
 		session.getTransaction().commit();
 
 		session.close();
@@ -2385,7 +2385,7 @@ public class RosterDAOImpl implements RosterDAO {
 	}
 
 	@Override
-	public void addDepartment(Department assignmentdata) {
+	public void addMachine(Machine assignmentdata) {
 
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
@@ -2396,13 +2396,13 @@ public class RosterDAOImpl implements RosterDAO {
 	}
 
 	@Override
-	public void removeDepartment(ObservableList<Department> itemsSelected) {
+	public void removeMachine(ObservableList<Machine> itemsSelected) {
 
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		for (Department idvalue : itemsSelected) {
+		for (Machine idvalue : itemsSelected) {
 			long id = idvalue.getId();
-			Department s = (Department) session.load(Department.class, id);
+			Machine s = (Machine) session.load(Machine.class, id);
 			session.delete(s);
 		}
 		session.getTransaction().commit();
@@ -2411,7 +2411,7 @@ public class RosterDAOImpl implements RosterDAO {
 	}
 
 	@Override
-	public void updateDepartment(Department department) {
+	public void updateMachine(Machine department) {
 
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
@@ -2422,59 +2422,59 @@ public class RosterDAOImpl implements RosterDAO {
 	}
 
 	@Override
-	public List<Department> listDepartmentcode() {
+	public List<Machine> listMachinecode() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
 	@Override
-	public List<ShiftTypeDepartmentRequirement> listShiftTypeDepartmentRequirement() {
-		List<ShiftTypeDepartmentRequirement> shiftTypeDepartmentRequirementslist = new ArrayList<>();
+	public List<ShiftTypeMachineRequirement> listShiftTypeMachineRequirement() {
+		List<ShiftTypeMachineRequirement> shiftTypeMachineRequirementslist = new ArrayList<>();
 
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		shiftTypeDepartmentRequirementslist = session.createQuery("from ShiftTypeDepartmentRequirement").list();
+		shiftTypeMachineRequirementslist = session.createQuery("from ShiftTypeMachineRequirement").list();
 		session.getTransaction().commit();
 
 		session.close();
-		return shiftTypeDepartmentRequirementslist;
+		return shiftTypeMachineRequirementslist;
 	}
 
 	@Override
-	public List<ShiftTypeDepartmentRequirement> listShiftTypeDepartmentRequirementId() {
-		List<ShiftTypeDepartmentRequirement> shiftTypeDepartmentRequirementsidlist = new ArrayList<>();
+	public List<ShiftTypeMachineRequirement> listShiftTypeMachineRequirementId() {
+		List<ShiftTypeMachineRequirement> shiftTypeMachineRequirementsidlist = new ArrayList<>();
 
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		shiftTypeDepartmentRequirementsidlist = session.createQuery("select id from ShiftTypeDepartmentRequirement").list();
+		shiftTypeMachineRequirementsidlist = session.createQuery("select id from ShiftTypeMachineRequirement").list();
 		session.getTransaction().commit();
 
 		session.close();
-		return shiftTypeDepartmentRequirementsidlist;
+		return shiftTypeMachineRequirementsidlist;
 	}
 
 	
 
 	@Override
-	public void addShiftTypeDepartmentRequirement(ShiftTypeDepartmentRequirement shiftTypeDepartmentRequirement) {
+	public void addShiftTypeMachineRequirement(ShiftTypeMachineRequirement shiftTypeMachineRequirement) {
 
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		session.save(shiftTypeDepartmentRequirement);
+		session.save(shiftTypeMachineRequirement);
 		session.getTransaction().commit();
 
 		session.close();
 	}
 
 	@Override
-	public void removeShiftTypeDepartmentRequirement(ObservableList<ShiftTypeDepartmentRequirement> itemsSelected) {
+	public void removeShiftTypeMachineRequirement(ObservableList<ShiftTypeMachineRequirement> itemsSelected) {
 
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		for (ShiftTypeDepartmentRequirement idvalue : itemsSelected) {
+		for (ShiftTypeMachineRequirement idvalue : itemsSelected) {
 			long id = idvalue.getId();
-			ShiftTypeDepartmentRequirement s = (ShiftTypeDepartmentRequirement) session.load(ShiftTypeDepartmentRequirement.class, id);
+			ShiftTypeMachineRequirement s = (ShiftTypeMachineRequirement) session.load(ShiftTypeMachineRequirement.class, id);
 			session.delete(s);
 		}
 		session.getTransaction().commit();
@@ -2483,11 +2483,11 @@ public class RosterDAOImpl implements RosterDAO {
 	}
 
 	@Override
-	public void updateShiftTypeDepartmentRequirement(ShiftTypeDepartmentRequirement shiftTypeDepartmentRequirement) {
+	public void updateShiftTypeMachineRequirement(ShiftTypeMachineRequirement shiftTypeMachineRequirement) {
 
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		session.update(shiftTypeDepartmentRequirement);
+		session.update(shiftTypeMachineRequirement);
 		session.getTransaction().commit();
 
 		session.close();
@@ -2495,52 +2495,111 @@ public class RosterDAOImpl implements RosterDAO {
 
 ///////////
 	@Override
-	public List<EmployeeDepartment> listEmployeeDepartment() {
-		List<EmployeeDepartment> EmployeeDepartmentslist = new ArrayList<>();
+	public List<EmployeeMachine> listEmployeeMachine() {
+		List<EmployeeMachine> EmployeeMachineslist = new ArrayList<>();
 
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		EmployeeDepartmentslist = session.createQuery("from EmployeeDepartment").list();
+		EmployeeMachineslist = session.createQuery("from EmployeeMachine").list();
 		session.getTransaction().commit();
 
 		session.close();
-		return EmployeeDepartmentslist;
+		return EmployeeMachineslist;
 	}
 
 	@Override
-	public List<EmployeeDepartment> listEmployeeDepartmentId() {
-		List<EmployeeDepartment> EmployeeDepartmentsidlist = new ArrayList<>();
+	public List<EmployeeMachine> listEmployeeMachineId() {
+		List<EmployeeMachine> EmployeeMachinesidlist = new ArrayList<>();
 
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		EmployeeDepartmentsidlist = session.createQuery("select id from EmployeeDepartment").list();
+		EmployeeMachinesidlist = session.createQuery("select id from EmployeeMachine").list();
 		session.getTransaction().commit();
 
 		session.close();
-		return EmployeeDepartmentsidlist;
+		return EmployeeMachinesidlist;
 	}
 
 	
 
 	@Override
-	public void addEmployeeDepartment(EmployeeDepartment employeeDepartments) {
+	public void addEmployeeMachine(EmployeeMachine employeeMachines) {
 
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		session.save(employeeDepartments);
+		session.save(employeeMachines);
 		session.getTransaction().commit();
 
 		session.close();
 	}
 
 	@Override
-	public void removeEmployeeDepartment(ObservableList<EmployeeDepartment> itemsSelected) {
+	public void removeEmployeeMachine(EmployeeMachine itemsSelected) {
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		session.delete(itemsSelected);
+		session.getTransaction().commit();
+		session.close();
+	}
+
+	@Override
+	public void mergeEmployeeMachine(EmployeeMachine employeeMachine) {
 
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		for (EmployeeDepartment idvalue : itemsSelected) {
+		session.merge(employeeMachine);
+		session.getTransaction().commit();
+		session.close();
+	}
+
+
+	@Override
+	public List<MachineTypeSkillsRequirement> listMachineTypeSkillsRequirement() {
+		List<MachineTypeSkillsRequirement> shiftTypeMachineRequirementslist = new ArrayList<>();
+
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		shiftTypeMachineRequirementslist = session.createQuery("from MachineTypeSkillsRequirement").list();
+		session.getTransaction().commit();
+
+		session.close();
+		return shiftTypeMachineRequirementslist;
+	}
+
+	@Override
+	public List<MachineTypeSkillsRequirement> listMachineTypeSkillsRequirementId() {
+		List<MachineTypeSkillsRequirement> shiftTypeMachineRequirementsidlist = new ArrayList<>();
+
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		shiftTypeMachineRequirementsidlist = session.createQuery("select id from MachineTypeSkillsRequirement").list();
+		session.getTransaction().commit();
+
+		session.close();
+		return shiftTypeMachineRequirementsidlist;
+	}
+
+	
+
+	@Override
+	public void addMachineTypeSkillsRequirement(MachineTypeSkillsRequirement shiftTypeMachineRequirement) {
+
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		session.save(shiftTypeMachineRequirement);
+		session.getTransaction().commit();
+
+		session.close();
+	}
+
+	@Override
+	public void removeMachineTypeSkillsRequirement(ObservableList<MachineTypeSkillsRequirement> itemsSelected) {
+
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		for (MachineTypeSkillsRequirement idvalue : itemsSelected) {
 			long id = idvalue.getId();
-			EmployeeDepartment s = (EmployeeDepartment) session.load(EmployeeDepartment.class, id);
+			MachineTypeSkillsRequirement s = (MachineTypeSkillsRequirement) session.load(MachineTypeSkillsRequirement.class, id);
 			session.delete(s);
 		}
 		session.getTransaction().commit();
@@ -2549,14 +2608,13 @@ public class RosterDAOImpl implements RosterDAO {
 	}
 
 	@Override
-	public void updateEmployeeDepartment(EmployeeDepartment employeeDepartment) {
+	public void updateMachineTypeSkillsRequirement(MachineTypeSkillsRequirement shiftTypeMachineRequirement) {
 
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		session.update(employeeDepartment);
+		session.update(shiftTypeMachineRequirement);
 		session.getTransaction().commit();
+
 		session.close();
 	}
-
-	
 }

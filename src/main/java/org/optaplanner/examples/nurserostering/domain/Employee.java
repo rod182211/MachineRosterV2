@@ -16,6 +16,7 @@
 
 package org.optaplanner.examples.nurserostering.domain;
 
+import java.util.List;
 import java.util.Map;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -53,8 +54,10 @@ public class Employee extends AbstractPersistable implements Labeled, Comparable
 	private String name;
 	@ManyToOne(cascade = CascadeType.MERGE)
 	private Contract contract;
-	@ManyToOne
-	private Department department;
+	@OneToMany(mappedBy = "employee")
+	private List<EmployeeMachine> employeeMachine;
+	
+
 	private String streetnum;
 	private String address;
 	private String suburb;
@@ -118,14 +121,7 @@ public class Employee extends AbstractPersistable implements Labeled, Comparable
 		this.contract = contract;
 	}
 
-	public Department getDepartment() {
-		return department;
-	}
-
-	public void setDepartment(Department department) {
-		this.department = department;
-	}
-
+	
 	public int getWeekendLength() {
 		return getContract().getWeekendLength();
 	}
@@ -236,7 +232,15 @@ public class Employee extends AbstractPersistable implements Labeled, Comparable
 
 
 
-    @Override
+    public List<EmployeeMachine> getEmployeeMachine() {
+		return employeeMachine;
+	}
+
+	public void setEmployeeMachine(List<EmployeeMachine> employeeMachine) {
+		this.employeeMachine = employeeMachine;
+	}
+
+	@Override
     public String getLabel() {
         return "" + name;
     }

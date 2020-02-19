@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 import org.optaplanner.database.RosterService;
 import org.optaplanner.database.RosterServiceImpl;
-import org.optaplanner.examples.nurserostering.domain.Department;
+import org.optaplanner.examples.nurserostering.domain.Machine;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,11 +17,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
-public class DepartmentsEditController implements Initializable {
+public class MachineEditController implements Initializable {
 
 	
 	@FXML
-	private TextField department;;
+	private TextField machines;;
 
 	private Stage dialogStage;
 
@@ -31,15 +31,15 @@ public class DepartmentsEditController implements Initializable {
 	private RosterService rosterService = new RosterServiceImpl();
 	
 
-	private ObservableList<Department> departmentsList = FXCollections.observableArrayList();
+	private ObservableList<Machine> machineList = FXCollections.observableArrayList();
 
-	private Department departments;
+	private Machine machine;
 
-	public ObservableList<Department> getDepartmentsList() {
-		if (!departmentsList.isEmpty())
-			departmentsList.clear();
-		departmentsList = FXCollections.observableList((List<Department>) rosterService.listDepartment());
-		return departmentsList;
+	public ObservableList<Machine> getMachinesList() {
+		if (!machineList.isEmpty())
+			machineList.clear();
+		machineList = FXCollections.observableList((List<Machine>) rosterService.listMachine());
+		return machineList;
 	}
 
 	/**
@@ -65,9 +65,9 @@ public class DepartmentsEditController implements Initializable {
 	 * @param employee
 	 */
 
-	public void setDepartments(Department departments) {
-		this.departments = departments;
-		department.setText(departments.getCode());
+	public void setMachines(Machine machine) {
+		this.machine = machine;
+		machines.setText(machine.getCode());
 	}
 
 	/**
@@ -85,10 +85,10 @@ public class DepartmentsEditController implements Initializable {
 	@FXML
 	private void handleOk() {
 		if (isInputValid()) {
-			String depart = department.getText();
-			departments.setCode(depart);
+			String depart = machines.getText();
+			machine.setCode(depart);
 			okClicked = true;
-			rosterService.updateDepartment(departments);
+			rosterService.updateMachine(machine);
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Information Dialog");
 			alert.setHeaderText(null);
@@ -108,8 +108,8 @@ public class DepartmentsEditController implements Initializable {
 	private boolean isInputValid() {
 		String errorMessage = "";
 
-		if (department.getText() == null || department.getText().length() == 0) {
-			errorMessage += "No valid Department Code!\n";
+		if (machines.getText() == null || machines.getText().length() == 0) {
+			errorMessage += "No valid Machine Code!\n";
 		}
 	
 

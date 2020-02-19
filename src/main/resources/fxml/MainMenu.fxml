@@ -15,14 +15,14 @@
    <children>
       <Pane prefHeight="173.0" prefWidth="980.0" style="-fx-background-color: #2D75E8;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="130.0" layoutY="44.0" text="NeoPlexus Beta Verson 1.1" textFill="WHITE">
+            <Label layoutX="120.0" layoutY="18.0" text="NeoPlexus Machine Rostering Beta Verson 1.1" textFill="WHITE">
                <font>
-                  <Font size="48.0" />
+                  <Font size="38.0" />
                </font>
             </Label>
             <Label layoutX="136.0" layoutY="105.0" text="Staff Rostering" textFill="WHITE">
                <font>
-                  <Font size="19.0" />
+                  <Font size="18.0" />
                </font>
             </Label>
          </children>

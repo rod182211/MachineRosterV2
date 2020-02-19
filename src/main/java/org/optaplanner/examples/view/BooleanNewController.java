@@ -79,7 +79,7 @@ public class BooleanNewController implements Initializable {
 			.observableArrayList("SINGLE_ASSIGNMENT_PER_DAY",
 					"COMPLETE_WEEKENDS", "IDENTICAL_SHIFT_TYPES_DURING_WEEKEND",
 					"NO_NIGHT_SHIFT_BEFORE_FREE_WEEKEND",
-					"ALTERNATIVE_SKILL_CATEGORY","ALTERNATIVE_DEPARTMENT","IS_LOADBALANCED",
+					"ALTERNATIVE_SKILL_CATEGORY","ALTERNATIVE_MACHINE","IS_LOADBALANCED",
 					"IS_CASUAL");
 	/**
 	 * Initializes the controller class. This method is automatically called

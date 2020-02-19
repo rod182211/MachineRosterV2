@@ -37,7 +37,7 @@ public class ShiftDate extends AbstractPersistable implements Comparable<ShiftDa
 
     @OneToMany(mappedBy = "shiftDate")
 	private List<Shift> shiftList;
-
+   
     public int getDayIndex() {
         return dayIndex;
     }
@@ -65,8 +65,9 @@ public class ShiftDate extends AbstractPersistable implements Comparable<ShiftDa
     public void setShiftList(List<Shift> shiftList) {
         this.shiftList = shiftList;
     }
+    
 
-    public int getWeekendSundayIndex() {
+ 	public int getWeekendSundayIndex() {
         switch (date.getDayOfWeek()) {
             case MONDAY:
                 return dayIndex - 1;

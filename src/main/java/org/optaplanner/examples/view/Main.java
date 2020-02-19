@@ -15,7 +15,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainMenu.fxml"));
-        primaryStage.setTitle("NeoPlexus Roster Beta Version 1.0");
+        primaryStage.setTitle("NeoPlexus Machine Rostering Beta Version 1.0");
     //    primaryStage.getIcons().add(new Image("/icons/icon.png"));
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
@@ -23,16 +23,9 @@ public class Main extends Application {
 
    
        public static void main(String[] args) {     
-    	 //  if (HibernateUtil.setSessionFactory()) {
+    	
                launch(args);
-		/*
-		 * HibernateUtil.getSessionFactory().close(); } else { Platform.runLater(() -> {
-		 * Alert alert = new Alert(Alert.AlertType.ERROR);
-		 * alert.setTitle("An error has occured!");
-		 * alert.setHeaderText("Database Connection Error!");
-		 * alert.setContentText("Please contact the developer"); alert.showAndWait();
-		 * Platform.exit(); }); }
-		 */
+		
        }
 
    }

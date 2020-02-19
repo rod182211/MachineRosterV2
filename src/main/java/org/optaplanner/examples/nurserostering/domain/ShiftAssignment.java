@@ -26,8 +26,6 @@ import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 import org.optaplanner.examples.nurserostering.domain.contract.Contract;
-import org.optaplanner.examples.nurserostering.domain.Department;
-import org.optaplanner.examples.nurserostering.domain.ShiftTypeDepartmentRequirement;
 import org.optaplanner.examples.nurserostering.domain.solver.EmployeeStrengthComparator;
 import org.optaplanner.examples.nurserostering.domain.solver.MovableShiftAssignmentSelectionFilter;
 import org.optaplanner.examples.nurserostering.domain.solver.ShiftAssignmentDifficultyComparator;
@@ -44,8 +42,9 @@ public class ShiftAssignment extends AbstractPersistable implements Comparable<S
 
     @ManyToOne
 	private Shift shift;
-    private int indexInShift;
 
+    private int indexInShift;
+   
     // Planning variables: changes during planning, between score calculations.
     @ManyToOne
 	@PlanningVariable(valueRangeProviderRefs = {"employeeRange"},
@@ -75,12 +74,18 @@ public class ShiftAssignment extends AbstractPersistable implements Comparable<S
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
-
+    
+  
+    
+    
     // ************************************************************************
     // Complex methods
     // ************************************************************************
 
-    public ShiftDate getShiftDate() {
+  
+
+	
+	public ShiftDate getShiftDate() {
         return shift.getShiftDate();
     }
 

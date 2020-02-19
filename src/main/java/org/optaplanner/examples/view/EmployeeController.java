@@ -11,6 +11,7 @@ import org.optaplanner.database.HibernateUtil;
 import org.optaplanner.database.RosterService;
 import org.optaplanner.database.RosterServiceImpl;
 import org.optaplanner.examples.nurserostering.domain.Employee;
+import org.optaplanner.examples.nurserostering.domain.EmployeeMachine;
 import org.optaplanner.examples.nurserostering.domain.SkillProficiency;
 import org.optaplanner.examples.nurserostering.domain.contract.Contract;
 
@@ -29,8 +30,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -56,6 +55,8 @@ public class EmployeeController implements Initializable {
 	private Label contractfield;
 	@FXML
 	private ListView<String> skillfield;
+	@FXML
+	private ListView<String> machinefield;
 	@FXML
 	private Label streetnum;
 	@FXML
@@ -103,8 +104,17 @@ public class EmployeeController implements Initializable {
 		skillprofList = FXCollections.observableList((List<SkillProficiency>) rosterService.listSkillProficiency());
 		return skillprofList;
 	}
-	 final ObservableList<String> strings = FXCollections.observableArrayList();
 	
+	private ObservableList<EmployeeMachine> machineList = FXCollections.observableArrayList();
+
+	public ObservableList<EmployeeMachine> getMachineList() {
+		if (!machineList.isEmpty())
+			machineList.clear();
+		machineList = FXCollections.observableList((List<EmployeeMachine>) rosterService.listEmployeeMachine());
+		return machineList;
+	}
+	 final ObservableList<String> strings = FXCollections.observableArrayList();
+	 final ObservableList<String> machines = FXCollections.observableArrayList();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -130,14 +140,15 @@ public class EmployeeController implements Initializable {
 	private void showEmployeeDetails(Employee employee) {
 		if (employee != null) {
 			strings.clear();
-			getSkillprofList();			 
+			machines.clear();
+			getSkillprofList();		
+			getMachineList();
 			employeeId.setText(employee.getEmployeeId());
 			name.setText(employee.getName());
 			contractfield.setText(employee.getContract().getCode());
 			streetnum.setText(employee.getStreetnum());
 			address.setText(employee.getAddress());
 			suburb.setText(employee.getSuburb());
-		    department.setText(employee.getDepartment().getCode());
 			postcode.setText(employee.getPostcode());
 			contactdetails.setText(employee.getContactdetails());
 			
@@ -148,10 +159,22 @@ public class EmployeeController implements Initializable {
 				  strings.add(element.getSkill().getCode());
 				 			
 			 }
-				  skillfield.setItems(strings);
-				  skillfield.setVisible(true);
+				 
 		}
-
+		  for (EmployeeMachine element: machineList)
+		  {
+			  if (element.getEmployee().getName().equals(employee.getName())) {
+			  //place skills into a list
+			  machines.add(element.getMachine().getCode());
+			 			
+		 }
+			 
+	}
+		  machinefield.setItems(machines);
+		  machinefield.setVisible(true);
+		  skillfield.setItems(strings);
+		  skillfield.setVisible(true);
+		  
 		} else { // Employee is null, remove all the text. name.setText("");
 
 			employeeId.setText("");
@@ -161,8 +184,7 @@ public class EmployeeController implements Initializable {
 			address.setText("");
 			suburb.setText("");
 			postcode.setText("");
-            department.setText("");
-			contactdetails.setText("");
+         	contactdetails.setText("");
 		}
 		
 	}
@@ -175,6 +197,7 @@ public class EmployeeController implements Initializable {
 			Employee itemsSelected = employeeTable.getSelectionModel().getSelectedItem();
 			String empname = itemsSelected.getName();
 			getSkillprofList();
+			getMachineList();
 			Alert alertpattern = new Alert(AlertType.CONFIRMATION);
 			alertpattern.setTitle("Request Confirmation");
 			alertpattern.setHeaderText("Are you sure?");
@@ -193,6 +216,21 @@ public class EmployeeController implements Initializable {
 						SkillProficiency p = (SkillProficiency) session.get(SkillProficiency.class, checkedvalue);
 						session.close();
 						rosterService.removeSkillProficiency(p);
+
+					}
+				}
+				
+				for (EmployeeMachine element : machineList) {
+					String checkedemployee = element.getEmployee().getName();
+					long checkedvalue = element.getId();
+
+					if (checkedemployee.contentEquals(empname) ) {
+						
+						session = HibernateUtil.getSessionFactory().getCurrentSession();
+						session.beginTransaction();
+						EmployeeMachine p = (EmployeeMachine) session.get(EmployeeMachine.class, checkedvalue);
+						session.close();
+						rosterService.removeEmployeeMachine(p);
 
 					}
 				}

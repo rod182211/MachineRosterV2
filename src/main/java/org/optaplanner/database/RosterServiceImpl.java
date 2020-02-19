@@ -929,89 +929,117 @@ public class RosterServiceImpl implements RosterService {
 	}
 	
 	@Override
-	public void addDepartment(Department Department) {
-		rosterDAO.addDepartment(Department);
+	public void addMachine(Machine Machine) {
+		rosterDAO.addMachine(Machine);
 	}
 
 	@Override
-	public List<Department> listDepartment() {
-		return rosterDAO.listDepartment();
+	public List<Machine> listMachine() {
+		return rosterDAO.listMachine();
 	}
 	
 	@Override
-	public void removeDepartment(ObservableList<Department> itemsSelected) {
-		rosterDAO.removeDepartment(itemsSelected);
+	public void removeMachine(ObservableList<Machine> itemsSelected) {
+		rosterDAO.removeMachine(itemsSelected);
 	}
 
 	@Override
-	public void updateDepartment(Department department) {
-		rosterDAO.updateDepartment(department);
+	public void updateMachine(Machine department) {
+		rosterDAO.updateMachine(department);
 	}
 
 	@Override
-	public List<Department> listDepartmentId() {
+	public List<Machine> listMachineId() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Department> listDepartmentcode() {
+	public List<Machine> listMachinecode() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<ShiftTypeDepartmentRequirement> listShiftTypeDepartmentRequirement() {
-		return rosterDAO.listShiftTypeDepartmentRequirement();
+	public List<ShiftTypeMachineRequirement> listShiftTypeMachineRequirement() {
+		return rosterDAO.listShiftTypeMachineRequirement();
 	}
 	
 	@Override
-	public void removeShiftTypeDepartmentRequirement(ObservableList<ShiftTypeDepartmentRequirement> itemsSelected) {
-		rosterDAO.removeShiftTypeDepartmentRequirement(itemsSelected);
-	}
-	
-	
-
-	@Override
-	public void updateShiftTypeDepartmentRequirement(ShiftTypeDepartmentRequirement shiftTypeDepartmentRequirement) {
-		rosterDAO.updateShiftTypeDepartmentRequirement(shiftTypeDepartmentRequirement);
-	}
-
-	@Override
-	public void addShiftTypeDepartmentRequirement(ShiftTypeDepartmentRequirement shiftTypeDepartmentRequirement) {
-		rosterDAO.addShiftTypeDepartmentRequirement(shiftTypeDepartmentRequirement);
-	}
-	@Override
-	public List<ShiftTypeDepartmentRequirement> listShiftTypeDepartmentRequirementId() {
-		return rosterDAO.listShiftTypeDepartmentRequirementId();
-	}
-
-	
-
-	@Override
-	public List<EmployeeDepartment> listEmployeeDepartment() {
-		return rosterDAO.listEmployeeDepartment();
-	}
-	
-	@Override
-	public void removeEmployeeDepartment(ObservableList<EmployeeDepartment> itemsSelected) {
-		rosterDAO.removeEmployeeDepartment(itemsSelected);
+	public void removeShiftTypeMachineRequirement(ObservableList<ShiftTypeMachineRequirement> itemsSelected) {
+		rosterDAO.removeShiftTypeMachineRequirement(itemsSelected);
 	}
 	
 	
 
 	@Override
-	public void updateEmployeeDepartment(EmployeeDepartment employeeDepartment) {
-		rosterDAO.updateEmployeeDepartment(employeeDepartment);
+	public void updateShiftTypeMachineRequirement(ShiftTypeMachineRequirement shiftTypeMachineRequirement) {
+		rosterDAO.updateShiftTypeMachineRequirement(shiftTypeMachineRequirement);
 	}
 
 	@Override
-	public void addEmployeeDepartment(EmployeeDepartment employeeDepartment) {
-		rosterDAO.addEmployeeDepartment(employeeDepartment);
+	public void addShiftTypeMachineRequirement(ShiftTypeMachineRequirement shiftTypeMachineRequirement) {
+		rosterDAO.addShiftTypeMachineRequirement(shiftTypeMachineRequirement);
 	}
 	@Override
-	public List<EmployeeDepartment> listEmployeeDepartmentId() {
-		return rosterDAO.listEmployeeDepartmentId();
+	public List<ShiftTypeMachineRequirement> listShiftTypeMachineRequirementId() {
+		return rosterDAO.listShiftTypeMachineRequirementId();
 	}
+
+	
+
+	@Override
+	public List<EmployeeMachine> listEmployeeMachine() {
+		return rosterDAO.listEmployeeMachine();
+	}
+	
+	@Override
+	public void removeEmployeeMachine(EmployeeMachine itemsSelected) {
+		rosterDAO.removeEmployeeMachine(itemsSelected);
+	}
+	
+	
+
+	@Override
+	public void mergeEmployeeMachine(EmployeeMachine employeeMachine) {
+		rosterDAO.mergeEmployeeMachine(employeeMachine);
+	}
+
+	@Override
+	public void addEmployeeMachine(EmployeeMachine employeeMachine) {
+		rosterDAO.addEmployeeMachine(employeeMachine);
+	}
+	@Override
+	public List<EmployeeMachine> listEmployeeMachineId() {
+		return rosterDAO.listEmployeeMachineId();
+	}
+	
+
+	@Override
+	public List<MachineTypeSkillsRequirement> listMachineTypeSkillsRequirement() {
+		return rosterDAO.listMachineTypeSkillsRequirement();
+	}
+	
+	@Override
+	public void removeMachineTypeSkillsRequirement(ObservableList<MachineTypeSkillsRequirement> itemsSelected) {
+		rosterDAO.removeMachineTypeSkillsRequirement(itemsSelected);
+	}
+	
+	
+
+	@Override
+	public void updateMachineTypeSkillsRequirement(MachineTypeSkillsRequirement shiftTypeMachineRequirement) {
+		rosterDAO.updateMachineTypeSkillsRequirement(shiftTypeMachineRequirement);
+	}
+
+	@Override
+	public void addMachineTypeSkillsRequirement(MachineTypeSkillsRequirement shiftTypeMachineRequirement) {
+		rosterDAO.addMachineTypeSkillsRequirement(shiftTypeMachineRequirement);
+	}
+	@Override
+	public List<MachineTypeSkillsRequirement> listMachineTypeSkillsRequirementId() {
+		return rosterDAO.listMachineTypeSkillsRequirementId();
+	}
+
 }
 	

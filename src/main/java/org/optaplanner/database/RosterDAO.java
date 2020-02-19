@@ -270,24 +270,30 @@ public void deletePattern(Pattern itemsSelected);
  public List<CalendarData>listCalendarData();
  
  
- public void addDepartment(Department department);
- public List<Department> listDepartment();
- public List<Department> listDepartmentId();
- public List<Department> listDepartmentcode();
- public void removeDepartment(ObservableList<Department> itemsSelected);
- public void updateDepartment(Department department);
+ public void addMachine(Machine machine);
+ public List<Machine> listMachine();
+ public List<Machine> listMachineId();
+ public List<Machine> listMachinecode();
+ public void removeMachine(ObservableList<Machine> itemsSelected);
+ public void updateMachine(Machine machine);
  
  
  
- public void addShiftTypeDepartmentRequirement(ShiftTypeDepartmentRequirement shiftTypeDepartmentRequirement);
- public void removeShiftTypeDepartmentRequirement (ObservableList<ShiftTypeDepartmentRequirement> itemsSelected);
- public void updateShiftTypeDepartmentRequirement(ShiftTypeDepartmentRequirement  shiftTypeDepartmentRequirement);
- public List<ShiftTypeDepartmentRequirement> listShiftTypeDepartmentRequirementId();
- public List<ShiftTypeDepartmentRequirement>listShiftTypeDepartmentRequirement();
+ public void addShiftTypeMachineRequirement(ShiftTypeMachineRequirement shiftTypeMachineRequirement);
+ public void removeShiftTypeMachineRequirement (ObservableList<ShiftTypeMachineRequirement> itemsSelected);
+ public void updateShiftTypeMachineRequirement(ShiftTypeMachineRequirement  shiftTypeMachineRequirement);
+ public List<ShiftTypeMachineRequirement> listShiftTypeMachineRequirementId();
+ public List<ShiftTypeMachineRequirement>listShiftTypeMachineRequirement();
  
- public void addEmployeeDepartment(EmployeeDepartment employeeDepartment);
- public void removeEmployeeDepartment (ObservableList<EmployeeDepartment> itemsSelected);
- public void updateEmployeeDepartment(EmployeeDepartment  employeeDepartment);
- public List<EmployeeDepartment> listEmployeeDepartmentId();
- public List<EmployeeDepartment>listEmployeeDepartment();
+ public void addEmployeeMachine(EmployeeMachine employeeMachine);
+ public void removeEmployeeMachine (EmployeeMachine itemsSelected);
+ public void mergeEmployeeMachine(EmployeeMachine  employeeMachine);
+ public List<EmployeeMachine> listEmployeeMachineId();
+ public List<EmployeeMachine>listEmployeeMachine();
+ 
+ public void addMachineTypeSkillsRequirement(MachineTypeSkillsRequirement machineTypeSkillsRequirement);
+ public void removeMachineTypeSkillsRequirement (ObservableList<MachineTypeSkillsRequirement> itemsSelected);
+ public void updateMachineTypeSkillsRequirement(MachineTypeSkillsRequirement  machineTypeSkillsRequirement);
+ public List<MachineTypeSkillsRequirement> listMachineTypeSkillsRequirementId();
+ public List<MachineTypeSkillsRequirement>listMachineTypeSkillsRequirement();
 }

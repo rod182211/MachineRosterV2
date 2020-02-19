@@ -57,9 +57,9 @@ public class SettingsController implements Initializable {
 	@FXML
 	private Button btnCoverRequiremtns;
 	@FXML
-	private Button btnShiftTypeDepartmentRequirement;
+	private Button btnShiftTypeMachineRequirement;
 	@FXML
-	private Button btnDepartment;
+	private Button btnMachine;
 
 
 	@FXML
@@ -78,7 +78,7 @@ public class SettingsController implements Initializable {
 			loadStage("/fxml/FreeBefore2Days.fxml");
 
 		} else if (event.getSource() == btnShiftAssignement) {
-			loadStage("/fxml/ShiftAssignment.fxml");
+			loadStage("/fxml/MachineSkillsAssignment.fxml");
 		}
 		else if (event.getSource() ==  btnMinMaxContract) {
 			loadStage("/fxml/MinMax.fxml");
@@ -95,11 +95,11 @@ public class SettingsController implements Initializable {
 		else if (event.getSource() == btnCoverRequiremtns) {
 			loadStage("/fxml/CoverRequirements.fxml");
 		}
-		else if (event.getSource() == btnShiftTypeDepartmentRequirement ) {
-			loadStage("/fxml/ShiftTypeDepartmentRequirement.fxml");
+		else if (event.getSource() == btnShiftTypeMachineRequirement ) {
+			loadStage("/fxml/ShiftTypeMachineRequirement.fxml");
 		}
-		else if (event.getSource() == btnDepartment ) {
-			loadStage("/fxml/Department.fxml");
+		else if (event.getSource() == btnMachine ) {
+			loadStage("/fxml/Machine.fxml");
 		}
 	}
 

@@ -18,8 +18,10 @@ import java.util.ResourceBundle;
 import org.controlsfx.control.CheckComboBox;
 import org.optaplanner.database.RosterService;
 import org.optaplanner.database.RosterServiceImpl;
-import org.optaplanner.examples.nurserostering.domain.Department;
+
 import org.optaplanner.examples.nurserostering.domain.Employee;
+import org.optaplanner.examples.nurserostering.domain.EmployeeMachine;
+import org.optaplanner.examples.nurserostering.domain.Machine;
 import org.optaplanner.examples.nurserostering.domain.Skill;
 import org.optaplanner.examples.nurserostering.domain.SkillProficiency;
 import org.optaplanner.examples.nurserostering.domain.contract.Contract;
@@ -46,8 +48,7 @@ public class EmployeeNewEditDialogController implements Initializable {
 	@FXML
 	private CheckComboBox<Skill> skill;
 	@FXML
-	private ComboBox<Department> department;
-	
+	private CheckComboBox<Machine> machine;
 	@FXML
 	private TextField streetnum;
 	@FXML
@@ -88,13 +89,13 @@ public class EmployeeNewEditDialogController implements Initializable {
 		skillsList = FXCollections.observableList((List<Skill>) rosterService.listSkill());
 		return skillsList;
 	}
-	private ObservableList<Department> departmentList = FXCollections.observableArrayList();
+	private ObservableList<Machine> machineList = FXCollections.observableArrayList();
 
-	public ObservableList<Department> getDepartmentList() {
-		if (!departmentList.isEmpty())
-			departmentList.clear();
-		departmentList = FXCollections.observableList((List<Department>) rosterService.listDepartment());
-		return departmentList;
+	public ObservableList<Machine> getMachineList() {
+		if (!machineList.isEmpty())
+			machineList.clear();
+		machineList = FXCollections.observableList((List<Machine>) rosterService.listMachine());
+		return machineList;
 	}
 
 	 
@@ -125,9 +126,9 @@ public class EmployeeNewEditDialogController implements Initializable {
 		this.employee = employee;
 		getContractList();	
 		getSkillsList();
-		getDepartmentList();
+		getMachineList();
 		contract.setItems(contractList);
-		department.setItems(departmentList);
+	    machine.getItems().addAll(machineList);
 		skill.getItems().addAll(skillsList);
 	 
 	}
@@ -163,9 +164,7 @@ public class EmployeeNewEditDialogController implements Initializable {
 			String name = employeename.getText();
 			employee.setEmployeeId(employeeId);
 			employee.setName(name);
-			Department departmentcode = department.getSelectionModel().getSelectedItem();
 			Contract contractcode = contract.getSelectionModel().getSelectedItem();
-			employee.setDepartment(departmentcode);
 			employee.setContract(contractcode);
 			okClicked = true;
 			rosterService.addEmployee(employee);
@@ -173,10 +172,17 @@ public class EmployeeNewEditDialogController implements Initializable {
 			SkillProficiency prof = new SkillProficiency();
 			prof.setEmployee(employee);
 			for (Skill obj: skillcode) {
-				prof.setSkill(obj);
-			
+ 				prof.setSkill(obj);
+ 				rosterService.addSkillProficiency(prof);
 			}
-			rosterService.addSkillProficiency(prof);
+			ObservableList<Machine> machinecode = machine.getCheckModel().getCheckedItems();
+			EmployeeMachine empmachine = new EmployeeMachine();
+			empmachine.setEmployee(employee);
+			for (Machine obj: machinecode) {
+				empmachine.setMachine(obj);
+ 				rosterService.addEmployeeMachine(empmachine);
+			}
+		
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Information Dialog");
 			alert.setHeaderText(null);
@@ -210,9 +216,9 @@ public class EmployeeNewEditDialogController implements Initializable {
 			errorMessage += "No valid first name!\n";
 		}
 	
-		if (department.getSelectionModel().getSelectedItem()  == null)  {
+	/*	if (department.getSelectionModel().getSelectedItem()  == null)  {
 			errorMessage += "No valid Department!\n";
-		}
+		}*/
 		if (contract.getSelectionModel().getSelectedItem()  == null)  {
 			errorMessage += "No valid contract!\n";
 		}

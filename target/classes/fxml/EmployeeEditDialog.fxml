@@ -45,7 +45,6 @@
             <TextField fx:id="employeeIdField" GridPane.columnIndex="1" />
             <TextField fx:id="employeename" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <ComboBox fx:id="contract" prefHeight="26.0" prefWidth="332.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <ComboBox fx:id="department" prefHeight="25.0" prefWidth="333.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextField fx:id="streetnum" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <TextField fx:id="address" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <TextField fx:id="suburb" GridPane.columnIndex="1" GridPane.rowIndex="7" />
@@ -60,8 +59,9 @@
             <Label text="Post Code" GridPane.rowIndex="8" />
             <Label text="Contact Number" GridPane.rowIndex="9" />
             <Label text="Skill" GridPane.rowIndex="3" />
-            <Label text="Department" GridPane.rowIndex="4" />
+            <Label text="Machine Assignment" GridPane.rowIndex="4" />
             <CheckComboBox fx:id="skill" prefHeight="25.0" prefWidth="362.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <CheckComboBox fx:id="machine" prefHeight="26.0" prefWidth="348.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
       <ButtonBar layoutY="689.0" prefHeight="40.0" prefWidth="571.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="689.0">

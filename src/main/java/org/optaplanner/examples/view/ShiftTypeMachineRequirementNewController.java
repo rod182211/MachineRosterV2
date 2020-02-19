@@ -4,36 +4,32 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-
 import org.optaplanner.database.RosterService;
 import org.optaplanner.database.RosterServiceImpl;
-
-import org.optaplanner.examples.nurserostering.domain.Department;
-
+import org.optaplanner.examples.nurserostering.domain.Machine;
 import org.optaplanner.examples.nurserostering.domain.ShiftType;
-import org.optaplanner.examples.nurserostering.domain.ShiftTypeDepartmentRequirement;
-
+import org.optaplanner.examples.nurserostering.domain.ShiftTypeMachineRequirement;
+import org.optaplanner.examples.nurserostering.domain.SkillProficiency;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
-public class ShiftTypeDepartmentRequirementEditController implements Initializable {
-	
-	
+public class ShiftTypeMachineRequirementNewController implements Initializable {
+
 
 	@FXML
 	private ComboBox<ShiftType> shiftType;
 	@FXML
-	private ComboBox<Department> department;
+	private ComboBox<Machine> machine;
 	
 	private Stage dialogStage;
 
-
+	
 
 	private boolean okClicked = false;
 
@@ -47,14 +43,14 @@ public class ShiftTypeDepartmentRequirementEditController implements Initializab
 		shiftListId = FXCollections.observableList((List<ShiftType>) rosterService.listShiftType());
 		return shiftListId;
 	}
-	private ObservableList<Department> departmentList = FXCollections.observableArrayList();
-	private ShiftTypeDepartmentRequirement departments;
+	private ObservableList<Machine> machineList = FXCollections.observableArrayList();
+	private ShiftTypeMachineRequirement machines;
 
-	public ObservableList<Department> getDepartmentList() {
-		if (!departmentList.isEmpty())
-			departmentList.clear();
-		departmentList = FXCollections.observableList((List<Department>) rosterService.listDepartment());
-		return departmentList;
+	public ObservableList<Machine> getMachineList() {
+		if (!machineList.isEmpty())
+			machineList.clear();
+		machineList = FXCollections.observableList((List<Machine>) rosterService.listMachine());
+		return machineList;
 	}
 	/**
 	 * Initializes the controller class. This method is automatically called after
@@ -83,14 +79,14 @@ public class ShiftTypeDepartmentRequirementEditController implements Initializab
 	 * @param employee
 	 */
 	
-	public void setShiftTypeDepartmentRequirements(ShiftTypeDepartmentRequirement departments) {
-		this.departments = departments;
+	public void setShiftTypeMachineRequirements(ShiftTypeMachineRequirement machines) {
+		this.machines = machines;
 		 getShiftListId();
-		 getDepartmentList();
-		 department.setItems(departmentList);
-		 department.setValue(departments.getDepartment());
+		 getMachineList();
+		 machine.setItems(machineList);
+		 machine.setValue(machines.getMachine());
 		 shiftType.setItems(shiftListId);
-		 shiftType.setValue(departments.getShiftType());
+		 shiftType.setValue(machines.getShiftType());
 		
 	
 	}
@@ -111,9 +107,9 @@ public class ShiftTypeDepartmentRequirementEditController implements Initializab
 	private void handleOk() {
 		if (isInputValid()) {
 		ShiftType type = shiftType.getSelectionModel().getSelectedItem();
-		departments.setShiftType(type);
-		Department deptype = department.getSelectionModel().getSelectedItem();
-		departments.setDepartment(deptype);
+		machines.setShiftType(type);
+		Machine deptype = machine.getSelectionModel().getSelectedItem();
+		machines.setMachine(deptype);
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Information Dialog");
 		alert.setHeaderText(null);
@@ -121,11 +117,11 @@ public class ShiftTypeDepartmentRequirementEditController implements Initializab
 		alert.showAndWait();
 		dialogStage.close();
 		okClicked = true;
-		rosterService.updateShiftTypeDepartmentRequirement(departments);
+		rosterService.addShiftTypeMachineRequirement(machines);
 
 	}
-	
 	}
+	
 
 	/**
 	 * Called when the user clicks cancel.
@@ -140,8 +136,8 @@ public class ShiftTypeDepartmentRequirementEditController implements Initializab
 		
 		  if (shiftType.getSelectionModel().getSelectedItem() == null) {
 			  errorMessage += "No valid  Shift Type!\n"; }
-		  if (department.getSelectionModel().getSelectedItem() == null) {
-			  errorMessage += "No valid Department!\n"; }
+		  if (machine.getSelectionModel().getSelectedItem() == null) {
+			  errorMessage += "No valid Machine!\n"; }
 		 
 		if (errorMessage.length() == 0) {
 			return true;

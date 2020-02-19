@@ -108,7 +108,7 @@ public class NurseRosterExcelExporter
 
 									if (obj.getShiftType().getCode()
 											.equalsIgnoreCase("D")) {
-										style = workbook.createCellStyle();
+									    style = workbook.createCellStyle();
 										style.setFillForegroundColor(
 												IndexedColors.BLUE.getIndex());
 										style.setFillPattern(

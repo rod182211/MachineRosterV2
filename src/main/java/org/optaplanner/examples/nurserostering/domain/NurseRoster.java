@@ -56,7 +56,7 @@ public class NurseRoster extends AbstractPersistable {
     private List<Skill> skillList;
     @ProblemFactCollectionProperty
     private List<ShiftType> shiftTypeList;
-    private List<ShiftTypeSkillRequirement> shiftTypeSkillRequirementList;
+   // private List<ShiftTypeSkillRequirement> shiftTypeSkillRequirementList;
     @ProblemFactCollectionProperty
     private List<Pattern> patternList;
     @ProblemFactCollectionProperty
@@ -93,11 +93,13 @@ public class NurseRoster extends AbstractPersistable {
     @PlanningEntityCollectionProperty
     private List<ShiftAssignment> shiftAssignmentList;
     @ProblemFactCollectionProperty  
-    private List<Department> departmentList;
+    private List<Machine> machineList;
+    @ProblemFactCollectionProperty  
+    private List<EmployeeMachine> employeeMachineList;
     @ProblemFactCollectionProperty
-    private List<ShiftTypeDepartmentRequirement> shiftTypeDepartmentRequirementList;
+    private List<ShiftTypeMachineRequirement> shiftTypeMachineRequirementList;
     @ProblemFactCollectionProperty
-    private List<EmployeeDepartment> employeeDepartmentList;
+    private List<MachineTypeSkillsRequirement> machineTypeSkillsRequirementList;
     
 
 	@PlanningScore
@@ -139,14 +141,14 @@ public class NurseRoster extends AbstractPersistable {
         this.shiftTypeList = shiftTypeList;
     }
 
- 
+ /*
 	public List<ShiftTypeSkillRequirement> getShiftTypeSkillRequirementList() {
         return shiftTypeSkillRequirementList;
     }
 
     public void setShiftTypeSkillRequirementList(List<ShiftTypeSkillRequirement> shiftTypeSkillRequirementList) {
         this.shiftTypeSkillRequirementList = shiftTypeSkillRequirementList;
-    }
+    }*/
 
  
 	public List<Pattern> getPatternList() {
@@ -296,31 +298,38 @@ public class NurseRoster extends AbstractPersistable {
 		this.trainingRequestList = trainingRequestList;
 	}
 	
+	public List<Machine> getMachineList() {
+		return machineList;
+	}
+
+	public void setMachineList(List<Machine> machineList) {
+		this.machineList = machineList;
+	}
+
 	
 
-	public List<Department> getDepartmentList() {
-		return departmentList;
+	public List<EmployeeMachine> getEmployeeMachineList() {
+		return employeeMachineList;
 	}
 
-	public void setDepartmentList(List<Department> departmentList) {
-		this.departmentList = departmentList;
+	public void setEmployeeMachineList(List<EmployeeMachine> employeeMachineList) {
+		this.employeeMachineList = employeeMachineList;
 	}
 
-	public List<ShiftTypeDepartmentRequirement> getShiftTypeDepartmentRequirementList() {
-		return shiftTypeDepartmentRequirementList;
+	public List<ShiftTypeMachineRequirement> getShiftTypeMachineRequirementList() {
+		return shiftTypeMachineRequirementList;
 	}
 
-	public void setShiftTypeDepartmentRequirementList(
-			List<ShiftTypeDepartmentRequirement> shiftTypeDepartmentRequirementList) {
-		this.shiftTypeDepartmentRequirementList = shiftTypeDepartmentRequirementList;
+	public void setShiftTypeMachineRequirementList(List<ShiftTypeMachineRequirement> shiftTypeMachineRequirementList) {
+		this.shiftTypeMachineRequirementList = shiftTypeMachineRequirementList;
 	}
 
-	public List<EmployeeDepartment> getEmployeeDepartmentList() {
-		return employeeDepartmentList;
+	public List<MachineTypeSkillsRequirement> getMachineTypeSkillsRequirementList() {
+		return machineTypeSkillsRequirementList;
 	}
 
-	public void setEmployeeDepartmentList(List<EmployeeDepartment> employeeDepartmentList) {
-		this.employeeDepartmentList = employeeDepartmentList;
+	public void setMachineTypeSkillsRequirementList(List<MachineTypeSkillsRequirement> machineTypeSkillsRequirementList) {
+		this.machineTypeSkillsRequirementList = machineTypeSkillsRequirementList;
 	}
 
 	public HardSoftScore getScore() {

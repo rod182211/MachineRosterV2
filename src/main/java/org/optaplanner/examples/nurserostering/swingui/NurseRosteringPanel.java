@@ -85,7 +85,7 @@ public class NurseRosteringPanel extends SolutionPanel<NurseRoster> {
 	private EmployeePanel unassignedPanel;
 	private Map<Employee, EmployeePanel> employeeToPanelMap;
 
-	private int count;
+
 
 	
 
@@ -278,11 +278,11 @@ public class NurseRosteringPanel extends SolutionPanel<NurseRoster> {
 				employeeMap.put(workingEmployee.getName(), workingEmployee);
 				
 			}
-			ShiftTypeSkillRequirement oldshifttypeskill = nurseRoster.getShiftTypeSkillRequirementList()
+			/*ShiftTypeSkillRequirement oldshifttypeskill = nurseRoster.getShiftTypeSkillRequirementList()
 							.get(nurseRoster.getShiftTypeSkillRequirementList().size() - 1);
 				long shiftTypeSkillRequirementId =  oldshifttypeskill.getId() + 1L;
 			List<ShiftTypeSkillRequirement> coverRequirementElementList = (List<ShiftTypeSkillRequirement>) rosterService
-					.listShiftTypeSkillRequirement();
+					.listShiftTypeSkillRequirement();*/
 			List<ShiftType> shiftTypeElementList = (List<ShiftType>) nurseRoster.getShiftTypeList();
 			List<ShiftType> shiftTypeList = new ArrayList<>(shiftTypeElementList.size());
 			shiftTypeMap = new HashMap<>(shiftTypeElementList.size());
@@ -312,7 +312,7 @@ public class NurseRosteringPanel extends SolutionPanel<NurseRoster> {
 
 				index++;
 			}
-			for (ShiftTypeSkillRequirement skillElement : coverRequirementElementList) {
+			/*for (ShiftTypeSkillRequirement skillElement : coverRequirementElementList) {
 				ShiftTypeSkillRequirement shiftTypeSkillRequirement = new ShiftTypeSkillRequirement();
 				shiftTypeSkillRequirement.setId(shiftTypeSkillRequirementId);
 				ShiftType type = skillElement.getShiftType();
@@ -327,10 +327,10 @@ public class NurseRosteringPanel extends SolutionPanel<NurseRoster> {
 				shiftTypeSkillRequirement.setSkill(skillupdate);
 				shiftTypeSkillRequirementList.add(shiftTypeSkillRequirement);
 				shiftTypeSkillRequirementId++;
-			}
+			}*/
 
 			nurseRoster.setShiftTypeList(shiftTypeList);
-			nurseRoster.setShiftTypeSkillRequirementList(shiftTypeSkillRequirementList);
+			//nurseRoster.setShiftTypeSkillRequirementList(shiftTypeSkillRequirementList);
 
 			int shiftListSize = shiftDateMap.size() * shiftTypeList.size();
 

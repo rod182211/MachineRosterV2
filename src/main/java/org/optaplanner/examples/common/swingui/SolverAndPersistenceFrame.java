@@ -750,11 +750,7 @@ public class SolverAndPersistenceFrame<Solution_> extends JFrame {
 
     private class ShowConstraintMatchesDialogAction extends AbstractAction {
 
-        /**
-		 * 
-		 */
-		private static final long serialVersionUID = 2433126833106755845L;
-
+      
 		public ShowConstraintMatchesDialogAction() {
             super("Constraint matches", new ImageIcon(SolverAndPersistenceFrame.class.getResource("showConstraintMatchesDialogAction.png")));
         }

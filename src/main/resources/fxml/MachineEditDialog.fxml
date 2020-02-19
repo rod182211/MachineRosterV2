@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="230.0" prefWidth="390.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.optaplanner.examples.view.MachineEditController">
+   <effect>
+      <DropShadow />
+   </effect>
+   <children>
+      <Pane prefHeight="68.0" prefWidth="390.0" style="-fx-background-color: #8AC5D1;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="applicatonname" layoutX="114.0" layoutY="14.0" text="Edit Machine" textFill="WHITE">
+               <font>
+                  <Font size="35.0" />
+               </font>
+            </Label>
+            <MaterialDesignIconView fill="#171717" glyphName="ACCOUNT_CARD_DETAILS" layoutX="22.0" layoutY="64.0" size="80" />
+         </children>
+      </Pane>
+      <GridPane layoutX="6.0" layoutY="70.0" prefHeight="80.0" prefWidth="376.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="182.0" minWidth="10.0" prefWidth="107.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="269.0" minWidth="10.0" prefWidth="269.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TextField fx:id="machines" promptText="Enter Machine" GridPane.columnIndex="1" />
+            <Label text="Machine" />
+         </children>
+      </GridPane>
+      <ButtonBar layoutX="6.0" layoutY="176.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <buttons>
+          <Button mnemonicParsing="false" onAction="#handleCancel" styleClass="buttonacancel" stylesheets="@fullpackstyling.css" text="Cancel" />
+            <Button layoutX="315.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleOk" styleClass="buttonok" stylesheets="@fullpackstyling.css" text="Ok.." />
+        </buttons>
+      </ButtonBar>
+   </children>
+</AnchorPane>

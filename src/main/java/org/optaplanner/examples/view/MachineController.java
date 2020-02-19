@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
 import org.optaplanner.database.RosterService;
 import org.optaplanner.database.RosterServiceImpl;
 
-import org.optaplanner.examples.nurserostering.domain.Department;
+import org.optaplanner.examples.nurserostering.domain.Machine;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -27,70 +27,70 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class DepartmentController implements Initializable {
+public class MachineController implements Initializable {
 	@FXML
-	private AnchorPane DepartmentsTab;
+	private AnchorPane machinesTab;
 
 	@FXML
-	private TableView<Department> DepartmentsTable;
-
-	
-	@FXML
-	private TableColumn<Department, String> DepartmentsCol;
+	private TableView<Machine> machineTable;
 
 	
 	@FXML
-	private Label Departmentfield;
+	private TableColumn<Machine, String> machinesCol;
+
+	
+	@FXML
+	private Label machinefield;
 
 
 
 	private RosterService rosterService = new RosterServiceImpl();
-	private ObservableList<Department> departmentsList = FXCollections.observableArrayList();
+	private ObservableList<Machine> departmentsList = FXCollections.observableArrayList();
 
-	public ObservableList<Department> getDepartmentsList() {
+	public ObservableList<Machine> getMachinesList() {
 		if (!departmentsList.isEmpty())
 			departmentsList.clear();
-		departmentsList = FXCollections.observableList((List<Department>) rosterService.listDepartment());
+		departmentsList = FXCollections.observableList((List<Machine>) rosterService.listMachine());
 		return departmentsList;
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		loadDepartment();
+		loadMachine();
 	}
 
-	public void loadDepartment() {
-		DepartmentsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		DepartmentsTable.getItems().clear();
-		DepartmentsTable.setItems(getDepartmentsList());
-		DepartmentsCol.setCellValueFactory(new PropertyValueFactory<Department, String>("code"));
-		showDepartmentsDetails(null);
-		DepartmentsTable.getSelectionModel().selectedItemProperty()
-				.addListener((observable, oldValue, newValue) -> showDepartmentsDetails(newValue));
+	public void loadMachine() {
+		machineTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		machineTable.getItems().clear();
+		machineTable.setItems(getMachinesList());
+		machinesCol.setCellValueFactory(new PropertyValueFactory<Machine, String>("code"));
+		showMachinesDetails(null);
+		machineTable.getSelectionModel().selectedItemProperty()
+				.addListener((observable, oldValue, newValue) -> showMachinesDetails(newValue));
 
 	}
 
-	private void showDepartmentsDetails(Department departments) {
+	private void showMachinesDetails(Machine departments) {
 		if (departments != null) {
-			// Fill the labels with info from the Department object.
+			// Fill the labels with info from the Machine object.
 
-			Departmentfield.setText(departments.getCode());
+			machinefield.setText(departments.getCode());
 		
 
 		} else {
-			// Department is null, remove all the text.
+			// Machine is null, remove all the text.
 			
-			Departmentfield.setText("");
+			machinefield.setText("");
 
 		}
 	}
 
 	@FXML
-	private void handleDeleteDepartments() {
-		int selectItem = DepartmentsTable.getSelectionModel().getSelectedIndex();
+	private void handleDeleteMachine() {
+		int selectItem = machineTable.getSelectionModel().getSelectedIndex();
 		if (selectItem >= 0) {
-			 ObservableList<Department> itemsSelected;
-			 itemsSelected = DepartmentsTable.getSelectionModel().getSelectedItems();
+			 ObservableList<Machine> itemsSelected;
+			 itemsSelected = machineTable.getSelectionModel().getSelectedItems();
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Confirmation Dialog");
 			alert.setHeaderText("Look, a Confirmation Dialog");
@@ -98,12 +98,12 @@ public class DepartmentController implements Initializable {
 
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() == ButtonType.OK) {
-				rosterService.removeDepartment(itemsSelected);
-				loadDepartment();
+				rosterService.removeMachine(itemsSelected);
+				loadMachine();
 			} else
 
 			{
-				loadDepartment();
+				loadMachine();
 			}
 
 		} else {
@@ -119,13 +119,13 @@ public class DepartmentController implements Initializable {
 	}
 	
 	@FXML
-	private void handleEditDepartments() {
-		Department selectedSkills = DepartmentsTable.getSelectionModel().getSelectedItem();
+	private void handleEditMachine() {
+		Machine selectedSkills = machineTable.getSelectionModel().getSelectedItem();
 
 		if (selectedSkills != null) {
-			boolean okClicked = showDepartmentsEditDialog(selectedSkills);
+			boolean okClicked = showMachinesEditDialog(selectedSkills);
 			if (okClicked) {
-				showDepartmentsDetails(selectedSkills);
+				showMachinesDetails(selectedSkills);
 			}
 
 		} else {
@@ -138,17 +138,17 @@ public class DepartmentController implements Initializable {
 
 			alert.showAndWait();
 		}
-		loadDepartment();
+		loadMachine();
 	}
 
 	@FXML
-	private void handleNewDepartments() {
-		Department tempDepartments = new Department();
-		boolean okClicked = showDepartmentsNewEditDialog(tempDepartments);
+	private void handleNewMachine() {
+		Machine tempMachines = new Machine();
+		boolean okClicked = showMachinesNewEditDialog(tempMachines);
 
 		if (okClicked) {
 
-			loadDepartment();
+			loadMachine();
 
 		}
 	}
@@ -156,16 +156,16 @@ public class DepartmentController implements Initializable {
 	
 
 
-	public boolean showDepartmentsEditDialog(Department departments) {
+	public boolean showMachinesEditDialog(Machine machine) {
 		try {
 			// Load the fxml file and create a new stage for the popup dialog.
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("/fxml/DepartmentEditDialog.fxml"));
+			loader.setLocation(getClass().getResource("/fxml/MachineEditDialog.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 
 			// Create the dialog Stage.
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Edit Departments");
+			dialogStage.setTitle("Edit Machines");
 			/*
 			 * dialogStage.initModality(Modality.WINDOW_MODAL);
 			 * dialogStage.initOwner(primaryStage);
@@ -174,9 +174,9 @@ public class DepartmentController implements Initializable {
 			dialogStage.setScene(scene);
 
 			// Set the person into the controller.
-			DepartmentsEditController controller = loader.getController();
+			MachineEditController controller = loader.getController();
 			controller.setDialogStage(dialogStage);
-			controller.setDepartments(departments);
+			controller.setMachines(machine);
 
 			// Show the dialog and wait until the user closes it
 			dialogStage.showAndWait();
@@ -188,23 +188,23 @@ public class DepartmentController implements Initializable {
 		}
 	}
 
-	public boolean showDepartmentsNewEditDialog(Department departments) {
+	public boolean showMachinesNewEditDialog(Machine machine) {
 		try {
 			// Load the fxml file and create a new stage for the popup dialog.
 
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DepartmentNewDialog.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MachineNewDialog.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 
 			// Create the dialog Stage.
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("New Department");
+			dialogStage.setTitle("New Machine");
 			Scene scene = new Scene(page);
 			dialogStage.setScene(scene);
 
 			// Set the person into the controller.
-			DepartmentsNewController controller = loader.getController();
+			MachineNewController controller = loader.getController();
 			controller.setDialogStage(dialogStage);
-			controller.setDepartments(departments);
+			controller.setMachines(machine);
 
 			// Show the dialog and wait until the user closes it
 			dialogStage.showAndWait();

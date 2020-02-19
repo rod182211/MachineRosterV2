@@ -23,7 +23,6 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OrderColumn;
 
-import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 
 @Entity
@@ -38,9 +37,6 @@ public class Shift extends AbstractPersistable{
     @OrderColumn
     private int index;
    
-
-
-
 	private int requiredEmployeeSize;
 
     public ShiftDate getShiftDate() {
@@ -74,18 +70,20 @@ public class Shift extends AbstractPersistable{
     public void setRequiredEmployeeSize(int requiredEmployeeSize) {
         this.requiredEmployeeSize = requiredEmployeeSize;
     }
-    
-    public String getLabel() {
-        return shiftType.getLabel() + " of " + shiftDate.getLabel();
-    }
 
-
-   
-    @Override
-    public String toString() {
-        return shiftDate + "/" + shiftType;
-    }
+	@Override
+	public String toString() {
+		return "Shift [shiftDate=" + shiftDate + ", shiftType=" + shiftType + "]";
+	}
+      
 
 	
+
+
+
+	
+
+	
+		
 
 }

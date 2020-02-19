@@ -2,11 +2,11 @@ package org.optaplanner.examples.nurserostering.domain;
 
 import javax.persistence.Entity;
 
-import org.apache.commons.lang3.builder.CompareToBuilder;
+
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 
 @Entity
-public class Department extends AbstractPersistable  {
+public class Machine extends AbstractPersistable  {
 
     private String code;
 
