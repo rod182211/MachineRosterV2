@@ -29,7 +29,6 @@ import org.optaplanner.examples.nurserostering.domain.NurseRosterParametrization
 import org.optaplanner.examples.nurserostering.domain.Shift;
 import org.optaplanner.examples.nurserostering.domain.ShiftDate;
 import org.optaplanner.examples.nurserostering.domain.ShiftType;
-import org.optaplanner.examples.nurserostering.domain.ShiftTypeSkillRequirement;
 import org.optaplanner.examples.nurserostering.domain.MachineTypeSkillsRequirement;
 import org.optaplanner.examples.nurserostering.domain.Skill;
 import org.optaplanner.examples.nurserostering.domain.Machine;
@@ -616,9 +615,12 @@ rule "alternativeSkill"
         $contractLine : BooleanContractLine(contractLineType == ContractLineType.ALTERNATIVE_SKILL_CATEGORY, enabled == true,
             $contract : contract)
         ShiftAssignment(contract == $contract, $employee : employee, $shiftType : shiftType)
-        ShiftTypeSkillRequirement(shiftType == $shiftType, $skill : skill)
-        not SkillProficiency(employee == $employee, skill == $skill)
+        MachineTypeSkillsRequirement(shiftType == $shiftType, $skill : skill, $machine : machine)
+        
+         not SkillProficiency(employee == $employee, skill == $skill)
+
     then
+    System.out.println("Using");
         scoreHolder.addSoftConstraintMatch(kcontext, - $contractLine.getWeight());
 end
 
@@ -630,10 +632,10 @@ rule "alternativeMachine"
             $contract : contract)
         ShiftAssignment(contract == $contract, $employee : employee, $shiftType : shiftType )
         ShiftTypeMachineRequirement(shiftType == $shiftType, $machine : machine)        
-        MachineTypeSkillsRequirement(machine ==$machine, $skill : skill)
-        
+       
+         not EmployeeMachine(employee == $employee, machine == $machine)
     then
-   
+     System.out.println("Using Machine");
      scoreHolder.addSoftConstraintMatch(kcontext, - $contractLine.getWeight());
 end
 

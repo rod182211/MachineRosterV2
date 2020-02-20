@@ -42,7 +42,7 @@ import org.optaplanner.examples.nurserostering.domain.Shift;
 import org.optaplanner.examples.nurserostering.domain.ShiftAssignment;
 import org.optaplanner.examples.nurserostering.domain.ShiftDate;
 import org.optaplanner.examples.nurserostering.domain.ShiftType;
-import org.optaplanner.examples.nurserostering.domain.ShiftTypeSkillRequirement;
+//import org.optaplanner.examples.nurserostering.domain.ShiftTypeSkillRequirement;
 import org.optaplanner.examples.nurserostering.domain.Skill;
 import org.optaplanner.examples.nurserostering.domain.SkillProficiency;
 import org.optaplanner.examples.nurserostering.domain.WeekendDefinition;
@@ -219,8 +219,8 @@ public class NurseRosteringImporter extends AbstractXmlSolutionImporter<NurseRos
             shiftTypeMap = new HashMap<>(shiftTypeElementList.size());
             long id = 0L;
             int index = 0;
-            List<ShiftTypeSkillRequirement> shiftTypeSkillRequirementList
-                    = new ArrayList<>(shiftTypeElementList.size() * 2);
+          //  List<ShiftTypeSkillRequirement> shiftTypeSkillRequirementList
+          //          = new ArrayList<>(shiftTypeElementList.size() * 2);
             long shiftTypeSkillRequirementId = 0L;
             for (Element element : shiftTypeElementList) {
                 assertElementName(element, "Shift");
@@ -240,16 +240,16 @@ public class NurseRosteringImporter extends AbstractXmlSolutionImporter<NurseRos
                     List<Element> skillElementList = (List<Element>) skillsElement.getChildren();
                     for (Element skillElement : skillElementList) {
                         assertElementName(skillElement, "Skill");
-                        ShiftTypeSkillRequirement shiftTypeSkillRequirement = new ShiftTypeSkillRequirement();
-                        shiftTypeSkillRequirement.setId(shiftTypeSkillRequirementId);
-                        shiftTypeSkillRequirement.setShiftType(shiftType);
+                   //     ShiftTypeSkillRequirement shiftTypeSkillRequirement = new ShiftTypeSkillRequirement();
+                    //    shiftTypeSkillRequirement.setId(shiftTypeSkillRequirementId);
+                   //     shiftTypeSkillRequirement.setShiftType(shiftType);
                         Skill skill = skillMap.get(skillElement.getText());
                         if (skill == null) {
                             throw new IllegalArgumentException("The skill (" + skillElement.getText()
                                     + ") of shiftType (" + shiftType.getCode() + ") does not exist.");
                         }
-                        shiftTypeSkillRequirement.setSkill(skill);
-                        shiftTypeSkillRequirementList.add(shiftTypeSkillRequirement);
+                     //   shiftTypeSkillRequirement.setSkill(skill);
+                     //   shiftTypeSkillRequirementList.add(shiftTypeSkillRequirement);
                         shiftTypeSkillRequirementId++;
                     }
                 }

@@ -515,39 +515,36 @@ public class RosterServiceImpl implements RosterService {
 	public void updateShiftType(ShiftType shiftype) {
 		rosterDAO.updateShiftType(shiftype);
 	}
-	@Override
-	public void addShiftTypeSkillRequirement(ShiftTypeSkillRequirement skillrequirement) {
-		rosterDAO.addShiftTypeSkillRequirement(skillrequirement);
-	}
 
-	@Override
-	public List<ShiftTypeSkillRequirement> listShiftTypeSkillRequirement() {
-		return rosterDAO.listShiftTypeSkillRequirement();
-	}
-	@Override
-	public List<ShiftTypeSkillRequirement> listShiftTypeSkillRequirementday() {
-		return rosterDAO.listShiftTypeSkillRequirementday();
-	}
-	
-	@Override
-	public void removeShiftTypeSkillRequirement(ObservableList<ShiftTypeSkillRequirement> itemsSelected) {
-		rosterDAO.removeShiftTypeSkillRequirement(itemsSelected);
-	}
-
-	@Override
-	public void updateShiftTypeSkillRequirement(ShiftTypeSkillRequirement skillrequirement) {
-		rosterDAO.updateShiftTypeSkillRequirement(skillrequirement);
-	}
-
-	@Override
-	public List<ShiftTypeSkillRequirement> listShiftTypeSkillRequirementId() {
-		return rosterDAO.listShiftTypeSkillRequirementId();
-	}
-
-	@Override
-	public List<ShiftTypeSkillRequirement> listShiftTypeSkillRequirementcode() {
-		return rosterDAO.listShiftTypeSkillRequirementcode();
-	}
+	/*
+	 * @Override public void addShiftTypeSkillRequirement(ShiftTypeSkillRequirement
+	 * skillrequirement) { rosterDAO.addShiftTypeSkillRequirement(skillrequirement);
+	 * }
+	 * 
+	 * @Override public List<ShiftTypeSkillRequirement>
+	 * listShiftTypeSkillRequirement() { return
+	 * rosterDAO.listShiftTypeSkillRequirement(); }
+	 * 
+	 * @Override public List<ShiftTypeSkillRequirement>
+	 * listShiftTypeSkillRequirementday() { return
+	 * rosterDAO.listShiftTypeSkillRequirementday(); }
+	 * 
+	 * @Override public void
+	 * removeShiftTypeSkillRequirement(ObservableList<ShiftTypeSkillRequirement>
+	 * itemsSelected) { rosterDAO.removeShiftTypeSkillRequirement(itemsSelected); }
+	 * 
+	 * @Override public void
+	 * updateShiftTypeSkillRequirement(ShiftTypeSkillRequirement skillrequirement) {
+	 * rosterDAO.updateShiftTypeSkillRequirement(skillrequirement); }
+	 * 
+	 * @Override public List<ShiftTypeSkillRequirement>
+	 * listShiftTypeSkillRequirementId() { return
+	 * rosterDAO.listShiftTypeSkillRequirementId(); }
+	 * 
+	 * @Override public List<ShiftTypeSkillRequirement>
+	 * listShiftTypeSkillRequirementcode() { return
+	 * rosterDAO.listShiftTypeSkillRequirementcode(); }
+	 */
 	@Override
 	public void addSkillProficiency(SkillProficiency skillprof) {
 		rosterDAO.addSkillProficiency(skillprof);

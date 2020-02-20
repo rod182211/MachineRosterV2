@@ -83,14 +83,17 @@ public void deletePattern(Pattern itemsSelected);
  public List<Contract> listContractcode();
  
  
- public List<ShiftTypeSkillRequirement> listShiftTypeSkillRequirement();
- public void addShiftTypeSkillRequirement(ShiftTypeSkillRequirement skillrequirement);
- public void removeShiftTypeSkillRequirement(ObservableList<ShiftTypeSkillRequirement> itemsSelected);
- public void updateShiftTypeSkillRequirement(ShiftTypeSkillRequirement skillrequirement);
- public List<ShiftTypeSkillRequirement> listShiftTypeSkillRequirementId();
- public List<ShiftTypeSkillRequirement> listShiftTypeSkillRequirementcode();
- public List<ShiftTypeSkillRequirement> listShiftTypeSkillRequirementday();
- 
+	/*
+	 * public List<ShiftTypeSkillRequirement> listShiftTypeSkillRequirement();
+	 * public void addShiftTypeSkillRequirement(ShiftTypeSkillRequirement
+	 * skillrequirement); public void
+	 * removeShiftTypeSkillRequirement(ObservableList<ShiftTypeSkillRequirement>
+	 * itemsSelected); public void
+	 * updateShiftTypeSkillRequirement(ShiftTypeSkillRequirement skillrequirement);
+	 * public List<ShiftTypeSkillRequirement> listShiftTypeSkillRequirementId();
+	 * public List<ShiftTypeSkillRequirement> listShiftTypeSkillRequirementcode();
+	 * public List<ShiftTypeSkillRequirement> listShiftTypeSkillRequirementday();
+	 */
  public List<BooleanContractLine> listBooleanContractLine();
  public void addBooleanContractLine(BooleanContractLine booleandata);
  public void removeBooleanContractLine(ObservableList<BooleanContractLine> itemsSelected);

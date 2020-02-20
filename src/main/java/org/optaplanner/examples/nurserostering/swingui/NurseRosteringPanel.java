@@ -35,7 +35,7 @@ import org.optaplanner.examples.nurserostering.domain.Shift;
 import org.optaplanner.examples.nurserostering.domain.ShiftAssignment;
 import org.optaplanner.examples.nurserostering.domain.ShiftDate;
 import org.optaplanner.examples.nurserostering.domain.ShiftType;
-import org.optaplanner.examples.nurserostering.domain.ShiftTypeSkillRequirement;
+
 import org.optaplanner.examples.nurserostering.domain.Skill;
 import org.optaplanner.examples.nurserostering.domain.contract.Contract;
 import org.optaplanner.examples.nurserostering.domain.pattern.Pattern;
@@ -287,9 +287,10 @@ public class NurseRosteringPanel extends SolutionPanel<NurseRoster> {
 			List<ShiftType> shiftTypeList = new ArrayList<>(shiftTypeElementList.size());
 			shiftTypeMap = new HashMap<>(shiftTypeElementList.size());
 			int index = 0;
-			List<ShiftTypeSkillRequirement> shiftTypeSkillRequirementList = new ArrayList<>(
-					shiftTypeElementList.size() * 2);
-
+			/*
+			 * List<ShiftTypeSkillRequirement> shiftTypeSkillRequirementList = new
+			 * ArrayList<>( shiftTypeElementList.size() * 2);
+			 */
 			for (ShiftType shiftelement : shiftTypeElementList) {
 				ShiftType shiftType = new ShiftType();
 				long Id = shiftelement.getId();

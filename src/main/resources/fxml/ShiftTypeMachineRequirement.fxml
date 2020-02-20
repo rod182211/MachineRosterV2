@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="669.0" prefWidth="1083.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.optaplanner.examples.view.ShiftTypeMachineController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="669.0" prefWidth="1083.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.optaplanner.examples.view.ShiftTypeMachineController">
    <children>
       <SplitPane dividerPositions="0.580018501387604" layoutY="116.0" prefHeight="329.0" prefWidth="656.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="116.0">
         <items>
@@ -52,7 +52,7 @@
                         <Label fx:id="shiftType" text="Shift Type" GridPane.rowIndex="1" />
                         <Label fx:id="shiftType" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="Machine" />
-                        <Label fx:id="department" text="Label" GridPane.columnIndex="1" />
+                        <Label fx:id="machines" text="Label" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
                </children>

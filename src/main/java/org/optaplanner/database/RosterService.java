@@ -78,13 +78,17 @@ public interface  RosterService {
     public void updatePattern(Pattern pattern);
     public void deletePattern(Pattern itemsSelected);
           
-    public void addShiftTypeSkillRequirement(ShiftTypeSkillRequirement skillrequirement);
-    public List<ShiftTypeSkillRequirement> listShiftTypeSkillRequirement();
-    public List<ShiftTypeSkillRequirement> listShiftTypeSkillRequirementId();
-    public void removeShiftTypeSkillRequirement(ObservableList<ShiftTypeSkillRequirement> itemsSelected);
-    public void updateShiftTypeSkillRequirement(ShiftTypeSkillRequirement skillrequirement);
-    public List<ShiftTypeSkillRequirement> listShiftTypeSkillRequirementcode();
-    public List<ShiftTypeSkillRequirement> listShiftTypeSkillRequirementday();
+	/*
+	 * public void addShiftTypeSkillRequirement(ShiftTypeSkillRequirement
+	 * skillrequirement); public List<ShiftTypeSkillRequirement>
+	 * listShiftTypeSkillRequirement(); public List<ShiftTypeSkillRequirement>
+	 * listShiftTypeSkillRequirementId(); public void
+	 * removeShiftTypeSkillRequirement(ObservableList<ShiftTypeSkillRequirement>
+	 * itemsSelected); public void
+	 * updateShiftTypeSkillRequirement(ShiftTypeSkillRequirement skillrequirement);
+	 * public List<ShiftTypeSkillRequirement> listShiftTypeSkillRequirementcode();
+	 * public List<ShiftTypeSkillRequirement> listShiftTypeSkillRequirementday();
+	 */
     
     public void addBooleanContractLine(BooleanContractLine booleandata);
     public List<BooleanContractLine> listBooleanContractLine();

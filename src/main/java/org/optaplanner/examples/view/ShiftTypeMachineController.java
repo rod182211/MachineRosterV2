@@ -35,7 +35,7 @@ public class ShiftTypeMachineController implements Initializable {
 	private TableView<ShiftTypeMachineRequirement> ShiftTypeMachineRequirementTable;
 	@FXML
 	private TableColumn<ShiftTypeMachineRequirement, String> machine;
-
+	
 	@FXML
 	private TableColumn<ShiftTypeMachineRequirement, String> Shifttype;
 	@FXML
@@ -67,7 +67,6 @@ public class ShiftTypeMachineController implements Initializable {
 		ShiftTypeMachineRequirementTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		ShiftTypeMachineRequirementTable.getItems().clear();
 		ShiftTypeMachineRequirementTable.setItems(getShiftTypeMachineRequirementsList());
-		
 		machine.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMachine().getCode()));
 		Shifttype.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getShiftType().getCode()));
 		showShiftTypeMachineRequirementsDetails(null);

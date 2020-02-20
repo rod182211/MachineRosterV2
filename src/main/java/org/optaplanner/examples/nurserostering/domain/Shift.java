@@ -36,8 +36,7 @@ public class Shift extends AbstractPersistable{
     @Column(name = "shift_index")
     @OrderColumn
     private int index;
-   
-	private int requiredEmployeeSize;
+   	private int requiredEmployeeSize;
 
     public ShiftDate getShiftDate() {
         return shiftDate;
@@ -70,20 +69,18 @@ public class Shift extends AbstractPersistable{
     public void setRequiredEmployeeSize(int requiredEmployeeSize) {
         this.requiredEmployeeSize = requiredEmployeeSize;
     }
+    
+    public String getLabel() {
+        return shiftType.getLabel() + " of " + shiftDate.getLabel();
+    }
 
-	@Override
-	public String toString() {
-		return "Shift [shiftDate=" + shiftDate + ", shiftType=" + shiftType + "]";
-	}
-      
+
+   
+    @Override
+    public String toString() {
+        return shiftDate + "/" + shiftType;
+    }
 
 	
-
-
-
-	
-
-	
-		
 
 }

@@ -195,6 +195,7 @@ public class EmployeeEditDialogController implements Initializable {
 	private void handleOk() {
 		if (isInputValid()) {
 			getSkillprofList();
+			getEmployeeMachineList();
 			String employeeId = employeeIdField.getText();
 			String stnum = streetnum.getText();
 			employee.setStreetnum(stnum);
@@ -216,7 +217,7 @@ public class EmployeeEditDialogController implements Initializable {
 			rosterService.updateEmployee(employee);
 			String empname = employee.getName();
 			ObservableList<Skill> skillcode = skill.getCheckModel().getCheckedItems();
-
+			ObservableList<Machine> machineCode = machine.getCheckModel().getCheckedItems();
 			for (SkillProficiency element : skillprofList) {
 				String checkedemployee = element.getEmployee().getName();
 				long checkedvalue = element.getId();
@@ -239,17 +240,17 @@ public class EmployeeEditDialogController implements Initializable {
 
 			}
 			
-			ObservableList<Machine> machineCode = machine.getCheckModel().getCheckedItems();
+		
 
-			for (EmployeeMachine element : employeeMachineList) {
-				String checkedemployee = element.getEmployee().getName();
-				long checkedvalue = element.getId();
+			for (EmployeeMachine element1 : employeeMachineList) {
+				String checkedemployee1 = element1.getEmployee().getName();
+				long checkedvalue1 = element1.getId();
 
-				if (checkedemployee.contentEquals(empname)) {
+				if (checkedemployee1.contentEquals(empname)) {
 
 					session = HibernateUtil.getSessionFactory().getCurrentSession();
 					session.beginTransaction();
-					EmployeeMachine p = (EmployeeMachine) session.get(EmployeeMachine.class, checkedvalue);
+					EmployeeMachine p = (EmployeeMachine) session.get(EmployeeMachine.class, checkedvalue1);
 					session.close();
 					rosterService.removeEmployeeMachine(p);
 

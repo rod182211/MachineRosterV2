@@ -35,8 +35,10 @@ public class MachineTypeSkillsRequirementController implements Initializable {
 	@FXML
 	private TableColumn<MachineTypeSkillsRequirement, String> machinetype;
 
-		@FXML
+	@FXML
 	private TableColumn<MachineTypeSkillsRequirement, String> skills;
+	@FXML
+	private TableColumn<MachineTypeSkillsRequirement, String> shiftType;
 	
 
 	@FXML
@@ -45,6 +47,8 @@ public class MachineTypeSkillsRequirementController implements Initializable {
 	private Label machine;
 	@FXML
 	private Label skill;
+	@FXML
+	private Label shift;
 	
 	
 	private RosterService rosterService = new RosterServiceImpl();
@@ -81,6 +85,7 @@ public class MachineTypeSkillsRequirementController implements Initializable {
 		shiftAssignmentable.getItems().clear();
 		shiftAssignmentable.setItems(getMachineTypeSkillsRequirementList());
 		shiftAssignmentable.setEditable(true);
+		shiftType.setCellValueFactory(new PropertyValueFactory<MachineTypeSkillsRequirement, String>("shiftType"));
 		machinetype.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMachine().getCode()));
 		skills.setCellValueFactory(new PropertyValueFactory<MachineTypeSkillsRequirement, String>("skill"));
 		
@@ -95,7 +100,7 @@ public class MachineTypeSkillsRequirementController implements Initializable {
 	private void showShiftAssignmentDetails(MachineTypeSkillsRequirement skillrequirement) {
 		if (skillrequirement != null) {
 
-		
+			shift.setText(skillrequirement.getShiftType().getCode());
 			machine.setText(skillrequirement.getMachine().getCode());
 			skill.setText(skillrequirement.getSkill().getCode());
 			
@@ -103,7 +108,7 @@ public class MachineTypeSkillsRequirementController implements Initializable {
 
 		} else { 
 
-			
+			shift.setText("");
 			machine.setText("");
 			skill.setText("");
 			

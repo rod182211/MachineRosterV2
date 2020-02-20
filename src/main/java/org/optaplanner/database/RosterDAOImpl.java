@@ -316,95 +316,85 @@ public class RosterDAOImpl implements RosterDAO {
 		session.close();
 	}
 
-	@Override
-	public List<ShiftTypeSkillRequirement> listShiftTypeSkillRequirementId() {
-		List<ShiftTypeSkillRequirement> shiftassignmentidlist = new ArrayList<>();
+	/*
+	 * @Override public List<ShiftTypeSkillRequirement>
+	 * listShiftTypeSkillRequirementId() { List<ShiftTypeSkillRequirement>
+	 * shiftassignmentidlist = new ArrayList<>();
+	 * 
+	 * session = HibernateUtil.getSessionFactory().getCurrentSession();
+	 * session.beginTransaction(); shiftassignmentidlist =
+	 * session.createQuery("select id from ShiftTypeSkillRequirement").list();
+	 * session.getTransaction().commit();
+	 * 
+	 * session.close(); return shiftassignmentidlist; }
+	 */
 
-		session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		shiftassignmentidlist = session.createQuery("select id from ShiftTypeSkillRequirement").list();
-		session.getTransaction().commit();
-
-		session.close();
-		return shiftassignmentidlist;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<ShiftTypeSkillRequirement> listShiftTypeSkillRequirementday() {
-		List<ShiftTypeSkillRequirement> shiftassignmentdaylist = new ArrayList<>();
-
-		session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		shiftassignmentdaylist = session.createQuery("select dayOfWeek from ShiftTypeSkillRequirement").list();
-		session.getTransaction().commit();
-
-		session.close();
-		return shiftassignmentdaylist;
-	}
-
-	@Override
-	public void addShiftTypeSkillRequirement(ShiftTypeSkillRequirement shiftassignment) {
-
-		session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		session.save(shiftassignment);
-		session.getTransaction().commit();
-
-		session.close();
-	}
-
-	@Override
-	public void removeShiftTypeSkillRequirement(ObservableList<ShiftTypeSkillRequirement> itemsSelected) {
-
-		session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		for (ShiftTypeSkillRequirement idvalue : itemsSelected) {
-			long id = idvalue.getId();
-			ShiftTypeSkillRequirement s = (ShiftTypeSkillRequirement) session.load(ShiftTypeSkillRequirement.class, id);
-			session.delete(s);
-		}
-		session.getTransaction().commit();
-
-		session.close();
-	}
-
-	@Override
-	public void updateShiftTypeSkillRequirement(ShiftTypeSkillRequirement shiftassignment) {
-
-		session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		session.update(shiftassignment);
-		session.getTransaction().commit();
-
-		session.close();
-	}
-
-	@Override
-	public List<ShiftTypeSkillRequirement> listShiftTypeSkillRequirement() {
-		List<ShiftTypeSkillRequirement> shiftassignmentlist = new ArrayList<>();
-
-		session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		shiftassignmentlist = session.createQuery("from ShiftTypeSkillRequirement").list();
-		session.getTransaction().commit();
-
-		session.close();
-		return shiftassignmentlist;
-	}
-
-	@Override
-	public List<ShiftTypeSkillRequirement> listShiftTypeSkillRequirementcode() {
-		List<ShiftTypeSkillRequirement> assignmentcodelist = new ArrayList<>();
-
-		session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		assignmentcodelist = session.createQuery("select code from ShiftTypeSkillRequirement").list();
-		session.getTransaction().commit();
-
-		session.close();
-		return assignmentcodelist;
-	}
+	/*
+	 * @SuppressWarnings("unchecked")
+	 * 
+	 * @Override public List<ShiftTypeSkillRequirement>
+	 * listShiftTypeSkillRequirementday() { List<ShiftTypeSkillRequirement>
+	 * shiftassignmentdaylist = new ArrayList<>();
+	 * 
+	 * session = HibernateUtil.getSessionFactory().getCurrentSession();
+	 * session.beginTransaction(); shiftassignmentdaylist =
+	 * session.createQuery("select dayOfWeek from ShiftTypeSkillRequirement").list()
+	 * ; session.getTransaction().commit();
+	 * 
+	 * session.close(); return shiftassignmentdaylist; }
+	 * 
+	 * @Override public void addShiftTypeSkillRequirement(ShiftTypeSkillRequirement
+	 * shiftassignment) {
+	 * 
+	 * session = HibernateUtil.getSessionFactory().getCurrentSession();
+	 * session.beginTransaction(); session.save(shiftassignment);
+	 * session.getTransaction().commit();
+	 * 
+	 * session.close(); }
+	 * 
+	 * @Override public void
+	 * removeShiftTypeSkillRequirement(ObservableList<ShiftTypeSkillRequirement>
+	 * itemsSelected) {
+	 * 
+	 * session = HibernateUtil.getSessionFactory().getCurrentSession();
+	 * session.beginTransaction(); for (ShiftTypeSkillRequirement idvalue :
+	 * itemsSelected) { long id = idvalue.getId(); ShiftTypeSkillRequirement s =
+	 * (ShiftTypeSkillRequirement) session.load(ShiftTypeSkillRequirement.class,
+	 * id); session.delete(s); } session.getTransaction().commit();
+	 * 
+	 * session.close(); }
+	 * 
+	 * @Override public void
+	 * updateShiftTypeSkillRequirement(ShiftTypeSkillRequirement shiftassignment) {
+	 * 
+	 * session = HibernateUtil.getSessionFactory().getCurrentSession();
+	 * session.beginTransaction(); session.update(shiftassignment);
+	 * session.getTransaction().commit();
+	 * 
+	 * session.close(); }
+	 * 
+	 * @Override public List<ShiftTypeSkillRequirement>
+	 * listShiftTypeSkillRequirement() { List<ShiftTypeSkillRequirement>
+	 * shiftassignmentlist = new ArrayList<>();
+	 * 
+	 * session = HibernateUtil.getSessionFactory().getCurrentSession();
+	 * session.beginTransaction(); shiftassignmentlist =
+	 * session.createQuery("from ShiftTypeSkillRequirement").list();
+	 * session.getTransaction().commit();
+	 * 
+	 * session.close(); return shiftassignmentlist; }
+	 * 
+	 * @Override public List<ShiftTypeSkillRequirement>
+	 * listShiftTypeSkillRequirementcode() { List<ShiftTypeSkillRequirement>
+	 * assignmentcodelist = new ArrayList<>();
+	 * 
+	 * session = HibernateUtil.getSessionFactory().getCurrentSession();
+	 * session.beginTransaction(); assignmentcodelist =
+	 * session.createQuery("select code from ShiftTypeSkillRequirement").list();
+	 * session.getTransaction().commit();
+	 * 
+	 * session.close(); return assignmentcodelist; }
+	 */
 
 	@Override
 	public List<BooleanContractLine> listBooleanContractLine() {
@@ -2484,7 +2474,6 @@ public class RosterDAOImpl implements RosterDAO {
 
 	@Override
 	public void updateShiftTypeMachineRequirement(ShiftTypeMachineRequirement shiftTypeMachineRequirement) {
-
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		session.update(shiftTypeMachineRequirement);
@@ -2493,24 +2482,21 @@ public class RosterDAOImpl implements RosterDAO {
 		session.close();
 	}
 
-///////////
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<EmployeeMachine> listEmployeeMachine() {
-		List<EmployeeMachine> EmployeeMachineslist = new ArrayList<>();
-
+		List<EmployeeMachine> employeeMachineslist = new ArrayList<>();
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		EmployeeMachineslist = session.createQuery("from EmployeeMachine").list();
+		employeeMachineslist = session.createQuery("from EmployeeMachine").list();
 		session.getTransaction().commit();
-
 		session.close();
-		return EmployeeMachineslist;
+		return employeeMachineslist;
 	}
 
 	@Override
 	public List<EmployeeMachine> listEmployeeMachineId() {
 		List<EmployeeMachine> EmployeeMachinesidlist = new ArrayList<>();
-
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		EmployeeMachinesidlist = session.createQuery("select id from EmployeeMachine").list();

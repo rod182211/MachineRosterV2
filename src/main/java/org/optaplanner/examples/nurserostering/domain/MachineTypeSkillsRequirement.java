@@ -11,7 +11,9 @@ public class MachineTypeSkillsRequirement extends AbstractPersistable  {
 	private Machine machine;
     @ManyToOne
 	private Skill skill;
-
+    @ManyToOne
+   	private ShiftType shiftType;
+   
     public Machine getMachine() {
 		return machine;
 	}
@@ -29,9 +31,20 @@ public class MachineTypeSkillsRequirement extends AbstractPersistable  {
     }
 
    
-    @Override
-    public String toString() {
-        return machine + "-" + skill;
-    }
+    public ShiftType getShiftType() {
+		return shiftType;
+	}
+
+	public void setShiftType(ShiftType shiftType) {
+		this.shiftType = shiftType;
+	}
+
+	@Override
+	public String toString() {
+		return "MachineTypeSkillsRequirement [machine=" + machine + ", skill=" + skill + ", shiftType=" + shiftType
+				+ "]";
+	}
+
+	
 
 }

@@ -25,7 +25,7 @@ import org.optaplanner.examples.nurserostering.domain.ShiftAssignment;
 import org.optaplanner.examples.nurserostering.domain.ShiftDate;
 import org.optaplanner.examples.nurserostering.domain.ShiftType;
 import org.optaplanner.examples.nurserostering.domain.ShiftTypeMachineRequirement;
-import org.optaplanner.examples.nurserostering.domain.ShiftTypeSkillRequirement;
+//import org.optaplanner.examples.nurserostering.domain.ShiftTypeSkillRequirement;
 import org.optaplanner.examples.nurserostering.domain.Skill;
 import org.optaplanner.examples.nurserostering.domain.SkillProficiency;
 import org.optaplanner.examples.nurserostering.domain.WeekendDefinition;
@@ -269,10 +269,14 @@ public class DataLogic {
 		for (MachineTypeSkillsRequirement skillElement : coverRequirementElementList) {
 			MachineTypeSkillsRequirement machineTypeSkillsRequirement = new MachineTypeSkillsRequirement();
 			machineTypeSkillsRequirement.setId(machineTypeSkillRequirementId);
+			
+			
 			Machine wanted = machineMap.get(skillElement.getMachine().getCode());
 			machineTypeSkillsRequirement.setMachine(wanted);
 			Skill skill = skillMap.get(skillElement.getSkill().getCode());
 			machineTypeSkillsRequirement.setSkill(skill);
+			ShiftType type = shiftTypeMap.get(skillElement.getShiftType().getCode());
+			machineTypeSkillsRequirement.setShiftType(type);
 			machineTypeSkillsRequirementList.add(machineTypeSkillsRequirement);
 			machineTypeSkillRequirementId++;
 		}
@@ -561,13 +565,16 @@ public class DataLogic {
 		List<Employee> employeeElementList = (List<Employee>) rosterService.listEmployee();
 
 		List<Employee> employeeList = new ArrayList<>(employeeElementList.size());
-
+		List<EmployeeMachine> employeeMachine1 = (List<EmployeeMachine>) rosterService.listEmployeeMachine();
+		List<EmployeeMachine> employeeMachineList = new ArrayList<>(employeeElementList.size() * 2);
+		List<SkillProficiency> skillProf = (List<SkillProficiency>) rosterService.listSkillProficiency();
+		List<SkillProficiency> skillProficiencyList = new ArrayList<>(employeeElementList.size() * 2);
 		employeeMap = new HashMap<>(employeeElementList.size());
 		employeeSkillMap = new HashMap<>(employeeElementList.size());
 
 		
-
-		long employeeMachineId = 0L;
+		long employeeMachineId =0L;
+		long skillprofId = 0L;
 
 		for (Employee element : employeeElementList) {
 
@@ -599,39 +606,39 @@ public class DataLogic {
 			employee.setLeaveMap(new HashMap<>(estimatedRequestSize));
 			employee.setRosterdayMap(new HashMap<>(estimatedRequestSize));
 			employee.setTrainingRequestMap(new HashMap<>(estimatedRequestSize));
-			employeeList.add(employee);
 			
+			employeeList.add(employee);
 		}
-			List<EmployeeMachine> employeeMachine1 = (List<EmployeeMachine>) rosterService.listEmployeeMachine();
-			List<EmployeeMachine> employeeMachineList = new ArrayList<>(employeeElementList.size() * 2);
 			
 			for (EmployeeMachine machineelement : employeeMachine1) {
 			EmployeeMachine employeeMachine = new EmployeeMachine();
+			//long employeeMachineId = machineelement.getId();
 			employeeMachine.setId(employeeMachineId);
 			Employee depemployee = employeeMap.get(machineelement.getEmployee().getName());
 			Machine machinetype = machineMap.get(machineelement.getMachine().getCode());
 			employeeMachine.setEmployee(depemployee);
 			employeeMachine.setMachine(machinetype);
-			employeeMachineList.add(employeeMachine);
 			employeeMachineId++;
+			employeeMachineList.add(employeeMachine);
+			
 			
 
 		}
-		List<SkillProficiency> skillProf = (List<SkillProficiency>) rosterService.listSkillProficiency();
-
-		List<SkillProficiency> skillProficiencyList = new ArrayList<>(employeeElementList.size() * 2);
+		
 		for (SkillProficiency skillelement : skillProf) {
 			SkillProficiency skillProficiency = new SkillProficiency();
-			long id = skillelement.getId();
-			skillProficiency.setId(id);
+			skillProficiency.setId(skillprofId);
 			Employee skillemployee = employeeMap.get(skillelement.getEmployee().getName());
 			skillProficiency.setEmployee(skillemployee);
 			Skill skillprof = skillMap.get(skillelement.getSkill().getCode());
 			skillProficiency.setSkill(skillprof);
+			skillprofId++;
 			skillProficiencyList.add(skillProficiency);
 
 		}
-
+		
+		
+		
 		nurseRoster.setEmployeeList(employeeList);
 		nurseRoster.setSkillProficiencyList(skillProficiencyList);
 		nurseRoster.setEmployeeMachineList(employeeMachineList);

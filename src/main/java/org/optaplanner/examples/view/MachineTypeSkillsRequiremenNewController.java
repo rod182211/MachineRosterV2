@@ -8,6 +8,7 @@ import org.optaplanner.database.RosterService;
 import org.optaplanner.database.RosterServiceImpl;
 import org.optaplanner.examples.nurserostering.domain.Machine;
 import org.optaplanner.examples.nurserostering.domain.MachineTypeSkillsRequirement;
+import org.optaplanner.examples.nurserostering.domain.ShiftType;
 import org.optaplanner.examples.nurserostering.domain.Skill;
 
 import javafx.collections.FXCollections;
@@ -28,6 +29,8 @@ public class MachineTypeSkillsRequiremenNewController implements Initializable {
 	private ComboBox<Machine> machine;
 	@FXML
 	private ComboBox<Skill> skills;
+	@FXML
+	private ComboBox<ShiftType> shiftType;
 
 	@FXML
 	private TextField size;
@@ -72,7 +75,14 @@ private ObservableList<Machine> shifttypeList = FXCollections.observableArrayLis
 		skillsList = FXCollections.observableList((List<Skill>) rosterService.listSkill());
 		return skillsList;
 	}
+	private ObservableList<ShiftType> shiftTypeList = FXCollections.observableArrayList();
 
+	public ObservableList<ShiftType> getshiftTypeList() {
+		if (!shiftTypeList.isEmpty())
+			shiftTypeList.clear();
+		shiftTypeList = FXCollections.observableList((List<ShiftType>) rosterService.listShiftType());
+		return shiftTypeList;
+	}
 
 	/**
 	 * Initializes the controller class. This method is automatically called after
@@ -103,8 +113,10 @@ private ObservableList<Machine> shifttypeList = FXCollections.observableArrayLis
 		this.skillrequirement = skillrequirement;
 		getSkillsList();
 		getMachineList();
+		getshiftTypeList();
 		machine.setItems(shifttypeList);
 		skills.setItems(skillsList);
+		shiftType.setItems(shiftTypeList);
 	
 		
 		
@@ -125,9 +137,10 @@ private ObservableList<Machine> shifttypeList = FXCollections.observableArrayLis
 	@FXML
 	private void handleOk() {
 		if (isInputValid()) {
-			
+			ShiftType type = shiftType.getSelectionModel().getSelectedItem();
 			Skill skill = skills.getSelectionModel().getSelectedItem();
 			skillrequirement.setSkill(skill);
+			skillrequirement.setShiftType(type);
 			Machine machinetype = machine.getSelectionModel().getSelectedItem();
 			skillrequirement.setMachine(machinetype);
 			okClicked = true;
