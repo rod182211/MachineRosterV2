@@ -2,4 +2,4 @@ Roster application based on Optaplanner JavaFx and Hibernate Currently configure
 
 Currently the print function from Calendar view is not completed. There is also some tidy up work required although all it functioning. A MySqlFile is provide for ease of loading the database before opening the application.
 
-Disclaimer being you use this application at your own risk.
+Disclaimer being you use this application at your own risk. This version is focused on allocated staff to machines and shifts based on skills
