@@ -187,6 +187,16 @@ rule "fairAssignmentCountPerEmployee"
         scoreHolder.addSoftConstraintMatch(kcontext, - (int) $total.getZeroDeviationSquaredSumRootMillis());
 end
 
+rule "No Night Shifts"
+
+    when $contractLine : BooleanContractLine(contractLineType == ContractLineType.NO_NIGHT_SHIFTS, enabled == true, $contract : contract,$weight : weight) 
+      $shiftType : ShiftType(night == true)
+      ShiftAssignment($employee:employee, shiftType == $shiftType)
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, - $weight);
+   
+  end
+
         
 rule "insertEmployeeConsecutiveAssignmentStart"
         salience 2 // Do these rules first (optional, for performance)
