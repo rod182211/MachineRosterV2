@@ -190,10 +190,11 @@ end
 rule "No Night Shifts"
 
     when $contractLine : BooleanContractLine(contractLineType == ContractLineType.NO_NIGHT_SHIFTS, enabled == true, $contract : contract,$weight : weight) 
+      $employee : Employee(contract == $contract)
       $shiftType : ShiftType(night == true)
-      ShiftAssignment($employee:employee, shiftType == $shiftType)
+     ShiftAssignment(employee ==$employee, shiftType ==$shiftType)
     then
-        scoreHolder.addSoftConstraintMatch(kcontext, - $weight);
+    scoreHolder.addSoftConstraintMatch(kcontext, - $weight);
    
   end
 
@@ -627,10 +628,10 @@ rule "alternativeSkill"
         ShiftAssignment(contract == $contract, $employee : employee, $shiftType : shiftType)
         MachineTypeSkillsRequirement(shiftType == $shiftType, $skill : skill, $machine : machine)
         
-         not SkillProficiency(employee == $employee, skill == $skill)
+        not SkillProficiency(employee == $employee, skill == $skill)
 
     then
-    System.out.println("Using");
+   
         scoreHolder.addSoftConstraintMatch(kcontext, - $contractLine.getWeight());
 end
 
@@ -639,14 +640,14 @@ end
 rule "alternativeMachine"
     when
         $contractLine : BooleanContractLine(contractLineType == ContractLineType.ALTERNATIVE_MACHINE, enabled == true,
-            $contract : contract)
-        ShiftAssignment(contract == $contract, $employee : employee, $shiftType : shiftType )
-        ShiftTypeMachineRequirement(shiftType == $shiftType, $machine : machine)        
-       
-         not EmployeeMachine(employee == $employee, machine == $machine)
+            $contract : contract)  
+       ShiftAssignment(contract == $contract, $employee : employee, $shiftType : shiftType)  
+       EmployeeMachine(employee==$employee, $machine : machine)
+       ShiftTypeMachineRequirement(shiftType==$shiftType, machine==$machine)       
+    
+        
     then
-     System.out.println("Using Machine");
-     scoreHolder.addSoftConstraintMatch(kcontext, - $contractLine.getWeight());
+       scoreHolder.addSoftConstraintMatch(kcontext, - $contractLine.getWeight());
 end
 
 

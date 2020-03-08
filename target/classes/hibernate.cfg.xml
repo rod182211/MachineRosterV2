@@ -11,12 +11,12 @@
 	<session-factory>
 	 	<property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
 	 	<property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
-		<property name="connection.url">jdbc:mysql://localhost:3306/machineroster</property>
-		<property name="connection.username">myrosterapp</property>
-		<property name="connection.password">myroster</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/machineroster?useTimezone=true&amp;serverTimezone=UTC&amp;useLegacyDatetimeCode=false</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password">rod182211</property>
 	   	<property name="hibernate.current_session_context_class">thread</property>
 		<property name="hibernate.show_sql">true</property>
-	  
+	    <property name="hibernate.hbm2ddl.auto">update</property>
 	
 	
 	   <property name="hibernate.c3p0.min_size">5</property>
