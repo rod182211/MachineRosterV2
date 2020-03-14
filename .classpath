@@ -11,26 +11,55 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="/home/rodney/Downloads/javafx-sdk-11.0.2/lib/javafx.base.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="/home/rodney/Downloads/javafx-sdk-11.0.2/lib/javafx.controls.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="/home/rodney/Downloads/javafx-sdk-11.0.2/lib/javafx.fxml.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="/home/rodney/Downloads/javafx-sdk-11.0.2/lib/javafx.graphics.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="/home/rodney/Downloads/javafx-sdk-11.0.2/lib/javafx.media.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="/home/rodney/Downloads/javafx-sdk-11.0.2/lib/javafx.swing.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="/home/rodney/Downloads/javafx-sdk-11.0.2/lib/javafx.web.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="/home/rodney/Downloads/javafx-sdk-11.0.2/lib/javafx-swt.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry exported="true" kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
-	<classpathentry exported="true" kind="lib" path="sources/fontawesomefx-commons-9.1.2-jdk8-1-javadoc.jar"/>
-	<classpathentry exported="true" kind="lib" path="sources/fontawesomefx-commons-9.1.2-jdk8-1.jar"/>
-	<classpathentry exported="true" kind="lib" path="sources/fontawesomefx-controls-9.1.2-jdk8-1.jar"/>
-	<classpathentry exported="true" kind="lib" path="sources/fontawesomefx-emojione-3.1.1-9.1.2-jdk8-1.jar"/>
-	<classpathentry exported="true" kind="lib" path="sources/fontawesomefx-fontawesome-4.7.0-5.jar"/>
-	<classpathentry exported="true" kind="lib" path="sources/fontawesomefx-icons525-4.2.0-9.1.2-jdk8-1.jar"/>
-	<classpathentry exported="true" kind="lib" path="sources/fontawesomefx-materialdesignfont-2.0.26-9.1.2-jdk8-1.jar"/>
-	<classpathentry exported="true" kind="lib" path="sources/fontawesomefx-materialicons-2.2.0-9.1.2-jdk8-1.jar"/>
-	<classpathentry exported="true" kind="lib" path="sources/fontawesomefx-materialstackicons-2.1-5-9.1.2-jdk8-1.jar"/>
-	<classpathentry exported="true" kind="lib" path="sources/fontawesomefx-octicons-4.3.0-9.1.2-jdk8-1.jar"/>
-	<classpathentry exported="true" kind="lib" path="sources/fontawesomefx-weathericons-2.0.10-9.1.2-jdk8-1.jar"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry exported="true" kind="lib" path="sources/controlsfx-8.40.13.jar"/>
-	<classpathentry exported="true" kind="lib" path="sources/recurrence-8.6.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="sources/view-8.6.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

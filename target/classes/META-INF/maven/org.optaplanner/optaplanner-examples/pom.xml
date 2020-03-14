@@ -207,6 +207,12 @@
 			<version>1.5.0</version>
 		</dependency>
 		<dependency>
+			<groupId>com.dlsc.formsfx</groupId>
+			<artifactId>formsfx-core</artifactId>
+			<version>11.4.1</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
 			<groupId>org.jfree</groupId>
 			<artifactId>jcommon</artifactId>
 			<version>1.0.23</version>
@@ -258,15 +264,15 @@
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
+			<version>3.17</version>
 			<exclusions>
 				<exclusion>
 					<!-- Collides with 'javax.xml.stream:stax-api' brought in by 'org.drools:drools-decisiontables'. -->
 					<groupId>stax</groupId>
 					<artifactId>stax-api</artifactId>
-					<version>1.0.2</version>
 				</exclusion>
 			</exclusions>
-			<version>3.17</version>
+
 		</dependency>
 		<dependency>
 			<groupId>org.glassfish</groupId>
@@ -283,25 +289,16 @@
 			<artifactId>hibernate-annotations</artifactId>
 			<version>3.5.6-Final</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.calendarfx/calendar -->
-		<dependency>
-			<groupId>com.calendarfx</groupId>
-			<artifactId>calendar</artifactId>
-			<version>8.6.1</version>
-			<type>pom</type>
-		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/com.calendarfx/recurrence -->
 		<dependency>
 			<groupId>com.calendarfx</groupId>
-			<artifactId>recurrence</artifactId>
-			<version>8.6.1</version>
+			<artifactId>calendar</artifactId>
+			<version>11.8.3</version>
+			<type>pom</type>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.calendarfx/view -->
-		<dependency>
-			<groupId>com.calendarfx</groupId>
-			<artifactId>view</artifactId>
-			<version>8.6.1</version>
-		</dependency>
+
+
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.1-api</artifactId>
@@ -317,11 +314,49 @@
 			<artifactId>c3p0</artifactId>
 			<version>0.9.5.4</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.webjars/font-awesome -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>font-awesome</artifactId>
+			<version>5.12.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.controlsfx/controlsfx -->
+		<dependency>
+			<groupId>org.controlsfx</groupId>
+			<artifactId>controlsfx</artifactId>
+			<version>11.0.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.calendarfx/recurrence -->
+		<dependency>
+			<groupId>com.calendarfx</groupId>
+			<artifactId>recurrence</artifactId>
+			<version>11.6.4</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.calendarfx/view -->
+		<dependency>
+			<groupId>com.calendarfx</groupId>
+			<artifactId>view</artifactId>
+			<version>11.8.3</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.kordamp.ikonli/ikonli-javafx -->
+		<dependency>
+			<groupId>org.kordamp.ikonli</groupId>
+			<artifactId>ikonli-javafx</artifactId>
+			<version>11.3.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kordamp.ikonli</groupId>
+			<artifactId>ikonli-dashicons-pack</artifactId>
+			<version>2.4.0</version>
+		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.13</version>
 		</dependency>
 	</dependencies>
-
+	<properties>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+	</properties>
 </project>

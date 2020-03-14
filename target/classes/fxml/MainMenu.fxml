@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -11,16 +12,16 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="807.0" prefWidth="1128.0" style="-fx-background-color: #CFD3D4;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.optaplanner.examples.view.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="815.0" prefWidth="1128.0" style="-fx-background-color: #CFD3D4;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.optaplanner.examples.view.MainController">
    <children>
-      <Pane prefHeight="173.0" prefWidth="980.0" style="-fx-background-color: #2D75E8;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane layoutX="1.0" prefHeight="173.0" prefWidth="980.0" style="-fx-background-color: #CFD3D4;" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="120.0" layoutY="18.0" text="NeoPlexus Machine Rostering Beta Verson 1.1" textFill="WHITE">
+            <Label layoutX="124.0" layoutY="14.0" text="NeoPlexus Machine Rostering Beta Verson 1.1" textFill="#282828">
                <font>
                   <Font size="38.0" />
                </font>
             </Label>
-            <Label layoutX="136.0" layoutY="105.0" text="Staff Rostering" textFill="WHITE">
+            <Label layoutX="497.0" layoutY="76.0" text="Staff Rostering" textFill="#282828">
                <font>
                   <Font size="18.0" />
                </font>
@@ -40,57 +41,87 @@
         </rowConstraints>
          <children>
             <Button fx:id="btnEmployees" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClicks" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: #F7A8E5;" text="Employees" textAlignment="CENTER">
-               <graphic>
-                  <FontAwesomeIconView glyphName="USERS" size="50" />
-               </graphic>
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
                <GridPane.margin>
                   <Insets left="20.0" />
-               </GridPane.margin></Button>
-            <Button fx:id="btnScheduleRun" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClicks" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: #a1d490;" text="Schedule Run" GridPane.columnIndex="2">
+               </GridPane.margin>
                <graphic>
-                  <FontAwesomeIconView glyphName="CALENDAR" size="50" />
-               </graphic>
-               <GridPane.margin>
-                  <Insets left="20.0" />
-               </GridPane.margin></Button>
-            <Button fx:id="btnSettings" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClicks" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: #8AC5D1;" text="Settings" textFill="#0d0d0d" GridPane.rowIndex="1">
-               <graphic>
-                  <FontAwesomeIconView glyphName="COGS" size="50" />
-               </graphic>
-               <GridPane.margin>
-                  <Insets left="20.0" />
-               </GridPane.margin></Button>
-            <Button fx:id="btnSchedInitialise" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClicks" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: #F2BB5c;" text="Schedule Date Initialiser" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <graphic>
-                  <FontAwesomeIconView glyphName="CALENDAR_CHECK_ALT" size="50" />
-               </graphic>
-               <GridPane.margin>
-                  <Insets left="20.0" />
-               </GridPane.margin></Button>
-            <Button fx:id="btnShiftRequest" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClicks" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: AA8AD1;" text="Shift Requests" GridPane.columnIndex="1">
-               <graphic>
-                  <FontAwesomeIconView glyphName="USER_PLUS" size="50" />
-               </graphic>
-               <GridPane.margin>
-                  <Insets left="20.0" />
-               </GridPane.margin></Button>
-            <Button fx:id="btnReport" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClicks" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: #E64764;" text="Shift Report" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <graphic>
-                  <FontAwesomeIconView glyphName="LIST_ALT" size="50" />
-               </graphic>
-               <GridPane.margin>
-                  <Insets left="20.0" />
-               </GridPane.margin></Button>
-            <Button fx:id="calendar" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClicks" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: lightblue;" text="Calendar View" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <graphic>
-                  <FontAwesomeIconView glyphName="CALENDAR" size="50" />
-               </graphic>
+                  <ImageView fitHeight="93.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../org/optaplanner/examples/common/swingui/users_2.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+                <Button fx:id="btnScheduleRun" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClicks" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: #a1d490;" text="Schedule Run" GridPane.columnIndex="2">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
+               <graphic>
+              </graphic>
+               <graphic>
+                  <ImageView fitHeight="86.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../org/optaplanner/examples/common/swingui/run.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="btnSettings" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClicks" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: #8AC5D1;" text="Settings" textFill="#0d0d0d" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+               <graphic>
+                  <ImageView fitHeight="108.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../org/optaplanner/examples/common/swingui/Settings.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="btnSchedInitialise" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClicks" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: #F2BB5c;" text="Schedule Date Initialiser" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+               <graphic>
+                  <ImageView fitHeight="90.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../org/optaplanner/examples/common/swingui/config_date.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="btnShiftRequest" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClicks" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: AA8AD1;" text="Shift Requests" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+               <graphic>
+                  <ImageView fitHeight="96.0" fitWidth="127.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../org/optaplanner/examples/common/swingui/service.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="btnReport" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClicks" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: #E64764;" text="Shift Report" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+               <graphic>
+                  <ImageView fitHeight="102.0" fitWidth="103.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../org/optaplanner/examples/common/swingui/report.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="calendar" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClicks" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: lightblue;" text="Calendar View" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+               <graphic>
+                  <ImageView fitHeight="104.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../org/optaplanner/examples/common/swingui/office_calendar.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
             <Button fx:id="btnmynuserroster" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClicks" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: #E6E6FA;" text="Unused this Version" GridPane.rowIndex="2">
                <GridPane.margin>

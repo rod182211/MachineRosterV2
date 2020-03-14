@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
-<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
-<?import de.jensd.fx.glyphs.octicons.OctIconView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -13,21 +11,25 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="711.0" prefWidth="926.0" style="-fx-background-color: #CFD3D4;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.optaplanner.examples.view.SettingsController">
+<AnchorPane prefHeight="711.0" prefWidth="926.0" style="-fx-background-color: #CFD3D4;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.optaplanner.examples.view.SettingsController">
    <children>
       <Pane layoutX="10.0" layoutY="10.0" prefHeight="173.0" prefWidth="980.0" style="-fx-background-color: #8AC5D1;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label fx:id="applicatonname" layoutX="130.0" layoutY="44.0" text="Application Configuraton" textFill="WHITE">
+            <Label fx:id="applicatonname" layoutX="209.0" layoutY="46.0" text="Application Configuraton" textFill="WHITE">
                <font>
                   <Font size="48.0" />
                </font>
             </Label>
-            <Label fx:id="applicatontitle" layoutX="136.0" layoutY="105.0" text="Staff Rostering" textFill="WHITE">
+            <Label fx:id="applicatontitle" layoutX="218.0" layoutY="105.0" text="Staff Rostering" textFill="WHITE">
                <font>
                   <Font size="19.0" />
                </font>
             </Label>
-            <FontAwesomeIconView glyphName="COGS" layoutX="22.0" layoutY="114.0" size="80" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../org/optaplanner/examples/common/swingui/Settings.png" />
+               </image>
+            </ImageView>
           
          </children>
       </Pane>
@@ -47,78 +49,124 @@
          <children>
             <Button fx:id="btnShiftAssignement" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: #8AC5D1;" text="Machine Skills Requirement" GridPane.rowIndex="2">
                <graphic>
-                  <MaterialDesignIconView fill="#0a0a0a" glyphName="ACCOUNT_CONVERT" size="50" />
-               </graphic>
-            </Button>
+                  <ImageView fitHeight="49.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../org/optaplanner/examples/common/swingui/engineer_avatar.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
             <Button fx:id="btnContract" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: #8AC5D1;" text="Contract" GridPane.columnIndex="2">
                <graphic>
-                  <MaterialDesignIconView fill="#1a1b1a" glyphName="BOOK_OPEN_PAGE_VARIANT" size="50" />
-               </graphic>
-            </Button>
+                  <ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../org/optaplanner/examples/common/swingui/contract%20.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
             <Button fx:id="btnMinMaxContract" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: #8AC5D1;" text="Min/Max for Contract" textFill="#0d0d0d" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <graphic>
-                  <MaterialDesignIconView fill="#141414" glyphName="CONTRAST" size="50" />
-               </graphic>
-            </Button>
+                  <ImageView fitHeight="43.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../org/optaplanner/examples/common/swingui/minmax.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
             <Button fx:id="btnShiftType" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: #8AC5D1;" text="Shift Type Configuration" GridPane.columnIndex="1">
                <graphic>
-                  <MaterialDesignIconView fill="#0d0d0d" glyphName="CLOCK_IN" size="50" />
-               </graphic>
-            </Button>
+                  <ImageView fitHeight="64.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../org/optaplanner/examples/common/swingui/config_date.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
             <Button fx:id="btnSkills" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: #8AC5D1;" text="Skills">
                <graphic>
-                  <MaterialDesignIconView fill="#0d0d0d" glyphName="ACCOUNT_CARD_DETAILS" size="50" />
-               </graphic>
-            </Button>
+                  <ImageView fitHeight="60.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../org/optaplanner/examples/common/swingui/education.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
             <Button fx:id="btnContractLine" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: #8AC5D1;" text="Not Used" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <graphic>
-                  <MaterialIconView glyphName="PRIORITY_HIGH" size="50" />
-               </graphic>
-            </Button>
+                  <ImageView fitHeight="45.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../org/optaplanner/examples/common/swingui/x.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
             <Button fx:id="btnBooleanContract" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: #8AC5D1;" text="True or False Statements" textFill="#141414" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <graphic>
-                  <OctIconView fill="#101110" glyphName="FILE_BINARY" size="50" />
-               </graphic>
-            </Button>
+                  <ImageView fitHeight="59.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../org/optaplanner/examples/common/swingui/onoff.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
             <Button fx:id="btnWorkBefore" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: #8AC5D1;" text="WorkBefore Days Off" GridPane.rowIndex="1">
                <graphic>
-                  <MaterialDesignIconView fill="#0a0a0a" glyphName="WORKER" size="50" />
-               </graphic>
-            </Button>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../org/optaplanner/examples/common/swingui/workbefore.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
             <Button fx:id="btnFreeBefore2days" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: #8AC5D1;" text="Free Before 2 Days " GridPane.columnIndex="1" GridPane.rowIndex="1">
                <graphic>
-                  <MaterialDesignIconView fill="#171717" glyphName="BIKE" size="50" />
-               </graphic>
-            </Button>
+                  <ImageView fitHeight="45.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../org/optaplanner/examples/common/swingui/sign_free_red.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
             <Button fx:id="btnShift2days" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: #8AC5D1;" text="Unwanted 2 day Pattern" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <graphic>
-                  <MaterialDesignIconView fill="#141414" glyphName="DICE_2" size="50" />
-               </graphic>
-            </Button>
+                  <ImageView fitHeight="57.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../org/optaplanner/examples/common/swingui/2days.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
             <Button fx:id="btnShift3Days" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: #8AC5D1;" text="Unwanted 3 day Pattern" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <graphic>
-                  <MaterialDesignIconView fill="#0a0a0a" glyphName="DICE_3" size="50" />
-               </graphic>
-            </Button>
+                  <ImageView fitHeight="52.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../org/optaplanner/examples/common/swingui/3days.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
             <Button fx:id="btnPatternContractLine" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: #8AC5D1;" text="Contract Patterns" GridPane.rowIndex="3">
                <graphic>
-                  <MaterialDesignIconView fill="#141414" glyphName="FORMAT_LINE_WEIGHT" size="50" />
-               </graphic>
-            </Button>
+                  <ImageView fitHeight="58.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../org/optaplanner/examples/common/swingui/pattern.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
             <Button fx:id="btnMachine" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: #8AC5D1;" text="Machine" GridPane.rowIndex="4">
                <graphic>
-                  <MaterialDesignIconView glyphName="CLIPBOARD_ACCOUNT" size="50" />
-               </graphic>
-            </Button>
+                  <ImageView fitHeight="52.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../org/optaplanner/examples/common/swingui/robot.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
             <Button fx:id="btnCoverRequiremtns" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: #8AC5D1;" text="Shift Cover Requirements" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <graphic>
-                  <FontAwesomeIconView glyphName="USER_CIRCLE_ALT" size="50" />
+                  <ImageView fitHeight="54.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../org/optaplanner/examples/common/swingui/users_two_add.png" />
+                     </image>
+                  </ImageView>
                </graphic></Button>
             <Button fx:id="btnShiftTypeMachineRequirement" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="181.0" prefWidth="242.0" style="-fx-background-color: #8AC5D1;" text="Shift Type Machine Requirments" GridPane.columnIndex="2" GridPane.rowIndex="4">
                <graphic>
-                  <MaterialDesignIconView glyphName="CLIPBOARD_ACCOUNT" size="50" />
-               </graphic>
-            </Button>
+                  <ImageView fitHeight="45.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../org/optaplanner/examples/common/swingui/kontact_date.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
          </children>
       </GridPane>
    </children>
