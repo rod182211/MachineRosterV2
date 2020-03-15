@@ -16,7 +16,7 @@
    <children>
       <Pane layoutX="1.0" prefHeight="173.0" prefWidth="980.0" style="-fx-background-color: #CFD3D4;" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="124.0" layoutY="14.0" text="NeoPlexus Machine Rostering Beta Verson 1.1" textFill="#282828">
+            <Label layoutX="124.0" layoutY="14.0" text="NeoPlexus Machine Rostering Beta Verson 2" textFill="#282828">
                <font>
                   <Font size="38.0" />
                </font>

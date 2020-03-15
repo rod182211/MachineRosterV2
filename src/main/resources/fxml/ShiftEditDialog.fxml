@@ -6,6 +6,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -13,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="326.0" prefWidth="460.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.optaplanner.examples.view.ShiftEditController">
+<AnchorPane prefHeight="326.0" prefWidth="460.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.optaplanner.examples.view.ShiftEditController">
    <children>
       <GridPane layoutX="14.0" layoutY="111.0" prefHeight="150.0" prefWidth="361.0">
         <columnConstraints>
@@ -40,12 +42,19 @@
             <Label text="Shift Description" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Pane prefHeight="86.0" prefWidth="600.0" style="-fx-background-color: #8AC5D1;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Label fx:id="applicatonname" layoutX="106.0" layoutY="24.0" text="Edit Shifts" textFill="WHITE">
-         <font>
-            <Font size="48.0" />
-         </font>
-      </Label>
+      <Pane prefHeight="86.0" prefWidth="600.0" style="-fx-background-color: #8AC5D1;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="applicatonname" layoutX="108.0" layoutY="14.0" text="Edit Shifts" textFill="WHITE">
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="75.0" fitWidth="85.0" layoutX="12.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../org/optaplanner/examples/common/swingui/config_date.png" />
+               </image>
+            </ImageView>
+         </children></Pane>
       <ButtonBar layoutY="280.0" prefHeight="40.0" prefWidth="460.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <buttons>
           <Button mnemonicParsing="false" onAction="#handleCancel" styleClass="buttonacancel" stylesheets="@fullpackstyling.css" text="Cancel" />

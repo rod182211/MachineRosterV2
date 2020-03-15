@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -18,12 +19,12 @@
    <children>
       <Pane prefHeight="135.0" prefWidth="800.0" style="-fx-background-color: #8AC5D1;" AnchorPane.bottomAnchor="465.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="127.0" layoutY="30.0" text="Min/Max Configuraton" textFill="WHITE">
+            <Label layoutX="293.0" layoutY="38.0" text="Min/Max Configuraton" textFill="WHITE">
                <font>
                   <Font size="48.0" />
                </font>
             </Label>
-            <MaterialIconView glyphName="ACCESS_ALARM" layoutX="23.0" layoutY="108.0" size="80" />
+     
          </children></Pane>
       <SplitPane dividerPositions="0.6693620844564241" layoutY="135.0" prefHeight="468.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="135.0">
         <items>
@@ -88,5 +89,10 @@
             </AnchorPane>
         </items>
       </SplitPane>
+      <ImageView fitHeight="112.0" fitWidth="185.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../org/optaplanner/examples/common/swingui/minmax.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

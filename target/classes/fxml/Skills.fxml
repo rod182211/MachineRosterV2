@@ -6,6 +6,8 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -13,9 +15,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="519.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.optaplanner.examples.view.SkillsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="519.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.optaplanner.examples.view.SkillsController">
    <children>
-      <SplitPane dividerPositions="0.29797979797979796" layoutY="116.0" prefHeight="329.0" prefWidth="656.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="116.0">
+      <SplitPane dividerPositions="0.29797979797979796" layoutY="91.0" prefHeight="284.0" prefWidth="519.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="91.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -55,14 +57,19 @@
             </AnchorPane>
         </items>
       </SplitPane>
-      <Pane layoutY="6.0" prefHeight="116.0" prefWidth="519.0" style="-fx-background-color: #8AC5D1;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane layoutY="6.0" prefHeight="91.0" prefWidth="519.0" style="-fx-background-color: #8AC5D1;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label fx:id="applicatonname" layoutX="112.0" layoutY="48.0" text="Skills Settings" textFill="WHITE">
+            <Label fx:id="applicatonname" layoutX="118.0" layoutY="14.0" text="Skills Settings" textFill="WHITE">
                <font>
                   <Font size="48.0" />
                </font>
             </Label>
          </children>
       </Pane>
+      <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../org/optaplanner/examples/common/swingui/education.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

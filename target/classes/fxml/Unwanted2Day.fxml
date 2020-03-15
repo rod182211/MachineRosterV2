@@ -6,6 +6,8 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -13,11 +15,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1001.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.optaplanner.examples.view.Unwanted2DayController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1001.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.optaplanner.examples.view.Unwanted2DayController">
    <children>
       <Pane layoutX="6.0" prefHeight="120.0" prefWidth="888.0" style="-fx-background-color: #8AC5D1;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label fx:id="applicatonname" layoutX="93.0" layoutY="60.0" text="Unwanted 2 Day Pattern" textFill="WHITE">
+            <Label fx:id="applicatonname" layoutX="205.0" layoutY="37.0" text="Unwanted 2 Day Pattern" textFill="WHITE">
                <font>
                   <Font size="48.0" />
                </font>
@@ -76,5 +78,10 @@
             </AnchorPane>
         </items>
       </SplitPane>
+      <ImageView fitHeight="104.0" fitWidth="152.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../org/optaplanner/examples/common/swingui/2days.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

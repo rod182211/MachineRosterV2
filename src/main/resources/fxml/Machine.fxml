@@ -6,6 +6,8 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -13,9 +15,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="519.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.optaplanner.examples.view.MachineController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="519.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.optaplanner.examples.view.MachineController">
    <children>
-      <SplitPane dividerPositions="0.29797979797979796" layoutY="116.0" prefHeight="329.0" prefWidth="656.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="116.0">
+      <SplitPane dividerPositions="0.29797979797979796" layoutY="82.0" prefHeight="293.0" prefWidth="519.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="82.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -29,7 +31,7 @@
                   </TableView>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="603.0" prefWidth="697.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="280.0" prefWidth="359.0">
                <children>
                   <GridPane layoutX="4.0" layoutY="39.0" prefHeight="31.0" prefWidth="292.0" AnchorPane.bottomAnchor="197.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="29.0">
                     <columnConstraints>
@@ -55,14 +57,19 @@
             </AnchorPane>
         </items>
       </SplitPane>
-      <Pane layoutY="6.0" prefHeight="116.0" prefWidth="519.0" style="-fx-background-color: #8AC5D1;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane prefHeight="83.0" prefWidth="519.0" style="-fx-background-color: #8AC5D1;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label fx:id="applicatonname" layoutX="112.0" layoutY="48.0" text="Machine " textFill="WHITE">
+            <Label fx:id="applicatonname" layoutX="144.0" layoutY="14.0" text="Machine " textFill="WHITE">
                <font>
                   <Font size="48.0" />
                </font>
             </Label>
            </children>
       </Pane>
+      <ImageView fitHeight="65.0" fitWidth="71.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../org/optaplanner/examples/common/swingui/robot.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
