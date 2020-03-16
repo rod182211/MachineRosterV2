@@ -99,7 +99,6 @@ public class DataLogic {
 		readSkillList(nurseRoster);
 		readMachineList(nurseRoster);
 		readShiftTypeList(nurseRoster);
-		//readShiftTypeSkills(nurseRoster);
 		readMachineTypeSkills(nurseRoster);
 		readMachineShiftType(nurseRoster);
 		generateShiftList(nurseRoster);
@@ -240,26 +239,6 @@ public class DataLogic {
 		}
 		nurseRoster.setShiftTypeList(shiftTypeList);
 	}
-
-	/*private void readShiftTypeSkills(NurseRoster nurseRoster) {
-		List<ShiftTypeSkillRequirement> coverRequirementElementList = (List<ShiftTypeSkillRequirement>) rosterService
-				.listShiftTypeSkillRequirement();
-		List<ShiftTypeSkillRequirement> shiftTypeSkillRequirementList = new ArrayList<>(
-				coverRequirementElementList.size() * 2);
-		long shiftTypeSkillRequirementId = 0L;
-		for (ShiftTypeSkillRequirement skillElement : coverRequirementElementList) {
-			ShiftTypeSkillRequirement shiftTypeSkillRequirement = new ShiftTypeSkillRequirement();
-			shiftTypeSkillRequirement.setId(shiftTypeSkillRequirementId);
-			ShiftType wanted = shiftTypeMap.get(skillElement.getShiftType().getCode());
-			shiftTypeSkillRequirement.setShiftType(wanted);
-			Skill skill = skillMap.get(skillElement.getSkill().getCode());
-			shiftTypeSkillRequirement.setSkill(skill);
-			shiftTypeSkillRequirementList.add(shiftTypeSkillRequirement);
-			shiftTypeSkillRequirementId++;
-		}
-		nurseRoster.setShiftTypeSkillRequirementList(shiftTypeSkillRequirementList);
-	}*/
-	
 	private void readMachineTypeSkills(NurseRoster nurseRoster) {
 		List<MachineTypeSkillsRequirement> coverRequirementElementList = (List<MachineTypeSkillsRequirement>) rosterService
 				.listMachineTypeSkillsRequirement();
@@ -269,8 +248,7 @@ public class DataLogic {
 		for (MachineTypeSkillsRequirement skillElement : coverRequirementElementList) {
 			MachineTypeSkillsRequirement machineTypeSkillsRequirement = new MachineTypeSkillsRequirement();
 			machineTypeSkillsRequirement.setId(machineTypeSkillRequirementId);
-			
-			
+
 			Machine wanted = machineMap.get(skillElement.getMachine().getCode());
 			machineTypeSkillsRequirement.setMachine(wanted);
 			Skill skill = skillMap.get(skillElement.getSkill().getCode());
@@ -572,8 +550,7 @@ public class DataLogic {
 		employeeMap = new HashMap<>(employeeElementList.size());
 		employeeSkillMap = new HashMap<>(employeeElementList.size());
 
-		
-		long employeeMachineId =0L;
+		long employeeMachineId = 0L;
 		long skillprofId = 0L;
 
 		for (Employee element : employeeElementList) {
@@ -606,13 +583,13 @@ public class DataLogic {
 			employee.setLeaveMap(new HashMap<>(estimatedRequestSize));
 			employee.setRosterdayMap(new HashMap<>(estimatedRequestSize));
 			employee.setTrainingRequestMap(new HashMap<>(estimatedRequestSize));
-			
+
 			employeeList.add(employee);
 		}
-			
-			for (EmployeeMachine machineelement : employeeMachine1) {
+
+		for (EmployeeMachine machineelement : employeeMachine1) {
 			EmployeeMachine employeeMachine = new EmployeeMachine();
-			//long employeeMachineId = machineelement.getId();
+			// long employeeMachineId = machineelement.getId();
 			employeeMachine.setId(employeeMachineId);
 			Employee depemployee = employeeMap.get(machineelement.getEmployee().getName());
 			Machine machinetype = machineMap.get(machineelement.getMachine().getCode());
@@ -620,11 +597,9 @@ public class DataLogic {
 			employeeMachine.setMachine(machinetype);
 			employeeMachineId++;
 			employeeMachineList.add(employeeMachine);
-			
-			
 
 		}
-		
+
 		for (SkillProficiency skillelement : skillProf) {
 			SkillProficiency skillProficiency = new SkillProficiency();
 			skillProficiency.setId(skillprofId);
@@ -636,14 +611,12 @@ public class DataLogic {
 			skillProficiencyList.add(skillProficiency);
 
 		}
-		
-		
-		
+
 		nurseRoster.setEmployeeList(employeeList);
 		nurseRoster.setSkillProficiencyList(skillProficiencyList);
 		nurseRoster.setEmployeeMachineList(employeeMachineList);
 	}
-	
+
 	private void readDayOffRequestList(NurseRoster nurseRoster) {
 
 		List<DayOffRequest> dayOffRequestList;

@@ -29,10 +29,8 @@ public class BooleanNewController implements Initializable {
 	private ComboBox<Contract> contract;
 	@FXML
 	private ComboBox<String> contractLine;
-
 	@FXML
 	private TextField weight;
-
 	@FXML
 	private CheckBox contractline;
 
@@ -43,47 +41,41 @@ public class BooleanNewController implements Initializable {
 	private boolean okClicked = false;
 	private RosterService rosterService = new RosterServiceImpl();
 
-	private ObservableList<BooleanContractLine> booleandataList = FXCollections
-			.observableArrayList();
+	private ObservableList<BooleanContractLine> booleandataList = FXCollections.observableArrayList();
 
 	public ObservableList<BooleanContractLine> getBooleanDataList() {
 		if (!booleandataList.isEmpty())
 			booleandataList.clear();
 		booleandataList = FXCollections
-				.observableList((List<BooleanContractLine>) rosterService
-						.listBooleanContractLine());
+				.observableList((List<BooleanContractLine>) rosterService.listBooleanContractLine());
 		return booleandataList;
 	}
 
-	private ObservableList<Contract> contractList = FXCollections
-			.observableArrayList();
+	private ObservableList<Contract> contractList = FXCollections.observableArrayList();
 
 	public ObservableList<Contract> getContractList() {
 		if (!contractList.isEmpty())
 			contractList.clear();
-		contractList = FXCollections
-				.observableList((List<Contract>) rosterService.listContract());
+		contractList = FXCollections.observableList((List<Contract>) rosterService.listContract());
 		return contractList;
 	}
-	private ObservableList<ContractLine> contractLineList = FXCollections
-			.observableArrayList();
+
+	private ObservableList<ContractLine> contractLineList = FXCollections.observableArrayList();
 
 	public ObservableList<ContractLine> getContractLineList() {
 		if (!contractLineList.isEmpty())
 			contractLineList.clear();
-		contractLineList = FXCollections.observableList(
-				(List<ContractLine>) rosterService.listContractLine());
+		contractLineList = FXCollections.observableList((List<ContractLine>) rosterService.listContractLine());
 		return contractLineList;
 	}
-	private ObservableList<String> contractLineTypeList = FXCollections
-			.observableArrayList("SINGLE_ASSIGNMENT_PER_DAY",
-					"COMPLETE_WEEKENDS", "IDENTICAL_SHIFT_TYPES_DURING_WEEKEND",
-					"NO_NIGHT_SHIFT_BEFORE_FREE_WEEKEND",
-					"ALTERNATIVE_SKILL_CATEGORY","ALTERNATIVE_MACHINE","IS_LOADBALANCED","NO_NIGHT_SHIFTS",
-					"IS_CASUAL");
+
+	private ObservableList<String> contractLineTypeList = FXCollections.observableArrayList("SINGLE_ASSIGNMENT_PER_DAY",
+			"COMPLETE_WEEKENDS", "IDENTICAL_SHIFT_TYPES_DURING_WEEKEND", "NO_NIGHT_SHIFT_BEFORE_FREE_WEEKEND",
+			"ALTERNATIVE_SKILL_CATEGORY", "ALTERNATIVE_MACHINE", "IS_LOADBALANCED", "NO_NIGHT_SHIFTS", "IS_CASUAL");
+
 	/**
-	 * Initializes the controller class. This method is automatically called
-	 * after the fxml file has been loaded.
+	 * Initializes the controller class. This method is automatically called after
+	 * the fxml file has been loaded.
 	 */
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -98,7 +90,6 @@ public class BooleanNewController implements Initializable {
 		this.dialogStage = dialogStage;
 	}
 
-	
 	public void setBoolean(BooleanContractLine booleandata) {
 		this.booleandata = booleandata;
 		getContractList();
@@ -126,12 +117,9 @@ public class BooleanNewController implements Initializable {
 			String weightpas = weight.getText();
 			int weightinint = Integer.parseInt(weightpas);
 			booleandata.setWeight(weightinint);
-			Contract contractId = contract.getSelectionModel()
-					.getSelectedItem();
-			String contractLinetype = contractLine.getSelectionModel()
-					.getSelectedItem();
-			ContractLineType linetype = Enum.valueOf(ContractLineType.class,
-					contractLinetype);
+			Contract contractId = contract.getSelectionModel().getSelectedItem();
+			String contractLinetype = contractLine.getSelectionModel().getSelectedItem();
+			ContractLineType linetype = Enum.valueOf(ContractLineType.class, contractLinetype);
 			booleandata.setContractLineType(linetype);
 			booleandata.setContract(contractId);
 			if (contractline.isSelected()) {
@@ -182,10 +170,10 @@ public class BooleanNewController implements Initializable {
 		if (weight.getText() == null || weight.getText().length() == 0) {
 			errorMessage += "No valid weight\n";
 		}
-		if (contract.getSelectionModel().getSelectedItem() == null ) {
+		if (contract.getSelectionModel().getSelectedItem() == null) {
 			errorMessage += "No valid Contract\n";
 		}
-		if (contractLine.getSelectionModel().getSelectedItem() == null ) {
+		if (contractLine.getSelectionModel().getSelectedItem() == null) {
 			errorMessage += "No valid ContractLine\n";
 		}
 

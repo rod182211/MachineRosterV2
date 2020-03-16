@@ -7,7 +7,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import java.util.List;
-import java.util.ResourceBundle;
+//import java.util.ResourceBundle;
 
 import org.optaplanner.database.RosterService;
 import org.optaplanner.database.RosterServiceImpl;
@@ -24,14 +24,13 @@ import com.calendarfx.view.CalendarView;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.Initializable;
+//import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 
 import javafx.stage.Stage;
-
-public class CalendarController<CalendarEvent> implements Initializable {
-    private Stage primaryStage;
-	private RosterService rosterService = new RosterServiceImpl();
+public class CalendarController<CalendarEvent>  {
+//public class CalendarController<CalendarEvent> implements Initializable {
+   	private RosterService rosterService = new RosterServiceImpl();
 	private ObservableList<CalendarData> calendarList = FXCollections.observableArrayList();
 
 	public ObservableList<CalendarData> getCalendarDataList() {
@@ -108,9 +107,9 @@ public class CalendarController<CalendarEvent> implements Initializable {
 
 	}
 
-	@Override
+	/*@Override
 	public void initialize(URL location, ResourceBundle resources) {
 	
 		
-	}
+	}*/
 }

@@ -39,32 +39,28 @@ public class BooleanEditController implements Initializable {
 	private boolean okClicked = false;
 	private RosterService rosterService = new RosterServiceImpl();
 
-	private ObservableList<BooleanContractLine> booleandataList = FXCollections
-			.observableArrayList();
+	private ObservableList<BooleanContractLine> booleandataList = FXCollections.observableArrayList();
 
 	public ObservableList<BooleanContractLine> getBooleanDataList() {
 		if (!booleandataList.isEmpty())
 			booleandataList.clear();
 		booleandataList = FXCollections
-				.observableList((List<BooleanContractLine>) rosterService
-						.listBooleanContractLine());
+				.observableList((List<BooleanContractLine>) rosterService.listBooleanContractLine());
 		return booleandataList;
 	}
 
-	private ObservableList<Contract> contractList = FXCollections
-			.observableArrayList();
+	private ObservableList<Contract> contractList = FXCollections.observableArrayList();
 
 	public ObservableList<Contract> getContractList() {
 		if (!contractList.isEmpty())
 			contractList.clear();
-		contractList = FXCollections
-				.observableList((List<Contract>) rosterService.listContract());
+		contractList = FXCollections.observableList((List<Contract>) rosterService.listContract());
 		return contractList;
 	}
 
 	/**
-	 * Initializes the controller class. This method is automatically called
-	 * after the fxml file has been loaded.
+	 * Initializes the controller class. This method is automatically called after
+	 * the fxml file has been loaded.
 	 */
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -113,8 +109,7 @@ public class BooleanEditController implements Initializable {
 			String weightpas = weight.getText();
 			int weightinint = Integer.parseInt(weightpas);
 			booleandata.setWeight(weightinint);
-			Contract contractId = contract.getSelectionModel()
-					.getSelectedItem();
+			Contract contractId = contract.getSelectionModel().getSelectedItem();
 			booleandata.setContract(contractId);
 			if (contractline.isSelected()) {
 				boolean selected = true;
@@ -155,7 +150,7 @@ public class BooleanEditController implements Initializable {
 		if (weight.getText() == null || weight.getText().length() == 0) {
 			errorMessage += "No valid Request!\n";
 		}
-		if (contract.getSelectionModel().getSelectedItem() == null ) {
+		if (contract.getSelectionModel().getSelectedItem() == null) {
 			errorMessage += "No valid Contract!\n";
 		}
 

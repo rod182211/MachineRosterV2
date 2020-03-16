@@ -34,22 +34,16 @@ public class ContractController implements Initializable {
 
 	@FXML
 	private TableView<Contract> contractTable;
-	
 	@FXML
 	private TableColumn<Contract, String> contractCol;
-
 	@FXML
 	private TableColumn<Contract, String> descriptionCol;
-
 	@FXML
 	private TableColumn<Contract, String> weekenddefCol;
-
 	@FXML
 	private Label title;
-
 	@FXML
 	private Label contractId;
-
 	@FXML
 	private Label descriptionfield;
 	@FXML
@@ -58,14 +52,12 @@ public class ContractController implements Initializable {
 	private Label weekenddef;
 
 	private RosterService rosterService = new RosterServiceImpl();
-	private ObservableList<Contract> contractList = FXCollections
-			.observableArrayList();
+	private ObservableList<Contract> contractList = FXCollections.observableArrayList();
 
 	public ObservableList<Contract> getContractList() {
 		if (!contractList.isEmpty())
 			contractList.clear();
-		contractList = FXCollections
-				.observableList((List<Contract>) rosterService.listContract());
+		contractList = FXCollections.observableList((List<Contract>) rosterService.listContract());
 		return contractList;
 	}
 
@@ -73,18 +65,16 @@ public class ContractController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		loadContract();
 	}
+
 	public void loadContract() {
 		contractTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		contractTable.getItems().clear();
 		contractTable.setItems(getContractList());
-		contractCol.setCellValueFactory(
-				new PropertyValueFactory<Contract, String>("code"));
-		descriptionCol.setCellValueFactory(
-				new PropertyValueFactory<Contract, String>("description"));
+		contractCol.setCellValueFactory(new PropertyValueFactory<Contract, String>("code"));
+		descriptionCol.setCellValueFactory(new PropertyValueFactory<Contract, String>("description"));
 		showContractDetails(null);
 		contractTable.getSelectionModel().selectedItemProperty()
-				.addListener((observable, oldValue,
-						newValue) -> showContractDetails(newValue));
+				.addListener((observable, oldValue, newValue) -> showContractDetails(newValue));
 
 	}
 
@@ -108,8 +98,8 @@ public class ContractController implements Initializable {
 		int selectIndex = contractTable.getSelectionModel().getSelectedIndex();
 		if (selectIndex >= 0) {
 
-			 ObservableList<Contract> itemsSelected;
-			 itemsSelected = contractTable.getSelectionModel().getSelectedItems();
+			ObservableList<Contract> itemsSelected;
+			itemsSelected = contractTable.getSelectionModel().getSelectedItems();
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Confirmation Dialog");
 			alert.setHeaderText("Look, a Confirmation Dialog");
@@ -134,6 +124,7 @@ public class ContractController implements Initializable {
 			alert.showAndWait();
 		}
 	}
+
 	@FXML
 	private void handleNewContract() {
 		Contract tempcontract = new Contract();
@@ -147,13 +138,12 @@ public class ContractController implements Initializable {
 	}
 
 	/**
-	 * Called when the user clicks the edit button. Opens a dialog to edit
-	 * details for the selected person.
+	 * Called when the user clicks the edit button. Opens a dialog to edit details
+	 * for the selected person.
 	 */
 	@FXML
 	private void handleEditContract() {
-		Contract selectedContract = contractTable.getSelectionModel()
-				.getSelectedItem();
+		Contract selectedContract = contractTable.getSelectionModel().getSelectedItem();
 
 		if (selectedContract != null) {
 			boolean okClicked = showContractEditDialog(selectedContract);
@@ -177,14 +167,13 @@ public class ContractController implements Initializable {
 		try {
 			// Load the fxml file and create a new stage for the popup dialog.
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(
-					getClass().getResource("/fxml/ContractEditDialog.fxml"));
+			loader.setLocation(getClass().getResource("/fxml/ContractEditDialog.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 
 			// Create the dialog Stage.
 			Stage dialogStage = new Stage();
 			dialogStage.setTitle("Edit Contract");
-			
+
 			Scene scene = new Scene(page);
 			dialogStage.setScene(scene);
 
@@ -206,8 +195,7 @@ public class ContractController implements Initializable {
 		try {
 			// Load the fxml file and create a new stage for the popup dialog.
 
-			FXMLLoader loader = new FXMLLoader(
-					getClass().getResource("/fxml/ContractNewDialog.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ContractNewDialog.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 
 			// Create the dialog Stage.

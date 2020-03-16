@@ -9,7 +9,6 @@ import org.optaplanner.database.RosterServiceImpl;
 import org.optaplanner.examples.nurserostering.domain.WeekendDefinition;
 import org.optaplanner.examples.nurserostering.domain.contract.Contract;
 
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -75,7 +74,7 @@ public class ContractEditController implements Initializable {
 	/**
 	
 	 */
-	
+
 	public void setContract(Contract contract) {
 		this.contract = contract;
 		contractcode.setText(contract.getCode());
@@ -98,7 +97,7 @@ public class ContractEditController implements Initializable {
 	@FXML
 	private void handleOk() {
 		if (isInputValid()) {
-					
+
 			String Contract = contractcode.getText();
 			String contractdescription = contractDescription.getText();
 			String weekendDefinition1 = weekenddefinition.getText();
@@ -136,7 +135,7 @@ public class ContractEditController implements Initializable {
 		if (contractcode.getText() == null || contractcode.getText().length() == 0) {
 			errorMessage += "No valid Code!\n";
 		}
-		if (contractDescription.getText() == null ||contractDescription.getText().length() == 0) {
+		if (contractDescription.getText() == null || contractDescription.getText().length() == 0) {
 			errorMessage += "No valid Decription!\n";
 		}
 

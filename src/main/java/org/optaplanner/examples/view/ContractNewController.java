@@ -23,10 +23,8 @@ public class ContractNewController implements Initializable {
 	private TextField contractIdField;
 	@FXML
 	private TextField contractField;
-
 	@FXML
 	private TextField contractdescription;
-
 	@FXML
 	private TextField contractweekenddef;
 
@@ -45,12 +43,12 @@ public class ContractNewController implements Initializable {
 		return contractList;
 	}
 
-		/**
+	/**
 	 * Initializes the controller class. This method is automatically called after
 	 * the fxml file has been loaded.
 	 */
 	public void initialize(URL location, ResourceBundle resources) {
-	//	loadContract();
+		// loadContract();
 
 	}
 
@@ -127,7 +125,7 @@ public class ContractNewController implements Initializable {
 		if (contractField.getText() == null || contractField.getText().length() == 0) {
 			errorMessage += "No valid Code!\n";
 		}
-		if (contractdescription.getText() == null ||contractdescription.getText().length() == 0) {
+		if (contractdescription.getText() == null || contractdescription.getText().length() == 0) {
 			errorMessage += "No valid Decription!\n";
 		}
 

@@ -62,7 +62,7 @@ public class MainController implements Initializable {
 			loadStage("/fxml/NurseRosteringPanel.fxml");
 
 		} else if (event.getSource() == calendar) {
-			Stage primaryStage = (Stage) btnReport.getScene().getWindow();
+			Stage primaryStage = (Stage) calendar.getScene().getWindow();
 			
 			@SuppressWarnings("rawtypes")
 			CalendarController app = new CalendarController();
